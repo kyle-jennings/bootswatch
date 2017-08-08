@@ -1,11 +1,19 @@
+video,
+.video {
+    height: auto;
+    max-width: 100%;
+
+}
+
+
 .video-screen {
     background-color: $gray-base;
     text-align: center;
 
     video,
     .video {
-        height: 400px;
         margin-top: 4px;
+        max-height: 400px;
     }
 }
 

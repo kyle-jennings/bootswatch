@@ -34,13 +34,8 @@ function bootswatch_the_header() {
                 get_template_part('template-parts/navbars/navbar');
                 break;
             case 'hero':
-
-                    if(get_post_format() == 'video' && is_single()):
-                        echo bootswatch_get_post_format_video_hero();
-                    else:
-                        $hero = new Hero($template);
-                        echo $hero; //WPCS: xss ok.
-                    endif;
+                $hero = new Hero($template);
+                echo $hero; //WPCS: xss ok.
                 break;
         endswitch;
     endforeach;
@@ -52,6 +47,9 @@ function bootswatch_get_post_format_video_hero()
 
     global $post;
     $video = get_post_meta($post->ID, '_post_format_video', true);
+
+    if(!$video)
+        return null;
 
     $output = '';
 
@@ -65,10 +63,14 @@ function bootswatch_get_post_format_video_hero()
         $output .= '</div>';
     $output .= '</div>';
 
-    echo $output;
 
+    return $output;
 }
 
+
+function bootswatch_post_format_video_hero() {
+    echo bootswatch_get_post_format_video_hero();
+}
 /**
  * gets the 404 settings
  * @return array keyed array with settings

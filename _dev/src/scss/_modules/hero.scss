@@ -21,10 +21,16 @@
     > .container{
         position: relative;
     }
+
+    .video {
+        height: 400px;
+    }
 }
 
 // if it has a bg image of video, give it a border
 .hero--has-background {
+    background-size: cover;
+    background-repeat: no-repeat;
     border-top: 2px solid $navbar-default-bg;
     border-bottom: 2px solid $navbar-default-bg;
     color: white;
@@ -103,6 +109,18 @@
         align-self: flex-end;
     }
 }
+
+
+.section.hero--is-post-format,
+.hero--is-post-format {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+
+    &::before {
+        background-color: rgba(0,0,0, .8);
+    }
+}
+
 
 // trim hero a little more if the admin bar is showing
 body.logged-in .hero--full {

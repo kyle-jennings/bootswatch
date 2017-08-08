@@ -22,5 +22,4 @@
 <div id="page-wrapper" class="page-wrapper">
 
 <?php
-
     bootswatch_the_header();
