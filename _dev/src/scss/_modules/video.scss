@@ -1,0 +1,15 @@
+.video-screen {
+    background-color: $gray-base;
+    text-align: center;
+
+    video,
+    .video {
+        height: 400px;
+        margin-top: 4px;
+    }
+}
+
+
+.navbar+.video-screen {
+    margin-top: -20px;
+}

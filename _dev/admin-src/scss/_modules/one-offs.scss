@@ -1,0 +1,33 @@
+.js--uswds-media-wrap {
+    margin-bottom: 10px;
+}
+
+.use-url {
+    clear: both;
+    display: block;
+    margin: 4px 0;
+    text-align: center;
+}
+
+.js--placeholder {
+
+    border: 1px dashed #b4b9be;
+    margin-bottom: 5px;
+    padding: 40px;
+    text-align: center;
+
+    > .wp-video,
+    iframe {
+        max-width: 100% !important;
+    }
+}
+
+
+.js--video-url {
+    padding: 4px;
+    width: 100%;
+}
+
+.button .dashicons {
+    margin-top: 3px;
+}

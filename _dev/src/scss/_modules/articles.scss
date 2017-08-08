@@ -1,0 +1,35 @@
+.post,
+article {
+    // margin-bottom: 60px;
+
+    img,
+    video,
+    .video,
+    figure {
+        height: auto;
+        max-width: 100%;
+    }
+}
+
+
+.post-featured-image {
+    margin-bottom: 1em;
+}
+
+
+.post-meta {
+    margin-bottom: 30px;
+}
+
+.post-meta .fa {
+    margin-right: 10px;
+}
+
+.post-meta__field {
+    margin-right: 20px;
+}
+
+
+.post-content {
+    margin-bottom: 30px;
+}

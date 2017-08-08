@@ -1,0 +1,23 @@
+.widget-title {
+    margin-top: 0;
+}
+
+.widget {
+    .widget-list,
+    #recentcomments {
+        list-style-position: inside;
+        padding-left: 0;
+    }
+}
+
+
+.widget  .widget-list .widget-list {
+    padding-left: 20px;
+}
+
+
+.list-group-item .list-group-item {
+
+    border-color: transparent;
+    border-width: 0;
+}

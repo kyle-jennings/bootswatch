@@ -1,0 +1,27 @@
+{
+    "name": "kyleJennings/bootswatch",
+    "description": "WordPress theme built with _s, Bootstrap, and the WP Customizer",
+    "type": "project",
+    "license": "MIT",
+    "repositories": [
+      {
+        "type": "vcs",
+        "url": "https://github.com/kyle-jennings/post-formats-plus"
+      }
+    ],
+    "require": {
+      "twbs/bootstrap-sass" : "3.3.x-dev",
+      "leafo/scssphp": "0.6.6",
+      "thomaspark/bootswatch": "3.3.7",
+      "kyle-jennings/post-formats-plus" : "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "bootswatch\\": "inc/shared/bootswatch/"
+        }
+    },
+    "scripts" : {
+        "post-install-cmd" : "bootswatch\\PrepBootSwatch::postInstall",
+        "post-update-cmd": "bootswatch\\PrepBootSwatch::buildCSS"
+    }
+}

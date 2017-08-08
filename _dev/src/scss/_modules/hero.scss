@@ -1,0 +1,149 @@
+/* Hero */
+.navbar+.hero {
+    margin-top: -20px;
+}
+
+.hero {
+
+    @for $i from 1 through 6 {
+        h#{$i}{
+            margin-top: 0;
+            margin-bottom: 0
+        }
+    }
+
+
+    // if the content is cneter aligned, flex box it
+    &.hero--center-align {
+        text-align: center;
+    }
+
+    > .container{
+        position: relative;
+    }
+}
+
+// if it has a bg image of video, give it a border
+.hero--has-background {
+    border-top: 2px solid $navbar-default-bg;
+    border-bottom: 2px solid $navbar-default-bg;
+    color: white;
+    position: relative;
+
+    // the image BG overlay
+    &::before {
+        background-color: rgba(0,0,0, .4);
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+
+    h1 {
+        color: white;
+    }
+}
+
+
+
+// slim size
+// total padding 6em
+.section.hero--slim,
+.hero--slim {
+    padding-top: 5rem;
+    padding-bottom: 1rem;
+
+    &.hero--center-align {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+}
+
+
+// medium size
+// total padding 9em
+.section.hero--medium,
+.hero--medium {
+    padding-top: 7rem;
+    padding-bottom: 2rem;
+
+    &.hero--center-align {
+        padding-top: 4.5rem;
+        padding-bottom: 4.5rem;
+    }
+}
+
+// large sized
+// total padding 16em
+.section.hero--big,
+.hero--big {
+    padding-top: 13rem;
+    padding-bottom: 3rem;
+
+    &.hero--center-align {
+        padding-top: 8rem;
+        padding-bottom: 8rem;
+    }
+}
+
+
+// Full hgiht hero
+.section.hero--full,
+.hero--full {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    > * {
+        align-self: flex-end;
+    }
+}
+
+// trim hero a little more if the admin bar is showing
+body.logged-in .hero--full {
+    min-height: calc( (100vh - 50px) - 46px);
+
+    @media(min-width: 782px) {
+        min-height: calc( (100vh - 50px) - 32px);
+
+    }
+}
+
+
+// Hero Title
+.hero__title {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.hero__pre-title {
+
+    font-size: 16px;
+    margin-bottom: .75em;
+
+    .fa {
+        margin-right: 6px;
+        font-size: 20px;
+        line-height: 24px;
+        vertical-align: bottom;
+    }
+}
+
+.hero__sub-title {
+    font-size: 20px;
+}
+
+@media(min-width: $screen-sm) {
+    .hero__title {
+         font-size: $jumbotron-heading-font-size;
+    }
+}
+
+.hero__title+.post-meta {
+    margin-bottom: 0;
+}
