@@ -14,9 +14,9 @@ function bootswatch_scripts() {
     $BootSwatch = new \bootswatch\BootSwatch( $theme );
     $BootSwatch->doesCSSExist();
     $uri = $BootSwatch->getCSS('uri');
-    
+
 	wp_enqueue_script(
-        'bootswatch-js', get_stylesheet_directory_uri() . '/assets/js/bootswatch-min.js',
+        'bootswatch-js', get_stylesheet_directory_uri() . '/assets/js/bootswatch.js',
          array('jquery'), null, true
     );
 

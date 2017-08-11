@@ -1,0 +1,18 @@
+.audio-player {
+    // background-color: $well-bg;
+    // border-color: $well-border;
+    //
+    .audio-vis {
+        height: 300px;
+        width: 100%;
+    }
+
+    #mono-R {
+    	transform: rotateX(230deg);
+    	-webkit-transform:(230deg);
+    	transform: rotateX(230deg);
+    	top: -66px;
+    	position: relative;
+    }
+
+}

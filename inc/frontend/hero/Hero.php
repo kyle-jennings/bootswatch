@@ -95,10 +95,10 @@ class Hero {
         if($this->currentpage !== 'singular')
             return false;
 
-            
+
         $format = get_post_format();
 
-        if ( $format == 'video' && $this->HeroContent->getPostFormatVideo() )
+        if ( $format == 'video' && $this->HeroContent->getVideo() )
             return true;
         elseif ( $format == 'gallery' && $this->HeroContent->getGallery() )
             return true;

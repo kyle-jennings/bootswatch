@@ -102,17 +102,25 @@ class HeroContent
 
         $format = get_post_format();
 
-        if( $format == 'video' && $this->getPostFormatVideo() ):
-            $output .= $this->getPostFormatVideo();
-        elseif(  $format == 'gallery' && $this->getGallery() ) :
-            $output .= $this->getGallery();
-        elseif(  $format == 'image' && $this->getImage() ) :
-            $output .= $this->getImage();
-        else :
+        if( $this->getPostFormatContent($format) )
+            $output .= $this->getPostFormatContent($format);
+        else
             $output .= $this->getSingularTitle();
-        endif;
+
 
         return $output;
+    }
+
+
+    public function getPostFormatContent($format)
+    {
+        $func = 'get'.ucfirst($format);
+
+        if( method_exists($this, $func) && call_user_func( array($this, $func)) )
+            return call_user_func( array($this, $func));
+        else
+            return false;
+
     }
 
 
@@ -138,12 +146,35 @@ class HeroContent
     }
 
 
+    /**
+     * If the current post is of the post format "video" then lets get that video
+     * @return [type] [description]
+     */
+    public function getAudio()
+    {
+        global $post;
+        $src = get_post_meta($post->ID, '_post_format_audio', true);
+
+        if(!$src)
+            return null;
+
+        $output = '';
+        $output .= '<div class="audio-wrapper">';
+            // $output .= '<div id="js--audio-canvas">';
+            //     $output .= '<canvas class="audio-vis" id="mono-L"></canvas>';
+            //     $output .= '<canvas class="audio-vis" id="mono-R"></canvas>';
+            // $output .= '</div>';
+            $output .= '<audio class="audio-player" src="'.wp_get_attachment_url($src).'" controls="controls"></audio>';
+        $output .= '</div>';
+        return $output;
+    }
+
 
     /**
      * If the current post is of the post format "video" then lets get that video
      * @return [type] [description]
      */
-    public function getPostFormatVideo()
+    public function getVideo()
     {
         global $post;
         $url = get_post_meta($post->ID, '_post_format_video', true);
