@@ -1,5 +1,5 @@
 <?php
-namespace Bootswatch;
+
 
 class FeaturedPost {
     public $id;
@@ -96,6 +96,12 @@ class FeaturedPost {
     }
 
 
+    public function setMeta()
+    {
+        $id = $this->ID;
+        $aid = $this->author;
+    }
+    
     public function getMeta(){
 
 

@@ -22,9 +22,19 @@
         position: relative;
     }
 
-    .video {
-        height: 400px;
+    .video,
+    .carousel,
+    .carousel img,
+    .hero-post-format-image {
+        height: auto;
+        width: 900px;
+        max-width: 100%;
     }
+
+    .video {
+        min-height: 400px;
+    }
+
 }
 
 // if it has a bg image of video, give it a border
@@ -115,9 +125,10 @@
 .hero--is-post-format {
     padding-top: 4rem;
     padding-bottom: 4rem;
+    text-align: center;
 
     &::before {
-        background-color: rgba(0,0,0, .8);
+        background-color: rgba(0,0,0, .85);
     }
 }
 

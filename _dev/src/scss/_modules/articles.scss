@@ -1,6 +1,6 @@
 .post,
 article {
-    // margin-bottom: 60px;
+    margin-bottom: 60px;
 
     img,
     video,
@@ -16,9 +16,23 @@ article {
     margin-bottom: 1em;
 }
 
+.post-title {
+    margin-bottom: 20px;
+
+    .fa {
+        color: rgba($text-color, .4);
+        font-size: .7em;
+        margin-right: 15px;
+    }
+
+
+    *{
+        margin-top: 0;
+    }
+}
 
 .post-meta {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .post-meta .fa {
@@ -26,10 +40,22 @@ article {
 }
 
 .post-meta__field {
+
     margin-right: 20px;
+
+    .post-col-left & {
+        margin-right: 15px;
+        display: inline-block;
+
+        @media(min-width: $screen-md) {
+            margin-right: 0;
+            margin-bottom: 5px;
+            display: block;
+        }
+    }
+
 }
 
-
 .post-content {
-    margin-bottom: 30px;
+    // margin-bottom: 30px;
 }

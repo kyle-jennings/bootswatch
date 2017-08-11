@@ -35,7 +35,7 @@ function bootswatch_infinite_scroll_render() {
 		if ( is_search() ) :
 			get_template_part( 'template-parts/content/content', 'search' );
 		else :
-			get_template_part( 'template-parts/content/content', get_post_format() );
+            get_template_part( 'template-parts/content-single/content', get_post_format() );
 		endif;
 	}
 }

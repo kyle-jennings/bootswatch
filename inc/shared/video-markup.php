@@ -42,7 +42,7 @@ function bootswatch_get_the_video_markup($url = null, $background = null) {
         else
             $atts = 'controls';
 
-        $output .= '<div class="video-bg">';
+        $output .= '<div class="video-screen">';
             $output .= '<video class="video" '.esc_attr($atts).' '.$src.'="'.esc_attr($url).'" type="video/'.esc_attr($type).'">';
             $output .= '</video>';
         $output .= '</div>';
@@ -58,7 +58,7 @@ function bootswatch_get_the_video_markup($url = null, $background = null) {
 
         $url = 'https://www.youtube.com/embed/'.$id.'?'.$settings;
 
-        $output .= '<div class="video-bg video-bg--youtube">';
+        $output .= '<div class="video-screen">';
             $output .= '<iframe class="video" '.$src.'="'.esc_attr($url).'" frameborder="0" height="100%" width="100%" allowfullscreen ></iframe>';
         $output .= '</div>';
     }

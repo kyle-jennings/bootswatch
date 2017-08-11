@@ -25,7 +25,6 @@ get_header();
  *
  */
 extract( bootswatch_template_settings() );
-
 if( !$hide_content ):
 ?>
 
@@ -47,17 +46,21 @@ if( !$hide_content ):
         			/* Start the Loop */
         			while ( have_posts() ) : the_post();
 
-        				/*
-        				 * Include the Post-Format-specific template for the content.
-        				 * If you want to override this in a child theme, then include a file
-        				 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-        				 */
-        				get_template_part( 'template-parts/content/content', get_post_format() );
+
+
+                        $part = get_post_format();
+                        //
+                        // if( !has_post_thumbnail() && !get_post_format()){
+                        //     $part = 'vertical';
+                        // }
+
+        				get_template_part( 'template-parts/content-feed/content', $part );
 
         			endwhile;
 
                     // pagination though the archive
-        			bootswatch_the_posts_navigation();
+        			// bootswatch_the_posts_navigation();
+        			echo bootswatch_paginate_links();
 
         		else :
 

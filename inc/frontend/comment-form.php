@@ -32,9 +32,3 @@ function bootswatch_comment_form( $args ) {
     return $args;
 }
 add_filter( 'comment_form_defaults', 'bootswatch_comment_form' );
-
-
-function bootswatch_comment_button() {
-    echo '<button class="btn btn-default" type="submit">' . __( 'Submit', 'bootswatch' ) . '</button>';
-}
-// add_action('comment_form', 'bootswatch_comment_button' );

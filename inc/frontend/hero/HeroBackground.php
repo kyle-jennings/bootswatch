@@ -9,41 +9,46 @@ class HeroBackground
     public $hasFeaturedImage = false;
     public $isFeaturedPost = false;
 
-    public function __construct($post_id, $template)
+    public function __construct($post_id, $template, $currentpage)
     {
         $this->post_id = $post_id;
         $this->template = $template;
+        $this->currentpage = $currentpage;
     }
 
     // set the background image and video BG
-    public function getBackground($template) {
-        if( in_array( $template, array('single','page')) || is_single() || is_page() ){
+    public function getBackground() {
 
-            $this->image = $this->getSingularImage($template);
-            // $this->video = $this->getSingularVideo($template);
+
+        if( in_array( $this->template, array('single','page')) || is_single() || is_page() ){
+
+            $this->image = $this->getSingularImage($this->template);
+            // $this->video = $this->getSingularVideo($this->template);
 
         } elseif( is_front_page() || is_404() ) {
 
-            $this->setMediaFromCustSetting($template);
+            $this->setMediaFromCustSetting($this->template);
 
-        } elseif( is_home() || is_archive() ) {
+        } elseif( is_home() ) {
 
             $post = get_queried_object();
             $this->postType = $post_type = is_a($post, 'WP_Post_Type') && !is_home() ? $post->name : 'post';
-            $this->isFeaturedPost = get_option('featured-post--'.$post_type, false);
+
+
+            $isFeaturedPost = get_option('featured-post--'.$post_type, false);
 
             // set the hero image
-            if($this->isFeaturedPost){
-                $this->featuredPost = new FeaturedPost($this->isFeaturedPost, $post_type);
+            if( $isFeaturedPost){
+                $this->featuredPost = new FeaturedPost($isFeaturedPost, $post_type);
                 $this->image = $this->getFeaturedPostMedia('image');
 
             } else {
-                $this->setMediaFromCustSetting($template);
+                $this->setMediaFromCustSetting($this->template);
             }
 
         } else {
 
-            $this->setMediaFromCustSetting($template);
+            $this->setMediaFromCustSetting($this->template);
         }
     }
 
@@ -82,10 +87,10 @@ class HeroBackground
     public function getSingularImage($template) {
 
         global $post;
-        $url = get_post_meta($post->ID, '_post_format_video', true);
 
-        if(get_post_format() == 'video' && $url && $id = bootswatch_get_youtube_id($url))
-            return 'http://img.youtube.com/vi/'.$id.'/maxresdefault.jpg';
+        $format = get_post_format();
+        if($format && $this->postFormatBackground($format) )
+            return $this->postFormatBackground($format);
         elseif( has_post_thumbnail() )
             return get_the_post_thumbnail_url();
         else
@@ -93,6 +98,30 @@ class HeroBackground
 
     }
 
+
+    public function postFormatBackground($format = null)
+    {
+        global $post;
+
+        switch($format):
+            case 'video':
+                $url = get_post_meta($post->ID, '_post_format_video', true);
+                if( $url && $id = bootswatch_get_youtube_id($url) )
+                    return 'http://img.youtube.com/vi/'.$id.'/maxresdefault.jpg';
+                break;
+            case 'gallery':
+                $gallery = get_post_meta($post->ID, '_post_format_gallery', true);
+                if($gallery)
+                    return wp_get_attachment_image_url( array_shift($gallery), 'full' );
+                break;
+            case 'image':
+                if( has_post_thumbnail() )
+                    return get_the_post_thumbnail_url();
+                break;
+        endswitch;
+
+
+    }
 
     // A featured post well have a featured image
     public function getFeaturedPostMedia($media = 'image') {

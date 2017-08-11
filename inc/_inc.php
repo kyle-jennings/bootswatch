@@ -3,6 +3,7 @@
 
 // these files contain functions used by both the admin section and frontend
 $shared_files = array(
+    '/inc/shared/utils.php',
     '/inc/shared/customize.php',
     '/inc/shared/functions.php',
     '/inc/shared/template-list.php',
@@ -53,6 +54,7 @@ if( !is_admin() ){
         'get-width-visibility.php',
         'nav-settings.php',
         'pager.php',
+        'galleries.php'
     );
     foreach($files as $file)
         require get_template_directory() . '/inc/frontend/' . $file;

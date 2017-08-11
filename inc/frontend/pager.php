@@ -94,3 +94,34 @@ function bootswatch_get_the_post_navigation( $args = array() ) {
 function bootswatch_the_post_navigation( $args = array() ) {
     echo bootswatch_get_the_post_navigation( $args );
 }
+
+
+function bootswatch_get_paginate_links($args = array()) {
+
+    $args['type'] = 'array';
+    $pages = paginate_links($args);
+
+
+    $output = '';
+
+    $output .= '<nav aria-label="Page navigation">';
+        $output .= '<ul class="pagination">';
+            foreach($pages as $key=>$page) {
+                $class = '';
+                if(strpos($page, 'current') !== false)
+                    $class = 'active';
+                if(strpos($page, '&hellip;') !== false)
+                    $class = "disabled";
+
+                $output .= '<li class="'.$class.'">'.$page.'</li>';
+            }
+        $output .= '</ul>';
+    $output .= '</nav>';
+
+    return $output;
+}
+
+
+function bootswatch_paginate_links($args = array()) {
+    echo bootswatch_get_paginate_links($args);
+}

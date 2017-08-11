@@ -10,14 +10,22 @@ class HeroContent
     public $hasFeaturedImage = false;
     public $hasFeaturedPost = false;
 
-    public function __construct($post_id, $template)
+    public function __construct($post_id, $template, $currentpage)
     {
+
         $this->post_id = $post_id;
         $this->template = $template;
+        $this->currentpage = $currentpage;
+
     }
 
-    function __toString() {
-        return $this->getContent();
+    function __toString()
+    {
+
+        $func = $this->currentpage.'Content';
+        $func = array($this, $func);
+
+        return call_user_func($func);
     }
 
     /**
@@ -25,34 +33,20 @@ class HeroContent
      * The date (month / year), search results, or the post type's featured post
      * @return [type] [description]
      */
-    function getContent() {
+    function getContent()
+    {
 
-        if( is_front_page() )
-            return $this->frontpageContent();
-        elseif( is_404() )
-            return $this->the404title();
-        elseif( is_page() || is_single() || is_singular() )
-            return $this->singularTitle();
-        elseif( is_author() )
-            return $this->authorFeedTitle();
-        elseif( is_date() )
-            return $this->dateTitle();
-        elseif( is_tag() )
-            return $this->tagFeedTitle();
-        elseif( is_category() )
-            return $this->catFeedTitle();
-        elseif( is_search() )
-            return $this->searchTitle();
-        elseif( is_home() || is_archive() )
-            return $this->feedContent();
-        else
-            return $this->defaultTitle();
+        $func = $this->currentpage.'Content';
+        $func = array($this, $func);
+
+        return call_user_func($func);
 
     }
 
 
     // the fallback
-    public function defaultTitle() {
+    public function defaultContent()
+    {
         $post = get_queried_object();
         if( $post->post_title)
             $title = $post->post_title;
@@ -64,7 +58,8 @@ class HeroContent
 
 
     // the 404 page has special powers
-    public function the404title(){
+    public function _404Content()
+    {
         /**
          * the 404 settings
          *
@@ -101,11 +96,18 @@ class HeroContent
      * post format of video
      * @return [type] [description]
      */
-    public function singularTitle() {
+    public function singularContent()
+    {
         $output = '';
 
-        if(get_post_format() == 'video' && $this->getPostFormatVideo() ):
+        $format = get_post_format();
+
+        if( $format == 'video' && $this->getPostFormatVideo() ):
             $output .= $this->getPostFormatVideo();
+        elseif(  $format == 'gallery' && $this->getGallery() ) :
+            $output .= $this->getGallery();
+        elseif(  $format == 'image' && $this->getImage() ) :
+            $output .= $this->getImage();
         else :
             $output .= $this->getSingularTitle();
         endif;
@@ -156,8 +158,60 @@ class HeroContent
     }
 
 
+    /**
+     * If the post format is a gallery and there are set images display the gallery
+     * @return [type] [description]
+     */
+    public function getGallery()
+    {
+        global $post;
+        $output = '';
+
+        $gallery = get_post_meta($post->ID, '_post_format_gallery', true);
+
+        if(!$gallery)
+            return null;
+
+        $output .= bootswatch_get_carousel_markup($gallery, 'large');
+
+        return $output;
+    }
+
+
+    /**
+     * If the post format is an Image type and a featured image has been uploaded
+     * @return [type] [description]
+     */
+    public function getImage()
+    {
+        global $post;
+        $output = '';
+
+        if( !has_post_thumbnail() )
+            return null;
+
+
+        $src = get_the_post_thumbnail_url();
+
+        $image = get_post( get_post_thumbnail_id() );
+
+        $title = $image->post_title;
+        $caption = $image->post_excerpt;
+
+        // $output .= '<div >';
+            $output .= '<img class="hero-post-format-image" src="'.$src.'">';
+            if($caption)
+                $output .= '<div class="hero-post-format-image__caption">'. $caption . '</div>';
+
+        // $output .= '</div>';
+
+        return $output;
+    }
+
+
     // author feed title
-    public function authorFeedTitle(){
+    public function authorContent()
+    {
         $auth = get_user_by('slug', get_query_var('author_name'));
 
         $output = '';
@@ -178,7 +232,8 @@ class HeroContent
      * Grabs the markup for either the month date, or the year depending on where we are
      * @return [type] [description]
      */
-    public function dateTitle() {
+    public function dateContent()
+    {
 
         $output = '';
 
@@ -208,7 +263,8 @@ class HeroContent
 
 
     // Tags
-    public function tagFeedTitle() {
+    public function tagContent()
+    {
         ob_start();
             single_tag_title();
             $buffered_cat = ob_get_contents();
@@ -227,7 +283,8 @@ class HeroContent
     }
 
     // category feed title
-    public function catFeedTitle() {
+    public function categoryContent()
+    {
         ob_start();
             single_cat_title();
             $buffered_cat = ob_get_contents();
@@ -247,7 +304,8 @@ class HeroContent
 
 
     // search title
-    public function searchTitle() {
+    public function searchContent()
+    {
         global $wp_query;
         $total_results = $wp_query->found_posts;
         // $title = $total_results ? 'Search Results for: '.get_search_query() : 'No results found' ;
@@ -266,14 +324,18 @@ class HeroContent
 
 
     // The feed either shows the featured post content, the feed type, or the name of the page
-    public function feedContent() {
+    public function homeContent()
+    {
         $output = '';
 
         $post = get_queried_object();
         $post_type = is_a($post, 'WP_Post_Type') ? $post->name : 'post';
 
-        if($this->hasFeaturedPost) {
-            $output = $this->featuredPost->output;
+        $hasFeaturedPost = get_option('featured-post--'.$post_type, false);
+
+        if($hasFeaturedPost) {
+            $FeaturedPost = new FeaturedPost($hasFeaturedPost, $post_type);
+            $output = $this->featuredContent($FeaturedPost);
         } elseif( $post->post_title )  {
             $output = '<h1 class="hero__title">' . $post->post_title . '</h1>';
         } elseif($post->name) {
@@ -286,7 +348,52 @@ class HeroContent
     }
 
 
-    public function frontpageContent() {
+    public function featuredContent($post)
+    {
+        $label = get_post_type_object($post->post_type)->labels->singular_name;
+        $output = '';
+        $output .= '<span class="hero__pre-title">';
+            $output .= '<i class="fa fa-star-o" aria-hidden="true"></i>';
+            $output .= 'Featured '.ucfirst($label);
+        $output .= '</span>';
+
+        $output .= '<h1 class="hero__title">';
+            $output .= '<a href="'.$post->url.'">' . $post->title . '</a>';
+        $output .= '</h1>';
+
+        $output .= '<div class="post-meta">';
+            $output .= bootswatch_get_hero_meta($post->id);
+        $output .= '</div>';
+
+        return $output;
+    }
+
+
+    // The feed either shows the featured post content, the feed type, or the name of the page
+    public function archiveContent()
+    {
+        $output = '';
+
+        $post = get_queried_object();
+        $post_type = is_a($post, 'WP_Post_Type') ? $post->name : 'post';
+
+        if( is_home() )
+            $this->isFeaturedPost = get_option('featured-post--'.$post_type, false);
+
+        if( $post->post_title )  {
+            $output = '<h1 class="hero__title">' . $post->post_title . '</h1>';
+        } elseif($post->name) {
+            $output = '<h1 class="hero__title">' . $post->name . '</h1>';
+        } else {
+            $output = '<h1 class="hero__title"> Home </h1>';
+        }
+
+        return $output;
+    }
+
+
+    public function frontpageContent()
+    {
 
         $output = '';
         $content = get_theme_mod('frontpage_hero_content_setting', 'callout');
