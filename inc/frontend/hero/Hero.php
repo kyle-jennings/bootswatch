@@ -104,12 +104,30 @@ class Hero {
             return true;
         elseif( $format == 'image' && $this->HeroContent->getImage() )
             return true;
+        elseif($format == 'audio' && $this->HeroContent->getAudio()) {
+            add_action('wp_footer', array($this, 'audioScript') );
+        }
         else
             return false;
 
         return false;
     }
 
+
+    function audioScript()
+    {
+
+        $file = get_template_directory() . '/_dev/src/js/audio-vis-2d.js';
+        if(!is_readable($file))
+            return false;
+        $script = '';
+        $script .= '<script>';
+            $script .= file_get_contents($file);
+            $script .= 'window.audioVis2D(".js--audio-player");';
+        $script .= '</script>';
+
+        echo $script;
+    }
 
     /**
      * The hero has different sizes depending on which template is displayed

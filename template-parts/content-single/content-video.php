@@ -35,8 +35,6 @@ global $post;
         echo '</header>';
 
         ?>
-                echo bootswatch_get_categories_links();
-                echo bootswatch_get_tags_links();
 
     	<div class="post-content">
 		<?php

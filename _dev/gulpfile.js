@@ -252,3 +252,11 @@ gulp.task('watch', function() {
   gulp.watch(paths.jsGlob, ['front-js']);
   gulp.watch(paths.adminScssGlob, ['admin-css']);
 });
+
+
+gulp.task('watch-js', function() {
+  gulp.start('front-js');
+  gulp.start('admin-js');
+  gulp.watch(paths.adminJSGlob,['admin-js']);
+  gulp.watch(paths.jsGlob, ['front-js']);
+});

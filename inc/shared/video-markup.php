@@ -5,72 +5,41 @@
  */
 
 
-function bootswatch_get_the_post_video_url() {
-    global $post;
-    $url = get_post_meta($post->ID, 'featured-video', true);
-
-    return $url;
-}
-
-
-function bootswatch_has_post_video() {
-    global $post;
-
-    $url = get_post_meta($post->ID, 'featured-video', true);
-    if($url)
-        return true;
-
-    return false;
-}
-
-
-function bootswatch_get_the_video_markup($url = null, $background = null) {
+function bootswatch_get_the_video_markup($url = null) {
     if(!$url)
         return;
 
     $settings = '';
     $src = ($background == 'background') ? 'data-src' : 'src';
+
     $type = bootswatch_get_video_type($url);
 
     $output = '';
-
+    $video = '';
     $atts = '';
 
-    if($type !== 'youtube' && $type !== 'vimeo'){
-        if($background == 'background')
-            $atts = 'autoplay loop muted';
-        else
-            $atts = 'controls';
+    if( $type == 'uploaded' ){
 
-        $output .= '<div class="video-screen">';
-            $output .= '<video class="video" '.esc_attr($atts).' '.$src.'="'.esc_attr($url).'" type="video/'.esc_attr($type).'">';
-            $output .= '</video>';
-        $output .= '</div>';
-    }else {
+        $video .= '<video class="video" '.esc_attr($atts).' '.$src.'="'.esc_attr($url).'" type="video/'.esc_attr($type).'" controls="controls">';
+        $video .= '</video>';
 
-        $id = bootswatch_get_youtube_id($url);
-        $poster = 'style="background: url(http://img.youtube.com/vi/'.$id.'/0.jpg) no-repeat cover;"';
+    }elseif( wp_oembed_get($url) ) {
 
-        if($background == 'background')
-            $settings ='autoplay=1&loop=1&autohide=1&modestbranding=0&rel=0&showinfo=0&controls=0&disablekb=1&enablejsapi=0&iv_load_policy=3&playlist='.$id;
-        else
-            $settings = 'controls=1';
+        $video .= wp_oembed_get($url);
 
-        $url = 'https://www.youtube.com/embed/'.$id.'?'.$settings;
-
-        $output .= '<div class="video-screen">';
-            $output .= '<iframe class="video" '.$src.'="'.esc_attr($url).'" frameborder="0" height="100%" width="100%" allowfullscreen ></iframe>';
-        $output .= '</div>';
     }
 
+    $output .= '<div class="video-screen">';
+        $output .= $video;
+    $output .= '</div>';
 
 
     return $output;
 }
 
 
-function bootswatch_the_video_markup($url, $background = null) {
-    echo bootswatch_get_the_video_markup($url, $background); //WPCS: xss ok.
+function bootswatch_the_video_markup($url) {
+    echo bootswatch_get_the_video_markup($url); //WPCS: xss ok.
 }
 
 
@@ -82,14 +51,10 @@ function bootswatch_get_youtube_id($url) {
 
 function bootswatch_get_video_type($url) {
 
-
+    $filetypes = array( '.mp4', '.mov', '.wmv', '.avi', '.mpg', '.ogv', '.3gp', '.3g2',);
     $type = null;
-    if('.mp4' == substr( $url, -4 ) ){
-        $type = 'mp4';
-    } elseif( '.mov' == substr( $url, -4 ) ) {
-        $type = 'mov';
-    } elseif('.webm' == substr( $url, -5 )) {
-        $type = 'webm';
+    if( in_array( substr( $url, -4 ), $filetypes ) ) {
+        $type = 'uploaded';
     } elseif ( preg_match( '#^https?://(?:www\.)?(?:youtube\.com/watch|youtu\.be/)#', $url ) ) {
         $type = 'youtube';
     } elseif( preg_match('#^https?://(.+\.)?vimeo\.com/.*#', $url ) ) {

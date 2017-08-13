@@ -1,18 +1,23 @@
-.audio-player {
-    // background-color: $well-bg;
-    // border-color: $well-border;
-    //
-    .audio-vis {
-        height: 300px;
-        width: 100%;
+.audio-player__visualizer {
+    height: 300px;
+    width: 100%;
+
+    .bar-wrapper {
+      height: 150px;
+      position: relative;
     }
 
-    #mono-R {
-    	transform: rotateX(230deg);
-    	-webkit-transform:(230deg);
-    	transform: rotateX(230deg);
-    	top: -66px;
-    	position: relative;
+    .bar {
+      position: relative;
+      bottom: 0;
+      width: 5px;
+      display: inline-block;
+      border: 1px solid $brand-success;
+      height: 5px;
+      border-bottom: 3px solid #fff;
     }
+}
 
+.hero__title+.audio-player {
+    margin-top: 20px;
 }

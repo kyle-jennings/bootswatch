@@ -16,7 +16,6 @@ global $post;
     	<?php
 
         echo '<header class="post-header">';
-            the_title( '<h1 class="post-title">','</h1>' );
 
             if ( 'page' !== get_post_type() ) : ?>
             <div class="post-meta">
@@ -35,8 +34,6 @@ global $post;
         echo '</header>';
 
         ?>
-                echo bootswatch_get_categories_links();
-                echo bootswatch_get_tags_links();
 
     	<div class="post-content">
 		<?php

@@ -13,6 +13,7 @@ $shared_files = array(
     '/inc/shared/register-sidebars.php',
     '/inc/shared/widgets.php',
     '/inc/shared/video-markup.php',
+    '/inc/shared/audio-markup.php',
     '/inc/shared/set-default-settings.php',
 );
 

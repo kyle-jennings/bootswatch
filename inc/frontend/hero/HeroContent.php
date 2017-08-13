@@ -158,14 +158,12 @@ class HeroContent
         if(!$src)
             return null;
 
+
         $output = '';
-        $output .= '<div class="audio-wrapper">';
-            // $output .= '<div id="js--audio-canvas">';
-            //     $output .= '<canvas class="audio-vis" id="mono-L"></canvas>';
-            //     $output .= '<canvas class="audio-vis" id="mono-R"></canvas>';
-            // $output .= '</div>';
-            $output .= '<audio class="audio-player" src="'.wp_get_attachment_url($src).'" controls="controls"></audio>';
-        $output .= '</div>';
+
+        $output .= '<h1 class="hero__title">'.get_the_title().'</h1>';
+        $output .= bootswatch_get_the_audio_markup($src);
+
         return $output;
     }
 
