@@ -4,6 +4,8 @@
 function bootswatch_carousel_markup($images =array(), $size = 'carousel-feed') {
     if(empty($images))
         return null;
+
+    $images = explode(',', $images);
     $count = count($images);
 
 

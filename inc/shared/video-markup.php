@@ -10,17 +10,19 @@ function bootswatch_get_the_video_markup($url = null) {
         return;
 
     $settings = '';
-    $src = ($background == 'background') ? 'data-src' : 'src';
+    $filetypes = array( '.mp4', '.mov', '.wmv', '.avi', '.mpg', '.ogv', '.3gp', '.3g2',);
 
-    $type = bootswatch_get_video_type($url);
+
+
+
 
     $output = '';
     $video = '';
     $atts = '';
 
-    if( $type == 'uploaded' ){
+    if( in_array( substr( $url, -4 ), $filetypes )  ){
 
-        $video .= '<video class="video" '.esc_attr($atts).' '.$src.'="'.esc_attr($url).'" type="video/'.esc_attr($type).'" controls="controls">';
+        $video .= '<video class="video" '.esc_attr($atts).' src="'.esc_attr($url).'" type="video/'.esc_attr($type).'" controls="controls">';
         $video .= '</video>';
 
     }elseif( wp_oembed_get($url) ) {

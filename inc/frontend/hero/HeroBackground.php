@@ -111,8 +111,10 @@ class HeroBackground
                 break;
             case 'gallery':
                 $gallery = get_post_meta($post->ID, '_post_format_gallery', true);
-                if($gallery)
+                if($gallery){
+                    $gallery = explode(',', $gallery);
                     return wp_get_attachment_image_url( array_shift($gallery), 'full' );
+                }
                 break;
             case 'image':
                 if( has_post_thumbnail() )

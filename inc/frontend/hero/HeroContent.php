@@ -161,8 +161,8 @@ class HeroContent
 
         $output = '';
 
-        $output .= '<h1 class="hero__title">'.get_the_title().'</h1>';
         $output .= bootswatch_get_the_audio_markup($src);
+        $output .= '<h1 class="hero__title">'.get_the_title().'</h1>';
 
         return $output;
     }
