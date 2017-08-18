@@ -1,0 +1,32 @@
+//
+// Custom Scaffolding
+//
+// Bootswatch custom
+// --------------------------------------------------
+
+html {
+  font-size: 10px;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  word-break: break-word !important;
+}
+
+
+
+// Figures
+//
+// We reset this here because previously Normalize had no `figure` margins. This
+// ensures we don't break anyone's use of the element.
+
+figure {
+  margin: 0;
+  max-width: 100%;
+}
+
+
+// Images
+
+img {
+  vertical-align: middle;
+  height: auto;
+  max-width: 100%;
+}
