@@ -24,11 +24,12 @@
     }
 
     .video,
+    .video-screen,
     .carousel,
     .carousel img,
     .hero-post-format-image {
         height: auto;
-        // min-width: 900px;
+        margin-bottom: 0;
         max-width: 100%;
     }
 
