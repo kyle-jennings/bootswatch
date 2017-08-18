@@ -26,9 +26,13 @@ global $post;
 
 
 <?php
+
     echo '<div class="col-md-12">';
-    if( has_post_thumbnail() )
-        echo '<img class="post-featured-image" src="'.get_the_post_thumbnail_url().'">';
+    if( has_post_thumbnail() ) {
+        echo '<a href="'.get_permalink().'">';
+            echo '<img class="post-featured-image" src="'.get_the_post_thumbnail_url().'">';
+        echo '</a>';
+    }
     echo '</div>';
  ?>
 

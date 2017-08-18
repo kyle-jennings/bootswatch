@@ -1,5 +1,39 @@
+.audio-player,
+.audio-player__player {
+    width: 100%;
+}
+
+.audio-player {
+    margin-bottom: 20px;
+}
+
+
+.audio-player.has-background {
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+
+    // the image BG overlay
+    &::before {
+        background-color: rgba(0,0,0, .8);
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+
+    .audio-player__player {
+        margin-bottom: -5px;
+    }
+}
+
 .audio-player__visualizer {
     height: 200px;
+    position: relative;
     width: 100%;
 
     .bar-wrapper {
@@ -17,6 +51,7 @@
       border-bottom: 3px solid #fff;
     }
 }
+
 
 .hero__title+.audio-player {
     margin-top: 20px;

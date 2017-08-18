@@ -59,6 +59,7 @@ gulp.task('front-js',['clean:front-js'], function(){
 
   return gulp.src([
     paths.srcPath + '/js/bootswatch.js',
+    !paths.srcPath + '/js/audio-vis-2d.js',
   ] )
   .pipe(plumber({ errorHandler: handleErrors }))
   .pipe(browserified)

@@ -8,7 +8,7 @@
  */
 global $post;
 
-
+    $video = get_post_meta($post->ID, '_post_format_video', true);
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class('cf row'); ?> >
@@ -27,14 +27,17 @@ global $post;
 
 
 <?php
+    if($video){
+        echo '<div class="col-md-12">';
+        echo bootswatch_get_the_video_markup($video);
+        echo '</div>';
+    }
 
-    echo '<div class="col-md-12">';
-    $video = get_post_meta($post->ID, '_post_format_video', true);
-    echo bootswatch_get_the_video_markup($video);
-    echo '</div>';
  ?>
 
     <div class="col-md-4 post-col-left">
+
+        <?php bootswatch_post_thumbnail($post); ?>
 
         <?php
         if ( 'page' !== get_post_type() ) : ?>

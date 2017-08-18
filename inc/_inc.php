@@ -55,7 +55,8 @@ if( !is_admin() ){
         'get-width-visibility.php',
         'nav-settings.php',
         'pager.php',
-        'galleries.php'
+        'galleries.php',
+        'functions.php',
     );
     foreach($files as $file)
         require get_template_directory() . '/inc/frontend/' . $file;

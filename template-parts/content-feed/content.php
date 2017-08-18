@@ -26,12 +26,7 @@ if( has_post_thumbnail() )
 
     <div class="col-md-4 post-col-left">
 
-    <?php if( has_post_thumbnail() ): ?>
-        <figure class="post-featured-image">
-            <?php the_post_thumbnail(); ?>
-        </figure>
-
-    <?php endif; ?>
+    <?php bootswatch_post_thumbnail($post); ?>
 
     <?php
     echo '<header class="post-header">';
@@ -84,7 +79,7 @@ if( has_post_thumbnail() )
             <?php bootswatch_the_edit_post_link(); ?>
         </div>
 
-        
+
         <footer class="post-footer post-meta">
             <?php
                 wp_link_pages( array(

@@ -63,7 +63,7 @@ if( !$hide_content ):
 
 			endwhile;
 
-			bootswatch_the_posts_navigation();
+			echo bootswatch_paginate_links();
 
 		else :
 

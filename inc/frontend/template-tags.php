@@ -62,7 +62,7 @@ function bootswatch_get_the_author($post = null) {
     if(!$post)
         global $post;
 
-    $user_i = 'fa-user-o';
+    $user_i = 'fa-user';
 
     $aid = get_the_author_meta( 'ID', $post->post_author );
 
@@ -122,12 +122,15 @@ function bootswatch_get_the_comment_count_link($post = null) {
     if(!$post)
         global $post;
 
+    if( !comments_open( $post->ID ))
+        return '';
+
     $output = '';
     $comments = '';
     $count = wp_count_comments( $post->ID );
 
     $count = $count->approved;
-    $comments_i = $count > 1 ? 'fa-comments-o' : 'fa-comment-o' ;
+    $comments_i = $count > 1 ? 'fa-comments' : 'fa-comment' ;
 
     $text = '';
     switch($count):
@@ -157,11 +160,15 @@ function bootswatch_get_the_comment_popup($anchor = null) {
 
     global $post;
 
+
+    if( !comments_open( $post->ID ))
+        return '';
+
     $output = '';
     $comments = '';
     $count = wp_count_comments( $post->ID );
     $count = $count->approved;
-    $comments_i = $count > 1 ? 'fa-comments-o' : 'fa-comment-o' ;
+    $comments_i = $count > 1 ? 'fa-comments' : 'fa-comment' ;
     // comment link
     if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
 
@@ -202,7 +209,7 @@ function bootswatch_get_categories_links() {
     if ( $categories_list = bootswatch_get_the_category_list($post->ID) ) {
         /* translators: 1: list of categories. */
         $output .= sprintf(
-            '<span class="post-meta__field"><i class="fa fa-folder-o"></i>'
+            '<span class="post-meta__field"><i class="fa fa-folder"></i>'
             . esc_html__( '%1$s', 'bootswatch' ) . '</span>',
             $categories_list
         ); // WPCS: XSS OK.
@@ -357,7 +364,25 @@ function bootswatch_get_custom_tax_terms($id = null, $post_type = null) {
     return $terms;
 }
 
+function bootswatch_get_post_thumbnail($post = null){
+    if(!$post)
+        global $post;
 
+    $output = '';
+    if( has_post_thumbnail() ):
+
+        $output .= '<figure class="post-featured-image">';
+            $output .= '<a href="'.esc_url( get_the_permalink() ).'" rel="bookmark">';
+                $output .= get_the_post_thumbnail($post);
+            $output .= '</a>';
+        $output .= '</figure>';
+    endif;
+
+    return $output;
+}
+function bootswatch_post_thumbnail($post = null) {
+    echo bootswatch_get_post_thumbnail($post);
+}
 
 function bootswatch_post_format_icon($format = null) {
 
@@ -381,12 +406,16 @@ function bootswatch_post_format_icon($format = null) {
             $icon = 'volume-up';
             break;
         case 'aside':
+            $icon = 'file-text';
             break;
         case 'chat':
+            $icon = 'comments';
             break;
         case 'quote':
+            $icon = 'quote-left';
             break;
         case 'status':
+            $icon = 'commenting';
             break;
         default:
             $icon = '';

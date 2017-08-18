@@ -161,8 +161,14 @@ class HeroContent
 
         $output = '';
 
+        $output .= '<span class="hero__pre-title">';
+            $output .= '<i class="fa fa-volume-up" aria-hidden="true"></i>';
+            $output .= 'Play Audio';
+        $output .= '</span>';
+
+
         $output .= bootswatch_get_the_audio_markup($src);
-        $output .= '<h1 class="hero__title">'.get_the_title().'</h1>';
+        // $output .= '<h1 class="hero__title">'.get_the_title().'</h1>';
 
         return $output;
     }
@@ -236,6 +242,82 @@ class HeroContent
 
         return $output;
     }
+
+
+    /**
+     * Gets the post format quote
+     * @return [type] [description]
+     */
+    public function getQuote()
+    {
+        global $post;
+
+        $output = '';
+
+        $quote = get_post_meta($post->ID, '_post_format_quote', true);
+
+        if(!$quote)
+            return null;
+
+        $output .= bootswatch_get_quote_markup($quote);
+
+        return $output;
+    }
+
+
+    /**
+     * Gets the post format chat
+     * @return [type] [description]
+     */
+    public function getChat()
+    {
+        global $post;
+
+        $output = '';
+
+        $chat = get_post_meta($post->ID, '_post_format_chat', true);
+
+        if(!$chat || $chat['location'] !== 'header')
+            return false;
+
+        $output .= '<h1 class="hero__title">'.get_the_title().'</h1>';
+
+        $output .= '<div class="well">';
+            $output .= bootswatch_get_chat_log($chat);
+        $output .= '</div>';
+
+        return $output;
+    }
+
+
+    /**
+     * Gets the post format quote
+     * @return [type] [description]
+     */
+    public function getLink()
+    {
+        global $post;
+
+        $output = '';
+
+        $link = get_post_meta($post->ID, '_post_format_link', true);
+
+        if(!$link)
+            return null;
+
+        $output .= '<span class="hero__pre-title">';
+            $output .= '<i class="fa fa-link" aria-hidden="true"></i>';
+            $output .= 'Visit Link';
+        $output .= '</span>';
+
+        $output .= '<h1 class="hero__title">';
+            $output .= '<a href="'.$link['url'].'" target="_blank" follow="no-follow">'.$link['text'].'</a>';
+        $output .= '</h1>';
+
+        return $output;
+    }
+
+
 
 
     // author feed title

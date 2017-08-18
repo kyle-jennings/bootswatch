@@ -37,7 +37,8 @@ if( !$hide_content ):
     	<?php
     	while ( have_posts() ) : the_post();
 
-            get_template_part( 'template-parts/content-single/content', get_post_format() );
+            $part = (get_post_format() == 'chat') ? 'chat' : get_post_format();
+            get_template_part( 'template-parts/content-single/content', $part );
 
             $navigation_args = array(
                 'prev_text' => '&laquo; Previous Post',

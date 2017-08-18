@@ -7,7 +7,7 @@
  * @package Bootswatch
  */
 global $post;
-
+$gallery = get_post_meta($post->ID, '_post_format_gallery', true);
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class('cf row'); ?> >
@@ -26,10 +26,11 @@ global $post;
 
 
 <?php
-    $gallery = get_post_meta($post->ID, '_post_format_gallery', true);
-    echo '<div class="col-md-12">';
-    bootswatch_carousel_markup($gallery);
-    echo '</div>';
+    if($gallery) {
+        echo '<div class="col-md-12">';
+        bootswatch_carousel_markup($gallery);
+        echo '</div>';
+    }
  ?>
 
     <!-- The left column of the post,  -->

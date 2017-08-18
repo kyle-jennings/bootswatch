@@ -46,20 +46,11 @@ if( !$hide_content ):
         			/* Start the Loop */
         			while ( have_posts() ) : the_post();
 
-
-
-                        $part = get_post_format();
-                        //
-                        // if( !has_post_thumbnail() && !get_post_format()){
-                        //     $part = 'vertical';
-                        // }
-
-        				get_template_part( 'template-parts/content-feed/content', $part );
+    				get_template_part( 'template-parts/content-feed/content', get_post_format() );
 
         			endwhile;
 
                     // pagination though the archive
-        			// bootswatch_the_posts_navigation();
         			echo bootswatch_paginate_links();
 
         		else :
