@@ -141,6 +141,7 @@ function bootswatch_get_the_comment_count_link($post = null) {
             $text = __( '1 comment', 'bootswatch' );
             break;
         default:
+            // translators: number of comments
             $text = sprintf( __( '%s comments', 'bootswatch' ), $count);
             break;
     endswitch;
@@ -207,12 +208,7 @@ function bootswatch_get_categories_links() {
     $output = '';
     // categories
     if ( $categories_list = bootswatch_get_the_category_list($post->ID) ) {
-        /* translators: 1: list of categories. */
-        $output .= sprintf(
-            '<span class="post-meta__field"><i class="fa fa-folder"></i>'
-            . esc_html__( '%1$s', 'bootswatch' ) . '</span>',
-            $categories_list
-        ); // WPCS: XSS OK.
+        $output .= sprintf( '<span class="post-meta__field"><i class="fa fa-folder"></i>' . esc_html( '%s' ) . '</span>', $categories_list );
     }
 
     return $output;
@@ -225,12 +221,7 @@ function bootswatch_get_tags_links() {
     // tags
     $tags_list = get_the_tag_list( '', esc_html__( ', ', 'bootswatch' ) );
     if ( $tags_list ) {
-        /* translators: used between list items, there is a space after the comma */
-        $output .= sprintf(
-            '<span class="post-meta__field"><i class="fa fa-tags"></i>'
-            . esc_html__( '%1$s', 'bootswatch' ) . '</span>',
-            $tags_list
-        ); // WPCS: XSS OK.
+        $output .= sprintf( '<span class="post-meta__field"><i class="fa fa-tags"></i>' . esc_html( '%s' ) . '</span>', $tags_list);
     }
 
     return $output;
@@ -269,7 +260,7 @@ function bootswatch_get_entry_footer($post = null) {
  */
 function bootswatch_entry_footer( $post = null ) {
 
-    echo bootswatch_get_entry_footer( $post);
+    echo bootswatch_get_entry_footer( $post); //WPCS. xss ok.
 
 }
 
@@ -298,7 +289,7 @@ function bootswatch_get_the_edit_post_link($post_id = null){
 
 
 function bootswatch_the_edit_post_link($post_id = null){
-    echo bootswatch_get_the_edit_post_link($post_id);
+    echo bootswatch_get_the_edit_post_link($post_id); //WPCS. xss ok.
 }
 
 
@@ -381,7 +372,7 @@ function bootswatch_get_post_thumbnail($post = null){
     return $output;
 }
 function bootswatch_post_thumbnail($post = null) {
-    echo bootswatch_get_post_thumbnail($post);
+    echo bootswatch_get_post_thumbnail($post); //WPCS. xss ok.
 }
 
 function bootswatch_post_format_icon($format = null) {

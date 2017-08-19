@@ -15,7 +15,7 @@ function bootswatch_carousel_markup($images =array(), $size = 'carousel-feed') {
         <ol class="carousel-indicators">
             <?php for($num = 0; $num < $count; $num++ ): ?>
             <?php $active = ($num == 0) ? 'class="active"' : ''; ?>
-            <li data-target="#carousel-example-generic" data-slide-to="<?php echo $num; ?>" <?php echo $active; ?> ></li>
+            <li data-target="#carousel-example-generic" data-slide-to="<?php echo esc_attr($num); ?>" <?php echo esc_attr($active); ?> ></li>
         <?php endfor; ?>
         </ol>
 
@@ -33,10 +33,10 @@ function bootswatch_carousel_markup($images =array(), $size = 'carousel-feed') {
                     $active = ($i == 0) ? 'active' : '';
 
                  ?>
-                <div class="item <?php echo $active; ?>">
-                    <img src="<?php echo $src[0]; ?>" alt="...">
+                <div class="item <?php echo esc_attr($active); ?>">
+                    <img src="<?php echo esc_url($src[0]); ?>" alt="...">
                     <div class="carousel-caption">
-                        <?php echo $image_caption; ?>
+                        <?php echo esc_html($image_caption); ?>
                     </div>
                 </div>
             <?php endforeach; ?>

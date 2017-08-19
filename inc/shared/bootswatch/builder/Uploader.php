@@ -47,7 +47,7 @@ class Uploader {
         mkdir($uploads_dir, 0777, true);
 
         // try to open the file (create it if it doesnt exist)
-        $file = @fopen($file,"w");
+        $file = fopen($file,"w");
 
         if ($file == false)
         return -2;
@@ -97,12 +97,12 @@ class Uploader {
 
     function upload( $file = null, $post_id = 0, $path = null ) {
         if ( empty( $file ) )
-            return new \WP_Error( 'image_sideload_failed', __( 'Invalid URL' ) );
+            return new \WP_Error( 'image_sideload_failed', __( 'Invalid URL', 'bootswatch' ) );
 
         // We only want css files, reject everything else
         preg_match( '/[^\?]+\.(css)\b/i', $file, $matches );
         if ( ! $matches ) {
-            return new \WP_Error( 'image_sideload_failed', __( 'This is not the correct type of file, just what are you trying to do?' ) );
+            return new \WP_Error( 'image_sideload_failed', __( 'This is not the correct type of file, just what are you trying to do?', 'bootswatch' ) );
         }
 
         // $tmp_file = download_url( $file );
@@ -138,7 +138,7 @@ class Uploader {
             return $id;
         }else{
             $old_css_file = get_option('css-url', true);
-            @unlink($old_css_file);
+            unlink($old_css_file);
         }
 
 
@@ -213,7 +213,7 @@ class Uploader {
         ?>
         <div class="update-nag notice">
             <p>
-                <?php echo $this->status->get_error_message();?>
+                <?php echo $this->status->get_error_message(); // WPCS: xss ok. ?>
             </p>
         </div>
         <?php

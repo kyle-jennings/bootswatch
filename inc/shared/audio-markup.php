@@ -50,5 +50,5 @@ function bootswatch_enqueue_visualizer_script(){
         $script .= 'window.audioVis2D(".js--audio-player");';
     $script .= '</script>';
 
-    echo $script;
+    echo $script; // WPCS: xss ok.
 }

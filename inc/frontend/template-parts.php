@@ -69,7 +69,7 @@ function bootswatch_get_post_format_video_hero()
 
 
 function bootswatch_post_format_video_hero() {
-    echo bootswatch_get_post_format_video_hero();
+    echo bootswatch_get_post_format_video_hero(); // WPCS: xss ok.
 }
 /**
  * gets the 404 settings

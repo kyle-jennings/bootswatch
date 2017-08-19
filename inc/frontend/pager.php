@@ -20,9 +20,9 @@ function bootswatch_get_the_posts_navigation( $args = array() ) {
      // Don't print empty markup if there's only one page.
     if ( $GLOBALS['wp_query']->max_num_pages > 1 ) {
         $args = wp_parse_args( $args, array(
-            'prev_text'          => __( 'Older posts' ),
-            'next_text'          => __( 'Newer posts' ),
-            'screen_reader_text' => __( 'Posts navigation' ),
+            'prev_text'          => __( 'Older posts', 'bootswatch' ),
+            'next_text'          => __( 'Newer posts', 'bootswatch' ),
+            'screen_reader_text' => __( 'Posts navigation', 'bootswatch' ),
         ) );
 
         $next_link = get_previous_posts_link( $args['next_text'] . ' <span aria-hidden="true">&raquo;</span>' );
@@ -48,7 +48,7 @@ function bootswatch_get_the_posts_navigation( $args = array() ) {
 
 
 function bootswatch_the_posts_navigation( $args = array() ) {
-    echo bootswatch_get_the_posts_navigation( $args);
+    echo bootswatch_get_the_posts_navigation($args);  // WPCS: xss ok.
 }
 
 
@@ -62,7 +62,7 @@ function bootswatch_get_the_post_navigation( $args = array() ) {
         'in_same_term'       => false,
         'excluded_terms'     => '',
         'taxonomy'           => 'category',
-        'screen_reader_text' => __( 'Post navigation' ),
+        'screen_reader_text' => __( 'Post navigation', 'bootswatch' ),
     ) );
 
 
@@ -92,7 +92,7 @@ function bootswatch_get_the_post_navigation( $args = array() ) {
 
 
 function bootswatch_the_post_navigation( $args = array() ) {
-    echo bootswatch_get_the_post_navigation( $args );
+    echo bootswatch_get_the_post_navigation( $args ); // WPCS: xss ok.
 }
 
 
@@ -123,5 +123,5 @@ function bootswatch_get_paginate_links($args = array()) {
 
 
 function bootswatch_paginate_links($args = array()) {
-    echo bootswatch_get_paginate_links($args);
+    echo bootswatch_get_paginate_links($args); // WPCS: xss ok.
 }

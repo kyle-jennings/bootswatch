@@ -56,7 +56,7 @@ if( !$hide_content ):
 			endwhile;
 
             // pagination though the archive
-            echo bootswatch_paginate_links();
+            bootswatch_paginate_links();
 
 		else :
 

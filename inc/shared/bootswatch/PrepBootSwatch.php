@@ -137,7 +137,7 @@ class PrepBootSwatch {
 
 
         $dir = opendir( $src );
-        @mkdir( dirname( $dst ) );
+        mkdir( dirname( $dst ) );
 
         while( false !== ( $file = readdir( $dir ) ) ) {
             if( $file != '.' && $file != '..' ) {
