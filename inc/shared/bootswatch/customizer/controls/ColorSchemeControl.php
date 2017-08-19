@@ -28,7 +28,7 @@ class ColorSchemeControl extends WP_Customize_Control
             </span>
         </label>
         <p class="description customize-control-description">
-            <?php echo $this->description; ?>
+            <?php echo esc_html($this->description); ?>
         </p>
         <ul>
             <?php
@@ -36,13 +36,13 @@ class ColorSchemeControl extends WP_Customize_Control
                 foreach($this->choices as $theme):
             ?>
             <li class="cf">
-                <input type="radio" name="<?php echo $this->id; ?>"
+                <input type="radio" name="<?php echo esc_attr($this->id); ?>"
                     <?php $this->link(); ?>
-                    value="<?php echo $theme->name; ?>"
+                    value="<?php echo esc_attr($theme->name); ?>"
                     <?php selected($this->value(), $theme->name) ?>
                 />
-                <?php echo ucfirst($theme->name); ?>
-                <img class="swatches" src="<?php echo $theme->thumbnail_uri; ?>" />
+                <?php echo esc_attr(ucfirst($theme->name)); ?>
+                <img class="swatches" src="<?php echo esc_url($theme->thumbnail_uri); ?>" />
 
             </li>
         <?php endforeach; ?>

@@ -393,7 +393,7 @@ class Validations {
         }, $themes );
 
         if( !in_array($val, $valids) )
-            return $validity->add( 'required', __( 'Invalid value' ) );
+            return $validity->add( 'required', __( 'Invalid value', 'bootswatch' ) );
 
 
         return $val;

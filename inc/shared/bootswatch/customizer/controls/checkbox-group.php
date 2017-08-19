@@ -54,6 +54,6 @@ class Bootswatch_Checkbox_Group_Control extends WP_Customize_Control
             $output .= 'value=\''.$this->value().'\' ';
         $output .= ' />';
 
-        echo $output;
+        echo $output; // WPCS: xss ok.
     }
 }

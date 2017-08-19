@@ -153,4 +153,17 @@ class PrepBootSwatch {
         closedir( $dir );
     }
 
+
+    static public function getTextDomain()
+    {
+        $root = dirname(dirname( dirname( dirname( __FILE__))));
+        $file = $root . 'style.css';
+        if(!is_readable($file))
+            return;
+
+        $file = file_get_contents($file);
+        $pattern = '/(Text Domain:) ?+([a-zA-Z0-9-_]+)/';
+        preg_match($patten, $file, $matches);
+        examine($matches);
+    }
 }

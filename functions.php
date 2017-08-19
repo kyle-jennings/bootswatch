@@ -17,8 +17,6 @@ if(!function_exists('examine')){
 
 }
 
-
-
 if ( version_compare( $GLOBALS['wp_version'], '4.6', '<' ) ) {
 	require get_template_directory() . '/inc/back-compat.php';
 	return;

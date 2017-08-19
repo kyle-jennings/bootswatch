@@ -102,7 +102,7 @@ class Bootswatch_Widget_Recent_Comments extends WP_Widget {
             foreach ( (array) $comments as $comment ) {
                 $output .= '<option value="'.get_comment_link( $comment ) .'" >';
                 /* translators: comments widget: 1: comment author, 2: post link */
-                $output .= sprintf( _x( '%1$s', 'widgets', 'bootswatch' ),
+                $output .= sprintf( _x( ' %1$s', 'widgets', 'bootswatch' ),
                     get_comment_author_link( $comment ) . ' &#45; &nbsp;'
                     . get_the_title( $comment->comment_post_ID )
                 );
@@ -151,7 +151,7 @@ class Bootswatch_Widget_Recent_Comments extends WP_Widget {
                 $output .= '<li '.$li_class.'>';
 
                 /* translators: comments widget: 1: comment author, 2: post link */
-                $output .= sprintf( _x( '%1$s', 'widgets', 'bootswatch' ),
+                $output .= sprintf( _x( ' %1$s', 'widgets', 'bootswatch' ),
                     '<span class="comment-author-link">' . get_comment_author( $comment ) . ' &#45;  </span> &nbsp;'
                     . '<a href="' . esc_url( get_comment_link( $comment ) ) . '">'
                     . ( get_the_title( $comment->comment_post_ID ) ? get_the_title( $comment->comment_post_ID ) : "No Title" )

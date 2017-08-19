@@ -185,21 +185,6 @@ class Customizer {
         );
     }
 
-    public function setEmptyTag()
-    {
-        global $wp_customize;
-        $output = '';
-        if ( isset( $wp_customize ) ){
-            $output .= "\n";
-            $output .= '<style id="bootswatch--fake-target" type="text/css">';
-                $output .= '';
-            $output .= '</style>';
-            $output .= "\n";
-            echo $output;
-        }
-
-    }
-
     public function setPreviewStyle()
     {
         $output = '';

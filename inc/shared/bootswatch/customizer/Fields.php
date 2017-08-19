@@ -11,7 +11,7 @@ class Fields{
     public $args
     public $callback;
 
-    public function __construct(&$wp_customize, $setting, $section, $label = null, $desc = null, $args = array(), $callback = null)
+    public function __construct(&$wp_customize, $setting, $section, $label = '', $desc = '', $args = array(), $callback = null)
     {
         $this->wp_customize = $wp_customize;
         $this->setting = $setting;
@@ -23,11 +23,13 @@ class Fields{
     }
 
 
-    public function rangeSlider(&$wp_customize, $setting, $section, $label = null, $desc = null, $callback = null)
+    public function rangeSlider(&$wp_customize, $setting, $section, $label = '', $desc = '', $callback = null)
     {
         $args = array(
-            'description' => sprintf(__('%s','bootswatch'), $desc),
-            'label' => sprintf(__('%s', 'bootswatch'), $label),
+            // translators: range slider field description
+            'description' => sprintf( __(' %s', 'bootswatch'), $desc ),
+            // translators: range slider field label
+            'label' => sprintf( __(' %s', 'bootswatch'), $label ),
             'type' => 'label',
             'section' => $section,
             'settings' => $setting,
@@ -40,11 +42,13 @@ class Fields{
 
 
 
-    public function label(&$wp_customize, $setting, $section, $label = null, $desc = null, $callback = null) {
+    public function label(&$wp_customize, $setting, $section, $label = '', $desc = '', $callback = null) {
 
         $args = array(
-            'description' => sprintf(__('%s','bootswatch'), $desc),
-            'label' => sprintf(__('%s', 'bootswatch'), $label),
+            // translators: range slider field description
+            'description' => sprintf( __(' %s', 'bootswatch'), $desc ),
+            // translators: range slider field label
+            'label' => sprintf( __(' %s', 'bootswatch'), $label ),
             'type' => 'label',
             'section' => $section,
             'settings' => $setting,
@@ -71,11 +75,13 @@ class Fields{
     }
 
 
-    public function color(&$wp_customize, $setting, $section, $label = null, $desc = null, $callback = null)
+    public function color(&$wp_customize, $setting, $section, $label = '', $desc = '', $callback = null)
     {
         $args = array(
-            'description' => sprintf(__('%s','bootswatch'), $desc),
-            'label' => sprintf(__('%s', 'bootswatch'), $label),
+            // translators: range slider field description
+            'description' => sprintf( __(' %s', 'bootswatch'), $desc ),
+            // translators: range slider field label
+            'label' => sprintf( __(' %s', 'bootswatch'), $label ),
             'section' => $section,
             'settings' => $setting,
             'show_opacity' => true,
@@ -103,11 +109,13 @@ class Fields{
     }
 
 
-    public function alphaColor(&$wp_customize, $setting, $section, $label = null, $desc = null, $callback = null)
+    public function alphaColor(&$wp_customize, $setting, $section, $label = '', $desc = '', $callback = null)
     {
         $args = array(
-            'description' => sprintf(__('%s','bootswatch'), $desc),
-            'label' => sprintf(__('%s', 'bootswatch'), $label),
+            // translators: range slider field description
+            'description' => sprintf( __(' %s', 'bootswatch'), $desc ),
+            // translators: range slider field label
+            'label' => sprintf( __(' %s', 'bootswatch'), $label ),
             'section' => $section,
             'settings' => $setting,
             'show_opacity' => true,

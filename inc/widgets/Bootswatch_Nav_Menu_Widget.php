@@ -1,5 +1,13 @@
 <?php
-
+/**
+ * This is basically a clone of the WP_Nav_Menu_Widget but has some additonal
+ * display options and obviously the additonal markup for these display options.
+ *
+ * Examples of the new options are basically just adding different types of
+ * list styles. Because this theme is using Bootstrap, it might be a complicated
+ * and messy process to refactor the CSS to match the and since we have to add
+ * the new display options, we might as well jsut go the extra mile and add the markup here
+ */
 class Bootswatch_Nav_Menu_Widget extends WP_Nav_Menu_Widget {
 
 	/**
@@ -37,10 +45,10 @@ class Bootswatch_Nav_Menu_Widget extends WP_Nav_Menu_Widget {
 		/** This filter is documented in wp-includes/widgets/class-wp-widget-pages.php */
 		$instance['title'] = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
 
-		echo $args['before_widget'];
+		echo $args['before_widget']; // WPCS: xss ok.
 
 		if ( !empty($instance['title']) )
-			echo $args['before_title'] . $instance['title'] . $args['after_title'];
+			echo $args['before_title'] . $instance['title'] . $args['after_title'];  // WPCS: xss ok.
 
 
 		$nav_menu_args = array(
@@ -69,7 +77,7 @@ class Bootswatch_Nav_Menu_Widget extends WP_Nav_Menu_Widget {
 		 * @param array    $instance      Array of settings for the current widget.
 		 */
 		wp_nav_menu( apply_filters( 'widget_nav_menu_args', $nav_menu_args, $nav_menu, $args, $instance ) );
-		echo $args['after_widget'];
+		echo $args['after_widget']; // WPCS: xss ok.
 	}
 
 	/**
@@ -132,20 +140,20 @@ class Bootswatch_Nav_Menu_Widget extends WP_Nav_Menu_Widget {
 				$url = admin_url( 'nav-menus.php' );
 			}
 			?>
-			<?php echo sprintf( __( 'No menus have been created yet. <a href="%s">Create some</a>.', 'bootswatch' ), esc_attr( $url ) ); ?>
+			<?php /* translators: link to create new menu if none exist */ printf( __( 'No menus have been created yet. <a href="%s">Create some</a>.', 'bootswatch' ), esc_attr( $url ) ); //WPCS xss ok; ?>
 		</p>
 		<div class="nav-menu-widget-form-controls"
             <?php if ( empty( $menus ) ) { echo ' style="display:none" '; } ?>>
 			<p>
-				<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'bootswatch' ) ?></label>
-				<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $title ); ?>"/>
+				<label for="<?php echo esc_attr($this->get_field_id( 'title' )); ?>"><?php esc_html_e( 'Title:', 'bootswatch' ) ?></label>
+				<input type="text" class="widefat" id="<?php echo esc_attr($this->get_field_id( 'title' )); ?>" name="<?php echo esc_attr($this->get_field_name( 'title' )); ?>" value="<?php echo esc_attr( $title ); ?>"/>
 			</p>
 			<p>
-				<label for="<?php echo $this->get_field_id( 'nav_menu' ); ?>">
-                        <?php _e( 'Select Menu:', 'bootswatch' ); ?></label>
-				<select id="<?php echo $this->get_field_id( 'nav_menu' ); ?>"
-                    name="<?php echo $this->get_field_name( 'nav_menu' ); ?>">
-					<option value="0"><?php _e( '&mdash; Select &mdash;', 'bootswatch' ); ?></option>
+				<label for="<?php echo esc_attr($this->get_field_id( 'nav_menu' )); ?>">
+                        <?php esc_html_e( 'Select Menu:', 'bootswatch' ); ?></label>
+				<select id="<?php echo esc_attr($this->get_field_id( 'nav_menu' )); ?>"
+                    name="<?php echo esc_attr($this->get_field_name( 'nav_menu' )); ?>">
+					<option value="0"><?php esc_html_e( '&mdash; Select &mdash;', 'bootswatch' ); ?></option>
 					<?php foreach ( $menus as $menu ) : ?>
 						<option value="<?php echo esc_attr( $menu->term_id ); ?>"
                             <?php selected( $nav_menu, $menu->term_id ); ?>>
@@ -156,11 +164,11 @@ class Bootswatch_Nav_Menu_Widget extends WP_Nav_Menu_Widget {
 			</p>
 
             <p>
-				<label for="<?php echo $this->get_field_id( 'menu_style' ); ?>">
+				<label for="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>">
                         <?php _e( 'Menu Style:', 'bootswatch' ); ?>
                 </label>
-				<select id="<?php echo $this->get_field_id( 'menu_style' ); ?>"
-                      name="<?php echo $this->get_field_name( 'menu_style' ); ?>">
+				<select id="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>"
+                      name="<?php echo esc_attr($this->get_field_name( 'menu_style' )); ?>">
 					<?php
                         foreach ( $menu_styles as $style ) :
                             $label = ucwords(str_replace($find, ' ', $style ));
@@ -175,7 +183,7 @@ class Bootswatch_Nav_Menu_Widget extends WP_Nav_Menu_Widget {
 
 			<?php if ( $wp_customize instanceof WP_Customize_Manager ) : ?>
 				<p class="edit-selected-nav-menu" style="<?php if ( ! $nav_menu ) { echo 'display: none;'; } ?>">
-					<button type="button" class="button"><?php _e( 'Edit Menu', 'bootswatch' ) ?></button>
+					<button type="button" class="button"><?php esc_html_e( 'Edit Menu', 'bootswatch' ) ?></button>
 				</p>
 			<?php endif; ?>
 		</div>
