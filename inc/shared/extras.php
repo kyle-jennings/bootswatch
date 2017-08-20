@@ -26,8 +26,3 @@ add_filter('widget_text','do_shortcode');
 // lets add soem new image sizes
 add_image_size('featured-image', '262', '262', true);
 add_image_size('carousel-feed', '1066', '600', true);
-
-
-// add_theme_support( 'post-formats', array( 'aside', 'gallery', 'link', 'image', 'quote', 'status', 'video', 'audio', 'chat') );
-$post_formats = array( 'gallery', 'link', 'image', 'quote', 'video', 'audio', 'chat');
-$post_formats = new PostFormats( $post_formats, array('post', 'page') );

@@ -67,9 +67,10 @@ class Builder {
         $this->template_dir = $template_dir = (function_exists('get_template_directory') )
             ? get_template_directory() : $this->get_template_directory();
 
+
         $this->assets_dir = $this->template_dir . '/assets';
 
-        $this->vendor_dir = $template_dir . '/vendor';
+        $this->vendor_dir = $template_dir . '/_dev/vendor';
 
         $this->fonts_dir = $template_dir . '/_dev/bower_components/font-awesome/scss';
         $this->bootstrap_dir = $this->vendor_dir . '/twbs/bootstrap-sass/assets/stylesheets';
@@ -141,6 +142,18 @@ class Builder {
 
     private function get_template_directory()
     {
-        return dirname( dirname( dirname( dirname( dirname( __FILE__)))));
+        return  dirname(dirname( dirname( dirname( __FILE__))));
     }
+
+
+    static public function examine($val = [], $mode = null)
+    {
+        if( empty($val) && $mode != 'vardump' )
+            return;
+        echo "<pre>";
+        print_r($val);
+        die;
+    }
+
+
 }

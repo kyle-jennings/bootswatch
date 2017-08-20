@@ -56,8 +56,8 @@ class BootSwatch {
         $template_uri = (function_exists('get_template_directory_uri') )
             ? get_template_directory_uri() : $this->get_template_directory_uri();
 
-        $this->vendor_dir = $template_dir . '/vendor';
-        $this->vendor_uri = $template_uri . '/vendor';
+        $this->vendor_dir = $template_dir . '/_dev/vendor';
+        $this->vendor_uri = $template_uri . '/_dev/vendor';
 
         $this->bootswatch_dir = $this->vendor_dir . '/thomaspark/bootswatch';
         $this->bootswatch_uri = $this->vendor_uri . '/thomaspark/bootswatch';
@@ -136,11 +136,22 @@ class BootSwatch {
 
     private function get_template_directory()
     {
-        return dirname(dirname( dirname( dirname( __FILE__))));
+        return dirname( dirname( dirname( __FILE__)));
     }
 
     private function get_template_directory_uri()
     {
         return null;
     }
+
+
+    static public function examine($val = [], $mode = null)
+    {
+        if( empty($val) && $mode != 'vardump' )
+            return;
+        echo "<pre>";
+        print_r($val);
+        die;
+    }
+
 }

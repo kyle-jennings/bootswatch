@@ -1,10 +1,5 @@
 <?php
 
-include dirname(__file__). '/vendor/autoload.php';
-
-require_once dirname(__file__) . '/vendor/kyle-jennings/post-formats-plus/post-formats.php';
-
-
 if(!function_exists('examine')){
 
     function examine($val, $mode = null){

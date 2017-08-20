@@ -3,22 +3,24 @@
 
 // these files contain functions used by both the admin section and frontend
 $shared_files = array(
-    '/inc/shared/utils.php',
-    '/inc/shared/customize.php',
-    '/inc/shared/functions.php',
-    '/inc/shared/template-list.php',
-    '/inc/shared/theme-support.php',
-    '/inc/shared/extras.php',
-    '/inc/shared/jetpack.php',
-    '/inc/shared/register-sidebars.php',
-    '/inc/shared/widgets.php',
-    '/inc/shared/video-markup.php',
-    '/inc/shared/audio-markup.php',
-    '/inc/shared/set-default-settings.php',
+    'bootswatch/Bootswatch.php',
+    'bootswatch/BootswatchThemes.php',
+    'utils.php',
+    'customize.php',
+    'functions.php',
+    'template-list.php',
+    'theme-support.php',
+    'extras.php',
+    'jetpack.php',
+    'register-sidebars.php',
+    'widgets.php',
+    'video-markup.php',
+    'audio-markup.php',
+    'set-default-settings.php',
 );
 
 foreach($shared_files as $file)
-    require get_template_directory() . $file; // WPCS: xss ok.
+    require get_template_directory() . '/inc/shared/' . $file; // WPCS: xss ok.
 
 // only load these in the admin section
 if (is_admin()) {
