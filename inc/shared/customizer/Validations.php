@@ -386,9 +386,7 @@ class Validations {
         $themes = $themes->getThemes();
 
 
-        $valids = array_map(function($theme){
-            return $theme->name;
-        }, $themes );
+        $valids = array_map( $this->color_scheme_sanitize_map($theme), $themes );
 
         if( !in_array($val, $valids) )
             return $validity->add( 'required', __( 'Invalid value', 'bootswatch' ) );
@@ -397,6 +395,9 @@ class Validations {
         return $val;
     }
 
+    function color_scheme_sanitize_map($theme){
+        return $theme->name;
+    }
 
 
     function widgetized_sortable_sanitize($val) {

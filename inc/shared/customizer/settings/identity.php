@@ -44,22 +44,6 @@ $wp_customize->add_control(
 );
 
 
-
-$wp_customize->selective_refresh->add_partial(
-    'color_scheme_setting_refresh',
-    array(
-        'container_inclusive' => true,
-        'fallback_refresh' => false,
-        'render_callback' => function() {
-            return '*{ display: none; }';
-        },
-        'selector' => '#bootswatch--fake-target',
-        'settings' => array('color_scheme_setting'),
-    )
-);
-
-
-
 //
 // $wp_customize->add_setting(
 //     'sidebar_size_setting',

@@ -52,8 +52,6 @@ $wp_customize->add_control( '_404_page_select_control', array(
         'settings'=> '_404_page_select_setting',
         'type'    => 'dropdown-pages',
         'priority' => 1,
-        'active_callback' => function() use ( $wp_customize ) {
-              return 'page' == $wp_customize->get_setting( '_404_page_content_setting' )->value();
-        },
+        'active_callback' => $this->_404PageActiveCallback($wp_customize),
      )
 );

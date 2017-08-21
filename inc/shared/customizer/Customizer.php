@@ -191,4 +191,25 @@ class Customizer {
 
         return $output;
     }
+
+
+    private function activeCallback( $wp_customize, $name )
+    {
+        return 'yes' === $wp_customize->get_setting( $name . '_settings_active' )->value();
+    }
+
+    private function frontpageHeroPageActiveCallback($wp_customizer)
+    {
+         return 'page' === $wp_customize->get_setting( 'frontpage_hero_content_setting' )->value();
+    }
+
+    private function frontpageCalloutActiveCallback($wp_customizer)
+    {
+         return 'callout' === $wp_customize->get_setting( 'frontpage_hero_content_setting' )->value();
+    }
+
+    private function _404PageActiveCallback($wp_customize)
+    {
+        return 'page' == $wp_customize->get_setting( '_404_page_content_setting' )->value();
+    }
 }

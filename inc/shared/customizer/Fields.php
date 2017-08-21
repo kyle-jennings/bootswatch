@@ -1,7 +1,5 @@
 <?php
 
-namespace bootswatch\customizer;
-
 class Fields{
     public $wp_customize;
     public $setting;
