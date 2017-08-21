@@ -16,13 +16,13 @@ class Customizer {
         'controls/AlphaColor.php',
 
 
-        'settings/template-settings.php',
         'settings/identity.php',
-        'settings/header.php',
-        'settings/frontpage.php',
-        'settings/widgetized.php',
-        'settings/footer.php',
-        'settings/404.php',
+        'settings/template-settings.php',
+        // 'settings/header.php',
+        // 'settings/frontpage.php',
+        // 'settings/widgetized.php',
+        // 'settings/footer.php',
+        // 'settings/404.php',
     );
 
 
@@ -59,34 +59,6 @@ class Customizer {
         // loop through the section
         // foreach($this->sections as $section)
         //     $this->registerSectionStyles($section, $wp_customize);
-
-    }
-
-
-    public function unlockValidationTasks()
-    {
-
-        $transient = 'bootswatch--building-css';
-        if( $saved !== false)
-            delete_transient( $transient );
-
-    }
-
-
-    public function isValidationLocked()
-    {
-
-
-        $transient = 'bootswatch--building-css';
-        $saved = get_transient( $transient );
-        if( $saved === false) {
-            set_transient( $transient, $option, 60 * 2 );
-            error_log('new change');
-            return true;
-        }else {
-            error_log('still building');
-            return false;
-        }
 
     }
 
@@ -181,29 +153,21 @@ class Customizer {
         );
     }
 
-    public function setPreviewStyle()
+
+    private function activeCallback($wp_customize, $name)
     {
-        $output = '';
 
-        $output .= '.bootswatch-loading {';
-            $output .= 'opacity: 0.25; cursor: progress !important; -webkit-transition: opacity 0.5s; transition: opacity 0.5s;';
-        $output .= '}';
-
-        return $output;
-    }
-
-
-    private function activeCallback( $wp_customize, $name )
-    {
+        // if($wp_customize->get_setting( $name . '_settings_active' )->value() )
+            // return 'yes';
         return 'yes' === $wp_customize->get_setting( $name . '_settings_active' )->value();
     }
 
-    private function frontpageHeroPageActiveCallback($wp_customizer)
+    private function frontpageHeroPageActiveCallback($wp_customize)
     {
          return 'page' === $wp_customize->get_setting( 'frontpage_hero_content_setting' )->value();
     }
 
-    private function frontpageCalloutActiveCallback($wp_customizer)
+    private function frontpageCalloutActiveCallback($wp_customize)
     {
          return 'callout' === $wp_customize->get_setting( 'frontpage_hero_content_setting' )->value();
     }

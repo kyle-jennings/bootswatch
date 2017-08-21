@@ -385,12 +385,10 @@ class Validations {
         $themes->setThemesAtts();
         $themes = $themes->getThemes();
 
-
-        $valids = array_map( $this->color_scheme_sanitize_map($theme), $themes );
+        $valids = array_map( array($this, 'color_scheme_sanitize_map'), $themes );
 
         if( !in_array($val, $valids) )
             return $validity->add( 'required', __( 'Invalid value', 'bootswatch' ) );
-
 
         return $val;
     }

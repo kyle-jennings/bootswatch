@@ -11,7 +11,7 @@ function bootswatch_scripts() {
 
 
     $theme = get_theme_mod('color_scheme_setting');
-    $file = get_template_directory() . '/_dev/vendor/thomaspark/bootswatch/'.$theme.'/bootswatch.css';
+    $file = get_template_directory() . '/assets/css/'.$theme.'/bootswatch.css';
 
 
     if( is_readable($file) )

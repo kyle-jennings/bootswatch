@@ -57,11 +57,14 @@ class Bootswatch {
         $template_uri = (function_exists('get_template_directory_uri') )
             ? get_template_directory_uri() : $this->get_template_directory_uri();
 
-        $this->vendor_dir = $template_dir . '/vendor';
-        $this->vendor_uri = $template_uri . '/vendor';
+        // $this->vendor_dir = $template_dir . '/_dev/vendor';
+        // $this->vendor_uri = $template_uri . '/_dev/vendor';
+        //
+        // $this->bootswatch_dir = $this->vendor_dir . '/thomaspark/bootswatch';
+        // $this->bootswatch_uri = $this->vendor_uri . '/thomaspark/bootswatch';
 
-        $this->bootswatch_dir = $this->vendor_dir . '/thomaspark/bootswatch';
-        $this->bootswatch_uri = $this->vendor_uri . '/thomaspark/bootswatch';
+        $this->bootswatch_dir = $template_dir . '/assets/css';
+        $this->bootswatch_uri = $template_uri . '/assets/css';
 
         $this->setTheme($theme);
     }
@@ -74,6 +77,7 @@ class Bootswatch {
         // i jsut wanted to play around with something other than concatenation, which is probably faster
         $this->theme_dir = implode('/', array($this->bootswatch_dir, $this->theme));
         $this->theme_uri = implode('/', array($this->bootswatch_uri, $this->theme));
+
     }
 
 
@@ -127,6 +131,7 @@ class Bootswatch {
 
     public function setThumbnail() {
         $file = $this->theme_dir . '/thumbnail.png';
+
 
         if(is_readable($file)){
             $this->thumbnail_dir = $file;

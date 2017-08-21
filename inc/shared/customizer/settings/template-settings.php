@@ -78,7 +78,9 @@ foreach($templates as $name => $args):
 
     // the active callback will provide the toggle functionality for us
     if( $name !== 'archive') {
-        $active_callback = $this->activeCallback($wp_customize, $name);
+        $active_callback = function() use ( $wp_customize, $name ) {
+            return 'yes' === $wp_customize->get_setting( $name . '_settings_active' )->value();
+        };
     }
 
 
