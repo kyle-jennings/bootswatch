@@ -145,7 +145,7 @@ class BootSwatch {
     }
 
 
-    static public function examine($val = [], $mode = null)
+    static public function examine($val = array(), $mode = null)
     {
         if( empty($val) && $mode != 'vardump' )
             return;

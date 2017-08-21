@@ -10,13 +10,7 @@ class PrepBootSwatch {
 
     public function __construct()
     {
-        // $BootSwatch = new \bootswatch\builder\BootSwatch();
-        // $Builder = new \bootswatch\builder\Builder();
-        // $Compiler = new Compiler();
-        // $Compiler->setFormatter('Leafo\ScssPhp\Formatter\Crunched');
-        // $Compiler->setImportPaths($Builder->bootstrap_dir);
-        //
-        // $themes = $BootSwatch->themes;
+
 
     }
 
@@ -49,12 +43,12 @@ class PrepBootSwatch {
     {
         $Builder = new \bootswatch\builder\Builder();
 
-        $font_dir = $Builder->template_dir . '/_dev/bower_components/font-awesome/fonts';
-        $dst = $Builder->vendor_dir .'/thomaspark/bootswatch/fonts';
+        $font_dir = $Builder->template_dir . '/_dev/vendor/fortawesome/font-awesome/fonts';
+        $dst = $Builder->template_dir .'/assets/fonts';
         if(is_readable($font_dir)){
             // examine($Builder);
 
-            self::recurse_copy(
+            self::copy(
                 $font_dir,
                 $dst
             );
@@ -72,7 +66,7 @@ class PrepBootSwatch {
 
 
         $Builder = new \bootswatch\builder\Builder();
-        self::examine( $Builder->assets_dir);
+        // self::examine( $Builder->assets_dir);
         $Compiler = new Compiler();
 
         $paths = array($Builder->bootstrap_dir, $Builder->modules_dir, $Builder->fonts_dir);
@@ -88,14 +82,14 @@ class PrepBootSwatch {
 
 
             $sources = array(
+                $Builder->fonts_dir . '/font-awesome.scss',
                 $BootSwatch->sass_variables,
                 $Builder->bootstrap_dir . '/_bootstrap.scss',
                 $BootSwatch->sass_bootswatch,
                 $Builder->modules_manifest,
-                $Builder->fonts_dir . '/font-awesome.scss',
             );
 
-            // examine($BootSwatch);
+
 
             $file = '';
             foreach($sources as $source){
@@ -105,8 +99,7 @@ class PrepBootSwatch {
                 $file .= file_get_contents($source);
             }
 
-                self::examine($BootSwatch->theme_dir);
-                self::examine($Builder->assets_dir .'/'.$BootSwatch->name);
+            self::examine($file);
 
             // compile it
             $Compiler->setFormatter('Leafo\ScssPhp\Formatter\Expanded');
@@ -119,35 +112,63 @@ class PrepBootSwatch {
             file_put_contents($BootSwatch->theme_dir . '/bootswatch.min.css', $css);
 
 
-            // copy the theme over to the assets dir
-            // self::recurse_copy(
-            //     $BootSwatch->theme_dir,
-            //     $Builder->assets_dir .'/'.$BootSwatch->name
-            // );
-
-
-            // use this when building from the DB
-            // $Compiler->setVariables(array('varname' => 'value'))
-            // $Compiler->compile()
         }
 
 
     }
 
 
-    static private function recurse_copy( $src, $dst ) {
+    static public function moveToAssets()
+    {
+
+        self::moveFontAwesome();
+
+        $BootSwatchThemes = new \bootswatch\BootSwatchThemes();
+        $BootSwatchThemes->setThemesAtts();
+
+        $Builder = new \bootswatch\builder\Builder();
+        // examine($Compiler->getParsedFiles());
+        $themes = $BootSwatchThemes->getThemes();
+        // $themes = array('bootstrap' => reset($themes));
+
+        foreach($themes as $theme=>$BootSwatch){
+
+            $paths = array(
+                'src' => $BootSwatch->theme_dir,
+                'dst' => $Builder->assets_dir .'/css/'.$BootSwatch->name
+            );
+            // self::examine($paths);
+            // copy the theme over to the assets dir
+            self::copy(
+                $paths['src'],
+                $paths['dst']
+            );
+
+
+            // use this when building from the DB
+            // $Compiler->setVariables(array('varname' => 'value'))
+            // $Compiler->compile()
+        }
+    }
+
+
+    static public function moveFiles()
+    {
+        self::moveFontAwesome();
+        self::moveToAssets();
+    }
+
+    static private function copy( $src, $dst ) {
         if( !defined('DS') ) define( 'DS', DIRECTORY_SEPARATOR );
 
-
         $dir = opendir( $src );
-        @mkdir( dirname( $dst ) );
+        mkdir( $dst );
 
         while( false !== ( $file = readdir( $dir ) ) ) {
             if( $file != '.' && $file != '..' ) {
                 if( is_dir( $src . DS . $file ) ) {
-                    self::recurse_copy( $src . DS . $file, $dst . DS . $file );
+                    self::copy( $src . DS . $file, $dst . DS . $file );
                 } else {
-                    // examine($src . DS . $file);
                     if(is_readable($src . DS . $file))
                         copy( $src . DS . $file, $dst . DS . $file );
                 }
@@ -157,7 +178,7 @@ class PrepBootSwatch {
     }
 
 
-    static public function examine($val = [], $mode = null)
+    static public function examine($val = array(), $mode = null)
     {
         if( empty($val) && $mode != 'vardump' )
             return;

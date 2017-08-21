@@ -70,7 +70,8 @@ class Uploader {
         $current_user = wp_get_current_user();
         $id = $current_user->ID;
 
-        $url = wp_upload_dir()['baseurl'] . '/'.$this->tmpdir.'/' . $filename;
+        $url = wp_upload_dir();
+        $url = $url['baseurl'] . '/'.$this->tmpdir.'/' . $filename;
         $path = $uploads_dir .'/' . $filename;
 
         $status = $this->upload($url, $id, $path);

@@ -72,7 +72,7 @@ class Builder {
 
         $this->vendor_dir = $template_dir . '/_dev/vendor';
 
-        $this->fonts_dir = $template_dir . '/_dev/bower_components/font-awesome/scss';
+        $this->fonts_dir = $template_dir . '/_dev/vendor/fortawesome/font-awesome/scss';
         $this->bootstrap_dir = $this->vendor_dir . '/twbs/bootstrap-sass/assets/stylesheets';
 
         $this->modules_dir = $template_dir . '/_dev/src/scss';
@@ -82,26 +82,6 @@ class Builder {
 
 
     }
-
-
-    private function shiftFrontAwesomeModules(&$arr, $file) {
-
-        $key = array_search($file, $arr) ;
-        unset($arr[$key]);
-        array_unshift($arr, $file);
-    }
-
-    private function getFontAwesomeModules( $val )
-    {
-        return $this->fonts_dir . '/' . $val;
-
-    }
-
-    public function getModules($val)
-    {
-        return $this->modules_dir . '/_modules/' .$val;
-    }
-
 
 
 
@@ -146,7 +126,7 @@ class Builder {
     }
 
 
-    static public function examine($val = [], $mode = null)
+    static public function examine($val = array(), $mode = null)
     {
         if( empty($val) && $mode != 'vardump' )
             return;

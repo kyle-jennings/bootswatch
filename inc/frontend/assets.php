@@ -15,7 +15,7 @@ function bootswatch_scripts() {
 
 
     if( is_readable($file) )
-        $uri = get_template_directory_uri() . '/_dev/vendor/thomaspark/bootswatch/'.$theme.'/bootswatch.css';
+        $uri = get_template_directory_uri() . '/assets/css/'.$theme.'/bootswatch.css';
     else
         $uri = get_template_directory_uri() . '/assets/bootstrap/bootswatch.css';
 

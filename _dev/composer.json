@@ -13,7 +13,7 @@
       "twbs/bootstrap-sass" : "3.3.x-dev",
       "leafo/scssphp": "0.6.6",
       "thomaspark/bootswatch": "3.3.7",
-      "kyle-jennings/post-formats-plus" : "dev-master"
+      "fortawesome/font-awesome" : "4.6.x-dev"
     },
     "autoload": {
         "psr-4": {
@@ -22,6 +22,8 @@
     },
     "scripts" : {
         "post-install-cmd" : "bootswatch\\PrepBootSwatch::postInstall",
-        "post-update-cmd": "bootswatch\\PrepBootSwatch::buildCSS"
+        "post-update-cmd": "bootswatch\\PrepBootSwatch::buildCSS",
+        "build-css": "bootswatch\\PrepBootSwatch::buildCSS",
+        "move-files": "bootswatch\\PrepBootSwatch::moveFiles"
     }
 }
