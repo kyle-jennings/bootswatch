@@ -24,6 +24,7 @@ get_header();
  * $sidebar_position
  *
  */
+
 extract( bootswatch_template_settings() );
 if( !$hide_content ):
 ?>

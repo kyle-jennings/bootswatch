@@ -33,7 +33,8 @@ $wp_customize->add_control(
  */
 $wp_customize->add_setting( $name . '_image_setting', array(
     'default'      => null,
-    'sanitize_callback' => array($this->validation, 'hero_image_sanitization'),
+    'sanitize_callback' => 'absint'
+    // 'sanitize_callback' => array($this->validation, 'hero_image_sanitization'),
 ) );
 
 $hero_image_args = array(
@@ -41,49 +42,20 @@ $hero_image_args = array(
     'label'   => __('Header Image', 'bootswatch'),
     'section' => $name . '_settings_section',
     'settings'   => $name . '_image_setting',
+    'height' => '900',
+    'width' => '1600'
 );
 
 if( $name !== 'archive')
     $hero_image_args['active_callback'] = $active_callback;
 
 $wp_customize->add_control(
-    new WP_Customize_Image_Control(
+    new WP_Customize_Cropped_Image_Control(
         $wp_customize,
         $name . '_image_setting_control',
         $hero_image_args
     )
 );
-
-
-/**
- * Hero video
- * @var array
- */
-// $wp_customize->add_setting( $name . '_video_setting', array(
-//     'default'      => null,
-//     'sanitize_callback' => 'esc_url_raw',
-// ) );
-//
-// $description = __('Use an uploaded video, or a video from youtube to display
-// in the header. Uploaded videos should be 8M and should be a .mp4, .mov, or .webm format.', 'bootswatch');
-//
-// $hero_video_args = array(
-//     'description' => $description,
-//     'label'   => __('Header Video', 'bootswatch'),
-//     'section' => $name . '_settings_section',
-//     'settings'   => $name . '_video_setting',
-// );
-// if( $name !== 'archive')
-//     $hero_video_args['active_callback'] = $active_callback;
-//
-// $wp_customize->add_control(
-//     new Bootswatch_Video_Control(
-//         $wp_customize,
-//         $name . '_video_setting_control',
-//         $hero_video_args
-//     )
-// );
-
 
 
 /**

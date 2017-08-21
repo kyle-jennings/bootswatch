@@ -56,6 +56,8 @@ class HeroBackground
     // set the media BGs set in teh customizer
     public function setMediaFromCustSetting($template){
         $this->image = get_theme_mod($template . '_image_setting', null);
+        if(!filter_var($this->image, FILTER_VALIDATE_URL))
+            $this->image = wp_get_attachment_url($this->image);
     }
 
 
