@@ -15,9 +15,9 @@ $args = array(
     'type' => 'label',
     'section' => $name . '_settings_section',
     'settings' => $name . '_header_label',
+    'input_attrs' => $input_attrs
+
 );
-if($name != 'archive')
-    $args['active_callback'] = $active_callback;
 
 $wp_customize->add_control(
     new Bootswatch_Label_Custom_Control(
@@ -27,14 +27,12 @@ $wp_customize->add_control(
     )
 );
 
-
 /**
  * Hero Image
  */
 $wp_customize->add_setting( $name . '_image_setting', array(
     'default'      => null,
     'sanitize_callback' => 'absint'
-    // 'sanitize_callback' => array($this->validation, 'hero_image_sanitization'),
 ) );
 
 $hero_image_args = array(
@@ -43,11 +41,10 @@ $hero_image_args = array(
     'section' => $name . '_settings_section',
     'settings'   => $name . '_image_setting',
     'height' => '900',
-    'width' => '1600'
+    'width' => '1600',
+    'input_attrs' => $input_attrs
 );
 
-if( $name !== 'archive')
-    $hero_image_args['active_callback'] = $active_callback;
 
 $wp_customize->add_control(
     new WP_Customize_Cropped_Image_Control(
@@ -79,10 +76,8 @@ $hero_position_args = array(
     'settings' => $name . '_hero_position_setting',
     'type' => 'select',
     'choices' => $choices,
+    'input_attrs' => $input_attrs
 );
-
-if( $name !== 'archive')
-    $hero_position_args['active_callback'] = $active_callback;
 
 $wp_customize->add_control( $name . '_hero_position_control', $hero_position_args );
 
@@ -107,6 +102,7 @@ $hero_size_args = array(
         'big' => 'Big',
         'full' => 'Full Screen'
     ),
+    'input_attrs' => array('toggable'),
 );
 
 if( $name !== 'archive')

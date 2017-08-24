@@ -19,7 +19,7 @@ class Customizer {
         'settings/identity.php',
         'settings/template-settings.php',
         // 'settings/header.php',
-        // 'settings/frontpage.php',
+        'settings/frontpage.php',
         // 'settings/widgetized.php',
         // 'settings/footer.php',
         // 'settings/404.php',
@@ -44,6 +44,7 @@ class Customizer {
 
         $this->validation = new Validations();
     }
+
 
     /**
     * Remove some default settings from the customizer
@@ -154,26 +155,100 @@ class Customizer {
     }
 
 
-    private function activeCallback($wp_customize, $name)
+    public function toggleTemplateSettingsCallback()
     {
-
-        // if($wp_customize->get_setting( $name . '_settings_active' )->value() )
-            // return 'yes';
-        return 'yes' === $wp_customize->get_setting( $name . '_settings_active' )->value();
+        return true;
     }
 
-    private function frontpageHeroPageActiveCallback($wp_customize)
+
+    // toggle section settings
+    public function activeCallbackFilter($active, $control)
+    {
+        global $wp_customize;
+
+        // first check the 1 offs (404 and dontpage setings), then check for the template toggles
+        if($control->id == '_404_page_select_control')
+            return 'page' == $wp_customize->get_setting( '_404_page_content_setting' )->value();
+        elseif($contorl->id == 'frontpage_hero_callout_control')
+            return 'callout' === $wp_customize->get_setting( 'frontpage_hero_content_setting' )->value();
+        elseif($contorl->id == 'frontpage_hero_page_control')
+            return 'page' === $wp_customize->get_setting( 'frontpage_hero_content_setting' )->value();
+        elseif(strpos( $control->section, '_settings_section'))
+            return $this->checkToggableSettings($active, $control, $wp_customize );
+
+        return $active;
+
+    }
+
+
+    // toggle the frontpage hero setting
+    public function frontpageHeroPageActiveCallback($wp_customize)
     {
          return 'page' === $wp_customize->get_setting( 'frontpage_hero_content_setting' )->value();
     }
 
-    private function frontpageCalloutActiveCallback($wp_customize)
+    // toggle front page callout setting
+    public function frontpageCalloutActiveCallback($wp_customize)
     {
          return 'callout' === $wp_customize->get_setting( 'frontpage_hero_content_setting' )->value();
     }
 
-    private function _404PageActiveCallback($wp_customize)
+    // toggle the 404 hero page stting
+    public function _404PageActiveCallback($wp_customize)
     {
         return 'page' == $wp_customize->get_setting( '_404_page_content_setting' )->value();
     }
+
+    // the logic to toggle these things... god damn php 5.2 support!
+    public function checkToggableSettings($active, $control, $wp_customize)
+    {
+
+        // set initial values
+        $is_togglable = false;
+        $is_section_setting = false;
+        $check_against = '_settings_active';
+
+        // get the setting to check against
+        $check_against = $this->getSectionPrefix($control->section);
+        if(!$check_against)
+            return $active;
+
+        // check to see if we are in teh correction section
+        $is_section_setting = strpos( $control->section, '_settings_section');
+
+        // check for the "toggable" attr
+        if( is_array($control->input_attrs) && in_array('toggable', $control->input_attrs) )
+            $is_togglable = true;
+
+        if( $is_section_setting !== false && $is_togglable !== false && $check_against ) {
+
+            if($wp_customize->get_setting( $check_against ))
+                return 'yes' === $wp_customize->get_setting( $check_against )->value();
+
+        }
+
+        return $active;
+    }
+
+
+    public function getSectionPrefix($section = null)
+    {
+        if(!$section)
+            return null;
+
+        $find = '_';
+        $section = explode($find, $section);
+
+        // get the section mae
+        $name = array_shift( $section );
+
+        // in the case of _404, we need to shift again and add an _
+        if(!$name)
+            $name = '_'. array_shift( $section );
+
+        $check_against = $name . '_settings_active';
+
+        return $check_against;
+    }
+
 }

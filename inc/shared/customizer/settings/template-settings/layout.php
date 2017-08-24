@@ -18,10 +18,10 @@ if( $name !== 'archive'):
         'type' => 'label',
         'section' => $name . '_settings_section',
         'settings' => $name . '_other_settings_label',
+        'input_attrs' => $input_attrs
     );
 
-    if($name != 'archive')
-        $args['active_callback'] = $active_callback;
+
     $wp_customize->add_control(
         new Bootswatch_Label_Custom_Control(
             $wp_customize,
@@ -50,10 +50,8 @@ if( $name !== 'archive'):
             'page-content' => 'Hide Page Content and Sidebar',
             'footer' => 'Hide Footer'
         ),
+        'input_attrs' => $input_attrs
     );
-
-    if( $name !== 'archive')
-        $layout_args['active_callback'] = $active_callback;
 
     $wp_customize->add_control(
         new Bootswatch_Checkbox_Group_Control(

@@ -39,7 +39,6 @@ $wp_customize->add_control( 'frontpage_hero_content_control', array(
          'active_callback' => function() use ( $wp_customize ) {
               return 'callout' === $wp_customize->get_setting( 'frontpage_hero_content_setting' )->value();
          },
-        //  'active_callback' => $this->frontpageCalloutActiveCallback($wp_customize),
      )
  );
 
@@ -59,7 +58,6 @@ $wp_customize->add_control( 'frontpage_hero_page_control', array(
         'active_callback' => function() use ( $wp_customize ) {
              return 'page' === $wp_customize->get_setting( 'frontpage_hero_content_setting' )->value();
         },
-        // 'active_callback' => $this->frontpageHeroPageActiveCallback($wp_customize),
      )
 );
 

@@ -44,7 +44,7 @@ foreach($templates as $name => $args):
         $name . '_settings_section',
         $section_args
     );
-
+    // examine($wp_customize);
     // now do the settings
 
 
@@ -73,15 +73,14 @@ foreach($templates as $name => $args):
         );
 
         $wp_customize->add_control( $name . '_settings_active_control', $activate_args );
-
     endif;
 
-    // the active callback will provide the toggle functionality for us
-    if( $name !== 'archive') {
-        $active_callback = function() use ( $wp_customize, $name ) {
-            return 'yes' === $wp_customize->get_setting( $name . '_settings_active' )->value();
-        };
-    }
+    $input_attrs = null;
+
+
+    // the active callback filter will provide the toggle functionality for us
+    if( $name !== 'archive')
+        $input_attrs = array('toggable');
 
 
     require('template-settings/header.php');
