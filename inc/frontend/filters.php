@@ -103,7 +103,8 @@ add_filter( 'get_archives_link', 'bootswatch_archive_link' );
 
 
 remove_filter( 'the_content', 'wpautop' );
-add_filter( 'the_content', function( $content ) {
 
+function bootswatch_autop_false($content) {
     return wpautop( $content, false );
-}, 10 );
+}
+add_filter( 'the_content', 'bootswatch_autop_false', 10 );

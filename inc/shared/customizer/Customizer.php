@@ -72,17 +72,17 @@ class Customizer {
 
         $themes = bootswatch_fetch_bootswatch_themes();
         $files = bootswatch_fetch_bootswatch_files($themes[$val]);
-        $Variables = new \bootswatch\builder\Variables();
+        $Variables = new Variables();
         $Variables->saveVarFile($files['scssVariables']);
 
-        $Builder = new \bootswatch\builder\Builder($val);
+        $Builder = new Builder($val);
         $Builder->build();
 
         if(strlen($Builder->css) <= 0)
          return false;
 
          // ok try to upload, if it's a success then huzzaah
-        $Uploader = new \bootswatch\builder\Uploader($Builder->css, $val);
+        $Uploader = new Uploader($Builder->css, $val);
         $status = $Uploader->saveTmpFile('preview');
 
         if(!is_wp_error($status))
@@ -169,9 +169,11 @@ class Customizer {
         // first check the 1 offs (404 and dontpage setings), then check for the template toggles
         if($control->id == '_404_page_select_control')
             return 'page' == $wp_customize->get_setting( '_404_page_content_setting' )->value();
-        elseif($contorl->id == 'frontpage_hero_callout_control')
+        elseif($control->id == 'frontpage_hero_callout_control'){
+            error_log('frontpage hero');
             return 'callout' === $wp_customize->get_setting( 'frontpage_hero_content_setting' )->value();
-        elseif($contorl->id == 'frontpage_hero_page_control')
+        }
+        elseif($control->id == 'frontpage_hero_page_control')
             return 'page' === $wp_customize->get_setting( 'frontpage_hero_content_setting' )->value();
         elseif(strpos( $control->section, '_settings_section'))
             return $this->checkToggableSettings($active, $control, $wp_customize );
@@ -180,24 +182,6 @@ class Customizer {
 
     }
 
-
-    // toggle the frontpage hero setting
-    public function frontpageHeroPageActiveCallback($wp_customize)
-    {
-         return 'page' === $wp_customize->get_setting( 'frontpage_hero_content_setting' )->value();
-    }
-
-    // toggle front page callout setting
-    public function frontpageCalloutActiveCallback($wp_customize)
-    {
-         return 'callout' === $wp_customize->get_setting( 'frontpage_hero_content_setting' )->value();
-    }
-
-    // toggle the 404 hero page stting
-    public function _404PageActiveCallback($wp_customize)
-    {
-        return 'page' == $wp_customize->get_setting( '_404_page_content_setting' )->value();
-    }
 
     // the logic to toggle these things... god damn php 5.2 support!
     public function checkToggableSettings($active, $control, $wp_customize)

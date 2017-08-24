@@ -36,9 +36,6 @@ $wp_customize->add_control( 'frontpage_hero_content_control', array(
          'settings'=> 'frontpage_hero_callout_setting',
          'type'    => 'dropdown-pages',
          'priority' => 1,
-         'active_callback' => function() use ( $wp_customize ) {
-              return 'callout' === $wp_customize->get_setting( 'frontpage_hero_content_setting' )->value();
-         },
      )
  );
 
@@ -55,9 +52,6 @@ $wp_customize->add_control( 'frontpage_hero_page_control', array(
         'settings'=> 'frontpage_hero_page_setting',
         'type'    => 'dropdown-pages',
         'priority' => 1,
-        'active_callback' => function() use ( $wp_customize ) {
-             return 'page' === $wp_customize->get_setting( 'frontpage_hero_content_setting' )->value();
-        },
      )
 );
 
