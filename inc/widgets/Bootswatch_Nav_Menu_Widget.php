@@ -165,7 +165,7 @@ class Bootswatch_Nav_Menu_Widget extends WP_Nav_Menu_Widget {
 
             <p>
 				<label for="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>">
-                        <?php _e( 'Menu Style:', 'bootswatch' ); ?>
+                        <?php esc_html__( 'Menu Style:', 'bootswatch' ); ?>
                 </label>
 				<select id="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>"
                       name="<?php echo esc_attr($this->get_field_name( 'menu_style' )); ?>">

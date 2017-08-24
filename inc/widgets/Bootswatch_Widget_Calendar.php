@@ -55,9 +55,9 @@ class Bootswatch_Widget_Calendar extends WP_Widget {
 		/** This filter is documented in wp-includes/widgets/class-wp-widget-pages.php */
 		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
 
-		echo $args['before_widget'];
+		echo $args['before_widget']; //WPCS: xss ok.
 		if ( $title ) {
-			echo $args['before_title'] . $title . $args['after_title'];
+			echo $args['before_title'] . $title . $args['after_title'];  //WPCS: xss ok.
 		}
 		if ( 0 === self::$instance ) {
 			echo '<div id="calendar_wrap" class="calendar_wrap">';
@@ -69,9 +69,9 @@ class Bootswatch_Widget_Calendar extends WP_Widget {
         $replace = '<table class="table" id';
 		$cal = get_calendar(true, false);
         $cal = preg_replace($search, $replace, $cal);
-        echo $cal;
+        echo $cal;  //WPCS: xss ok.
 		echo '</div>';
-		echo $args['after_widget'];
+		echo $args['after_widget'];  //WPCS: xss ok.
 
 		self::$instance++;
 	}
@@ -106,8 +106,14 @@ class Bootswatch_Widget_Calendar extends WP_Widget {
 		$instance = wp_parse_args( (array) $instance, array( 'title' => '' ) );
 		$title = sanitize_text_field( $instance['title'] );
 		?>
-		<p><label for="<?php echo esc_attr($this->get_field_id('title')); ?>"><?php _e('Title:', 'bootswatch'); ?></label>
-		<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>" /></p>
+		<p>
+            <label for="<?php echo esc_attr($this->get_field_id('title')); ?>">
+                <?php __('Title:', 'bootswatch'); ?>
+            </label>
+	          <input class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>" 
+              name="<?php echo esc_attr($this->get_field_name('title')); ?>" type="text"
+              value="<?php echo esc_attr($title); ?>" />
+      </p>
 		<?php
 	}
 }

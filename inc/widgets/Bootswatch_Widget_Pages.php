@@ -86,7 +86,7 @@ class Bootswatch_Widget_Pages extends WP_Widget {
         $output .= '</select>';
         $output .= $this->dropdown_js($dropdown_id);
 
-        echo $output;
+        echo $output; //WPCS: xss ok;
     }
 
 
@@ -188,7 +188,7 @@ class Bootswatch_Widget_Pages extends WP_Widget {
 
         $output .= '</'.$elm.'>';
 
-        echo $output;
+        echo $output;  //WPCS: xss ok;
     }
 
 	/**
@@ -244,9 +244,9 @@ class Bootswatch_Widget_Pages extends WP_Widget {
 		if ( empty( $out ) )
             return false;
 
-		echo $args['before_widget'];
+		echo $args['before_widget']; //WPCS: xss ok;
 		if ( $title ) {
-			echo $args['before_title'] . $title . $args['after_title'];
+			echo $args['before_title'] . $title . $args['after_title']; //WPCS: xss ok;
 		}
 
         if($style == 'dropdown') {
@@ -255,11 +255,11 @@ class Bootswatch_Widget_Pages extends WP_Widget {
             $this->menu($sortby, $exclude, $style, $children);
         } else {
             echo '<ul>';
-                echo $out;
+                echo $out;  //WPCS: xss ok;
             echo '</ul>';
         }
 
-		echo $args['after_widget'];
+		echo $args['after_widget']; //WPCS: xss ok;
 
 	}
 	/**
@@ -306,26 +306,26 @@ class Bootswatch_Widget_Pages extends WP_Widget {
 
 		?>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php _e( 'Title:', 'bootswatch' ); ?></label>
-			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id('title') ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" placeholder="<?php esc_attr_e( 'Pages', 'bootswatch' ); ?>" type="text" value="<?php echo esc_attr( $instance['title'] ); ?>" />
+			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php __( 'Title:', 'bootswatch' ); ?></label>
+			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id('title') ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" placeholder="<?php esc_attr__( 'Pages', 'bootswatch' ); ?>" type="text" value="<?php echo esc_attr( $instance['title'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'sortby' ) ); ?>"><?php _e( 'Sort by:', 'bootswatch' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'sortby' ) ); ?>"><?php __( 'Sort by:', 'bootswatch' ); ?></label>
 			<select name="<?php echo esc_attr( $this->get_field_name( 'sortby' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'sortby' ) ); ?>" class="widefat">
-				<option value="post_title"<?php selected( $instance['sortby'], 'post_title' ); ?>><?php _e('Page title', 'bootswatch'); ?></option>
-				<option value="menu_order"<?php selected( $instance['sortby'], 'menu_order' ); ?>><?php _e('Page order', 'bootswatch'); ?></option>
-				<option value="ID"<?php selected( $instance['sortby'], 'ID' ); ?>><?php _e( 'Page ID', 'bootswatch' ); ?></option>
+				<option value="post_title"<?php selected( $instance['sortby'], 'post_title' ); ?>><?php __('Page title', 'bootswatch'); ?></option>
+				<option value="menu_order"<?php selected( $instance['sortby'], 'menu_order' ); ?>><?php __('Page order', 'bootswatch'); ?></option>
+				<option value="ID"<?php selected( $instance['sortby'], 'ID' ); ?>><?php __( 'Page ID', 'bootswatch' ); ?></option>
 			</select>
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'exclude' ) ); ?>"><?php _e( 'Exclude:', 'bootswatch' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'exclude' ) ); ?>"><?php __( 'Exclude:', 'bootswatch' ); ?></label>
 			<input type="text" value="<?php echo esc_attr( $instance['exclude'] ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'exclude' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'exclude' ) ); ?>" class="widefat" />
 			<br />
-			<small><?php _e( 'Page IDs, separated by commas.', 'bootswatch' ); ?></small>
+			<small><?php __( 'Page IDs, separated by commas.', 'bootswatch' ); ?></small>
 		</p>
 
-        <input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('children'); ?>" name="<?php echo $this->get_field_name('children'); ?>"<?php checked( $children ); ?> />
-		<label for="<?php echo $this->get_field_id('children'); ?>"><?php _e( 'Show child pages', 'bootswatch' ); ?></label></p>
+        <input type="checkbox" class="checkbox" id="<?php echo esc_attr($this->get_field_id('children')); ?>" name="<?php echo esc_attr($this->get_field_name('children')); ?>"<?php checked( $children ); ?> />
+		<label for="<?php echo esc_attr($this->get_field_id('children')); ?>"><?php __( 'Show child pages', 'bootswatch' ); ?></label></p>
 
 
         <?php
@@ -335,11 +335,11 @@ class Bootswatch_Widget_Pages extends WP_Widget {
 
         ?>
         <p>
-            <label for="<?php echo $this->get_field_id( 'menu_style' ); ?>">
-                    <?php _e( 'Menu Style:', 'bootswatch' ); ?>
+            <label for="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>">
+                    <?php __( 'Menu Style:', 'bootswatch' ); ?>
             </label>
-            <select id="<?php echo $this->get_field_id( 'menu_style' ); ?>"
-                  name="<?php echo $this->get_field_name( 'menu_style' ); ?>">
+            <select id="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>"
+                  name="<?php echo esc_attr($this->get_field_name( 'menu_style' )); ?>">
                 <?php
                     foreach ( $menu_styles as $style ) :
                         $label = ucwords(str_replace($find, ' ', $style ));

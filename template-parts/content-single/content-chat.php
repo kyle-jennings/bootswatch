@@ -26,10 +26,10 @@ $chat_location = $chat['location'];
                     <div class="post-meta">
                         <?php
 
-                        echo bootswatch_get_the_date();
-                        echo bootswatch_get_the_author();
+                        echo bootswatch_get_the_date(); // WPCS: xss ok.
+                        echo bootswatch_get_the_author(); // WPCS: xss ok.
 
-                        echo bootswatch_get_the_comment_count_link();
+                        echo bootswatch_get_the_comment_count_link(); // WPCS: xss ok.
                         ?>
                     </div><!-- .post-meta -->
                     <?php
@@ -41,7 +41,7 @@ $chat_location = $chat['location'];
 
         <?php
             if($chat_location == 'before-content')
-                echo bootswatch_get_chat_log($chat);
+                echo bootswatch_get_chat_log($chat); // WPCS: xss ok.
         ?>
 
     	<div class="post-content">
@@ -61,11 +61,11 @@ $chat_location = $chat['location'];
 
         <?php
             if($chat_location == 'after-content')
-                echo bootswatch_get_chat_log($chat);
+                echo bootswatch_get_chat_log($chat); // WPCS: xss ok.
         ?>
 
 
-        <?php echo bootswatch_get_entry_footer($post); ?>
+        <?php echo bootswatch_get_entry_footer($post); // WPCS: xss ok. ?>
 
 
     </div>

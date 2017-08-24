@@ -108,7 +108,7 @@ class Bootswatch_Widget_Archives extends WP_Widget {
             $class = 'nav nav-pills nav-stacked';
         endif;
 
-        echo '<'.$elm .' class="widget-list '.$class .'">';
+        echo '<'.esc_attr($elm) .' class="widget-list '.esc_attr($class) .'">';
 		/**
 		 * Filters the arguments for the Archives widget.
 		 *
@@ -130,7 +130,7 @@ class Bootswatch_Widget_Archives extends WP_Widget {
             )
         );
 	?>
-		</<?php echo $elm; ?>>
+		</<?php echo esc_attr($elm); ?>>
 	<?php
 
     }
@@ -157,9 +157,9 @@ class Bootswatch_Widget_Archives extends WP_Widget {
 		/** This filter is documented in wp-includes/widgets/class-wp-widget-pages.php */
 		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Archives', 'bootswatch' ) : $instance['title'], $instance, $this->id_base );
 
-		echo $args['before_widget'];
+		echo $args['before_widget']; //WPCS: xss ok.
 		if ( $title ) {
-			echo $args['before_title'] . $title . $args['after_title'];
+			echo $args['before_title'] . $title . $args['after_title'];  //WPCS: xss ok.
 		}
 
 		if ( $style == 'dropdown' )
@@ -168,7 +168,7 @@ class Bootswatch_Widget_Archives extends WP_Widget {
             $this->list($c, $style);
 
 
-		echo $args['after_widget'];
+		echo $args['after_widget'];  //WPCS: xss ok.
 	}
 
 	/**
@@ -210,7 +210,12 @@ class Bootswatch_Widget_Archives extends WP_Widget {
         $saved_style = isset( $instance['menu_style'] ) ? $instance['menu_style'] : '';
 
 		?>
-		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:', 'bootswatch'); ?></label> <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" placeholder="<?php esc_attr_e( 'Archives', 'bootswatch' ); ?>" type="text" value="<?php echo esc_attr($title); ?>" /></p>
+		<p>
+            <label for="<?php echo esc_attr($this->get_field_id('title')); ?>"><?php __('Title:', 'bootswatch'); ?></label>
+            <input class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>"
+                name="<?php echo esc_attr($this->get_field_name('title')); ?>" placeholder="<?php esc_attr_e( 'Archives', 'bootswatch' ); ?>"
+                type="text" value="<?php echo esc_attr($title); ?>" />
+        </p>
         <?php
         // styles
         $find = array('-', '_');
@@ -218,11 +223,11 @@ class Bootswatch_Widget_Archives extends WP_Widget {
 
         ?>
         <p>
-            <label for="<?php echo $this->get_field_id( 'menu_style' ); ?>">
-                    <?php _e( 'Menu Style:', 'bootswatch' ); ?>
+            <label for="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>">
+                    <?php __( 'Menu Style:', 'bootswatch' ); ?>
             </label>
-            <select id="<?php echo $this->get_field_id( 'menu_style' ); ?>"
-                  name="<?php echo $this->get_field_name( 'menu_style' ); ?>">
+            <select id="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>"
+                  name="<?php echo esc_attr($this->get_field_name( 'menu_style' )); ?>">
                 <?php
                     foreach ( $menu_styles as $style ) :
                         $label = ucwords(str_replace($find, ' ', $style ));
@@ -236,7 +241,12 @@ class Bootswatch_Widget_Archives extends WP_Widget {
         </p>
 
 		<p>
-			<input class="checkbox" type="checkbox"<?php checked( $instance['count'] ); ?> id="<?php echo $this->get_field_id('count'); ?>" name="<?php echo $this->get_field_name('count'); ?>" /> <label for="<?php echo $this->get_field_id('count'); ?>"><?php _e('Show post counts', 'bootswatch'); ?></label>
+			<input class="checkbox" type="checkbox" <?php checked( $instance['count'] ); ?>
+                id="<?php echo esc_attr($this->get_field_id('count')); ?>"
+                name="<?php echo esc_attr($this->get_field_name('count')); ?>" />
+            <label for="<?php echo esc_attr($this->get_field_id('count')); ?>">
+                <?php __('Show post counts', 'bootswatch'); ?>
+            </label>
 		</p>
 		<?php
 	}

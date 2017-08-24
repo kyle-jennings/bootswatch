@@ -36,7 +36,7 @@ global $post;
     		?>
     	</div><!-- .post-meta -->
 
-        <?php echo bootswatch_get_entry_footer($post); ?>
+        <?php echo bootswatch_get_entry_footer($post); // WPCS: xss ok. ?>
 
 
     </div>

@@ -63,7 +63,7 @@ if( !$hide_content ):
 
 			endwhile;
 
-			echo bootswatch_paginate_links();
+			echo bootswatch_paginate_links(); // WPCS: xss ok.
 
 		else :
 

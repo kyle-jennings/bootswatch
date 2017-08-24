@@ -29,7 +29,7 @@ $quote = get_post_meta($post->ID, '_post_format_quote', true);
 
     if($quote){
         echo '<div class="col-md-12">';
-        echo bootswatch_get_quote_markup($quote);
+        echo bootswatch_get_quote_markup($quote);// WPCS: xss ok.
         echo '</div>';
 
     }
@@ -45,12 +45,12 @@ $quote = get_post_meta($post->ID, '_post_format_quote', true);
             <div class="post-meta">
                 <?php
 
-                echo bootswatch_get_the_date();
-                echo bootswatch_get_the_author();
+                echo bootswatch_get_the_date(); // WPCS: xss ok.
+                echo bootswatch_get_the_author(); // WPCS: xss ok.
 
-                echo bootswatch_get_the_comment_popup();
-                echo bootswatch_get_categories_links();
-                echo bootswatch_get_tags_links();
+                echo bootswatch_get_the_comment_popup(); // WPCS: xss ok.
+                echo bootswatch_get_categories_links(); // WPCS: xss ok.
+                echo bootswatch_get_tags_links(); // WPCS: xss ok.
                 ?>
             </div><!-- .post-meta -->
 

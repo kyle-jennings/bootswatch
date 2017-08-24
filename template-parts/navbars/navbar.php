@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <?php echo bootswatch_get_navbar_brand(); ?>
+            <?php echo bootswatch_get_navbar_brand(); // WPCS: xss ok.?>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->

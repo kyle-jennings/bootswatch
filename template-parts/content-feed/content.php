@@ -36,12 +36,12 @@ if( has_post_thumbnail() )
         <div class="post-meta">
             <?php
 
-            echo bootswatch_get_the_date();
-            echo bootswatch_get_the_author();
+            echo bootswatch_get_the_date(); // WPCS: xss ok.
+            echo bootswatch_get_the_author(); // WPCS: xss ok.
 
-            echo bootswatch_get_the_comment_popup();
-            echo bootswatch_get_categories_links();
-            echo bootswatch_get_tags_links();
+            echo bootswatch_get_the_comment_popup(); // WPCS: xss ok.
+            echo bootswatch_get_categories_links(); // WPCS: xss ok.
+            echo bootswatch_get_tags_links(); // WPCS: xss ok.
             ?>
         </div><!-- .post-meta -->
 
@@ -57,7 +57,7 @@ if( has_post_thumbnail() )
     ?>
     </div> <!-- col-md-4-->
 
-    <div class="<?php echo $right; ?>">
+    <div class="<?php echo $right; // WPCS: xss ok.?>">
 
         <div class="post-content">
             <?php

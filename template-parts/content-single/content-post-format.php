@@ -21,9 +21,9 @@ global $post;
             if ( 'page' !== get_post_type() ) : ?>
             <div class="post-meta">
             <?php
-                echo bootswatch_get_the_date();
-                echo bootswatch_get_the_author();
-                echo bootswatch_get_the_comment_count_link();
+                echo bootswatch_get_the_date(); // WPCS: xss ok.
+                echo bootswatch_get_the_author(); // WPCS: xss ok.
+                echo bootswatch_get_the_comment_count_link(); // WPCS: xss ok.
             ?>
             </div><!-- .post-meta -->
             <?php
@@ -51,7 +51,7 @@ global $post;
     	</div><!-- .post-meta -->
 
 
-        <?php echo bootswatch_get_entry_footer($post); ?>
+        <?php echo bootswatch_get_entry_footer($post); // WPCS: xss ok.?>
 
 
     </div>

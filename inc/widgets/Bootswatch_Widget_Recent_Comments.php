@@ -221,7 +221,7 @@ class Bootswatch_Widget_Recent_Comments extends WP_Widget {
 
 
 		$output .= $args['after_widget'];
-		echo $output;
+		echo $output;  //WPCS: xss ok;
 	}
 	/**
 	 * Handles updating settings for the current Recent Comments widget instance.
@@ -258,11 +258,11 @@ class Bootswatch_Widget_Recent_Comments extends WP_Widget {
         $saved_style = isset( $instance['menu_style'] ) ? $instance['menu_style'] : '';
 
 		?>
-		<p><label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'bootswatch' ); ?></label>
-		<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" placeholder="<?php esc_attr_e( 'Recent Comments', 'bootswatch' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" /></p>
+		<p><label for="<?php echo esc_attr($this->get_field_id( 'title' )); ?>"><?php __( 'Title:', 'bootswatch' ); ?></label>
+		<input class="widefat" id="<?php echo esc_attr($this->get_field_id( 'title' )); ?>" name="<?php echo esc_attr($this->get_field_name( 'title' )); ?>" placeholder="<?php esc_attr_e( 'Recent Comments', 'bootswatch' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" /></p>
 
-		<p><label for="<?php echo $this->get_field_id( 'number' ); ?>"><?php _e( 'Number of comments to show:', 'bootswatch' ); ?></label>
-		<input class="tiny-text" id="<?php echo $this->get_field_id( 'number' ); ?>" name="<?php echo $this->get_field_name( 'number' ); ?>" type="number" step="1" min="1" value="<?php echo $number; ?>" size="3" /></p>
+		<p><label for="<?php echo esc_attr($this->get_field_id( 'number' )); ?>"><?php __( 'Number of comments to show:', 'bootswatch' ); ?></label>
+		<input class="tiny-text" id="<?php echo esc_attr($this->get_field_id( 'number' )); ?>" name="<?php echo esc_attr($this->get_field_name( 'number' )); ?>" type="number" step="1" min="1" value="<?php echo esc_attr($number); ?>" size="3" /></p>
 
         <?php
         // styles
@@ -271,11 +271,11 @@ class Bootswatch_Widget_Recent_Comments extends WP_Widget {
 
         ?>
         <p>
-            <label for="<?php echo $this->get_field_id( 'menu_style' ); ?>">
-                    <?php _e( 'Menu Style:', 'bootswatch' ); ?>
+            <label for="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>">
+                    <?php __( 'Menu Style:', 'bootswatch' ); ?>
             </label>
-            <select id="<?php echo $this->get_field_id( 'menu_style' ); ?>"
-                  name="<?php echo $this->get_field_name( 'menu_style' ); ?>">
+            <select id="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>"
+                  name="<?php echo esc_attr($this->get_field_name( 'menu_style' )); ?>">
                 <?php
                     foreach ( $menu_styles as $style ) :
                         $label = ucwords(str_replace($find, ' ', $style ));
