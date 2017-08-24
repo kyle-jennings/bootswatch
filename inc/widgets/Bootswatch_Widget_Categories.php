@@ -198,11 +198,21 @@ class Bootswatch_Widget_Categories extends WP_Widget {
         $saved_style = isset( $instance['menu_style'] ) ? $instance['menu_style'] : '';
 
 		?>
-		<p><label for="<?php echo esc_attr($this->get_field_id('title')); ?>"><?php __( 'Title:', 'bootswatch' ); ?></label>
-		<input class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>" name="<?php echo esc_attr($this->get_field_name('title')); ?>" placeholder="<?php esc_attr_e( 'Categories', 'bootswatch' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" /></p>
+		<p>
+            <label for="<?php echo esc_attr($this->get_field_id('title')); ?>">
+                <?php echo __( 'Title:', 'bootswatch' );  // WPCS: xss ok.?>
+            </label>
+		    <input class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>"
+                name="<?php echo esc_attr($this->get_field_name('title')); ?>"
+                placeholder="<?php echo esc_attr( 'Categories', 'bootswatch' ); ?>"
+                type="text" value="<?php echo esc_attr( $title ); ?>" />
+        </p>
 
-		<input type="checkbox" class="checkbox" id="<?php echo esc_attr($this->get_field_id('count')); ?>" name="<?php echo esc_attr($this->get_field_name('count')); ?>"<?php checked( $count ); ?> />
-		<label for="<?php echo esc_attr($this->get_field_id('count')); ?>"><?php __e( 'Show post counts', 'bootswatch' ); ?></label><br />
+		<input type="checkbox" class="checkbox" id="<?php echo esc_attr($this->get_field_id('count')); ?>"
+            name="<?php echo esc_attr($this->get_field_name('count')); ?>"<?php checked( $count ); ?> />
+		<label for="<?php echo esc_attr($this->get_field_id('count')); ?>">
+            <?php echo __( 'Show post counts', 'bootswatch' );  // WPCS: xss ok. ?>
+        </label><br />
 
         <?php
         // styles
@@ -212,7 +222,7 @@ class Bootswatch_Widget_Categories extends WP_Widget {
         ?>
         <p>
             <label for="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>">
-                    <?php __( 'Menu Style:', 'bootswatch' ); ?>
+                <?php echo __( 'Menu Style:', 'bootswatch' );  // WPCS: xss ok.?>
             </label>
             <select id="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>"
                   name="<?php echo esc_attr($this->get_field_name( 'menu_style' )); ?>">

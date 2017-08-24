@@ -24,6 +24,7 @@ class NavbarWalker extends Walker_Nav_Menu {
         $title = $item->title;
         $description = $item->description;
         $permalink = $item->url;
+        $item_output = isset($item_output) ? $item_output : '';
 
         $is_current = false;
         if($item->classes){

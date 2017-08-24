@@ -102,6 +102,7 @@ class Bootswatch_Widget_Recent_Posts extends WP_Widget {
         $elm = 'ul';
         $format = 'html';
         $before = null;
+        $li_class = '';
         if($style == 'unordered-list'):
             $elm = 'ul';
         elseif($style == 'ordered-list'):
@@ -110,7 +111,7 @@ class Bootswatch_Widget_Recent_Posts extends WP_Widget {
             $class = 'list-unstyled';
         elseif( $style == 'list-group') :
             $class = 'list-group';
-            $li_class = 'class="list-group-item"';
+            $li_class = 'list-group-item';
 
         elseif($style == 'pills'):
             $class = 'nav nav-pills nav-stacked';
@@ -120,7 +121,7 @@ class Bootswatch_Widget_Recent_Posts extends WP_Widget {
 		echo '<'.$elm.' class="widget-list '.$class.'">';// WPCS: xss ok.
         ?>
 		<?php while ( $r->have_posts() ) : $r->the_post(); ?>
-			<li <?php echo $li_class; // WPCS: xss ok. ?>>
+			<li class="<?php echo $li_class; // WPCS: xss ok. ?>">
 				<a href="<?php the_permalink(); ?>">
                     <?php get_the_title() ? the_title() : the_ID(); ?>
                     <?php if ( $show_date ) : ?>
@@ -132,8 +133,6 @@ class Bootswatch_Widget_Recent_Posts extends WP_Widget {
 
 
         echo '</'.$elm.'>';// WPCS: xss ok.
-
-        echo $output;// WPCS: xss ok.
     }
 
 
@@ -234,14 +233,36 @@ class Bootswatch_Widget_Recent_Posts extends WP_Widget {
 		$show_date = isset( $instance['show_date'] ) ? (bool) $instance['show_date'] : false;
         $saved_style = isset( $instance['menu_style'] ) ? $instance['menu_style'] : '';
 ?>
-		<p><label for="<?php echo esc_attr($this->get_field_id( 'title' )); ?>"><?php __( 'Title:', 'bootswatch' ); ?></label>
-		<input class="widefat" id="<?php echo esc_attr($this->get_field_id( 'title' )); ?>" name="<?php echo esc_attr($this->get_field_name( 'title' )); ?>" placeholder="<?php __( 'Recent Posts', 'bootswatch' ); ?>" type="text" value="<?php echo esc_attr($title); ?>" /></p>
+		<p>
+            <label for="<?php echo esc_attr($this->get_field_id( 'title' )); ?>">
+                <?php echo __( 'Title:', 'bootswatch' );  // WPCS: xss ok.?>
+            </label>
+            <input class="widefat" id="<?php echo esc_attr($this->get_field_id( 'title' )); ?>"
+                name="<?php echo esc_attr($this->get_field_name( 'title' )); ?>"
+                placeholder="<?php echo __( 'Recent Posts', 'bootswatch' ); // WPCS: xss ok. ?>" type="text"
+                value="<?php echo esc_attr($title); ?>"
+             />
+         </p>
 
-		<p><label for="<?php echo esc_attr($this->get_field_id( 'number' )); ?>"><?php __( 'Number of posts to show:', 'bootswatch' ); ?></label>
-		<input class="tiny-text" id="<?php echo esc_attr($this->get_field_id( 'number' )); ?>" name="<?php echo esc_attr($this->get_field_name( 'number' )); ?>" type="number" step="1" min="1" value="<?php echo esc_attr($number); ?>" size="3" /></p>
+		<p>
+            <label for="<?php echo esc_attr($this->get_field_id( 'number' )); ?>">
+                <?php echo __( 'Number of posts to show:', 'bootswatch' );  // WPCS: xss ok.?>
+            </label>
+		    <input class="tiny-text" id="<?php echo esc_attr($this->get_field_id( 'number' )); ?>"
+                name="<?php echo esc_attr($this->get_field_name( 'number' )); ?>"
+                type="number" step="1" min="1" value="<?php echo esc_attr($number); ?>" size="3"
+            />
+        </p>
 
-		<p><input class="checkbox" type="checkbox"<?php checked( $show_date ); ?> id="<?php echo esc_attr($this->get_field_id( 'show_date' )); ?>" name="<?php echo esc_attr($this->get_field_name( 'show_date' )); ?>" />
-		<label for="<?php echo esc_attr($this->get_field_id( 'show_date' )); ?>"><?php __( 'Display post date?', 'bootswatch' ); ?></label></p>
+		<p>
+            <input class="checkbox" type="checkbox"<?php checked( $show_date ); ?>
+                id="<?php echo esc_attr($this->get_field_id( 'show_date' )); ?>"
+                name="<?php echo esc_attr($this->get_field_name( 'show_date' )); ?>"
+            />
+            <label for="<?php echo esc_attr($this->get_field_id( 'show_date' )); ?>">
+                <?php echo __( 'Display post date?', 'bootswatch' );  // WPCS: xss ok.?>
+            </label>
+        </p>
 
         <?php
         // styles
@@ -251,7 +272,7 @@ class Bootswatch_Widget_Recent_Posts extends WP_Widget {
         ?>
         <p>
             <label for="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>">
-                    <?php __( 'Menu Style:', 'bootswatch' ); ?>
+                <?php echo __( 'Menu Style:', 'bootswatch' );  // WPCS: xss ok.?>
             </label>
             <select id="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>"
                   name="<?php echo esc_attr($this->get_field_name( 'menu_style' )); ?>">

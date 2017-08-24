@@ -126,6 +126,8 @@ class Bootswatch_Widget_Recent_Comments extends WP_Widget {
         $elm = 'ul';
         $format = 'html';
         $before = null;
+        $li_class = '';
+
         if($style == 'unordered-list'):
             $elm = 'ul';
         elseif($style == 'ordered-list'):
@@ -134,7 +136,7 @@ class Bootswatch_Widget_Recent_Comments extends WP_Widget {
             $class = 'list-unstyled';
         elseif( $style == 'list-group') :
             $class = 'list-group';
-            $li_class = 'class="list-group-item"';
+            $li_class = 'list-group-item';
 
         elseif($style == 'pills'):
             $class = 'nav nav-pills nav-stacked';
@@ -148,7 +150,7 @@ class Bootswatch_Widget_Recent_Comments extends WP_Widget {
             $post_ids = array_unique( wp_list_pluck( $comments, 'comment_post_ID' ) );
             _prime_post_caches( $post_ids, strpos( get_option( 'permalink_structure' ), '%category%' ), false );
             foreach ( (array) $comments as $comment ) {
-                $output .= '<li '.$li_class.'>';
+                $output .= '<li class="'.$li_class.'">';
 
                 /* translators: comments widget: 1: comment author, 2: post link */
                 $output .= sprintf( _x( ' %1$s', 'widgets', 'bootswatch' ),
@@ -258,11 +260,26 @@ class Bootswatch_Widget_Recent_Comments extends WP_Widget {
         $saved_style = isset( $instance['menu_style'] ) ? $instance['menu_style'] : '';
 
 		?>
-		<p><label for="<?php echo esc_attr($this->get_field_id( 'title' )); ?>"><?php __( 'Title:', 'bootswatch' ); ?></label>
-		<input class="widefat" id="<?php echo esc_attr($this->get_field_id( 'title' )); ?>" name="<?php echo esc_attr($this->get_field_name( 'title' )); ?>" placeholder="<?php esc_attr_e( 'Recent Comments', 'bootswatch' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" /></p>
+		<p>
+            <label for="<?php echo esc_attr($this->get_field_id( 'title' )); ?>">
+                <?php echo __( 'Title:', 'bootswatch' );  // WPCS: xss ok. ?>
+            </label>
+            <input class="widefat" id="<?php echo esc_attr($this->get_field_id( 'title' )); ?>"
+                name="<?php echo esc_attr($this->get_field_name( 'title' )); ?>"
+                placeholder="<?php echo esc_attr( 'Recent Comments', 'bootswatch' ); ?>"
+                type="text" value="<?php echo esc_attr( $title ); ?>"
+            />
+        </p>
 
-		<p><label for="<?php echo esc_attr($this->get_field_id( 'number' )); ?>"><?php __( 'Number of comments to show:', 'bootswatch' ); ?></label>
-		<input class="tiny-text" id="<?php echo esc_attr($this->get_field_id( 'number' )); ?>" name="<?php echo esc_attr($this->get_field_name( 'number' )); ?>" type="number" step="1" min="1" value="<?php echo esc_attr($number); ?>" size="3" /></p>
+		<p>
+            <label for="<?php echo esc_attr($this->get_field_id( 'number' )); ?>">
+                <?php echo __( 'Number of comments to show:', 'bootswatch' ); // WPCS: xss ok. ?>
+            </label>
+		    <input class="tiny-text" id="<?php echo esc_attr($this->get_field_id( 'number' )); ?>"
+            name="<?php echo esc_attr($this->get_field_name( 'number' )); ?>"
+            type="number" step="1" min="1" value="<?php echo esc_attr($number); ?>" size="3"
+            />
+        </p>
 
         <?php
         // styles
@@ -272,7 +289,7 @@ class Bootswatch_Widget_Recent_Comments extends WP_Widget {
         ?>
         <p>
             <label for="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>">
-                    <?php __( 'Menu Style:', 'bootswatch' ); ?>
+                    <?php echo __( 'Menu Style:', 'bootswatch' );  // WPCS: xss ok.?>
             </label>
             <select id="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>"
                   name="<?php echo esc_attr($this->get_field_name( 'menu_style' )); ?>">

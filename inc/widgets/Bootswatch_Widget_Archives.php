@@ -72,13 +72,13 @@ class Bootswatch_Widget_Archives extends WP_Widget {
     <div class="form-group">
 
         <select class="form-control" id="<?php echo esc_attr( $dropdown_id ); ?>"
-                name="archive-dropdown"
-                onchange='document.location.href=this.options[this.selectedIndex].value;
+            name="archive-dropdown"
+            onchange='document.location.href=this.options[this.selectedIndex].value;
         '>
-
-            <option value=""><?php echo esc_attr( $label ); ?></option>
+            <option value="">
+                <?php echo esc_attr( $label ); ?>
+            </option>
             <?php wp_get_archives( $dropdown_args ); ?>
-
         </select>
     </div>
     <?php
@@ -211,10 +211,13 @@ class Bootswatch_Widget_Archives extends WP_Widget {
 
 		?>
 		<p>
-            <label for="<?php echo esc_attr($this->get_field_id('title')); ?>"><?php __('Title:', 'bootswatch'); ?></label>
+            <label for="<?php echo esc_attr($this->get_field_id('title')); ?>">
+                <?php echo __('Title:', 'bootswatch');  // WPCS: xss ok.?>
+            </label>
             <input class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>"
-                name="<?php echo esc_attr($this->get_field_name('title')); ?>" placeholder="<?php esc_attr_e( 'Archives', 'bootswatch' ); ?>"
-                type="text" value="<?php echo esc_attr($title); ?>" />
+                name="<?php echo esc_attr($this->get_field_name('title')); ?>" placeholder="<?php echo esc_attr( 'Archives', 'bootswatch' ); ?>"
+                type="text" value="<?php echo esc_attr($title); ?>"
+            />
         </p>
         <?php
         // styles
@@ -224,7 +227,7 @@ class Bootswatch_Widget_Archives extends WP_Widget {
         ?>
         <p>
             <label for="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>">
-                    <?php __( 'Menu Style:', 'bootswatch' ); ?>
+                <?php echo __( 'Menu Style:', 'bootswatch' );  // WPCS: xss ok.?>
             </label>
             <select id="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>"
                   name="<?php echo esc_attr($this->get_field_name( 'menu_style' )); ?>">
@@ -245,7 +248,7 @@ class Bootswatch_Widget_Archives extends WP_Widget {
                 id="<?php echo esc_attr($this->get_field_id('count')); ?>"
                 name="<?php echo esc_attr($this->get_field_name('count')); ?>" />
             <label for="<?php echo esc_attr($this->get_field_id('count')); ?>">
-                <?php __('Show post counts', 'bootswatch'); ?>
+                <?php echo __('Show post counts', 'bootswatch'); // WPCS: xss ok. ?>
             </label>
 		</p>
 		<?php

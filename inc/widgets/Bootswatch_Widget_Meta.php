@@ -42,7 +42,7 @@ class Bootswatch_Widget_Meta extends WP_Widget {
         $elm = 'ul';
         $format = 'html';
         $before = null;
-
+        $li_class= '';
         if($style == 'unordered-list'):
             $elm = 'ul';
         elseif($style == 'ordered-list'):
@@ -63,13 +63,13 @@ class Bootswatch_Widget_Meta extends WP_Widget {
         ?>
         <li class="<?php echo esc_attr($li_class); ?>"><?php wp_loginout(); ?></li>
         <li class="<?php echo esc_attr($li_class); ?>">
-                <a href="<?php echo esc_url( get_bloginfo( 'rss2_url' ) ); ?>">
-                    <?php __('Entries <abbr title="Really Simple Syndication">RSS</abbr>', 'bootswatch'); ?>
-                </a><
-        /li>
+            <a href="<?php echo esc_url( get_bloginfo( 'rss2_url' ) ); ?>">
+                <?php echo __('Entries <abbr title="Really Simple Syndication">RSS</abbr>', 'bootswatch'); // WPCS: xss ok. ?>
+            </a>
+        </li>
         <li class="<?php echo esc_attr($li_class); ?>">
             <a href="<?php echo esc_url( get_bloginfo( 'comments_rss2_url' ) ); ?>">
-                <?php __('Comments <abbr title="Really Simple Syndication">RSS</abbr>', 'bootswatch'); ?>
+                <?php echo __('Comments <abbr title="Really Simple Syndication">RSS</abbr>', 'bootswatch');  // WPCS: xss ok. ?>
             </a>
         </li>
         <?php
@@ -150,9 +150,9 @@ class Bootswatch_Widget_Meta extends WP_Widget {
         ?>
 
         <option value="<?php echo esc_url( get_bloginfo( 'rss2_url' ) ); ?>">
-        <?php __('Entries <abbr title="Really Simple Syndication">RSS</abbr>', 'bootswatch'); ?></a></option>
+        <?php echo __('Entries <abbr title="Really Simple Syndication">RSS</abbr>', 'bootswatch');  // WPCS: xss ok. ?></a></option>
         <option value="<?php echo esc_url( get_bloginfo( 'comments_rss2_url' ) ); ?>">
-            <?php __('Comments <abbr title="Really Simple Syndication">RSS</abbr>', 'bootswatch'); ?>
+            <?php echo __('Comments <abbr title="Really Simple Syndication">RSS</abbr>', 'bootswatch'); // WPCS: xss ok. ?>
         </option>
         <?php
         /**
@@ -243,7 +243,7 @@ class Bootswatch_Widget_Meta extends WP_Widget {
 ?>
 			<p>
                 <label for="<?php echo esc_attr($this->get_field_id('title')); ?>">
-                    <?php __('Title:', 'bootswatch'); ?>
+                    <?php echo __('Title:', 'bootswatch');  // WPCS: xss ok.?>
                 </label>
                 <input class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>"
                 name="<?php echo esc_attr($this->get_field_name('title')); ?>"
@@ -258,7 +258,7 @@ class Bootswatch_Widget_Meta extends WP_Widget {
         ?>
         <p>
             <label for="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>">
-                    <?php __( 'Menu Style:', 'bootswatch' ); ?>
+                    <?php echo __( 'Menu Style:', 'bootswatch' );  // WPCS: xss ok.?>
             </label>
             <select id="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>"
                   name="<?php echo esc_attr($this->get_field_name( 'menu_style' )); ?>">

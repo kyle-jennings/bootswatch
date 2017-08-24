@@ -38,6 +38,7 @@ if( !$hide_content ):
     	while ( have_posts() ) : the_post();
 
             $part = (get_post_format() == 'chat') ? 'chat' : get_post_format();
+            $part = ($part !== 'chat' && get_post_format() ) ? 'post-format' : $part;
             get_template_part( 'template-parts/content-single/content', $part );
 
             $navigation_args = array(

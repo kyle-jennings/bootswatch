@@ -54,7 +54,7 @@ function bootswatch_widgets_init() {
 
         // figure out which width rules to use
         if($sidebar_size == 'full')
-            $width = bootswatch_calculate_widget_width($count, $i);
+            $width = bootswatch_calculate_widget_width($count);
         else
             $width = '';
 

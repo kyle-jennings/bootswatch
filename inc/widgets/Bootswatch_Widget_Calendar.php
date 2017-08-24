@@ -108,9 +108,9 @@ class Bootswatch_Widget_Calendar extends WP_Widget {
 		?>
 		<p>
             <label for="<?php echo esc_attr($this->get_field_id('title')); ?>">
-                <?php __('Title:', 'bootswatch'); ?>
+                <?php echo __('Title:', 'bootswatch');  // WPCS: xss ok. ?>
             </label>
-	          <input class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>" 
+	          <input class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>"
               name="<?php echo esc_attr($this->get_field_name('title')); ?>" type="text"
               value="<?php echo esc_attr($title); ?>" />
       </p>

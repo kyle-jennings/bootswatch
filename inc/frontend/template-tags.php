@@ -203,8 +203,9 @@ function bootswatch_get_the_comment_popup($anchor = null) {
 }
 
 
-function bootswatch_get_categories_links() {
-
+function bootswatch_get_categories_links($post = null) {
+    if(!$post)
+        global $post;
     $output = '';
     // categories
     if ( $categories_list = bootswatch_get_the_category_list($post->ID) ) {
