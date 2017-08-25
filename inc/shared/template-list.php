@@ -17,8 +17,8 @@ function bootswatch_the_template_list($use_widget_areas = false) {
 
     $templates = array(
         'archive' => array(
-            'label' => 'Feed (default)',
-            'description' => __('<p>This is your default (home) page, but not your frontpage.
+            'label' => 'Default',
+            'description' => __('<p>This is your default (home/archive) page, but not your frontpage.
             These settings are the default settings used on every page unless the other
             templates\' settings been activated.</p>',
             'bootswatch'),
