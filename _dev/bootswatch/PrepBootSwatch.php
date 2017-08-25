@@ -65,7 +65,7 @@ class PrepBootSwatch {
 
 
         $Builder = new \bootswatch\builder\Builder();
-        // self::examine( $Builder->assets_dir);
+
         $Compiler = new Compiler();
         $Compiler->setVariables(array('fa-font-path' => '../../fonts'));
 
