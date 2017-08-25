@@ -2,9 +2,9 @@
 
 if ( ! class_exists( 'WP_Customize_Control' ) )
     return null;
-    
-if(!class_exists('AlphaColor')){
-    class AlphaColor extends WP_Customize_Control
+
+if(!class_exists('BootstrapColor')){
+    class BootstrapColor extends WP_Customize_Control
     {
 
         public $type = 'alpha_color';
@@ -19,19 +19,7 @@ if(!class_exists('AlphaColor')){
 
 
         public function enqueue() {
-            wp_enqueue_script(
-    			'alpha-color-picker',
-    			get_stylesheet_directory_uri() . '/inc/admin/assets/js/_bootswatch-customizer-min.js',
-    			array( 'jquery', 'wp-color-picker' ),
-    			'1.0.0',
-    			true
-    		);
-    		wp_enqueue_style(
-    			'alpha-color-picker',
-    			get_stylesheet_directory_uri() . '/inc/admin/assets/css/bootswatch-admin.min.css',
-    			array( 'wp-color-picker' ),
-    			'1.0.0'
-    		);
+
         }
 
         public function render_field() {

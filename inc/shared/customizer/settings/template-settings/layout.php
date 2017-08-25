@@ -23,7 +23,7 @@ if( $name !== 'archive'):
 
 
     $wp_customize->add_control(
-        new Bootswatch_Label_Custom_Control(
+        new Label(
             $wp_customize,
             $name . '_other_settings_label_control',
             $args
@@ -54,7 +54,7 @@ if( $name !== 'archive'):
     );
 
     $wp_customize->add_control(
-        new Bootswatch_Checkbox_Group_Control(
+        new CheckboxGroup(
             $wp_customize,
             $name.'_page_layout_control',
             $layout_args

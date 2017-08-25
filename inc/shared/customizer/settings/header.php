@@ -35,7 +35,7 @@ $wp_customize->add_setting( 'header_sortables_setting', array(
 $description = 'The header area is made of sortable parts.  Simply drag these
 parts around to change the order they are displayed.';
 $wp_customize->add_control(
-    new Bootswatch_Sortable_Control( $wp_customize,
+    new Sortable( $wp_customize,
         'header_sortables_control', array(
             'description' => $description,
             'label' => __('Header Order', 'bootswatch'),
@@ -59,7 +59,7 @@ $wp_customize->add_setting(
 
 
 $wp_customize->add_control(
-    new Bootswatch_Label_Custom_Control(
+    new Label(
         $wp_customize,
         'navbar_label_control',
         array(
@@ -160,7 +160,7 @@ $wp_customize->add_setting(
 
 
 $wp_customize->add_control(
-    new Bootswatch_Label_Custom_Control(
+    new Label(
         $wp_customize,
         'banner_label_control',
         array(

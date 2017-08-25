@@ -3,9 +3,9 @@
 if ( ! class_exists( 'WP_Customize_Control' ) )
     return null;
 
-if( !class_exists('Bootswatch_Sortable_Control') ) {
 
-    class Bootswatch_Sortable_Control extends WP_Customize_Control
+if ( ! class_exists( 'Sortable' ) ) {
+    class Sortable extends WP_Customize_Control
     {
         public $type = 'optional-sortable';
         public $optional;
@@ -153,6 +153,5 @@ if( !class_exists('Bootswatch_Sortable_Control') ) {
         }
 
     }
-
 
 }

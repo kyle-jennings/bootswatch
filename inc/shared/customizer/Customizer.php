@@ -7,22 +7,22 @@ class Customizer {
     public $change_count = 0;
 
     public $files = array(
-        'controls/Bootswatch_Label_Custom_Control.php',
-        'controls/video.php',
-        'controls/Bootswatch_Sortable_Control.php',
-        'controls/ColorSchemeControl.php',
-        'controls/Menu_Dropdown_Custom_Control.php',
-        'controls/checkbox-group.php',
+        'controls/Label.php',
+        'controls/Video.php',
+        'controls/Sortable.php',
+        'controls/ColorScheme.php',
+        'controls/MenuDropdown.php',
+        'controls/CheckboxGroup.php',
         'controls/AlphaColor.php',
 
 
         'settings/identity.php',
         'settings/template-settings.php',
-        // 'settings/header.php',
+        'settings/header.php',
         'settings/frontpage.php',
-        // 'settings/widgetized.php',
-        // 'settings/footer.php',
-        // 'settings/404.php',
+        'settings/widgetized.php',
+        'settings/footer.php',
+        'settings/404.php',
     );
 
 
@@ -55,7 +55,7 @@ class Customizer {
         foreach($this->files as $file)
             require_once $file;
 
-        $wp_customize->register_control_type( 'Bootswatch_Video_Control' );
+        // $wp_customize->register_control_type( 'Bootswatch_Video_Control' );
 
         // loop through the section
         // foreach($this->sections as $section)
@@ -169,10 +169,8 @@ class Customizer {
         // first check the 1 offs (404 and dontpage setings), then check for the template toggles
         if($control->id == '_404_page_select_control')
             return 'page' == $wp_customize->get_setting( '_404_page_content_setting' )->value();
-        elseif($control->id == 'frontpage_hero_callout_control'){
-            error_log('frontpage hero');
+        elseif($control->id == 'frontpage_hero_callout_control')
             return 'callout' === $wp_customize->get_setting( 'frontpage_hero_content_setting' )->value();
-        }
         elseif($control->id == 'frontpage_hero_page_control')
             return 'page' === $wp_customize->get_setting( 'frontpage_hero_content_setting' )->value();
         elseif(strpos( $control->section, '_settings_section'))

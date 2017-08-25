@@ -20,7 +20,7 @@ $args = array(
 );
 
 $wp_customize->add_control(
-    new Bootswatch_Label_Custom_Control(
+    new Label(
         $wp_customize,
         $name . '_header_label_control',
         $args
@@ -105,7 +105,5 @@ $hero_size_args = array(
     'input_attrs' => array('toggable'),
 );
 
-if( $name !== 'archive')
-    $hero_size_args['active_callback'] = $active_callback;
 
 $wp_customize->add_control( $name . '_hero_size_control', $hero_size_args );

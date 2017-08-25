@@ -29,7 +29,7 @@ $themes->setThemesAtts();
 $themes = $themes->getThemes();
 
 $wp_customize->add_control(
-    new ColorSchemeControl(
+    new ColorScheme(
         $wp_customize,
         'color_scheme_setting',
         array(

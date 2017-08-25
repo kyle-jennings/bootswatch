@@ -1,11 +1,10 @@
 <?php
 
 if ( ! class_exists( 'WP_Customize_Control' ) )
-    return;
+    return null;
 
-if( !class_exists('Bootswatch_Label_Custom_Control') ) {
-
-    class Bootswatch_Label_Custom_Control extends WP_Customize_Control
+if(!class_exists('Label')){
+    class Label extends WP_Customize_Control
     {
         public $type = 'label';
 
@@ -34,6 +33,5 @@ if( !class_exists('Bootswatch_Label_Custom_Control') ) {
         <?php
         }
     }
-
 
 }

@@ -21,7 +21,7 @@ $args = array(
 
 
 $wp_customize->add_control(
-    new Bootswatch_Label_Custom_Control(
+    new Label(
         $wp_customize,
         $name . '_sidebar_label_control',
         $args

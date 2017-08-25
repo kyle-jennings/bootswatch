@@ -3,16 +3,13 @@
 if ( ! class_exists( 'WP_Customize_Control' ) )
     return null;
 
-
-if ( !class_exists( 'Bootswatch_Checkbox_Group_Control' ) ) {
-
-    class Bootswatch_Checkbox_Group_Control extends WP_Customize_Control
+if(!class_exists('CheckboxGroup')) {
+    class CheckboxGroup extends WP_Customize_Control
     {
         public $type = 'checkbox-group';
 
         public function __construct($manager, $id, $args = array(), $options = array())
         {
-            $this->visibility_settings = $args['visibility_settings'] ? $args['visibility_settings'] : false;
             parent::__construct( $manager, $id, $args );
         }
 
@@ -60,6 +57,5 @@ if ( !class_exists( 'Bootswatch_Checkbox_Group_Control' ) ) {
             echo $output; // WPCS: xss ok.
         }
     }
-
 
 }

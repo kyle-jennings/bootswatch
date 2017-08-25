@@ -11,7 +11,7 @@ $description = __('The page content is sortable, and optional.  Simply drag the
 available components from the "available" box over to active.  This setting
 does not depend on the "Settings Active" setting above.', 'bootswatch');
 
-$wp_customize->add_control( new Bootswatch_Sortable_Control( $wp_customize,
+$wp_customize->add_control( new Sortable( $wp_customize,
    'widgetized_sortables_control', array(
        'label'   => __('Sortable Page Content', 'bootswatch'),
        'description' => $description,

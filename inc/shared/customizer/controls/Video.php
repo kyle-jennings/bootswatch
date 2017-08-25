@@ -3,10 +3,9 @@
 if ( ! class_exists( 'WP_Customize_Control' ) )
     return null;
 
-if ( ! class_exists( 'Bootswatch_Video_Control' ) ) {
+if ( ! class_exists( 'Video' ) ) {
 
-
-    class Bootswatch_Video_Control extends WP_Customize_Control
+    class Video extends WP_Customize_Control
     {
 
         public $type = 'video';
@@ -179,6 +178,5 @@ if ( ! class_exists( 'Bootswatch_Video_Control' ) ) {
             <?php
         }
     }
-
 
 }

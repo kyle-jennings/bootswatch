@@ -1,11 +1,11 @@
 <?php
 
+
 if ( ! class_exists( 'WP_Customize_Control' ) )
     return null;
 
-if ( ! class_exists( 'ColorSchemeControl' ) ) {
-
-    class ColorSchemeControl extends WP_Customize_Control
+if(!class_exists('ColorScheme')) {
+    class ColorScheme extends WP_Customize_Control
     {
         public $type = 'color-scheme';
         public $themes;

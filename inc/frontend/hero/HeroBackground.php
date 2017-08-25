@@ -20,17 +20,16 @@ class HeroBackground
     public function getBackground() {
 
 
-        if( in_array( $this->template, array('single','page')) || is_single() || is_page() ){
-
-            $this->image = $this->getSingularImage($this->template);
-            // $this->video = $this->getSingularVideo($this->template);
-
-        } elseif( is_front_page() || is_404() ) {
-
+        if( is_front_page() || is_404() ) {
+            // examine('front or 404');
             $this->setMediaFromCustSetting($this->template);
 
-        } elseif( is_home() ) {
+        } elseif( in_array( $this->template, array('single','page')) || is_single() || is_page() ){
+            // examine('single or page');
+            $this->image = $this->getSingularImage($this->template);
 
+        } elseif( is_home() ) {
+            // examine('home');
             $post = get_queried_object();
             $this->postType = $post_type = is_a($post, 'WP_Post_Type') && !is_home() ? $post->name : 'post';
 
@@ -56,7 +55,7 @@ class HeroBackground
     // set the media BGs set in teh customizer
     public function setMediaFromCustSetting($template){
         $this->image = get_theme_mod($template . '_image_setting', null);
-        if(!filter_var($this->image, FILTER_VALIDATE_URL))
+        if(!filter_var($this->image, FILTER_VALIDATE_URL) || filter_var($this->image, FILTER_VALIDATE_INT))
             $this->image = wp_get_attachment_url($this->image);
     }
 

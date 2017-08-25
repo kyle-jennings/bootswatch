@@ -70,7 +70,7 @@ $wp_customize->add_control( 'frontpage_hero_page_control', array(
  available components from the "available" box over to active.  This setting
  does not depend on the "Settings Active" setting above.';
 
- $wp_customize->add_control( new Bootswatch_Sortable_Control( $wp_customize,
+ $wp_customize->add_control( new Sortable( $wp_customize,
     'frontpage_sortables_control', array(
         'description' => $description,
         'label'   => __('Sortable Page Content', 'bootswatch'),

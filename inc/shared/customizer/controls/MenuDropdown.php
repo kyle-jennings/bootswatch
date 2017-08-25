@@ -3,9 +3,9 @@
 if ( ! class_exists( 'WP_Customize_Control' ) )
     return null;
 
-if( !class_exists('Menu_Dropdown_Custom_Control') ) {
 
-    class Menu_Dropdown_Custom_Control extends WP_Customize_Control
+if(!class_exists('MenuDropdown')) {
+    class MenuDropdown extends WP_Customize_Control
     {
         private $menus = false;
         public $type = 'menu-dropdown';
@@ -46,5 +46,5 @@ if( !class_exists('Menu_Dropdown_Custom_Control') ) {
             }
         }
     }
-    
+
 }
