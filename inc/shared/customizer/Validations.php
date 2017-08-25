@@ -380,12 +380,18 @@ class Validations {
     }
 
 
-    function color_scheme_sanitize($valitity, $val) {
+    /**
+     * Validate the color scheme setting
+     * @param  [object] $valitity similar to wp_error
+     * @param  string $val      the pre-saved value from the control
+     * @return string           the value (or the error object)
+     */
+    function color_scheme_validate($valitity, $val) {
         $themes = new BootswatchThemes();
         $themes->setThemesAtts();
         $themes = $themes->getThemes();
 
-        $valids = array_map( array($this, 'color_scheme_sanitize_map'), $themes );
+        $valids = array_map( array($this, 'color_scheme_validate_map'), $themes );
 
         if( !in_array($val, $valids) )
             return $validity->add( 'required', __( 'Invalid value', 'bootswatch' ) );
@@ -393,9 +399,11 @@ class Validations {
         return $val;
     }
 
-    function color_scheme_sanitize_map($theme){
-        return $theme->name;
+    // maps the themes array and returns the css uri
+    function color_scheme_validate_map($theme){
+        return $theme->css_uri;
     }
+
 
 
     function widgetized_sortable_sanitize($val) {

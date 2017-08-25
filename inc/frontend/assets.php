@@ -10,14 +10,7 @@ function bootswatch_scripts() {
         return;
 
 
-    $theme = get_theme_mod('color_scheme_setting');
-    $file = get_template_directory() . '/assets/css/'.$theme.'/bootswatch.css';
-
-
-    if( is_readable($file) )
-        $uri = get_template_directory_uri() . '/assets/css/'.$theme.'/bootswatch.css';
-    else
-        $uri = get_template_directory_uri() . '/assets/bootstrap/bootswatch.css';
+    $theme = get_theme_mod('color_scheme_setting', get_template_directory_uri() . '/assets/bootstrap/bootswatch.css');
 
 
 	wp_enqueue_script(
@@ -25,7 +18,7 @@ function bootswatch_scripts() {
          array('jquery'), null, true
     );
 
-    wp_enqueue_style( 'bootswatch', $uri );
+    wp_enqueue_style( 'bootswatch', $theme );
 
      // comment script
     if ( is_singular() && comments_open() && get_option( 'thread_comments' ) )

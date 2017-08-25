@@ -19,14 +19,16 @@ $wp_customize->add_setting(
     'color_scheme_setting',
     array(
         'default' => 'bootstrap',
-        'sanitize_callback' => 'wp_filter_nohtml_kses',
-        'validate_callback' => array($this->validation, 'color_scheme_sanitize'),
+        'sanitize_callback' => 'esc_url_raw',
+        'validate_callback' => array($this->validation, 'color_scheme_validate'),
     )
 );
 
 $themes = new BootswatchThemes();
 $themes->setThemesAtts();
 $themes = $themes->getThemes();
+
+$themes = apply_filters('bootswatch_filter_themes', $themes);
 
 $wp_customize->add_control(
     new ColorScheme(

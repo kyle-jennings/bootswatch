@@ -164,7 +164,20 @@ class PrepBootSwatch {
         self::buildCSS();
         self::moveFontAwesome();
         self::moveToAssets();
+        self::moveDefaultThumbnail();
     }
+
+
+    static public function moveDefaultThumbnail()
+    {
+        $Builder = new \bootswatch\builder\Builder();
+        $file = 'thumbnail.png';
+        $src = dirname(__FILE__) . '/' .$file;
+
+        $dst = $Builder->assets_dir .'/css/bootstrap/'.$file;
+        copy($src, $dst);
+    }
+
 
     static private function copy( $src, $dst ) {
         if( !defined('DS') ) define( 'DS', DIRECTORY_SEPARATOR );

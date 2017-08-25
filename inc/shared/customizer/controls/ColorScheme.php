@@ -36,12 +36,13 @@ if(!class_exists('ColorScheme')) {
                 <?php
 
                     foreach($this->choices as $theme):
+
                 ?>
                 <li class="cf">
                     <input type="radio" name="<?php echo esc_attr($this->id); ?>"
                         <?php $this->link(); ?>
-                        value="<?php echo esc_attr($theme->name); ?>"
-                        <?php selected($this->value(), $theme->name) ?>
+                        value="<?php echo esc_attr($theme->css_uri); ?>"
+                        <?php selected($this->value(), $theme->css_uri) ?>
                     />
                     <?php echo esc_attr(ucfirst($theme->name)); ?>
                     <img class="swatches" src="<?php echo esc_url($theme->thumbnail_uri); ?>" />
