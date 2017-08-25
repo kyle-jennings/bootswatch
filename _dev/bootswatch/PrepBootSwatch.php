@@ -46,7 +46,6 @@ class PrepBootSwatch {
         $font_dir = $Builder->template_dir . '/_dev/vendor/fortawesome/font-awesome/fonts';
         $dst = $Builder->template_dir .'/assets/fonts';
         if(is_readable($font_dir)){
-            // examine($Builder);
 
             self::copy(
                 $font_dir,
@@ -68,6 +67,7 @@ class PrepBootSwatch {
         $Builder = new \bootswatch\builder\Builder();
         // self::examine( $Builder->assets_dir);
         $Compiler = new Compiler();
+        $Compiler->setVariables(array('fa-font-path' => '../../fonts'));
 
         $paths = array($Builder->bootstrap_dir, $Builder->modules_dir, $Builder->fonts_dir);
         $Compiler->setImportPaths($paths);
@@ -99,7 +99,7 @@ class PrepBootSwatch {
                 $file .= file_get_contents($source);
             }
 
-            self::examine($file);
+            // self::examine($file);
 
             // compile it
             $Compiler->setFormatter('Leafo\ScssPhp\Formatter\Expanded');
@@ -158,11 +158,23 @@ class PrepBootSwatch {
         self::moveToAssets();
     }
 
+
+    static public function rebuildCss()
+    {
+        self::buildCSS();
+        self::moveFontAwesome();
+        self::moveToAssets();
+    }
+
     static private function copy( $src, $dst ) {
         if( !defined('DS') ) define( 'DS', DIRECTORY_SEPARATOR );
 
         $dir = opendir( $src );
-        mkdir( $dst );
+
+        // make the destination folder if it doesnt exist
+        if(!is_readable($dst)){
+            mkdir( $dst, 0777, true );
+        }
 
         while( false !== ( $file = readdir( $dir ) ) ) {
             if( $file != '.' && $file != '..' ) {

@@ -24,6 +24,8 @@
         "post-install-cmd" : "bootswatch\\PrepBootSwatch::postInstall",
         "post-update-cmd": "bootswatch\\PrepBootSwatch::buildCSS",
         "build-css": "bootswatch\\PrepBootSwatch::buildCSS",
-        "move-files": "bootswatch\\PrepBootSwatch::moveFiles"
+        "move-files": "bootswatch\\PrepBootSwatch::moveFiles",
+        "rebuild-css": "bootswatch\\PrepBootSwatch::rebuildCSS"
+
     }
 }
