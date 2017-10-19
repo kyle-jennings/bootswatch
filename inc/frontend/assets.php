@@ -9,9 +9,9 @@ function bootswatch_scripts() {
     if(is_admin())
         return;
 
-
-    $theme = get_theme_mod('color_scheme_setting', get_template_directory_uri() . '/assets/bootstrap/bootswatch.css');
-
+    $default = get_template_directory_uri() . '/assets/bootstrap/bootswatch.css';
+    $theme = get_theme_mod('color_scheme_setting', $default);
+    
 
 	wp_enqueue_script(
         'bootswatch-js', get_stylesheet_directory_uri() . '/assets/js/bootswatch.js',

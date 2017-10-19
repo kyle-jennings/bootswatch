@@ -391,6 +391,8 @@ class Validations {
         $themes->setThemesAtts();
         $themes = $themes->getThemes();
 
+        $themes = apply_filters('bootswatch_filter_themes', $themes);
+        
         $valids = array_map( array($this, 'color_scheme_validate_map'), $themes );
 
         if( !in_array($val, $valids) )

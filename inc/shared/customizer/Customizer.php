@@ -13,7 +13,7 @@ class Customizer {
         'controls/ColorScheme.php',
         'controls/MenuDropdown.php',
         'controls/CheckboxGroup.php',
-        'controls/AlphaColor.php',
+        // 'controls/AlphaColor.php',
 
 
         'settings/identity.php',
