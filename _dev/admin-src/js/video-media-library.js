@@ -1,6 +1,3 @@
-
-
-
 $('body').on('click','.js--media-library', function( event ){
   var file_frame;
   var wp_media_post_id = wp.media.model.settings.post.id; // Store the old id

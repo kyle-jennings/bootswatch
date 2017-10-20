@@ -13,7 +13,9 @@ class Customizer {
         'controls/ColorScheme.php',
         'controls/MenuDropdown.php',
         'controls/CheckboxGroup.php',
-        // 'controls/AlphaColor.php',
+        'controls/Tab.php',
+        'controls/ColorVariable.php',
+        'controls/BuildCssToggle.php',
 
 
         'settings/identity.php',
@@ -28,12 +30,6 @@ class Customizer {
 
     public $sections = array(
         'site'
-        // 'navbar',
-        // 'banner',
-        // 'main',
-        // 'sidebar',
-        // 'widebar',
-        // 'footer'
     );
 
     public $styles = array();
@@ -64,32 +60,13 @@ class Customizer {
     }
 
 
-    public function buildCSS($val = null)
+
+    /**
+     * Regiester our custom controls
+     */
+    public function registerControls($wp_customize)
     {
-        if(!$val)
-            return false;
-
-
-        $themes = bootswatch_fetch_bootswatch_themes();
-        $files = bootswatch_fetch_bootswatch_files($themes[$val]);
-        $Variables = new Variables();
-        $Variables->saveVarFile($files['scssVariables']);
-
-        $Builder = new Builder($val);
-        $Builder->build();
-
-        if(strlen($Builder->css) <= 0)
-         return false;
-
-         // ok try to upload, if it's a success then huzzaah
-        $Uploader = new Uploader($Builder->css, $val);
-        $status = $Uploader->saveTmpFile('preview');
-
-        if(!is_wp_error($status))
-            return $val;
-
-        // if the upload failed, we get an error, return false
-        return $status;
+        $wp_customize->register_control_type( 'ColorVariable' );
     }
 
 
@@ -213,6 +190,8 @@ class Customizer {
     }
 
 
+    // used gets teh section prefix to ensure that active callback only works
+    // against fields in the same section
     public function getSectionPrefix($section = null)
     {
         if(!$section)
