@@ -5,10 +5,20 @@
  *
  * This tempalte list is used to populate the customizer settings and widgets ares
  *
- * @package Bootswatch
+ * @package Benjamin
  */
 
-function bootswatch_the_template_list($use_widget_areas = false) {
+function bootswatch_get_template_info($name = null) {
+
+    if(!$name)
+        return;
+
+    $templates = bootswatch_the_template_list();
+    return $templates[$name];
+}
+
+
+function bootswatch_the_template_list($use_widget_areas = false, $add_default = false) {
 
 
     $desc_warning = '<p>The layout settings and widgets on this template are not available
@@ -17,10 +27,8 @@ function bootswatch_the_template_list($use_widget_areas = false) {
 
     $templates = array(
         'archive' => array(
-            'label' => 'Default',
-            'description' => __('<p>This is your default (home/archive) page, but not your frontpage.
-            These settings are the default settings used on every page unless the other
-            templates\' settings been activated.</p>',
+            'label' => 'Feed/Archive',
+            'description' => __('<p>This is your feed, or archive page. This page shows your recent new, archived, filtered posts ect.',
             'bootswatch'),
             /* translators: the page template name. */
             'widget_description' => sprintf( __('These widgets appear on %s
@@ -44,7 +52,7 @@ function bootswatch_the_template_list($use_widget_areas = false) {
             'label' => 'Single Post',
             /* translators:  warning about activating the widget areas. */
             'description' => sprintf( __('<p>The "single post" is what you see when viewing
-            a single blog post, or single custom post type.</p> %s.', 'bootswatch'), $desc_warning),
+            a single blog post, or single custom post type.</p> %s', 'bootswatch'), $desc_warning),
             /* translators: the page template name. */
             'widget_description' => sprintf( __('These widgets appear on %s
             in the sidebar located on the right or left of the page.', 'bootswatch'), 'single posts' )
@@ -126,60 +134,56 @@ function bootswatch_the_template_list($use_widget_areas = false) {
     $templates = $templates + $cpts;
 
     $widget_areas = array(
-        'banner-widget-area-1' => array(
-            'label' => 'Banner Widget Area 1',
+        'banner-widget-area' => array(
+            'label' => __('Banner Widgets', 'bootswatch'),
             'widget_description' => __('The banner is made up widget areas and are
             optionally used.  The banner is expandable only if widgets have been set.', 'bootswatch')
         ),
-        'banner-widget-area-2' => array(
-            'label' => 'Banner Widget Area 2',
-            'widget_description' => __('The banner is made up widget areas and are
-            optionally used.  The banner is expandable only if widgets have been set.', 'bootswatch')
-        ),
+
         'frontpage-widget-area-1' => array(
-            'label' => 'Frontpage Widget Area 1',
+            'label' => __('Frontpage Widget Area 1', 'bootswatch'),
             'widget_description' => __('The frontpage content is made up of sortable,
             horizontal widget areas.  This is one of those areas and is
             optionally used.', 'bootswatch')
         ),
         'frontpage-widget-area-2' => array(
-            'label' => 'Frontpage Widget Area 2',
+            'label' => __('Frontpage Widget Area 2', 'bootswatch'),
             'widget_description' => __('The frontpage content is made up of sortable,
             horizontal widget areas.  This is one of those areas and is
             optionally used.', 'bootswatch')
         ),
         'frontpage-widget-area-3' => array(
-            'label' => 'Frontpage Widget Area 3',
+            'label' => __('Frontpage Widget Area 3', 'bootswatch'),
             'widget_description' => __('The frontpage content is made up of sortable,
             horizontal widget areas.  This is one of those areas and is
             optionally used.', 'bootswatch')
         ),
         'widgetized-widget-area-1' => array(
-            'label' => 'Widgetized Page Area 1',
+            'label' => __('Widgetized Page Area 1', 'bootswatch'),
             'widget_description' => __('The Widgetized page content is made up of
             sortable, horizontal widget areas.  This is one of those areas and
             is optionally used.', 'bootswatch')
         ),
         'widgetized-widget-area-2' => array(
-            'label' => 'Widgetized Page Area 2',
+            'label' => __('Widgetized Page Area 2', 'bootswatch'),
             'widget_description' => __('The Widgetized page content is made up of
             sortable, horizontal widget areas.  This is one of those areas and
             is optionally used.', 'bootswatch')
         ),
         'widgetized-widget-area-3' => array(
-            'label' => 'Widgetized Page Area 3',
+            'label' => __('Widgetized Page Area 3', 'bootswatch'),
             'widget_description' => __('The Widgetized page is full sortable, horizontal
             widget areas.  This is one of those areas and is optionally used.',
             'bootswatch')
         ),
         'footer-widget-area-1' => array(
-            'label' => 'Footer Widget Area 1',
+            'label' => __('Footer Widget Area 1', 'bootswatch'),
             'widget_description' => __('The footer area is sortable and contains two
             optional widget areas.  To use these widgets, remember to setup the
             footer in the customizer.', 'bootswatch')
         ),
         'footer-widget-area-2' => array(
-            'label' => 'Footer Widget Area 2',
+            'label' => __('Footer Widget Area 2', 'bootswatch'),
             'widget_description' => __('The footer area is sortable and contains two
             optional widget areas.  To use these widgets, remember to setup the
             footer in the customizer.', 'bootswatch')
@@ -189,37 +193,18 @@ function bootswatch_the_template_list($use_widget_areas = false) {
     if( $use_widget_areas == true )
         $templates = $templates + $widget_areas;
 
-    return $templates;
-}
 
-function bootswatch_get_cpts() {
-    $args = array(
-       'public'   => true,
-       'publicly_queryable' => true,
-       '_builtin' => false
-    );
-    return bootswatch_get_cpt_template_types( get_post_types($args) );
-}
-
-function bootswatch_get_cpt_template_types($cpts) {
-    $new = array();
-    foreach($cpts as $cpt){
-        $obj = get_post_type_object($cpt);
-        $new[$cpt] = array(
-            'label' => $obj->label,
-            /* translators: custom post type label. */
-            'description' => sprintf( __('A single instance of a %s.', 'bootswatch'), $obj->label)
-        );
-        if($obj->has_archive){
-
-            $new[$cpt.'-feed'] = array(
-                'label' => $obj->label . ' Feed',
-                /* translators: custom post type label. */
-                'description' => sprintf( __('The feed for your %s.', 'bootswatch'), $obj->label)
-            );
-        }
+    if($add_default == true){
+        $templates = array(DEFAULT_TEMPLATE => array(
+            'label' => 'Default Layout Settings',
+            'description' => __('<p>These settings are the default settings used on every page unless the other
+            templates\' settings been activated.</p>',
+            'bootswatch'),
+            /* translators: the page template name. */
+            'widget_description' => sprintf( __('These widgets appear on %s
+            in the sidebar located on the right or left of the page.', 'bootswatch'), 'the home (the archive/feed) page')
+        )) + $templates;
     }
 
-
-    return $new;
+    return $templates;
 }

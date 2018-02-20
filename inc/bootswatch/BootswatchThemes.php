@@ -49,15 +49,18 @@ class BootswatchThemes {
         'yeti' => null,
     );
 
+
     public function __construct()
     {
 
     }
 
+
     public function getThemeList()
     {
         return $this->theme_list;
     }
+
 
     public function setThemesAtts()
     {
@@ -72,10 +75,12 @@ class BootswatchThemes {
         }
     }
 
+
     public function getThemes()
     {
         return $this->themes;
     }
+
 
     public function getSingleTheme($theme = null)
     {
@@ -83,5 +88,28 @@ class BootswatchThemes {
             return false;
 
         return $this->themes[$theme];
+    }
+
+
+    public function removeDevStuff()
+    {
+        $useless = array(
+            'vendor_dir',
+            'vendor_uri',
+            'sass_variables',
+            'sass_bootswatch',
+            'theme_dir',
+            'theme_uri',
+            'bootswatch_dir',
+            'bootswatch_uri',
+            'thumbnail'
+        );
+
+        foreach($this->themes as &$theme){
+            foreach($useless as $v){
+                unset($theme->$v);
+            }
+        }
+
     }
 }

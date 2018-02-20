@@ -11,17 +11,18 @@ $wp_customize->add_setting(
     )
 );
 $args = array(
-
     'label' => __('Sidebar Settings', 'bootswatch'),
     'type' => 'label',
     'section' => $name . '_settings_section',
     'settings' => $name . '_sidebar_label',
-    'input_attrs' => $input_attrs
+    'input_attrs' => array(
+      'data-toggled-by' => $name . '_settings_active',
+    )
 );
 
 
 $wp_customize->add_control(
-    new Label(
+    new Bootswatch_Label_Custom_Control(
         $wp_customize,
         $name . '_sidebar_label_control',
         $args
@@ -34,7 +35,7 @@ $wp_customize->add_control(
  */
 $wp_customize->add_setting( $name . '_sidebar_position_setting', array(
     'default' => 'none',
-    'sanitize_callback' => array($this->validation, 'sidebar_position_sanitize'),
+    'sanitize_callback' => 'bootswatch_sidebar_position_sanitize',
 ) );
 
 $sidebar_pos_args = array(
@@ -44,13 +45,14 @@ $sidebar_pos_args = array(
     'settings' => $name . '_sidebar_position_setting',
     'type' => 'select',
     'choices' => array(
-        'none' => 'No sidebar',
-        'left' => 'Left',
-        'right' => 'Right'
+        'none' => __('No sidebar', 'bootswatch'),
+        'left' => __('Left', 'bootswatch'),
+        'right' => __('Right', 'bootswatch'),
     ),
-    'input_attrs' => $input_attrs
+    'input_attrs' => array(
+      'data-toggled-by' => $name . '_settings_active',
+    )
 );
-
 
 $wp_customize->add_control($name . '_sidebar_position_control', $sidebar_pos_args);
 
@@ -60,7 +62,7 @@ $wp_customize->add_control($name . '_sidebar_position_control', $sidebar_pos_arg
  */
 $wp_customize->add_setting( $name . '_sidebar_visibility_setting', array(
     'default' => 'always-visible',
-    'sanitize_callback' => array($this->validation, 'sidebar_visibility_sanitize'),
+    'sanitize_callback' => 'bootswatch_sidebar_visibility_sanitize',
 ) );
 $sidebar_visibility_args = array(
     'description' => __('Hide or show the sidebar on different screen size (ie: hide on phones)', 'bootswatch'),
@@ -69,14 +71,15 @@ $sidebar_visibility_args = array(
     'settings' => $name . '_sidebar_visibility_setting',
     'type' => 'select',
     'choices' => array(
-        'always-visible' => 'Always visible',
-        'hidden-md hidden-lg' => 'Hide on medium screens and larger',
-        'hidden-lg' => 'Hide on desktop',
-        'visible-md-block visible-lg-block' => 'Visible on medium screens and larger',
-        'visible-lg' => 'Visible on desktop',
+        'always-visible' => __('Always visible', 'bootswatch'),
+        'hidden-medium-up' => __('Hide on medium screens and larger', 'bootswatch'),
+        'hidden-large-up' => __('Hide on desktop', 'bootswatch'),
+        'visible-medium-up' => __('Visible on medium screens and larger', 'bootswatch'),
+        'visible-large-up' => __('Visible on desktop', 'bootswatch'),
     ),
-    'input_attrs' => $input_attrs
+    'input_attrs' => array(
+      'data-toggled-by' => $name . '_settings_active',
+    )
 );
-
 
 $wp_customize->add_control($name . '_sidebar_visibility_control', $sidebar_visibility_args);

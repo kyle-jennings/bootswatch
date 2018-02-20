@@ -33,11 +33,9 @@ if(!class_exists('ColorScheme')) {
                 <?php echo esc_html($this->description); ?>
             </p>
             <ul>
-                <?php
-
-                    foreach($this->choices as $theme):
-
-                ?>
+            <?php
+                foreach($this->choices as $theme):
+            ?>
                 <li class="cf">
                     <input type="radio" name="<?php echo esc_attr($this->id); ?>"
                         <?php $this->link(); ?>
@@ -48,7 +46,9 @@ if(!class_exists('ColorScheme')) {
                     <img class="swatches" src="<?php echo esc_url($theme->thumbnail_uri); ?>" />
 
                 </li>
-            <?php endforeach; ?>
+            <?php 
+                endforeach; 
+            ?>
 
             </ul>
         <?php

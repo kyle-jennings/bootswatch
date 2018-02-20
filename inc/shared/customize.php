@@ -1,7 +1,7 @@
 <?php
 $files = array('Fields', 'Validations', 'Customizer',);
 foreach($files as $file){
-    $file = dirname(__FILE__) .'/customizer/'.$file.'.php';
+    $file = dirname( dirname(__FILE__) ) .'/customizer/'.$file.'.php';
 
     if(!is_readable($file))
         continue;

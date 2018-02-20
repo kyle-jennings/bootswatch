@@ -8,6 +8,7 @@ use Leafo\ScssPhp\Exception;
 class PrepBootSwatch {
 
 
+
     public function __construct()
     {
 
@@ -17,13 +18,21 @@ class PrepBootSwatch {
     static public function postInstall()
     {
         self::buildBootstrapDefault();
-        self::moveFontAwesome();
         self::buildCSS();
+        self::moveDefaultThumbnail();
+        self::moveFontAwesome();
+        self::moveToAssets();
     }
 
+
+    /**
+     * set up the "default" bootstrap src files
+     * renames the "custom" folder ot "bootstrap" and then copies the bootstrap
+     * thumbnail from teh admin-src folder to the new bootstrap folder
+     */
     static public function buildBootstrapDefault()
     {
-        $root = dirname( dirname( __FILE__));
+        $root = dirname( dirname( __FILE__) );
         $vendor = $root . '/vendor/thomaspark/bootswatch';
 
         $old = $vendor . '/custom';
@@ -33,12 +42,18 @@ class PrepBootSwatch {
             rename($old, $new);
         }
 
-        $thumbnail = $root . '/_dev/admin-src/img/bootstrap.png';
+        $thumbnail = $root . '/src/backend/img/bootstrap.png';
+
         if( is_readable($thumbnail) )
             copy($thumbnail, $new . '/thumbnail.png');
 
     }
 
+
+    /**
+     * Move the font awesome assets
+     * @return [type] [description]
+     */
     static public function moveFontAwesome()
     {
         $Builder = new \bootswatch\builder\Builder();
@@ -47,7 +62,7 @@ class PrepBootSwatch {
         $dst = $Builder->template_dir .'/assets/fonts';
         if(is_readable($font_dir)){
 
-            self::copy(
+            self::copyDir(
                 $font_dir,
                 $dst
             );
@@ -56,18 +71,22 @@ class PrepBootSwatch {
 
     }
 
+    /**
+     * Compiles and minifies the SCSS into product ready files
+     * @return [type] [description]
+     */
     static public function buildCSS()
     {
 
+        // set up the objects
         $BootSwatchThemes = new \bootswatch\BootSwatchThemes();
         $BootSwatchThemes->setThemesAtts();
 
-
-
+        // set the src file paths
         $Builder = new \bootswatch\builder\Builder();
-
         $Compiler = new Compiler();
         $Compiler->setVariables(array('fa-font-path' => '../../fonts'));
+
 
         $paths = array($Builder->bootstrap_dir, $Builder->modules_dir, $Builder->fonts_dir);
         $Compiler->setImportPaths($paths);
@@ -118,6 +137,10 @@ class PrepBootSwatch {
     }
 
 
+    /**
+     * Move the css, minified css, and thumbnail to the assets folder
+     * @return [type] [description]
+     */
     static public function moveToAssets()
     {
 
@@ -133,17 +156,27 @@ class PrepBootSwatch {
 
         foreach($themes as $theme=>$BootSwatch){
 
-            $paths = array(
-                'src' => $BootSwatch->theme_dir,
-                'dst' => $Builder->assets_dir .'/css/'.$BootSwatch->name
-            );
-            // self::examine($paths);
-            // copy the theme over to the assets dir
-            self::copy(
-                $paths['src'],
-                $paths['dst']
+            $files = array(
+                'css' => 'bootswatch.css',
+                'min' => 'bootswatch.min.css',
+                'thumb' => 'thumbnail.png'
             );
 
+            $src = $BootSwatch->theme_dir . DIRECTORY_SEPARATOR;
+            $dst = $Builder->assets_dir . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . $BootSwatch->name . DIRECTORY_SEPARATOR;
+
+            if(!is_readable($dst))
+                mkdir($dst, 755, true);
+            // copy the theme over to the assets dir
+            foreach($files as $k => $v) {
+
+                if( !is_readable($src . $v) )
+                    continue;
+
+
+                if( !copy( $src . $v, $dst . $v) )
+                    continue;
+            }
 
             // use this when building from the DB
             // $Compiler->setVariables(array('varname' => 'value'))
@@ -152,22 +185,35 @@ class PrepBootSwatch {
     }
 
 
+    /**
+     * move all teh files
+     * @return [type] [description]
+     */
     static public function moveFiles()
     {
         self::moveFontAwesome();
         self::moveToAssets();
+        self::moveDefaultThumbnail();
+
     }
 
 
+    /**
+     * Rebuld the CSS, move the assets,
+     * @return [type] [description]
+     */
     static public function rebuildCss()
     {
         self::buildCSS();
         self::moveFontAwesome();
-        self::moveToAssets();
-        self::moveDefaultThumbnail();
+        self::moveFiles();
     }
 
 
+    /**
+     * move the default thumbnail - may be repetitive 
+     * @return [type] [description]
+     */
     static public function moveDefaultThumbnail()
     {
         $Builder = new \bootswatch\builder\Builder();
@@ -179,7 +225,13 @@ class PrepBootSwatch {
     }
 
 
-    static private function copy( $src, $dst ) {
+    /**
+     * Recursivly copy files (a directory) to a new directory
+     * @param  [type] $src [description]
+     * @param  [type] $dst [description]
+     * @return [type]      [description]
+     */
+    static private function copyDir( $src, $dst ) {
         if( !defined('DS') ) define( 'DS', DIRECTORY_SEPARATOR );
 
         $dir = opendir( $src );
@@ -192,7 +244,7 @@ class PrepBootSwatch {
         while( false !== ( $file = readdir( $dir ) ) ) {
             if( $file != '.' && $file != '..' ) {
                 if( is_dir( $src . DS . $file ) ) {
-                    self::copy( $src . DS . $file, $dst . DS . $file );
+                    self::copyDir( $src . DS . $file, $dst . DS . $file );
                 } else {
                     if(is_readable($src . DS . $file))
                         copy( $src . DS . $file, $dst . DS . $file );

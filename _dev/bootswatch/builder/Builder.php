@@ -1,5 +1,12 @@
 <?php
-
+/**
+ * The Builder class does 1 thing - it collects the paths for various src files to build
+ *
+ * These src files are passed on the leafo\compiler class which will actually build everything
+ *
+ * This class used to do the actual building, and removal of the preview file but no more.  That is
+ * because the custom CSS building is being moved to its own plugin.
+ */
 namespace bootswatch\builder;
 
 
@@ -51,34 +58,28 @@ class Builder {
     public $modules_dir;
     public $modules;
 
+    /**
+     * Just set the paths
+     * @param array $args [description]
+     */
     public function __construct($args = array() ) {
 
-        // extract(shortcode_atts(
-        //     array(
-        //         'variables' => null,
-        //         'type' => 'custom',
-        //         'target' => 'preview',
-        //         'manifest' => null,
-        //         'manifest_append' => null,
-        //     ),
-        //     $args
-        // ));
 
         $this->template_dir = $template_dir = (function_exists('get_template_directory') )
             ? get_template_directory() : $this->get_template_directory();
 
 
+        // destination
         $this->assets_dir = $this->template_dir . '/assets';
 
+        // vendor stuff
         $this->vendor_dir = $template_dir . '/_dev/vendor';
-
         $this->fonts_dir = $template_dir . '/_dev/vendor/fortawesome/font-awesome/scss';
         $this->bootstrap_dir = $this->vendor_dir . '/twbs/bootstrap-sass/assets/stylesheets';
 
-        $this->modules_dir = $template_dir . '/_dev/src/scss';
+        // our custom SCSS modules
+        $this->modules_dir = $template_dir . '/_dev/src/frontend/scss';
         $this->modules_manifest = $this->modules_dir . '/manifest.scss';
-
-
 
 
     }
@@ -120,6 +121,12 @@ class Builder {
     }
 
 
+    /**
+     * If this is run by composer - we do not know where the template directory is
+     *
+     * However, since this file is used in DEV only, we know exactly where it is
+     * @return [type] [description]
+     */
     private function get_template_directory()
     {
         return  dirname(dirname( dirname( dirname( __FILE__))));

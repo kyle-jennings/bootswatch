@@ -13,7 +13,7 @@
       "twbs/bootstrap-sass" : "3.3.x-dev",
       "leafo/scssphp": "0.6.6",
       "thomaspark/bootswatch": "3.3.7",
-      "fortawesome/font-awesome" : "4.6.x-dev"
+      "fortawesome/font-awesome" : "4.7.0"
     },
     "autoload": {
         "psr-4": {

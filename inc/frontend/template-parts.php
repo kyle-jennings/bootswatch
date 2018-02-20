@@ -28,10 +28,10 @@ function bootswatch_the_header() {
         switch($component->name):
             case 'banner':
                 if( get_theme_mod('banner_visibility_setting', 'hide') !== 'hide')
-                    get_template_part('template-parts/section', 'banner');
+                    get_template_part('inc/frontend/section', 'banner');
                 break;
             case 'navbar':
-                get_template_part('template-parts/navbars/navbar');
+                get_template_part('inc/frontend/navbars/navbar');
                 break;
             case 'hero':
                 $hero = new Hero($template);
@@ -110,13 +110,13 @@ function bootswatch_footer() {
 
         switch($name):
             case 'footer-menu':
-                get_template_part('template-parts/footers/footer', 'menu');
+                get_template_part('inc/frontend/footers/footer', 'menu');
                 break;
             case 'widget-area-1':
-                get_template_part('template-parts/footers/footer', 'widgets-1');
+                get_template_part('inc/frontend/footers/footer', 'widgets-1');
                 break;
             case 'widget-area-2':
-                get_template_part('template-parts/footers/footer', 'widgets-2');
+                get_template_part('inc/frontend/footers/footer', 'widgets-2');
                 break;
 
         endswitch;

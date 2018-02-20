@@ -30,9 +30,9 @@ var config = {
 
 // dir paths
 var paths = {
-  srcPath: './src',
+  srcPath: './src/frontend',
   assetsPath: '../assets',
-  adminSrcPath: './admin-src',
+  adminSrcPath: './src/backend',
   adminAssetsPath: '../inc/admin/assets',
   npmPath : './node_modules',
   bowerPath: './bower_components',

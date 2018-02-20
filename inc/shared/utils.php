@@ -7,7 +7,7 @@
  * @uses   get_intermediate_image_sizes()
  * @return array $sizes Data for all currently-registered image sizes.
  */
-function get_image_sizes() {
+function bootswatch_get_image_sizes() {
 	global $_wp_additional_image_sizes;
 
 	$sizes = array();
@@ -36,7 +36,7 @@ function get_image_sizes() {
  * @param  string $size The image size for which to retrieve data.
  * @return bool|array $size Size data about an image size or false if the size doesn't exist.
  */
-function get_image_size( $size ) {
+function bootswatch_get_image_size( $size ) {
 	$sizes = get_image_sizes();
 
 	if ( isset( $sizes[ $size ] ) ) {
@@ -53,7 +53,7 @@ function get_image_size( $size ) {
  * @param  string $size The image size for which to retrieve data.
  * @return bool|string $size Width of an image size or false if the size doesn't exist.
  */
-function get_image_width( $size ) {
+function bootswatch_get_image_width( $size ) {
 	if ( ! $size = get_image_size( $size ) ) {
 		return false;
 	}
@@ -72,7 +72,7 @@ function get_image_width( $size ) {
  * @param  string $size The image size for which to retrieve data.
  * @return bool|string $size Height of an image size or false if the size doesn't exist.
  */
-function get_image_height( $size ) {
+function bootswatch_get_image_height( $size ) {
 	if ( ! $size = get_image_size( $size ) ) {
 		return false;
 	}
@@ -84,5 +84,3 @@ function get_image_height( $size ) {
 	return false;
 }
 
-
-// examine(get_image_sizes());

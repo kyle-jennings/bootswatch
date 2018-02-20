@@ -33,4 +33,7 @@ define('BOOTSWATCH_ONE_FOURTH' , 'col-sm-3');
 define('BOOTSWATCH_THREE_FOURTHS' , 'col-sm-9');
 define('BOOTSWATCH_ONE_HALF' , 'col-sm-6');
 
+// misc
+define('DEFAULT_TEMPLATE', 'default');
+
 require_once get_template_directory() . '/inc/_inc.php';

@@ -46,3 +46,15 @@ function bootswatch_content_width() {
     $GLOBALS['content_width'] = apply_filters( 'bootswatch_content_width', 640 );
 }
 add_action( 'after_setup_theme', 'bootswatch_content_width', 0 );
+
+
+
+function bootswatch_get_scheme_css()
+{
+    $themes = new BootswatchThemes();
+    $themes->setThemesAtts();
+    $themes->removeDevStuff();
+    $themes = $themes->getThemes();
+
+    return $themes;
+}

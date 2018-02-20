@@ -15,24 +15,27 @@ $args = array(
     'type' => 'label',
     'section' => $name . '_settings_section',
     'settings' => $name . '_header_label',
-    'input_attrs' => $input_attrs
-
+    'input_attrs' => array(
+      'data-toggled-by' => $name . '_settings_active',
+    ),
+    'priority' => 1,
 );
 
 $wp_customize->add_control(
-    new Label(
+    new Bootswatch_Label_Custom_Control(
         $wp_customize,
         $name . '_header_label_control',
         $args
     )
 );
 
+
 /**
  * Hero Image
  */
 $wp_customize->add_setting( $name . '_image_setting', array(
     'default'      => null,
-    'sanitize_callback' => 'absint'
+    'sanitize_callback' => 'bootswatch_hero_image_sanitization',
 ) );
 
 $hero_image_args = array(
@@ -40,14 +43,14 @@ $hero_image_args = array(
     'label'   => __('Header Image', 'bootswatch'),
     'section' => $name . '_settings_section',
     'settings'   => $name . '_image_setting',
-    'height' => '900',
-    'width' => '1600',
-    'input_attrs' => $input_attrs
+    'input_attrs' => array(
+      'data-toggled-by' => $name . '_settings_active',
+    ),
+    'priority' => 2,
 );
 
-
 $wp_customize->add_control(
-    new WP_Customize_Cropped_Image_Control(
+    new WP_Customize_Image_Control(
         $wp_customize,
         $name . '_image_setting_control',
         $hero_image_args
@@ -55,18 +58,21 @@ $wp_customize->add_control(
 );
 
 
+
+
+
 /**
- * Hero Size
+ * background position
  */
 $wp_customize->add_setting( $name . '_hero_position_setting', array(
-    'default' => 'center',
-    'sanitize_callback' => array($this->validation, 'hero_position_sanitize'),
+    'default' => 'top',
+    'sanitize_callback' => 'bootswatch_hero_position_sanitize',
 ) );
 
 $choices = array(
-    'top' => 'Top',
-    'center' => 'Center',
-    'bottom' => 'Bottom',
+    'top' => __('Top', 'bootswatch'),
+    'center' => __('Center', 'bootswatch'),
+    'bottom' => __('Bottom', 'bootswatch'),
 );
 
 $hero_position_args = array(
@@ -76,7 +82,9 @@ $hero_position_args = array(
     'settings' => $name . '_hero_position_setting',
     'type' => 'select',
     'choices' => $choices,
-    'input_attrs' => $input_attrs
+    'input_attrs' => array(
+      'data-toggled-by' => $name . '_settings_active',
+    )
 );
 
 $wp_customize->add_control( $name . '_hero_position_control', $hero_position_args );
@@ -86,8 +94,8 @@ $wp_customize->add_control( $name . '_hero_position_control', $hero_position_arg
  * Hero Size
  */
 $wp_customize->add_setting( $name . '_hero_size_setting', array(
-    'default' => 'big',
-    'sanitize_callback' => array($this->validation, 'hero_size_sanitize'),
+    'default' => 'medium',
+    'sanitize_callback' => 'bootswatch_hero_size_sanitize',
 ) );
 
 $hero_size_args = array(
@@ -97,12 +105,15 @@ $hero_size_args = array(
     'settings' => $name . '_hero_size_setting',
     'type' => 'select',
     'choices' => array(
-        'slim' => 'Slim',
-        'medium' => 'Medium',
-        'big' => 'Big',
-        'full' => 'Full Screen'
+        'slim' => __('Slim', 'bootswatch'),
+        'medium' => __('Medium', 'bootswatch'),
+        'big' => __('Big', 'bootswatch'),
+        'xtra-big' => __('Extra Big', 'bootswatch'),
+        'full' => __('Full Screen', 'bootswatch'),
     ),
-    'input_attrs' => array('toggable'),
+    'input_attrs' => array(
+      'data-toggled-by' => $name . '_settings_active',
+    )
 );
 
 

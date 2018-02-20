@@ -14,8 +14,6 @@ function bootswatch_get_the_video_markup($url = null) {
 
 
 
-
-
     $output = '';
     $video = '';
     $atts = '';

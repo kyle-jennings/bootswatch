@@ -85,7 +85,7 @@ class Bootswatch {
     public function doesCSSExist()
     {
 
-        $file = $this->theme_dir . '/bootstrap.min.css';
+        $file = $this->theme_dir . '/bootswatch.min.css';
 
         if( !is_readable($file))
             return false;
