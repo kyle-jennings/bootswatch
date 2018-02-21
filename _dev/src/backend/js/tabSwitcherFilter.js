@@ -1,5 +1,11 @@
-$('.js--tab-switch').on('change', function(){
+/**
+ * Used when switching tabs and loading in a new section of varibles
+ *
+ * This should be moved to the plugin
+ */
 
+
+$('.js--tab-switch').on('change', function(){
 
   var $this = $(this);
   var $parent = $this.closest('li');

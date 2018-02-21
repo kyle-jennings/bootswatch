@@ -1,4 +1,12 @@
+
+
+/**
+ * Saves values from the checkbox group control in teh customizer
+ *
+ * This control is used for the hide template parts settings
+ */
 $('.js--checkbox-group input[type="checkbox"]').on('change', function(e){
+
   var $this = $(this);
   var $parent = $this.closest('.js--checkbox-group');
   var targetID = $parent.attr('id');

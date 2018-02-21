@@ -63,8 +63,8 @@ class Bootswatch {
         // $this->bootswatch_dir = $this->vendor_dir . '/thomaspark/bootswatch';
         // $this->bootswatch_uri = $this->vendor_uri . '/thomaspark/bootswatch';
 
-        $this->bootswatch_dir = $template_dir . '/assets/css';
-        $this->bootswatch_uri = $template_uri . '/assets/css';
+        $this->bootswatch_dir = $template_dir . '/assets/frontend/css';
+        $this->bootswatch_uri = $template_uri . '/assets/frontend/css';
 
         $this->setTheme($theme);
     }

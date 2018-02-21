@@ -31,13 +31,16 @@ var config = {
 // dir paths
 var paths = {
   srcPath: './src/frontend',
-  assetsPath: '../assets',
+  assetsPath: '../assets/frontend',
+
   adminSrcPath: './src/backend',
-  adminAssetsPath: '../inc/admin/assets',
+  adminAssetsPath: '../assets/backend',
+  
   npmPath : './node_modules',
   bowerPath: './bower_components',
   vendorPath: './js/vendor'
 };
+
 paths.scssGlob = paths.srcPath + '/scss/**/*.scss';
 paths.jsGlob = paths.srcPath + '/js/**/*.js';
 paths.adminScssGlob = paths.adminSrcPath + '/scss/**/*.scss';
@@ -59,7 +62,8 @@ gulp.task('front-js',['clean:front-js'], function(){
 
   return gulp.src([
     paths.srcPath + '/js/bootswatch.js',
-    !paths.srcPath + '/js/audio-vis-2d.js',
+    paths.srcPath + '/js/audio-vis-2d.js',
+    paths.srcPath + '/js/previewer.js',
   ] )
   .pipe(plumber({ errorHandler: handleErrors }))
   .pipe(browserified)

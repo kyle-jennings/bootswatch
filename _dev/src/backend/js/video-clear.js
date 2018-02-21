@@ -1,3 +1,6 @@
+/**
+ * Clears the video url from the input box
+ */
 $('body').on('click', '.js--clear-video', function(e){
   var $this = $(this);
 

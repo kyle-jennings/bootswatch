@@ -8,10 +8,10 @@ function bootswatch_admin_assets() {
     // the following style and script files are minified, however non minified
     // versions are incuded with this theme
     wp_enqueue_style( 'admin-style',
-        get_stylesheet_directory_uri() . '/inc/admin/assets/css/bootswatch-admin.min.css' );
+        get_stylesheet_directory_uri() . '/assets/backend/css/bootswatch-admin.min.css' );
 
     wp_enqueue_script( 'admin-scripts',
-        get_stylesheet_directory_uri() . '/inc/admin/assets/js/_bootswatch-admin-min.js',
+        get_stylesheet_directory_uri() . '/assets/backend/js/_bootswatch-admin-min.js',
         null, '20170215', true
     );
 

@@ -61,6 +61,34 @@ function bootswatch_widgets_init() {
 add_action( 'init', 'bootswatch_widgets_init' );
 
 
+
+function add_classes_to__widget($args){
+    global $horizontal_sidebars_count;
+
+    if( !array_key_exists($args[0]['id'], $horizontal_sidebars_count) )
+        return $args;
+    $horizontal_sidebars_count[$args[0]['id']]['current']++;
+
+    // store the variables into something i dont hate writing
+    $current = $horizontal_sidebars_count[$args[0]['id']]['current'];
+    $count = $horizontal_sidebars_count[$args[0]['id']]['count'];
+    $cols = 12;
+
+    // if there are no widgets just return
+    if($count == 0)
+        return $args;
+
+    if( ($current == $count) && ($cols % $count > 0) ){
+        $last = 'col-md-'. floor(($cols / $count) + ($cols % $count));
+        $args[0]['before_widget'] = preg_replace('/(col-md-[0-9]+)/', $last, $args[0]['before_widget']);
+    }
+
+    return $args;
+}
+// add_filter('dynamic_sidebar_params', 'add_classes_to__widget');
+
+
+
 /**
  * Count the number of widgets set in an a widget area, this is used to automatically
  * resize all the widgets to take up the full width of the area
@@ -68,31 +96,10 @@ add_action( 'init', 'bootswatch_widgets_init' );
  * @return [type]        [description]
  */
 function bootswatch_calculate_widget_width($count){
-
-    switch($count):
-        case 1:
-            return 'usa-width-one-whole';
-            break;
-        case 2:
-            return 'usa-width-one-half';
-            break;
-        case 3:
-            return 'usa-width-one-third';
-            break;
-        case 4:
-            return 'usa-width-one-fourth';
-            break;
-        case 5:
-            return 'usa-width-one-sixth';
-            break;
-        case 6:
-            return 'usa-width-one-sixth';
-            break;
-        default:
-            return 'usa-width-one-twelfth';
-            break;
-    endswitch;
-
+    $cols = 12;
+    if($count <= 0)
+        return '';
+    return 'col-md-'.floor($cols / $count);
 }
 
 

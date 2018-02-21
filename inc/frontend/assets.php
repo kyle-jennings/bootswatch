@@ -9,12 +9,12 @@ function bootswatch_scripts() {
     if(is_admin())
         return;
 
-    $default = get_template_directory_uri() . '/assets/css/bootstrap/bootswatch.css';
+    $default = get_template_directory_uri() . '/assets/frontend/css/bootstrap/bootswatch.css';
 
     $theme = get_theme_mod('color_scheme_setting', $default);
     
 	wp_enqueue_script(
-        'bootswatch-js', get_template_directory_uri() . '/assets/js/bootswatch.js',
+        'bootswatch-js', get_template_directory_uri() . '/assets/frontend/js/bootswatch.js',
          array('jquery'), null, true
     );
 

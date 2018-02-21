@@ -70,7 +70,7 @@ class Builder {
 
 
         // destination
-        $this->assets_dir = $this->template_dir . '/assets';
+        $this->assets_dir = $this->template_dir . '/assets/frontend';
 
         // vendor stuff
         $this->vendor_dir = $template_dir . '/_dev/vendor';

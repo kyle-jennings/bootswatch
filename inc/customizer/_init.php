@@ -41,7 +41,7 @@ function bootswatch_customizer_enqueue() {
   // this script is minified, however a non minified version is included with the theme
 	wp_enqueue_script(
         'custom-customize',
-        get_stylesheet_directory_uri() . '/inc/admin/assets/js/_bootswatch-customizer-min.js',
+        get_stylesheet_directory_uri() . '/assets/backend/js/_bootswatch-customizer-min.js',
         null,
         '20170215',
         true
@@ -57,15 +57,15 @@ add_action( 'customize_controls_enqueue_scripts', 'bootswatch_customizer_enqueue
  */
 function bootswatch_previewer_enqueue() {
   wp_enqueue_script(
-        'custom-customize',
-        get_stylesheet_directory_uri() . '/assets/js/_bootswatch-previewer-min.js',
+        'custom-previewer',
+        get_stylesheet_directory_uri() . '/assets/frontend/js/previewer-min.js',
         null,
         '20170215',
         true
     );
 }
 
-// add_action( 'customize_preview_init', 'bootswatch_previewer_enqueue' );
+add_action( 'customize_preview_init', 'bootswatch_previewer_enqueue' );
 
 
 
