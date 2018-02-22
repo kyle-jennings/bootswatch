@@ -4,10 +4,6 @@
     "type": "project",
     "license": "MIT",
     "repositories": [
-      {
-        "type": "vcs",
-        "url": "https://github.com/kyle-jennings/post-formats-plus"
-      }
     ],
     "require": {
       "twbs/bootstrap-sass" : "3.3.x-dev",
@@ -21,12 +17,7 @@
         }
     },
     "scripts" : {
-        "post-install-cmd" : "bootswatch\\PrepBootSwatch::postInstall",
-        "post-update-cmd": "bootswatch\\PrepBootSwatch::buildCSS",
-        "build-css": "bootswatch\\PrepBootSwatch::buildCSS",
-        "move-files": "bootswatch\\PrepBootSwatch::moveFiles",
-        "rebuild-css": "bootswatch\\PrepBootSwatch::rebuildCSS",
-        "move-image": "bootswatch\\PrepBootSwatch::moveDefaultThumbnail"
-
+        "post-install-cmd": "bootswatch\\BuildBootswatches::buildCSS",
+        "build-css": "bootswatch\\BuildBootswatches::buildCSS"
     }
 }

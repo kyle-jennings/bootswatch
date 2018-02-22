@@ -68,9 +68,8 @@ class BootswatchThemes {
         foreach($this->theme_list as $theme){
             $BootSwatch = new Bootswatch($theme);
 
-            $BootSwatch->doesCSSExist();
+            $BootSwatch->setCSS();
             $BootSwatch->setThumbnail();
-            $BootSwatch->setSCSS();
             $this->themes[$theme] = $BootSwatch;
         }
     }
