@@ -18,7 +18,7 @@ function bootswatches_template_layout_settings($wp_customize) {
     $wp_customize->add_panel(
         'extra_template_settings',
         array(
-            'title' => __('More Templates Settings', 'bootswatch'),
+            'title' => __('More Templates Settings', 'bootswatches'),
             'priority' => 37,
         )
     );
@@ -35,7 +35,7 @@ function bootswatches_template_layout_settings($wp_customize) {
         // the section's args, add the panel arg if the template is NOT the archive
         $section_args = array(
             /* translators: Displays the dynamically set label */
-            'title' => sprintf( __('%s ', 'bootswatch'), ucfirst($args['label']) ),
+            'title' => sprintf( __('%s ', 'bootswatches'), ucfirst($args['label']) ),
             'priority' => 36,
             'description' => $args['description'],
             'type' => $is_active,

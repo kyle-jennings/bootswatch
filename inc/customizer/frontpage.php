@@ -9,7 +9,7 @@ function bootswatches_frontpage_settings($wp_customize) {
     // $label_args = array(
     //     'section' => $section,
     //     'setting_id' => 'frontpage_header_content_label',
-    //     'label' => __('Header Content Settings', 'bootswatch'),
+    //     'label' => __('Header Content Settings', 'bootswatches'),
     //     'control_id' => 'frontpage_header_label_control'
     // );
     // bootswatches_customizer_label($wp_customize, $label_args);
@@ -24,16 +24,16 @@ function bootswatches_frontpage_settings($wp_customize) {
     ) );
 
     $wp_customize->add_control( 'frontpage_hero_content_control', array(
-            'description' => __('Select what to display in the header.','bootswatch'),
-            'label'   => __('Header Content', 'bootswatch'),
+            'description' => __('Select what to display in the header.','bootswatches'),
+            'label'   => __('Header Content', 'bootswatches'),
             'section' => $section,
             'settings'=> 'frontpage_hero_content_setting',
             'priority' => 1,
             'type' => 'select',
             'choices' => array(
-                'callout' => __('Callout', 'bootswatch'),
-                'page' => __('Select a Page', 'bootswatch'),
-                'title' => __('Site title', 'bootswatch'),
+                'callout' => __('Callout', 'bootswatches'),
+                'page' => __('Select a Page', 'bootswatches'),
+                'title' => __('Site title', 'bootswatches'),
             )
         )
     );
@@ -46,8 +46,8 @@ function bootswatches_frontpage_settings($wp_customize) {
      ) );
      $wp_customize->add_control( 'frontpage_hero_callout_control',
          array(
-             'description' => __('Display a button link in the callout to a selected page','bootswatch'),
-             'label'   => __('Callout Button Link', 'bootswatch'),
+             'description' => __('Display a button link in the callout to a selected page','bootswatches'),
+             'label'   => __('Callout Button Link', 'bootswatches'),
              'section' => $section,
              'settings'=> 'frontpage_hero_callout_setting',
              'type'    => 'dropdown-pages',
@@ -63,7 +63,7 @@ function bootswatches_frontpage_settings($wp_customize) {
     ) );
 
     $wp_customize->add_control( 'frontpage_hero_page_control', array(
-            'label'   => __('Select a Page', 'bootswatch'),
+            'label'   => __('Select a Page', 'bootswatches'),
             'section' => $section,
             'settings'=> 'frontpage_hero_page_setting',
             'type'    => 'dropdown-pages',
@@ -84,21 +84,21 @@ function bootswatches_frontpage_settings($wp_customize) {
 
      $description = __('The page content is sortable, and optional.  Simply drag the
           available components from the "available" box over to active.  This setting
-          does not depend on the "Settings Active" setting above.', 'bootswatch');
+          does not depend on the "Settings Active" setting above.', 'bootswatches');
 
      $wp_customize->add_control( new Bootswatches_Sortable_Control( $wp_customize,
         'frontpage_sortables_control', array(
             'description' => sprintf(' %s', $description ),
-            'label'   => __('Sortable Page Content', 'bootswatch'),
+            'label'   => __('Sortable Page Content', 'bootswatches'),
             'section' => $section,
             'settings'=> 'frontpage_sortables_setting',
             'priority' => 1,
             'optional' => true,
             'choices' => array(
-                    'widget-area-1' => __('Widget Area 1', 'bootswatch'),
-                    'widget-area-2' => __('Widget Area 2', 'bootswatch'),
-                    'widget-area-3' => __('Widget Area 3', 'bootswatch'),
-                    'page-content' => __('Page Content', 'bootswatch'),
+                    'widget-area-1' => __('Widget Area 1', 'bootswatches'),
+                    'widget-area-2' => __('Widget Area 2', 'bootswatches'),
+                    'widget-area-3' => __('Widget Area 3', 'bootswatches'),
+                    'page-content' => __('Page Content', 'bootswatches'),
                 ),
             )
         )

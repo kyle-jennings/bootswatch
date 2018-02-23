@@ -140,13 +140,13 @@ class Bootswatches_Nav_Menu_Widget extends WP_Nav_Menu_Widget {
 				$url = admin_url( 'nav-menus.php' );
 			}
 			?>
-			<?php /* translators: link to create new menu if none exist */ printf( __( 'No menus have been created yet. <a href="%s">Create some</a>.', 'bootswatch' ), esc_attr( $url ) ); //WPCS xss ok; ?>
+			<?php /* translators: link to create new menu if none exist */ printf( __( 'No menus have been created yet. <a href="%s">Create some</a>.', 'bootswatches' ), esc_attr( $url ) ); //WPCS xss ok; ?>
 		</p>
 		<div class="nav-menu-widget-form-controls"
             <?php if ( empty( $menus ) ) { echo ' style="display:none" '; } ?>>
 			<p>
 				<label for="<?php echo esc_attr($this->get_field_id( 'title' )); ?>">
-                    <?php echo __( 'Title:', 'bootswatch' );  // WPCS: xss ok. ?>
+                    <?php echo __( 'Title:', 'bootswatches' );  // WPCS: xss ok. ?>
                 </label>
 				<input type="text" class="widefat" id="<?php echo esc_attr($this->get_field_id( 'title' )); ?>"
                     name="<?php echo esc_attr($this->get_field_name( 'title' )); ?>"
@@ -155,12 +155,12 @@ class Bootswatches_Nav_Menu_Widget extends WP_Nav_Menu_Widget {
 			</p>
 			<p>
 				<label for="<?php echo esc_attr($this->get_field_id( 'nav_menu' )); ?>">
-                    <?php echo __( 'Select Menu:', 'bootswatch' ); // WPCS: xss ok. ?>
+                    <?php echo __( 'Select Menu:', 'bootswatches' ); // WPCS: xss ok. ?>
                 </label>
 				<select id="<?php echo esc_attr($this->get_field_id( 'nav_menu' )); ?>"
                     name="<?php echo esc_attr($this->get_field_name( 'nav_menu' )); ?>">
 					<option value="0">
-                        <?php echo esc_html( '&mdash; Select &mdash;', 'bootswatch' ); ?>
+                        <?php echo esc_html( '&mdash; Select &mdash;', 'bootswatches' ); ?>
                     </option>
 					<?php foreach ( $menus as $menu ) : ?>
 						<option value="<?php echo esc_attr( $menu->term_id ); ?>"
@@ -173,7 +173,7 @@ class Bootswatches_Nav_Menu_Widget extends WP_Nav_Menu_Widget {
 
             <p>
 				<label for="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>">
-                    <?php echo esc_html__( 'Menu Style:', 'bootswatch' ); ?>
+                    <?php echo esc_html__( 'Menu Style:', 'bootswatches' ); ?>
                 </label>
 				<select id="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>"
                       name="<?php echo esc_attr($this->get_field_name( 'menu_style' )); ?>">
@@ -191,7 +191,7 @@ class Bootswatches_Nav_Menu_Widget extends WP_Nav_Menu_Widget {
 
 			<?php if ( $wp_customize instanceof WP_Customize_Manager ) : ?>
 				<p class="edit-selected-nav-menu" style="<?php if ( ! $nav_menu ) { echo 'display: none;'; } ?>">
-					<button type="button" class="button"><?php echo esc_html( 'Edit Menu', 'bootswatch' ) ?></button>
+					<button type="button" class="button"><?php echo esc_html( 'Edit Menu', 'bootswatches' ) ?></button>
 				</p>
 			<?php endif; ?>
 		</div>

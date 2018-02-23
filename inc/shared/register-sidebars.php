@@ -48,7 +48,7 @@ function bootswatches_widgets_init() {
             'name'          => sprintf( '%s ', ucfirst($args['label']) ),
             'id'            => (string) $name,
             /* translators: sidebar description. */
-            'description'   => sprintf(  __('%s ', 'bootswatch'), $description ),
+            'description'   => sprintf(  __('%s ', 'bootswatches'), $description ),
             'before_widget' => '<div id="%1$s" class="widget widget-area--' . $name . ' '. $width . '">',
             'after_widget'  => '</div>',
             'before_title'  => '<h3 class="widget-title">',

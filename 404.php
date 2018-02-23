@@ -54,7 +54,7 @@ if( !$hide_content ):
                 echo $content; // WPCS: xss ok.
 
             else :
-                echo '<p>' . esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'bootswatch' ) . '</p>';
+                echo '<p>' . esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'bootswatches' ) . '</p>';
 
                 get_search_form();
 

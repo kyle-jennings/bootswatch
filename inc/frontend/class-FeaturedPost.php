@@ -132,7 +132,7 @@ class FeaturedPost {
 
         // bootswatches_get_cpt_custom_tax_terms($this->id);
         if ( $categories_list = bootswatches_get_the_category_list($this->id) ) {
-			$cats = '<span class="cat-links">' . __('Posted in&nbsp;', 'bootswatch') . $categories_list . '</span>';
+			$cats = '<span class="cat-links">' . __('Posted in&nbsp;', 'bootswatches') . $categories_list . '</span>';
 		}
 
         return '<span class="posted-on">' . $date . '</span>

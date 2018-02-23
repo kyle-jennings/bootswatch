@@ -11,7 +11,7 @@ $wp_customize->add_setting(
     )
 );
 $args = array(
-    'label' => __('Sidebar Settings', 'bootswatch'),
+    'label' => __('Sidebar Settings', 'bootswatches'),
     'type' => 'label',
     'section' => $name . '_settings_section',
     'settings' => $name . '_sidebar_label',
@@ -39,15 +39,15 @@ $wp_customize->add_setting( $name . '_sidebar_position_setting', array(
 ) );
 
 $sidebar_pos_args = array(
-    'description' => __('Hide or move your sidebar to change the layout of the content area.','bootswatch'),
-    'label' => __('Sidebar Position', 'bootswatch'),
+    'description' => __('Hide or move your sidebar to change the layout of the content area.','bootswatches'),
+    'label' => __('Sidebar Position', 'bootswatches'),
     'section' => $name . '_settings_section',
     'settings' => $name . '_sidebar_position_setting',
     'type' => 'select',
     'choices' => array(
-        'none' => __('No sidebar', 'bootswatch'),
-        'left' => __('Left', 'bootswatch'),
-        'right' => __('Right', 'bootswatch'),
+        'none' => __('No sidebar', 'bootswatches'),
+        'left' => __('Left', 'bootswatches'),
+        'right' => __('Right', 'bootswatches'),
     ),
     'input_attrs' => array(
       'data-toggled-by' => $name . '_settings_active',
@@ -65,17 +65,17 @@ $wp_customize->add_setting( $name . '_sidebar_visibility_setting', array(
     'sanitize_callback' => 'bootswatches_sidebar_visibility_sanitize',
 ) );
 $sidebar_visibility_args = array(
-    'description' => __('Hide or show the sidebar on different screen size (ie: hide on phones)', 'bootswatch'),
-    'label' => __('Sidebar Visibility', 'bootswatch'),
+    'description' => __('Hide or show the sidebar on different screen size (ie: hide on phones)', 'bootswatches'),
+    'label' => __('Sidebar Visibility', 'bootswatches'),
     'section' => $name . '_settings_section',
     'settings' => $name . '_sidebar_visibility_setting',
     'type' => 'select',
     'choices' => array(
-        'always-visible' => __('Always visible', 'bootswatch'),
-        'hidden-medium-up' => __('Hide on medium screens and larger', 'bootswatch'),
-        'hidden-large-up' => __('Hide on desktop', 'bootswatch'),
-        'visible-medium-up' => __('Visible on medium screens and larger', 'bootswatch'),
-        'visible-large-up' => __('Visible on desktop', 'bootswatch'),
+        'always-visible' => __('Always visible', 'bootswatches'),
+        'hidden-medium-up' => __('Hide on medium screens and larger', 'bootswatches'),
+        'hidden-large-up' => __('Hide on desktop', 'bootswatches'),
+        'visible-medium-up' => __('Visible on medium screens and larger', 'bootswatches'),
+        'visible-large-up' => __('Visible on desktop', 'bootswatches'),
     ),
     'input_attrs' => array(
       'data-toggled-by' => $name . '_settings_active',

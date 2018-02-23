@@ -9,7 +9,7 @@ function bootswatches_widgetized_settings($wp_customize) {
 
     $section_args = array(
         'section' => $section,
-        'title' => __('Widgetized Page', 'bootswatch'),
+        'title' => __('Widgetized Page', 'bootswatches'),
         'description' => $template['description'],
     );
 
@@ -24,21 +24,21 @@ function bootswatches_widgetized_settings($wp_customize) {
 
     $description = __('The page content is sortable, and optional.  Simply drag the
     available components from the "available" box over to active.  This setting
-    does not depend on the "Settings Active" setting above.', 'bootswatch');
+    does not depend on the "Settings Active" setting above.', 'bootswatches');
 
     $wp_customize->add_control( new Bootswatches_Sortable_Control( $wp_customize,
        'widgetized_sortables_control', array(
-           'label'   => __('Sortable Page Content', 'bootswatch'),
+           'label'   => __('Sortable Page Content', 'bootswatches'),
            /* translators: use the $description variable above - states that the content is sortable via drag and drop */
-           'description' => sprintf( __('%s ', 'bootswatch'), $description ),
+           'description' => sprintf( __('%s ', 'bootswatches'), $description ),
            'section' => $section,
            'settings'=> 'widgetized_sortables_setting',
            'optional' => true,
            'choices' => array(
-                   'widget-area-1' => __('Widget Area 1', 'bootswatch'),
-                   'widget-area-2' => __('Widget Area 2', 'bootswatch'),
-                   'widget-area-3' => __('Widget Area 3', 'bootswatch'),
-                   'page-content' => __('Page Content', 'bootswatch'),
+                   'widget-area-1' => __('Widget Area 1', 'bootswatches'),
+                   'widget-area-2' => __('Widget Area 2', 'bootswatches'),
+                   'widget-area-3' => __('Widget Area 3', 'bootswatches'),
+                   'page-content' => __('Page Content', 'bootswatches'),
                )
            )
        )

@@ -23,10 +23,10 @@ class Bootswatches_Widget_Recent_Posts extends WP_Widget {
 	public function __construct() {
 		$widget_ops = array(
 			'classname' => 'widget_recent_entries',
-			'description' => __( 'Your site&#8217;s most recent Posts.', 'bootswatch' ),
+			'description' => __( 'Your site&#8217;s most recent Posts.', 'bootswatches' ),
 			'customize_selective_refresh' => true,
 		);
-		parent::__construct( 'recent-posts', __( 'Recent Posts', 'bootswatch' ), $widget_ops );
+		parent::__construct( 'recent-posts', __( 'Recent Posts', 'bootswatches' ), $widget_ops );
 		$this->alt_option_name = 'widget_recent_entries';
 	}
 
@@ -153,7 +153,7 @@ class Bootswatches_Widget_Recent_Posts extends WP_Widget {
 		}
         $style = ! empty( $instance['menu_style'] ) ? $instance['menu_style'] : 'side_nav';
 
-        $title = ( ! empty( $instance['title'] ) ) ? $instance['title'] : __( 'Recent Posts', 'bootswatch' );
+        $title = ( ! empty( $instance['title'] ) ) ? $instance['title'] : __( 'Recent Posts', 'bootswatches' );
 		/** This filter is documented in wp-includes/widgets/class-wp-widget-pages.php */
 		$title = apply_filters( 'widget_title', $title, $instance, $this->id_base );
 
@@ -235,18 +235,18 @@ class Bootswatches_Widget_Recent_Posts extends WP_Widget {
 ?>
 		<p>
             <label for="<?php echo esc_attr($this->get_field_id( 'title' )); ?>">
-                <?php echo __( 'Title:', 'bootswatch' );  // WPCS: xss ok.?>
+                <?php echo __( 'Title:', 'bootswatches' );  // WPCS: xss ok.?>
             </label>
             <input class="widefat" id="<?php echo esc_attr($this->get_field_id( 'title' )); ?>"
                 name="<?php echo esc_attr($this->get_field_name( 'title' )); ?>"
-                placeholder="<?php echo __( 'Recent Posts', 'bootswatch' ); // WPCS: xss ok. ?>" type="text"
+                placeholder="<?php echo __( 'Recent Posts', 'bootswatches' ); // WPCS: xss ok. ?>" type="text"
                 value="<?php echo esc_attr($title); ?>"
              />
          </p>
 
 		<p>
             <label for="<?php echo esc_attr($this->get_field_id( 'number' )); ?>">
-                <?php echo __( 'Number of posts to show:', 'bootswatch' );  // WPCS: xss ok.?>
+                <?php echo __( 'Number of posts to show:', 'bootswatches' );  // WPCS: xss ok.?>
             </label>
 		    <input class="tiny-text" id="<?php echo esc_attr($this->get_field_id( 'number' )); ?>"
                 name="<?php echo esc_attr($this->get_field_name( 'number' )); ?>"
@@ -260,7 +260,7 @@ class Bootswatches_Widget_Recent_Posts extends WP_Widget {
                 name="<?php echo esc_attr($this->get_field_name( 'show_date' )); ?>"
             />
             <label for="<?php echo esc_attr($this->get_field_id( 'show_date' )); ?>">
-                <?php echo __( 'Display post date?', 'bootswatch' );  // WPCS: xss ok.?>
+                <?php echo __( 'Display post date?', 'bootswatches' );  // WPCS: xss ok.?>
             </label>
         </p>
 
@@ -272,7 +272,7 @@ class Bootswatches_Widget_Recent_Posts extends WP_Widget {
         ?>
         <p>
             <label for="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>">
-                <?php echo __( 'Menu Style:', 'bootswatch' );  // WPCS: xss ok.?>
+                <?php echo __( 'Menu Style:', 'bootswatches' );  // WPCS: xss ok.?>
             </label>
             <select id="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>"
                   name="<?php echo esc_attr($this->get_field_name( 'menu_style' )); ?>">

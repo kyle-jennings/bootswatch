@@ -23,10 +23,10 @@ class Bootswatches_Widget_Recent_Comments extends WP_Widget {
 	public function __construct() {
 		$widget_ops = array(
 			'classname' => 'widget_recent_comments',
-			'description' => __( 'Your site&#8217;s most recent comments.', 'bootswatch' ),
+			'description' => __( 'Your site&#8217;s most recent comments.', 'bootswatches' ),
 			'customize_selective_refresh' => true,
 		);
-		parent::__construct( 'recent-comments', __( 'Recent Comments', 'bootswatch' ), $widget_ops );
+		parent::__construct( 'recent-comments', __( 'Recent Comments', 'bootswatches' ), $widget_ops );
 		$this->alt_option_name = 'widget_recent_comments';
 		if ( is_active_widget( false, false, $this->id_base ) || is_customize_preview() ) {
 			add_action( 'wp_head', array( $this, 'recent_comments_style' ) );
@@ -102,7 +102,7 @@ class Bootswatches_Widget_Recent_Comments extends WP_Widget {
             foreach ( (array) $comments as $comment ) {
                 $output .= '<option value="'.get_comment_link( $comment ) .'" >';
                 /* translators: comments widget: 1: comment author, 2: post link */
-                $output .= sprintf( _x( ' %1$s', 'widgets', 'bootswatch' ),
+                $output .= sprintf( _x( ' %1$s', 'widgets', 'bootswatches' ),
                     get_comment_author_link( $comment ) . ' &#45; &nbsp;'
                     . get_the_title( $comment->comment_post_ID )
                 );
@@ -153,7 +153,7 @@ class Bootswatches_Widget_Recent_Comments extends WP_Widget {
                 $output .= '<li class="'.$li_class.'">';
 
                 /* translators: comments widget: 1: comment author, 2: post link */
-                $output .= sprintf( _x( ' %1$s', 'widgets', 'bootswatch' ),
+                $output .= sprintf( _x( ' %1$s', 'widgets', 'bootswatches' ),
                     '<span class="comment-author-link">' . get_comment_author( $comment ) . ' &#45;  </span> &nbsp;'
                     . '<a href="' . esc_url( get_comment_link( $comment ) ) . '">'
                     . ( get_the_title( $comment->comment_post_ID ) ? get_the_title( $comment->comment_post_ID ) : "No Title" )
@@ -185,7 +185,7 @@ class Bootswatches_Widget_Recent_Comments extends WP_Widget {
 
 		static $first_dropdown = true;
 		$output = '';
-		$title = ( ! empty( $instance['title'] ) ) ? $instance['title'] : __( 'Recent Comments', 'bootswatch' );
+		$title = ( ! empty( $instance['title'] ) ) ? $instance['title'] : __( 'Recent Comments', 'bootswatches' );
 
         /** This filter is documented in wp-includes/widgets/class-wp-widget-pages.php */
 		$title = apply_filters( 'widget_title', $title, $instance, $this->id_base );
@@ -262,18 +262,18 @@ class Bootswatches_Widget_Recent_Comments extends WP_Widget {
 		?>
 		<p>
             <label for="<?php echo esc_attr($this->get_field_id( 'title' )); ?>">
-                <?php echo __( 'Title:', 'bootswatch' );  // WPCS: xss ok. ?>
+                <?php echo __( 'Title:', 'bootswatches' );  // WPCS: xss ok. ?>
             </label>
             <input class="widefat" id="<?php echo esc_attr($this->get_field_id( 'title' )); ?>"
                 name="<?php echo esc_attr($this->get_field_name( 'title' )); ?>"
-                placeholder="<?php echo esc_attr( 'Recent Comments', 'bootswatch' ); ?>"
+                placeholder="<?php echo esc_attr( 'Recent Comments', 'bootswatches' ); ?>"
                 type="text" value="<?php echo esc_attr( $title ); ?>"
             />
         </p>
 
 		<p>
             <label for="<?php echo esc_attr($this->get_field_id( 'number' )); ?>">
-                <?php echo __( 'Number of comments to show:', 'bootswatch' ); // WPCS: xss ok. ?>
+                <?php echo __( 'Number of comments to show:', 'bootswatches' ); // WPCS: xss ok. ?>
             </label>
 		    <input class="tiny-text" id="<?php echo esc_attr($this->get_field_id( 'number' )); ?>"
             name="<?php echo esc_attr($this->get_field_name( 'number' )); ?>"
@@ -289,7 +289,7 @@ class Bootswatches_Widget_Recent_Comments extends WP_Widget {
         ?>
         <p>
             <label for="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>">
-                    <?php echo __( 'Menu Style:', 'bootswatch' );  // WPCS: xss ok.?>
+                    <?php echo __( 'Menu Style:', 'bootswatches' );  // WPCS: xss ok.?>
             </label>
             <select id="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>"
                   name="<?php echo esc_attr($this->get_field_name( 'menu_style' )); ?>">

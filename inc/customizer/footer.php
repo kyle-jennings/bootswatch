@@ -14,14 +14,14 @@
 
 function bootswatches_footer_settings($wp_customize) {
     $choices = array(
-            'return-to-top' => __('Return to Top', 'bootswatch'),
-            'footer-menu' => __('Footer Menu', 'bootswatch'),
-            'widget-area-1' => __('Widget Area 1', 'bootswatch'),
-            'widget-area-2' => __('Widget Area 2', 'bootswatch'),
+            'return-to-top' => __('Return to Top', 'bootswatches'),
+            'footer-menu' => __('Footer Menu', 'bootswatches'),
+            'widget-area-1' => __('Widget Area 1', 'bootswatches'),
+            'widget-area-2' => __('Widget Area 2', 'bootswatches'),
     );
 
     $wp_customize->add_section( 'footer_settings_section', array(
-        'title'          => __('Footer Settings', 'bootswatch'),
+        'title'          => __('Footer Settings', 'bootswatches'),
         'priority'       => 38,
     ) );
 
@@ -33,12 +33,12 @@ function bootswatches_footer_settings($wp_customize) {
 
     $description = __('The page content is sortable, and optional.  Simply drag the
     available components from the "available" box over to active.  This setting
-    does not depend on the "Settings Active" setting above.', 'bootswatch');
+    does not depend on the "Settings Active" setting above.', 'bootswatches');
 
     $wp_customize->add_control( new Bootswatches_Sortable_Control( $wp_customize,
        'footer_sortables_control', array(
            'description' => sprintf('%s', $description),
-           'label'   => __('Sortable Footer Parts', 'bootswatch'),
+           'label'   => __('Sortable Footer Parts', 'bootswatches'),
            'section' => 'footer_settings_section',
            'settings'=> 'footer_sortables_setting',
            'priority' => 1,

@@ -135,14 +135,14 @@ function bootswatches_get_the_comment_count_link($post = null) {
     $text = '';
     switch($count):
         case 0:
-        $text = __( 'Leave a Comment', 'bootswatch' );
+        $text = __( 'Leave a Comment', 'bootswatches' );
             break;
         case 1:
-            $text = __( '1 comment', 'bootswatch' );
+            $text = __( '1 comment', 'bootswatches' );
             break;
         default:
             // translators: number of comments
-            $text = sprintf( __( '%s comments', 'bootswatch' ), $count);
+            $text = sprintf( __( '%s comments', 'bootswatches' ), $count);
             break;
     endswitch;
 
@@ -179,13 +179,13 @@ function bootswatches_get_the_comment_popup($anchor = null) {
             ob_start();
             /* translators: %s: post title */
             comments_popup_link(
-                wp_kses( __( 'Leave a Comment', 'bootswatch' ),
+                wp_kses( __( 'Leave a Comment', 'bootswatches' ),
                     array( 'span' => array( 'class' => array() ) )
                 ),
-                wp_kses( __( '1 comment', 'bootswatch' ),
+                wp_kses( __( '1 comment', 'bootswatches' ),
                     array( 'span' => array( 'class' => array() ) )
                 ),
-                wp_kses( __( '% comments', 'bootswatch' ),
+                wp_kses( __( '% comments', 'bootswatches' ),
                     array( 'span' => array( 'class' => array() ) )
                 ),
                 null,
@@ -220,7 +220,7 @@ function bootswatches_get_tags_links() {
 
     $output = '';
     // tags
-    $tags_list = get_the_tag_list( '', esc_html__( ', ', 'bootswatch' ) );
+    $tags_list = get_the_tag_list( '', esc_html__( ', ', 'bootswatches' ) );
     if ( $tags_list ) {
         $output .= sprintf( '<span class="post-meta__field"><i class="fa fa-tags"></i>' . esc_html( '%s' ) . '</span>', $tags_list);
     }
@@ -274,7 +274,7 @@ function bootswatches_get_the_edit_post_link($post_id = null){
     edit_post_link(
         sprintf(
             /* translators: %s: Name of current post */
-            esc_html__( 'Edit %s', 'bootswatch' ),
+            esc_html__( 'Edit %s', 'bootswatches' ),
             the_title( '<span class="screen-reader-text">"', '"</span>', false )
         ),
         '<div class="post-meta__field"> <i class="fa fa-pencil"></i>',

@@ -27,10 +27,10 @@ class Bootswatches_Widget_Meta extends WP_Widget {
 	public function __construct() {
 		$widget_ops = array(
 			'classname' => 'widget_meta',
-			'description' => __( 'Login, RSS, &amp; WordPress.org links.', 'bootswatch' ),
+			'description' => __( 'Login, RSS, &amp; WordPress.org links.', 'bootswatches' ),
 			'customize_selective_refresh' => true,
 		);
-		parent::__construct( 'meta', __( 'Meta','bootswatch' ), $widget_ops );
+		parent::__construct( 'meta', __( 'Meta','bootswatches' ), $widget_ops );
 	}
 
 
@@ -64,12 +64,12 @@ class Bootswatches_Widget_Meta extends WP_Widget {
         <li class="<?php echo esc_attr($li_class); ?>"><?php wp_loginout(); ?></li>
         <li class="<?php echo esc_attr($li_class); ?>">
             <a href="<?php echo esc_url( get_bloginfo( 'rss2_url' ) ); ?>">
-                <?php echo __('Entries <abbr title="Really Simple Syndication">RSS</abbr>', 'bootswatch'); // WPCS: xss ok. ?>
+                <?php echo __('Entries <abbr title="Really Simple Syndication">RSS</abbr>', 'bootswatches'); // WPCS: xss ok. ?>
             </a>
         </li>
         <li class="<?php echo esc_attr($li_class); ?>">
             <a href="<?php echo esc_url( get_bloginfo( 'comments_rss2_url' ) ); ?>">
-                <?php echo __('Comments <abbr title="Really Simple Syndication">RSS</abbr>', 'bootswatch');  // WPCS: xss ok. ?>
+                <?php echo __('Comments <abbr title="Really Simple Syndication">RSS</abbr>', 'bootswatches');  // WPCS: xss ok. ?>
             </a>
         </li>
         <?php
@@ -84,9 +84,9 @@ class Bootswatches_Widget_Meta extends WP_Widget {
             'widget_meta_poweredby',
             sprintf( '<li class="%1$s"><a href="%2$s" title="%3$s">%4$s</a></li>',
                 $li_class,
-                esc_url( __( 'https://wordpress.org/', 'bootswatch' ) ),
-                esc_attr__( 'Powered by WordPress, state-of-the-art semantic personal publishing platform.', 'bootswatch' ),
-                _x( 'WordPress.org', 'meta widget link text', 'bootswatch' )
+                esc_url( __( 'https://wordpress.org/', 'bootswatches' ) ),
+                esc_attr__( 'Powered by WordPress, state-of-the-art semantic personal publishing platform.', 'bootswatches' ),
+                _x( 'WordPress.org', 'meta widget link text', 'bootswatches' )
             )
         ); // WPCS: xss ok.
 
@@ -150,9 +150,9 @@ class Bootswatches_Widget_Meta extends WP_Widget {
         ?>
 
         <option value="<?php echo esc_url( get_bloginfo( 'rss2_url' ) ); ?>">
-        <?php echo __('Entries <abbr title="Really Simple Syndication">RSS</abbr>', 'bootswatch');  // WPCS: xss ok. ?></a></option>
+        <?php echo __('Entries <abbr title="Really Simple Syndication">RSS</abbr>', 'bootswatches');  // WPCS: xss ok. ?></a></option>
         <option value="<?php echo esc_url( get_bloginfo( 'comments_rss2_url' ) ); ?>">
-            <?php echo __('Comments <abbr title="Really Simple Syndication">RSS</abbr>', 'bootswatch'); // WPCS: xss ok. ?>
+            <?php echo __('Comments <abbr title="Really Simple Syndication">RSS</abbr>', 'bootswatches'); // WPCS: xss ok. ?>
         </option>
         <?php
         /**
@@ -165,8 +165,8 @@ class Bootswatches_Widget_Meta extends WP_Widget {
         echo apply_filters(  // WPCS: xss ok.
             'widget_meta_poweredby',
             sprintf( '<option value="%1$s">%2$s</option>',
-                esc_url( __( 'https://wordpress.org/', 'bootswatch' ) ),
-                _x( 'WordPress.org', 'meta widget link text', 'bootswatch' )
+                esc_url( __( 'https://wordpress.org/', 'bootswatches' ) ),
+                _x( 'WordPress.org', 'meta widget link text', 'bootswatches' )
             )
         ); // WPCS: xss ok.
 
@@ -188,7 +188,7 @@ class Bootswatches_Widget_Meta extends WP_Widget {
 	 */
 	public function widget( $args, $instance ) {
 		/** This filter is documented in wp-includes/widgets/class-wp-widget-pages.php */
-		$title = apply_filters( 'widget_title', empty($instance['title']) ? __( 'Meta', 'bootswatch' ) : $instance['title'], $instance, $this->id_base );
+		$title = apply_filters( 'widget_title', empty($instance['title']) ? __( 'Meta', 'bootswatches' ) : $instance['title'], $instance, $this->id_base );
         $style = ! empty( $instance['menu_style'] ) ? $instance['menu_style'] : 'side_nav';
 
 
@@ -243,11 +243,11 @@ class Bootswatches_Widget_Meta extends WP_Widget {
 ?>
 			<p>
                 <label for="<?php echo esc_attr($this->get_field_id('title')); ?>">
-                    <?php echo __('Title:', 'bootswatch');  // WPCS: xss ok.?>
+                    <?php echo __('Title:', 'bootswatches');  // WPCS: xss ok.?>
                 </label>
                 <input class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>"
                 name="<?php echo esc_attr($this->get_field_name('title')); ?>"
-                placeholder="<?php echo esc_attr( 'Meta', 'bootswatch' ); ?>"
+                placeholder="<?php echo esc_attr( 'Meta', 'bootswatches' ); ?>"
                 type="text" value="<?php echo esc_attr($title); ?>" />
             </p>
 <?php
@@ -258,7 +258,7 @@ class Bootswatches_Widget_Meta extends WP_Widget {
         ?>
         <p>
             <label for="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>">
-                    <?php echo __( 'Menu Style:', 'bootswatch' );  // WPCS: xss ok.?>
+                    <?php echo __( 'Menu Style:', 'bootswatches' );  // WPCS: xss ok.?>
             </label>
             <select id="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>"
                   name="<?php echo esc_attr($this->get_field_name( 'menu_style' )); ?>">

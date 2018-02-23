@@ -6,7 +6,7 @@
 function bootswatches_continue_reading_link() {
     global $summary_settings;
 
-    return ' <a href="'. esc_url( get_permalink() ) . '">' . __('Read More', 'bootswatch') .'</a>';
+    return ' <a href="'. esc_url( get_permalink() ) . '">' . __('Read More', 'bootswatches') .'</a>';
 }
 
 

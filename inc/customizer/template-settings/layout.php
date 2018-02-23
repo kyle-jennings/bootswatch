@@ -11,7 +11,7 @@ $wp_customize->add_setting(
     )
 );
 $args = array(
-    'label' => __('Other Settings', 'bootswatch'),
+    'label' => __('Other Settings', 'bootswatches'),
     'type' => 'label',
     'section' => $name . '_settings_section',
     'settings' => $name . '_other_settings_label',
@@ -35,15 +35,15 @@ $wp_customize->add_setting( $name.'_page_layout_setting', array(
 ) );
 
 $layout_args = array(
-    'description' => __('Hide parts of a page, great for making landing pages.' ,'bootswatch'),
-    'label'   => __('Page Layout', 'bootswatch'),
+    'description' => __('Hide parts of a page, great for making landing pages.' ,'bootswatches'),
+    'label'   => __('Page Layout', 'bootswatches'),
     'section' => $name.'_settings_section',
     'settings'=> $name.'_page_layout_setting',
     'choices' => array(
-        'banner' => __('Hide Banner', 'bootswatch'),
-        'navbar' => __('Hide Navbar', 'bootswatch'),
-        'page-content' => __('Hide Page Content and Sidebar', 'bootswatch'),
-        'footer' => __('Hide Footer', 'bootswatch'),
+        'banner' => __('Hide Banner', 'bootswatches'),
+        'navbar' => __('Hide Navbar', 'bootswatches'),
+        'page-content' => __('Hide Page Content and Sidebar', 'bootswatches'),
+        'footer' => __('Hide Footer', 'bootswatches'),
     ),
     'input_attrs' => array(
       'data-toggled-by' => $name . '_settings_active',

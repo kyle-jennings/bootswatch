@@ -35,14 +35,14 @@ class CommentsWalker extends Walker_Comment {
                     <time datetime="<?php comment_time( 'c' ); ?>">
                         <?php
                             // translators: date and time of comment
-                            printf( esc_html_x( '%1$s at %2$s', '1: date, 2: time', 'bootswatch' ), get_comment_date(), get_comment_time() );
+                            printf( esc_html_x( '%1$s at %2$s', '1: date, 2: time', 'bootswatches' ), get_comment_date(), get_comment_time() );
                         ?>
                     </time>
                 </a>
             </div><!-- .comment-metadata -->
 
             <?php if ( '0' == $comment->comment_approved ) : ?>
-                <p class="comment-awaiting-moderation label label-info"><?php _e( 'Your comment is awaiting moderation.', 'bootswatch' ); //WPCS: xss ok. ?></p>
+                <p class="comment-awaiting-moderation label label-info"><?php _e( 'Your comment is awaiting moderation.', 'bootswatches' ); //WPCS: xss ok. ?></p>
             <?php endif; ?>
 
             <div class="comment-content">
@@ -50,7 +50,7 @@ class CommentsWalker extends Walker_Comment {
             </div><!-- .comment-content -->
 
             <ul class="list-inline">
-                <?php edit_comment_link( __( 'Edit', 'bootswatch' ), '<li class="edit-link">', '</li>' ); ?>
+                <?php edit_comment_link( __( 'Edit', 'bootswatches' ), '<li class="edit-link">', '</li>' ); ?>
 
                 <?php
                 comment_reply_link( array_merge( $args, array(

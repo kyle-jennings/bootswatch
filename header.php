@@ -13,7 +13,7 @@
 
 
 <a class="skipnav" href="#primary">
-    <?php esc_html_e( 'Skip to main content', 'bootswatch' ); ?>
+    <?php esc_html_e( 'Skip to main content', 'bootswatches' ); ?>
 </a>
 
 

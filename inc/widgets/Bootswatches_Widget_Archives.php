@@ -25,10 +25,10 @@ class Bootswatches_Widget_Archives extends WP_Widget {
 	public function __construct() {
 		$widget_ops = array(
 			'classname' => 'widget_archive',
-			'description' => __( 'A monthly archive of your site&#8217;s Posts.', 'bootswatch' ),
+			'description' => __( 'A monthly archive of your site&#8217;s Posts.', 'bootswatches' ),
 			'customize_selective_refresh' => true,
 		);
-		parent::__construct('archives', __('Archives', 'bootswatch'), $widget_ops);
+		parent::__construct('archives', __('Archives', 'bootswatches'), $widget_ops);
 	}
 
 
@@ -53,19 +53,19 @@ class Bootswatches_Widget_Archives extends WP_Widget {
 
             switch ( $dropdown_args['type'] ) {
                 case 'yearly':
-                    $label = __( 'Select Year', 'bootswatch' );
+                    $label = __( 'Select Year', 'bootswatches' );
                     break;
                 case 'monthly':
-                    $label = __( 'Select Month', 'bootswatch' );
+                    $label = __( 'Select Month', 'bootswatches' );
                     break;
                 case 'daily':
-                    $label = __( 'Select Day', 'bootswatch' );
+                    $label = __( 'Select Day', 'bootswatches' );
                     break;
                 case 'weekly':
-                    $label = __( 'Select Week', 'bootswatch' );
+                    $label = __( 'Select Week', 'bootswatches' );
                     break;
                 default:
-                    $label = __( 'Select Post', 'bootswatch' );
+                    $label = __( 'Select Post', 'bootswatches' );
                     break;
             }
             ?>
@@ -155,7 +155,7 @@ class Bootswatches_Widget_Archives extends WP_Widget {
 
 
 		/** This filter is documented in wp-includes/widgets/class-wp-widget-pages.php */
-		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Archives', 'bootswatch' ) : $instance['title'], $instance, $this->id_base );
+		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Archives', 'bootswatches' ) : $instance['title'], $instance, $this->id_base );
 
 		echo $args['before_widget']; //WPCS: xss ok.
 		if ( $title ) {
@@ -212,10 +212,10 @@ class Bootswatches_Widget_Archives extends WP_Widget {
 		?>
 		<p>
             <label for="<?php echo esc_attr($this->get_field_id('title')); ?>">
-                <?php echo __('Title:', 'bootswatch');  // WPCS: xss ok.?>
+                <?php echo __('Title:', 'bootswatches');  // WPCS: xss ok.?>
             </label>
             <input class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>"
-                name="<?php echo esc_attr($this->get_field_name('title')); ?>" placeholder="<?php echo esc_attr( 'Archives', 'bootswatch' ); ?>"
+                name="<?php echo esc_attr($this->get_field_name('title')); ?>" placeholder="<?php echo esc_attr( 'Archives', 'bootswatches' ); ?>"
                 type="text" value="<?php echo esc_attr($title); ?>"
             />
         </p>
@@ -227,7 +227,7 @@ class Bootswatches_Widget_Archives extends WP_Widget {
         ?>
         <p>
             <label for="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>">
-                <?php echo __( 'Menu Style:', 'bootswatch' );  // WPCS: xss ok.?>
+                <?php echo __( 'Menu Style:', 'bootswatches' );  // WPCS: xss ok.?>
             </label>
             <select id="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>"
                   name="<?php echo esc_attr($this->get_field_name( 'menu_style' )); ?>">
@@ -248,7 +248,7 @@ class Bootswatches_Widget_Archives extends WP_Widget {
                 id="<?php echo esc_attr($this->get_field_id('count')); ?>"
                 name="<?php echo esc_attr($this->get_field_name('count')); ?>" />
             <label for="<?php echo esc_attr($this->get_field_id('count')); ?>">
-                <?php echo __('Show post counts', 'bootswatch'); // WPCS: xss ok. ?>
+                <?php echo __('Show post counts', 'bootswatches'); // WPCS: xss ok. ?>
             </label>
 		</p>
 		<?php

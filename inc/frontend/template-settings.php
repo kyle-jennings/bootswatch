@@ -7,8 +7,8 @@
 function bootswatches_template_settings($log = null) {
 
     // if the settings have already been gathered, return them
-    if( !empty($GLOBALS['bootswatch-settings']) ){
-        return $GLOBALS['bootswatch-settings'];
+    if( !empty($GLOBALS['bootswatches-settings']) ){
+        return $GLOBALS['bootswatches-settings'];
     }
     // otherwise we have to gather and set them
 
@@ -28,7 +28,7 @@ function bootswatches_template_settings($log = null) {
     $hide_content = bootswatches_hide_layout_part('page-content', $template);
 
     // set the settings to the global variable, and return them to the caller
-    return $GLOBALS['bootswatch-settings'] = array(
+    return $GLOBALS['bootswatches-settings'] = array(
         'template' => $template,
         'main_width' => $main_width,
         'hide_content' => $hide_content,

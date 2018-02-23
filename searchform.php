@@ -13,15 +13,15 @@
 
         <input class="form-control" id="search-field-small"
             name="s"
-            placeholder="<?php echo esc_attr_x( 'Search ...', 'placeholder', 'bootswatch' ); ?>"
-            title="<?php echo esc_attr_x( 'Search for:', 'title','bootswatch' ) ?>"
+            placeholder="<?php echo esc_attr_x( 'Search ...', 'placeholder', 'bootswatches' ); ?>"
+            title="<?php echo esc_attr_x( 'Search for:', 'title','bootswatches' ) ?>"
             type="search"
             value="<?php echo get_search_query() ?>"
         />
     </div>
 
     <div class="form-group">
-        <button class="btn btn-primary" type="submit" value="<?php echo esc_attr_x( 'Search', 'submit button', 'bootswatch' ); ?>">
+        <button class="btn btn-primary" type="submit" value="<?php echo esc_attr_x( 'Search', 'submit button', 'bootswatches' ); ?>">
             Search
         </button>
     </div>

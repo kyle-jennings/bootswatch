@@ -9,9 +9,9 @@
 function bootswatches_site_identity($wp_customize) {
 
 
-    $logo_desc = __('The logo appears in the navbar and must be toggled in the ', 'bootswatch');
+    $logo_desc = __('The logo appears in the navbar and must be toggled in the ', 'bootswatches');
     $logo_desc .= '<a href="' . esc_attr("javascript:wp.customize.control( 'navbar_brand_control' ).focus();") . '">';
-    $logo_desc .= __('header settings section</a>.', 'bootswatch');
+    $logo_desc .= __('header settings section</a>.', 'bootswatches');
 
     $wp_customize->get_control( 'custom_logo' )->description = sprintf('%s',$logo_desc);
 
@@ -35,7 +35,7 @@ function bootswatches_site_identity($wp_customize) {
     $wp_customize->add_control( new Bootswatches_Color_Scheme_Custom_Control(
         $wp_customize, 'color_scheme_control', array(
             'description' => $description,
-            'label'   => __('Color Scheme', 'bootswatch'),
+            'label'   => __('Color Scheme', 'bootswatches'),
             'section' => 'title_tagline',
             'settings' => 'color_scheme_setting',
             'choices' => array(
@@ -58,8 +58,8 @@ function bootswatches_site_identity($wp_customize) {
             'settings' => 'sidebar_size_setting',
             'type' => 'select',
             'choices' => array(
-                        'BOOTSWATCHES_ONE_THIRD' => __('Wide', 'bootswatch'),
-                        'BOOTSWATCHES_ONE_FOURTH' => __('Narrow', 'bootswatch'),
+                        'BOOTSWATCHES_ONE_THIRD' => __('Wide', 'bootswatches'),
+                        'BOOTSWATCHES_ONE_FOURTH' => __('Narrow', 'bootswatches'),
                     ),
         )
     );

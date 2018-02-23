@@ -11,7 +11,7 @@ function bootswatches_404_settings($wp_customize) {
     // set up the section
     $section_args = array(
         'section' => $section,
-        'title' => __('404 Page', 'bootswatch'),
+        'title' => __('404 Page', 'bootswatches'),
         'description' => $template['description'],
     );
     bootswatches_customize_section( $wp_customize, $section_args );
@@ -27,15 +27,15 @@ function bootswatches_404_settings($wp_customize) {
     ) );
 
     $wp_customize->add_control( '_404_hero_content_control', array(
-            'description' => __('Select what to display in the header.','bootswatch'),
-            'label'   => __('Header Content', 'bootswatch'),
+            'description' => __('Select what to display in the header.','bootswatches'),
+            'label'   => __('Header Content', 'bootswatches'),
             'section' => $section,
             'settings'=> '_404_hero_content_setting',
             'priority' => 1,
             'type' => 'select',
             'choices' => array(
-                'page' => __('Select a Page', 'bootswatch'),
-                'title' => __('Default title', 'bootswatch'),
+                'page' => __('Select a Page', 'bootswatches'),
+                'title' => __('Default title', 'bootswatches'),
             )
         )
     );
@@ -47,8 +47,8 @@ function bootswatches_404_settings($wp_customize) {
     ) );
 
     $wp_customize->add_control( '_404_header_page_content_control', array(
-            'description' => __('Select page content to the header, this is great when the header size is set to full and the other page parts are hidden.','bootswatch'),
-            'label'   => __('Select header content from page', 'bootswatch'),
+            'description' => __('Select page content to the header, this is great when the header size is set to full and the other page parts are hidden.','bootswatches'),
+            'label'   => __('Select header content from page', 'bootswatches'),
             'section' => $section,
             'settings'=> '_404_header_page_content_setting',
             'type' => 'select',
@@ -67,15 +67,15 @@ function bootswatches_404_settings($wp_customize) {
     ) );
 
     $wp_customize->add_control( '_404_page_content_control', array(
-            'description' => __('Display some default content provided by the theme or select a page to display.','bootswatch'),
-            'label'   => __('Page Content', 'bootswatch'),
+            'description' => __('Display some default content provided by the theme or select a page to display.','bootswatches'),
+            'label'   => __('Page Content', 'bootswatches'),
             'section' => $section,
             'settings'=> '_404_page_content_setting',
             'priority' => 1,
             'type' => 'select',
             'choices' => array(
-                'default' => __('Default', 'bootswatch'),
-                'page' => __('Select a Page', 'bootswatch'),
+                'default' => __('Default', 'bootswatches'),
+                'page' => __('Select a Page', 'bootswatches'),
             )
         )
     );
@@ -87,7 +87,7 @@ function bootswatches_404_settings($wp_customize) {
     ) );
 
     $wp_customize->add_control( '_404_page_select_control', array(
-            'label'   => __('Select a Page', 'bootswatch'),
+            'label'   => __('Select a Page', 'bootswatches'),
             'section' => $section,
             'settings'=> '_404_page_select_setting',
             'type'    => 'dropdown-pages',

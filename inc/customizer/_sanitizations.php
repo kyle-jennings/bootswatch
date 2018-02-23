@@ -376,7 +376,7 @@ function bootswatches_validate_external_header_video( $validity, $value ) {
     $video = esc_url_raw( $value );
     if ( $video ) {
         if ( ! preg_match( '#^https?://(?:www\.)?(?:youtube\.com/watch|youtu\.be/)#', $video ) ) {
-            $validity->add( 'invalid_url', __( 'Please enter a valid YouTube URL.', 'bootswatch' ) );
+            $validity->add( 'invalid_url', __( 'Please enter a valid YouTube URL.', 'bootswatches' ) );
         }
     }
     return $validity;
@@ -389,13 +389,13 @@ function bootswatches_validate_header_video( $validity, $value ) {
         $size = filesize( $video );
         if ( 8 < $size / pow( 1024, 2 ) ) { // Check whether the size is larger than 8MB.
             $validity->add( 'size_too_large',
-                __( 'This video file is too large to use as a header video. Try a shorter video or optimize the compression settings and re-upload a file that is less than 8MB. Or, upload your video to YouTube and link it with the option below.', 'bootswatch' )
+                __( 'This video file is too large to use as a header video. Try a shorter video or optimize the compression settings and re-upload a file that is less than 8MB. Or, upload your video to YouTube and link it with the option below.', 'bootswatches' )
             );
         }
         if ( '.mp4' !== substr( $video, -4 ) && '.mov' !== substr( $video, -4 ) ) { // Check for .mp4 or .mov format, which (assuming h.264 encoding) are the only cross-browser-supported formats.
             $validity->add( 'invalid_file_type', sprintf(
                 /* translators: 1: .mp4, 2: .mov */
-                __( 'Only %1$s or %2$s files may be used for header video. Please convert your video file and try again, or, upload your video to YouTube and link it with the option below.', 'bootswatch' ),
+                __( 'Only %1$s or %2$s files may be used for header video. Please convert your video file and try again, or, upload your video to YouTube and link it with the option below.', 'bootswatches' ),
                 '<code>.mp4</code>',
                 '<code>.mov</code>'
             ) );
@@ -461,7 +461,7 @@ function bootswatches_color_scheme_validate($valitity, $val) {
     $valids = array_map( 'bootswatches_color_scheme_validate_map', $themes );
     
     if( !in_array($val, $valids) )
-        return $validity->add( 'required', __( 'CSS not found', 'bootswatch' ) );
+        return $validity->add( 'required', __( 'CSS not found', 'bootswatches' ) );
 
     return $val;
 }

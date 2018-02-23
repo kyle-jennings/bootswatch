@@ -35,10 +35,10 @@ class Bootswatches_Widget_Calendar extends WP_Widget {
 	public function __construct() {
 		$widget_ops = array(
 			'classname' => 'widget_calendar',
-			'description' => __( 'A calendar of your site&#8217;s Posts.', 'bootswatch' ),
+			'description' => __( 'A calendar of your site&#8217;s Posts.', 'bootswatches' ),
 			'customize_selective_refresh' => true,
 		);
-		parent::__construct( 'calendar', __( 'Calendar', 'bootswatch' ), $widget_ops );
+		parent::__construct( 'calendar', __( 'Calendar', 'bootswatches' ), $widget_ops );
 	}
 
 	/**
@@ -108,7 +108,7 @@ class Bootswatches_Widget_Calendar extends WP_Widget {
 		?>
 		<p>
             <label for="<?php echo esc_attr($this->get_field_id('title')); ?>">
-                <?php echo __('Title:', 'bootswatch');  // WPCS: xss ok. ?>
+                <?php echo __('Title:', 'bootswatches');  // WPCS: xss ok. ?>
             </label>
 	          <input class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>"
               name="<?php echo esc_attr($this->get_field_name('title')); ?>" type="text"

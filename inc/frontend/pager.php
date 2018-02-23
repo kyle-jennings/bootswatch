@@ -20,9 +20,9 @@ function bootswatches_get_the_posts_navigation( $args = array() ) {
      // Don't print empty markup if there's only one page.
     if ( $GLOBALS['wp_query']->max_num_pages > 1 ) {
         $args = wp_parse_args( $args, array(
-            'prev_text'          => __( 'Older posts', 'bootswatch' ),
-            'next_text'          => __( 'Newer posts', 'bootswatch' ),
-            'screen_reader_text' => __( 'Posts navigation', 'bootswatch' ),
+            'prev_text'          => __( 'Older posts', 'bootswatches' ),
+            'next_text'          => __( 'Newer posts', 'bootswatches' ),
+            'screen_reader_text' => __( 'Posts navigation', 'bootswatches' ),
         ) );
 
         $next_link = get_previous_posts_link( $args['next_text'] . ' <span aria-hidden="true">&raquo;</span>' );
@@ -62,7 +62,7 @@ function bootswatches_get_the_post_navigation( $args = array() ) {
         'in_same_term'       => false,
         'excluded_terms'     => '',
         'taxonomy'           => 'category',
-        'screen_reader_text' => __( 'Post navigation', 'bootswatch' ),
+        'screen_reader_text' => __( 'Post navigation', 'bootswatches' ),
     ) );
 
 

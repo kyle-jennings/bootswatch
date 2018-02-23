@@ -127,12 +127,12 @@ class Bootswatches_Sortable_Control extends WP_Customize_Control
         </p>
         <div class="sortables">
 
-            <?php echo $this->sortable_list_markup( __('active', 'bootswatch'), $target); //WPCS: xss ok. ?>
+            <?php echo $this->sortable_list_markup( __('active', 'bootswatches'), $target); //WPCS: xss ok. ?>
 
 
             <?php
             if($this->optional):
-                echo $this->sortable_list_markup( __('available', 'bootswatch'), $target); //WPCS: xss ok.
+                echo $this->sortable_list_markup( __('available', 'bootswatches'), $target); //WPCS: xss ok.
             endif;
             ?>
 

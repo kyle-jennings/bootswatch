@@ -23,10 +23,10 @@ class Bootswatches_Widget_Categories extends WP_Widget {
 	public function __construct() {
 		$widget_ops = array(
 			'classname' => 'widget_categories',
-			'description' => __( 'A list or dropdown of categories.', 'bootswatch' ),
+			'description' => __( 'A list or dropdown of categories.', 'bootswatches' ),
 			'customize_selective_refresh' => true,
 		);
-		parent::__construct( 'categories', __( 'Categories','bootswatch' ), $widget_ops );
+		parent::__construct( 'categories', __( 'Categories','bootswatches' ), $widget_ops );
 	}
 
 
@@ -36,7 +36,7 @@ class Bootswatches_Widget_Categories extends WP_Widget {
         $dropdown_id = "{$this->id_base}-dropdown-{$this->number}";
         $first_dropdown = false;
 
-        $args['show_option_none'] = __( 'Select Category', 'bootswatch' );
+        $args['show_option_none'] = __( 'Select Category', 'bootswatches' );
         $args['id'] = $dropdown_id;
         $args['class'] = 'form-control';
         /**
@@ -131,7 +131,7 @@ class Bootswatches_Widget_Categories extends WP_Widget {
 	public function widget( $args, $instance ) {
 		static $first_dropdown = true;
 		/** This filter is documented in wp-includes/widgets/class-wp-widget-pages.php */
-		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Categories', 'bootswatch' ) : $instance['title'], $instance, $this->id_base );
+		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Categories', 'bootswatches' ) : $instance['title'], $instance, $this->id_base );
 		$c = ! empty( $instance['count'] ) ? '1' : '0';
 		$h = ! empty( $instance['hierarchical'] ) ? '1' : '0';
 		$d = ! empty( $instance['dropdown'] ) ? '1' : '0';
@@ -200,18 +200,18 @@ class Bootswatches_Widget_Categories extends WP_Widget {
 		?>
 		<p>
             <label for="<?php echo esc_attr($this->get_field_id('title')); ?>">
-                <?php echo __( 'Title:', 'bootswatch' );  // WPCS: xss ok.?>
+                <?php echo __( 'Title:', 'bootswatches' );  // WPCS: xss ok.?>
             </label>
 		    <input class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>"
                 name="<?php echo esc_attr($this->get_field_name('title')); ?>"
-                placeholder="<?php echo esc_attr( 'Categories', 'bootswatch' ); ?>"
+                placeholder="<?php echo esc_attr( 'Categories', 'bootswatches' ); ?>"
                 type="text" value="<?php echo esc_attr( $title ); ?>" />
         </p>
 
 		<input type="checkbox" class="checkbox" id="<?php echo esc_attr($this->get_field_id('count')); ?>"
             name="<?php echo esc_attr($this->get_field_name('count')); ?>"<?php checked( $count ); ?> />
 		<label for="<?php echo esc_attr($this->get_field_id('count')); ?>">
-            <?php echo __( 'Show post counts', 'bootswatch' );  // WPCS: xss ok. ?>
+            <?php echo __( 'Show post counts', 'bootswatches' );  // WPCS: xss ok. ?>
         </label><br />
 
         <?php
@@ -222,7 +222,7 @@ class Bootswatches_Widget_Categories extends WP_Widget {
         ?>
         <p>
             <label for="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>">
-                <?php echo __( 'Menu Style:', 'bootswatch' );  // WPCS: xss ok.?>
+                <?php echo __( 'Menu Style:', 'bootswatches' );  // WPCS: xss ok.?>
             </label>
             <select id="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>"
                   name="<?php echo esc_attr($this->get_field_name( 'menu_style' )); ?>">

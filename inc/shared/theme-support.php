@@ -12,9 +12,9 @@ function bootswatches_setup() {
 	 * Make theme available for translation.
 	 * Translations can be filed in the /languages/ directory.
 	 * If you're building a theme based on The Amendment, use a find and replace
-	 * to change 'bootswatch' to the name of your theme in all the template files.
+	 * to change 'bootswatches' to the name of your theme in all the template files.
 	 */
-	load_theme_textdomain( 'bootswatch', get_template_directory() . '/languages' );
+	load_theme_textdomain( 'bootswatches', get_template_directory() . '/languages' );
 
 	// Add default posts and comments RSS feed links to head.
 	add_theme_support( 'automatic-feed-links' );
@@ -36,8 +36,8 @@ function bootswatches_setup() {
 
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
-		'primary' => esc_html__( 'Primary', 'bootswatch' ),
-        'footer' => esc_html__('Footer', 'bootswatch')
+		'primary' => esc_html__( 'Primary', 'bootswatches' ),
+        'footer' => esc_html__('Footer', 'bootswatches')
 	) );
 
 	/*

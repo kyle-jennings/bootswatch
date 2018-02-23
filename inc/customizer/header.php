@@ -14,7 +14,7 @@ function bootswatches_header_settings($wp_customize){
 
     // the section
     $wp_customize->add_section( 'header_settings_section', array(
-        'title'          => __('Header Settings', 'bootswatch'),
+        'title'          => __('Header Settings', 'bootswatches'),
         'priority'       => 30,
     ) );
 
@@ -26,19 +26,19 @@ function bootswatches_header_settings($wp_customize){
 
     // header size
     $header_components = array(
-        'navbar' => __('Navbar', 'bootswatch'),
-        'hero' => __('Hero', 'bootswatch'),
+        'navbar' => __('Navbar', 'bootswatches'),
+        'hero' => __('Hero', 'bootswatches'),
     );
 
     $header_components['banner'] = 'Banner';
     $description = __('The header area is made of sortable parts.  Simply drag these
-        parts around to change the order they are displayed.', 'bootswatch');
+        parts around to change the order they are displayed.', 'bootswatches');
 
     $wp_customize->add_control(
         new Bootswatches_Sortable_Control( $wp_customize,
             'header_sortables_control', array(
                 'description' => sprintf('%s', $description),
-                'label' => __('Header Order', 'bootswatch'),
+                'label' => __('Header Order', 'bootswatches'),
                 'section' => 'header_settings_section',
                 'settings' => 'header_sortables_setting',
                 'choices' => $header_components
@@ -63,7 +63,7 @@ function bootswatches_header_settings($wp_customize){
             $wp_customize,
             'navbar_label_control',
             array(
-                'label' => __('Navbar Settings', 'bootswatch'),
+                'label' => __('Navbar Settings', 'bootswatches'),
                 'type' => 'label',
                 'section' => 'header_settings_section',
                 'settings' => 'navbar_label',
@@ -78,7 +78,7 @@ function bootswatches_header_settings($wp_customize){
     ) );
 
     $wp_customize->add_control('navbar_search_control', array(
-            'label' => __('Display Search in Navbar', 'bootswatch'),
+            'label' => __('Display Search in Navbar', 'bootswatches'),
             'section' => 'header_settings_section',
             'settings' => 'navbar_search_setting',
             'type' => 'select',
@@ -98,7 +98,7 @@ function bootswatches_header_settings($wp_customize){
     ) );
 
     $wp_customize->add_control('navbar_color_control', array(
-            'label' => __('Navbar Color Scheme', 'bootswatch'),
+            'label' => __('Navbar Color Scheme', 'bootswatches'),
             'section' => 'header_settings_section',
             'settings' => 'navbar_color_setting',
             'type' => 'select',
@@ -116,8 +116,8 @@ function bootswatches_header_settings($wp_customize){
     ) );
 
     $wp_customize->add_control('navbar_sticky_control', array(
-            'description' => __('Stick the navbar to the top of the screen when you scroll down the page', 'bootswatch'),
-            'label' => __('Navbar sticky on scroll', 'bootswatch'),
+            'description' => __('Stick the navbar to the top of the screen when you scroll down the page', 'bootswatches'),
+            'label' => __('Navbar sticky on scroll', 'bootswatches'),
             'section' => 'header_settings_section',
             'settings' => 'navbar_sticky_setting',
             'type' => 'select',
@@ -135,7 +135,7 @@ function bootswatches_header_settings($wp_customize){
 
     $wp_customize->add_control('navbar_brand_control', array(
             'description' => 'Display your site logo, or site name in the navbar',
-            'label' => __('Navbar Brand Type', 'bootswatch'),
+            'label' => __('Navbar Brand Type', 'bootswatches'),
             'section' => 'header_settings_section',
             'settings' => 'navbar_brand_setting',
             'type' => 'select',
@@ -164,7 +164,7 @@ function bootswatches_header_settings($wp_customize){
             $wp_customize,
             'banner_label_control',
             array(
-                'label' => __('Banner Settings', 'bootswatch'),
+                'label' => __('Banner Settings', 'bootswatches'),
                 'type' => 'label',
                 'section' => 'header_settings_section',
                 'settings' => 'banner_label',
@@ -180,7 +180,7 @@ function bootswatches_header_settings($wp_customize){
 
     $wp_customize->add_control('banner_visibility_control', array(
             'description' => 'Display your site banner',
-            'label' => __('Banner Visibility', 'bootswatch'),
+            'label' => __('Banner Visibility', 'bootswatches'),
             'section' => 'header_settings_section',
             'settings' => 'banner_visibility_setting',
             'type' => 'select',
@@ -198,7 +198,7 @@ function bootswatches_header_settings($wp_customize){
     ) );
 
     $wp_customize->add_control('banner_text_control', array(
-            'label' => __('Banner Text', 'bootswatch'),
+            'label' => __('Banner Text', 'bootswatches'),
             'section' => 'header_settings_section',
             'settings' => 'banner_text_setting',
             'type' => 'text',
@@ -212,7 +212,7 @@ function bootswatches_header_settings($wp_customize){
     ) );
 
     $wp_customize->add_control('banner_read_more_control', array(
-            'label' => __('Banner Read More', 'bootswatch'),
+            'label' => __('Banner Read More', 'bootswatches'),
             'section' => 'header_settings_section',
             'settings' => 'banner_read_more_setting',
             'type' => 'text',
