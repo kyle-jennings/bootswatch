@@ -2,7 +2,7 @@
 
 
 // The main content visibility
-function bootswatch_get_main_visibility($template, $sidebar_pos = 'none') {
+function bootswatches_get_main_visibility($template, $sidebar_pos = 'none') {
     $sidebar_vis = get_theme_mod($template . '_sidebar_visibility_setting', 'always-visible');
 
     $visibility = null;
@@ -19,11 +19,11 @@ function bootswatch_get_main_visibility($template, $sidebar_pos = 'none') {
 
 
 // the main content width
-function bootswatch_get_main_width($sidebar_position) {
-    $sidebar_width = get_theme_mod('sidebar_size_setting', 'BOOTSWATCH_ONE_FOURTH');
+function bootswatches_get_main_width($sidebar_position) {
+    $sidebar_width = get_theme_mod('sidebar_size_setting', 'BOOTSWATCHES_ONE_FOURTH');
 
-    $sidebar_width = $sidebar_width ? constant($sidebar_width) : BOOTSWATCH_ONE_THIRD;
-    $width = ($sidebar_width == BOOTSWATCH_ONE_THIRD) ? BOOTSWATCH_TWO_THIRDS : BOOTSWATCH_THREE_FOURTHS;
+    $sidebar_width = $sidebar_width ? constant($sidebar_width) : BOOTSWATCHES_ONE_THIRD;
+    $width = ($sidebar_width == BOOTSWATCHES_ONE_THIRD) ? BOOTSWATCHES_TWO_THIRDS : BOOTSWATCHES_THREE_FOURTHS;
 
     return $width;
 }

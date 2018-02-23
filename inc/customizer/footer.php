@@ -12,7 +12,7 @@
  * @param  object $wp_customize
  */
 
-function bootswatch_footer_settings($wp_customize) {
+function bootswatches_footer_settings($wp_customize) {
     $choices = array(
             'return-to-top' => __('Return to Top', 'bootswatch'),
             'footer-menu' => __('Footer Menu', 'bootswatch'),
@@ -27,7 +27,7 @@ function bootswatch_footer_settings($wp_customize) {
 
     $wp_customize->add_setting( 'footer_sortables_setting', array(
         'default'        => '',
-        'sanitize_callback' => 'bootswatch_footer_sortable_sanitize',
+        'sanitize_callback' => 'bootswatches_footer_sortable_sanitize',
     ) );
 
 
@@ -35,7 +35,7 @@ function bootswatch_footer_settings($wp_customize) {
     available components from the "available" box over to active.  This setting
     does not depend on the "Settings Active" setting above.', 'bootswatch');
 
-    $wp_customize->add_control( new Bootswatch_Sortable_Control( $wp_customize,
+    $wp_customize->add_control( new Bootswatches_Sortable_Control( $wp_customize,
        'footer_sortables_control', array(
            'description' => sprintf('%s', $description),
            'label'   => __('Sortable Footer Parts', 'bootswatch'),
@@ -50,4 +50,4 @@ function bootswatch_footer_settings($wp_customize) {
 
 
 }
-add_action('customize_register', 'bootswatch_footer_settings');
+add_action('customize_register', 'bootswatches_footer_settings');

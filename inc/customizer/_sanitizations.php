@@ -10,7 +10,7 @@
 /**
  * 404 page
  */
-function bootswatch_404_page_select_sanitize($val) {
+function bootswatches_404_page_select_sanitize($val) {
     $pages = get_posts(array('post_type' => 'page', 'posts_per_page' => -1, 'fields' => 'ids'));
 
     if( !in_array($val, $pages) && 'publish' == get_post_status( $val ) )
@@ -21,7 +21,7 @@ function bootswatch_404_page_select_sanitize($val) {
 
 
 
-function bootswatch_404_hero_content_sanitize($val) {
+function bootswatches_404_hero_content_sanitize($val) {
     $valids = array(
         'title',
         'page'
@@ -35,7 +35,7 @@ function bootswatch_404_hero_content_sanitize($val) {
 
 
 
-function bootswatch_404_content_sanitize($val) {
+function bootswatches_404_content_sanitize($val) {
     $valids = array(
         'default',
         'page'
@@ -51,7 +51,7 @@ function bootswatch_404_content_sanitize($val) {
 /**
  * Footer
  */
-function bootswatch_footer_sortable_sanitize($val) {
+function bootswatches_footer_sortable_sanitize($val) {
 
     $valids = array(
         'return-to-top',
@@ -80,7 +80,7 @@ function bootswatch_footer_sortable_sanitize($val) {
 /**
 * frontpage
 */
-function bootswatch_frontpage_hero_callout_sanitize($val) {
+function bootswatches_frontpage_hero_callout_sanitize($val) {
     $pages = get_posts(array('post_type' => 'page', 'posts_per_page' => -1, 'fields' => 'ids'));
 
     if( !in_array($val, $pages) && 'publish' == get_post_status( $val ) )
@@ -90,7 +90,7 @@ function bootswatch_frontpage_hero_callout_sanitize($val) {
 }
 
 
-function bootswatch_frontpage_sortable_sanitize($val) {
+function bootswatches_frontpage_sortable_sanitize($val) {
     $valids = array(
         'widget-area-1',
         'widget-area-2',
@@ -115,7 +115,7 @@ function bootswatch_frontpage_sortable_sanitize($val) {
 /**
  * global header settings
  */
-function bootswatch_header_sortable_sanitize($val) {
+function bootswatches_header_sortable_sanitize($val) {
     $valids = array(
         'navbar',
         'hero',
@@ -139,7 +139,7 @@ function bootswatch_header_sortable_sanitize($val) {
 /**
  * navbar
  */
-function bootswatch_navbar_brand_sanitize($val) {
+function bootswatches_navbar_brand_sanitize($val) {
     $valids = array(
         'text',
         'logo'
@@ -153,7 +153,7 @@ function bootswatch_navbar_brand_sanitize($val) {
 
 
 
-function bootswatch_navbar_sticky_sanitize($val) {
+function bootswatches_navbar_sticky_sanitize($val) {
     $valids = array(
         'no',
         'yes'
@@ -166,7 +166,7 @@ function bootswatch_navbar_sticky_sanitize($val) {
 }
 
 
-function bootswatch_navbar_color_setting_sanitize($val) {
+function bootswatches_navbar_color_setting_sanitize($val) {
     $valids = array(
         'light',
         'dark'
@@ -179,7 +179,7 @@ function bootswatch_navbar_color_setting_sanitize($val) {
 }
 
 
-function bootswatch_navbar_search_setting_sanitize($val) {
+function bootswatches_navbar_search_setting_sanitize($val) {
     $valids = array(
         'none',
         'navbar'
@@ -192,7 +192,7 @@ function bootswatch_navbar_search_setting_sanitize($val) {
 }
 
 
-function bootswatch_banner_visibility_sanitize($val) {
+function bootswatches_banner_visibility_sanitize($val) {
     $valids = array(
         'hide',
         'display'
@@ -208,7 +208,7 @@ function bootswatch_banner_visibility_sanitize($val) {
 /**
  * frontpage hero
  */
-function bootswatch_frontpage_hero_content_sanitize($val) {
+function bootswatches_frontpage_hero_content_sanitize($val) {
 
     $valids = array(
         'callout',
@@ -227,14 +227,14 @@ function bootswatch_frontpage_hero_content_sanitize($val) {
 /**
  * identity
  */
-function bootswatch_sidebar_width_sanitize($val) {
+function bootswatches_sidebar_width_sanitize($val) {
     $valids = array(
-        'BOOTSWATCH_ONE_THIRD',
-        'BOOTSWATCH_ONE_FOURTH',
+        'BOOTSWATCHES_ONE_THIRD',
+        'BOOTSWATCHES_ONE_FOURTH',
     );
 
     if( !in_array($val, $valids) )
-        $val = 'BOOTSWATCH_ONE_THIRD';
+        $val = 'BOOTSWATCHES_ONE_THIRD';
 
     return $val;
 }
@@ -243,7 +243,7 @@ function bootswatch_sidebar_width_sanitize($val) {
 /**
  * hero
  */
-function bootswatch_hero_image_sanitization( $val ) {
+function bootswatches_hero_image_sanitization( $val ) {
 	/*
 	 * Array of valid image file types.
 	 *
@@ -267,7 +267,7 @@ function bootswatch_hero_image_sanitization( $val ) {
 /**
  * template settings
  */
-function bootswatch_template_settings_active_sanitize($val) {
+function bootswatches_template_settings_active_sanitize($val) {
     $valids = array(
         'no',
         'yes'
@@ -282,7 +282,7 @@ function bootswatch_template_settings_active_sanitize($val) {
 /**
  * hero size
  */
-function bootswatch_hero_size_sanitize($val) {
+function bootswatches_hero_size_sanitize($val) {
     $valids = array(
         'slim',
         'medium',
@@ -298,7 +298,7 @@ function bootswatch_hero_size_sanitize($val) {
 }
 
 
-function bootswatch_hero_position_sanitize($val) {
+function bootswatches_hero_position_sanitize($val) {
     $valids = array(
         'top',
         'center',
@@ -315,7 +315,7 @@ function bootswatch_hero_position_sanitize($val) {
 /**
  * sidebar
  */
-function bootswatch_sidebar_position_sanitize($val) {
+function bootswatches_sidebar_position_sanitize($val) {
     $valids = array(
         'none',
         'left',
@@ -328,7 +328,7 @@ function bootswatch_sidebar_position_sanitize($val) {
     return $val;
 }
 
-function bootswatch_sidebar_visibility_sanitize($val) {
+function bootswatches_sidebar_visibility_sanitize($val) {
     $valids = array(
         'always-visible',
         'hidden-medium-up',
@@ -344,7 +344,7 @@ function bootswatch_sidebar_visibility_sanitize($val) {
 }
 
 
-function bootswatch_hide_layout_sanitize($val) {
+function bootswatches_hide_layout_sanitize($val) {
     $valids = array(
         'banner',
         'navbar',
@@ -368,11 +368,11 @@ function bootswatch_hide_layout_sanitize($val) {
 
 
 
-function bootswatch_sanitize_external_header_video( $value ) {
+function bootswatches_sanitize_external_header_video( $value ) {
     return esc_url_raw( trim( $value ) );
 }
 
-function bootswatch_validate_external_header_video( $validity, $value ) {
+function bootswatches_validate_external_header_video( $validity, $value ) {
     $video = esc_url_raw( $value );
     if ( $video ) {
         if ( ! preg_match( '#^https?://(?:www\.)?(?:youtube\.com/watch|youtu\.be/)#', $video ) ) {
@@ -383,7 +383,7 @@ function bootswatch_validate_external_header_video( $validity, $value ) {
 }
 
 
-function bootswatch_validate_header_video( $validity, $value ) {
+function bootswatches_validate_header_video( $validity, $value ) {
     $video = get_attached_file( absint( $value ) );
     if ( $video ) {
         $size = filesize( $video );
@@ -406,7 +406,7 @@ function bootswatch_validate_header_video( $validity, $value ) {
 
 
 
-function bootswatch_sanitize_color( $color ) {
+function bootswatches_sanitize_color( $color ) {
     if ( 'blank' === $color )
         return 'blank';
 
@@ -419,7 +419,7 @@ function bootswatch_sanitize_color( $color ) {
 
 
 
-function bootswatch_widgetized_sortable_sanitize($val) {
+function bootswatches_widgetized_sortable_sanitize($val) {
     $valids = array(
         'widget-area-1',
         'widget-area-2',
@@ -442,7 +442,7 @@ function bootswatch_widgetized_sortable_sanitize($val) {
 
 
 // maps the themes array and returns the css uri
-function bootswatch_color_scheme_validate_map($theme){
+function bootswatches_color_scheme_validate_map($theme){
 
     return $theme->css_uri;
 }
@@ -453,12 +453,12 @@ function bootswatch_color_scheme_validate_map($theme){
  * @param  string $val      the pre-saved value from the control
  * @return string           the value (or the error object)
  */
-function bootswatch_color_scheme_validate($valitity, $val) {
+function bootswatches_color_scheme_validate($valitity, $val) {
     
-    $themes = bootswatch_get_scheme_css();
-    $themes = apply_filters('bootswatch_filter_themes', $themes);
+    $themes = bootswatches_get_scheme_css();
+    $themes = apply_filters('bootswatches_filter_themes', $themes);
     
-    $valids = array_map( 'bootswatch_color_scheme_validate_map', $themes );
+    $valids = array_map( 'bootswatches_color_scheme_validate_map', $themes );
     
     if( !in_array($val, $valids) )
         return $validity->add( 'required', __( 'CSS not found', 'bootswatch' ) );
@@ -467,7 +467,7 @@ function bootswatch_color_scheme_validate($valitity, $val) {
 }
 
 
-function bootswatch_color_scheme_sanitize($val) {
+function bootswatches_color_scheme_sanitize($val) {
 
     if( !esc_url_raw($val) )
         return null;

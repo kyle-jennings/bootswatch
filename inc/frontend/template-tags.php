@@ -13,7 +13,7 @@
  * this is used outside the loop, hence being a different function
  * @return string html
  */
- function bootswatch_get_hero_meta($post_id = null){
+ function bootswatches_get_hero_meta($post_id = null){
 
      if(!$post_id)
         $post = get_queried_object();
@@ -21,16 +21,16 @@
         $post = get_post($post_id);
 
      $output = '';
-     $output .= bootswatch_get_the_date($post);
-     $output .= bootswatch_get_the_author($post);
-     $output .= bootswatch_get_the_comment_count_link($post);
+     $output .= bootswatches_get_the_date($post);
+     $output .= bootswatches_get_the_author($post);
+     $output .= bootswatches_get_the_comment_count_link($post);
 
      return $output;
  }
 
 
-function bootswatch_posted_on() {
-    echo bootswatch_get_posted_on(); //WPCS: xss ok.
+function bootswatches_posted_on() {
+    echo bootswatches_get_posted_on(); //WPCS: xss ok.
 }
 
 
@@ -40,25 +40,25 @@ function bootswatch_posted_on() {
  * this is used inside the loop, hence being a different function than the previous one
  * @return string html
  */
-function bootswatch_get_posted_on(){
+function bootswatches_get_posted_on(){
 
     $output = '';
-    $output .= bootswatch_get_the_date();
-    $output .= bootswatch_get_the_author();
+    $output .= bootswatches_get_the_date();
+    $output .= bootswatches_get_the_author();
 
     // Hide category and tag text for pages.
     if ( 'page' !== get_post_type() ) {
 
-        $output .= bootswatch_get_the_comment_popup();
-        $output .= bootswatch_get_categories_links();
-        $output .= bootswatch_get_tags_links();
+        $output .= bootswatches_get_the_comment_popup();
+        $output .= bootswatches_get_categories_links();
+        $output .= bootswatches_get_tags_links();
     }
 
     return $output;
 }
 
 
-function bootswatch_get_the_author($post = null) {
+function bootswatches_get_the_author($post = null) {
     if(!$post)
         global $post;
 
@@ -92,7 +92,7 @@ function bootswatch_get_the_author($post = null) {
  * Used in the loop
  * @return string markup with links to date archives
  */
-function bootswatch_get_the_date($post = null) {
+function bootswatches_get_the_date($post = null) {
     if(!$post)
         global $post;
 
@@ -118,7 +118,7 @@ function bootswatch_get_the_date($post = null) {
 }
 
 
-function bootswatch_get_the_comment_count_link($post = null) {
+function bootswatches_get_the_comment_count_link($post = null) {
     if(!$post)
         global $post;
 
@@ -157,7 +157,7 @@ function bootswatch_get_the_comment_count_link($post = null) {
     return $output;
 }
 
-function bootswatch_get_the_comment_popup($anchor = null) {
+function bootswatches_get_the_comment_popup($anchor = null) {
 
     global $post;
 
@@ -203,12 +203,12 @@ function bootswatch_get_the_comment_popup($anchor = null) {
 }
 
 
-function bootswatch_get_categories_links($post = null) {
+function bootswatches_get_categories_links($post = null) {
     if(!$post)
         global $post;
     $output = '';
     // categories
-    if ( $categories_list = bootswatch_get_the_category_list($post->ID) ) {
+    if ( $categories_list = bootswatches_get_the_category_list($post->ID) ) {
         $output .= sprintf( '<span class="post-meta__field"><i class="fa fa-folder"></i>' . esc_html( '%s' ) . '</span>', $categories_list );
     }
 
@@ -216,7 +216,7 @@ function bootswatch_get_categories_links($post = null) {
 }
 
 
-function bootswatch_get_tags_links() {
+function bootswatches_get_tags_links() {
 
     $output = '';
     // tags
@@ -228,7 +228,7 @@ function bootswatch_get_tags_links() {
     return $output;
 }
 
-function bootswatch_get_entry_footer($post = null) {
+function bootswatches_get_entry_footer($post = null) {
     if(!$post)
         global $post;
 
@@ -242,13 +242,13 @@ function bootswatch_get_entry_footer($post = null) {
         ) );
         if ( 'page' !== get_post_type() ):
         $output .= '<div class="post-meta">';
-            $output .= bootswatch_get_categories_links();
-            $output .= bootswatch_get_tags_links();
+            $output .= bootswatches_get_categories_links();
+            $output .= bootswatches_get_tags_links();
         $output .= '</div>';
         endif;
 
         $output .= '<div class="post-meta">';
-            $output .= bootswatch_get_the_edit_post_link();
+            $output .= bootswatches_get_the_edit_post_link();
         $output .= '</div>';
     $output .= '</footer>';
 
@@ -259,14 +259,14 @@ function bootswatch_get_entry_footer($post = null) {
 /**
  * Prints HTML with meta information for the categories, tags and comments.
  */
-function bootswatch_entry_footer( $post = null ) {
+function bootswatches_entry_footer( $post = null ) {
 
-    echo bootswatch_get_entry_footer( $post); //WPCS. xss ok.
+    echo bootswatches_get_entry_footer( $post); //WPCS. xss ok.
 
 }
 
 
-function bootswatch_get_the_edit_post_link($post_id = null){
+function bootswatches_get_the_edit_post_link($post_id = null){
 
     $output = '';
     // Edit link
@@ -289,8 +289,8 @@ function bootswatch_get_the_edit_post_link($post_id = null){
 }
 
 
-function bootswatch_the_edit_post_link($post_id = null){
-    echo bootswatch_get_the_edit_post_link($post_id); //WPCS. xss ok.
+function bootswatches_the_edit_post_link($post_id = null){
+    echo bootswatches_get_the_edit_post_link($post_id); //WPCS. xss ok.
 }
 
 
@@ -299,13 +299,13 @@ function bootswatch_the_edit_post_link($post_id = null){
  * @param  int $id post id
  * @return string     html list of links
  */
-function bootswatch_get_the_category_list($id = null) {
+function bootswatches_get_the_category_list($id = null) {
     $post = get_post($id);
     $post_type = $post->post_type;
 
     $is_cat = ($post_type =='post') ? true : false;
 
-    $terms = $is_cat ? get_the_category($id) : bootswatch_get_custom_tax_terms($id, $post_type);
+    $terms = $is_cat ? get_the_category($id) : bootswatches_get_custom_tax_terms($id, $post_type);
     $output = '';
     $count = 0;
 
@@ -333,7 +333,7 @@ function bootswatch_get_the_category_list($id = null) {
  * @param  string $post_type the post type
  * @return array            array of terms
  */
-function bootswatch_get_custom_tax_terms($id = null, $post_type = null) {
+function bootswatches_get_custom_tax_terms($id = null, $post_type = null) {
     if(!$id)
         return;
 
@@ -356,7 +356,7 @@ function bootswatch_get_custom_tax_terms($id = null, $post_type = null) {
     return $terms;
 }
 
-function bootswatch_get_post_thumbnail($post = null){
+function bootswatches_get_post_thumbnail($post = null){
     if(!$post)
         global $post;
 
@@ -372,11 +372,11 @@ function bootswatch_get_post_thumbnail($post = null){
 
     return $output;
 }
-function bootswatch_post_thumbnail($post = null) {
-    echo bootswatch_get_post_thumbnail($post); //WPCS. xss ok.
+function bootswatches_post_thumbnail($post = null) {
+    echo bootswatches_get_post_thumbnail($post); //WPCS. xss ok.
 }
 
-function bootswatch_post_format_icon($format = null) {
+function bootswatches_post_format_icon($format = null) {
 
     $icon = null;
 

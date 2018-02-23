@@ -1,9 +1,9 @@
 <?php
 
-if( class_exists('Bootswatch'))
+if( class_exists('Bootswatches'))
     return false;
 
-class Bootswatch {
+class Bootswatches {
 
     public $name;
     public $theme;
@@ -33,12 +33,12 @@ class Bootswatch {
 
         $this->name = $this->theme = $theme ? strtolower($theme): null;
 
-        $bootswatch_dir = get_template_directory() . '/assets/frontend/css';
-        $bootswatch_uri = get_template_directory_uri() . '/assets/frontend/css';
+        $bootswatches_dir = get_template_directory() . '/assets/frontend/css';
+        $bootswatches_uri = get_template_directory_uri() . '/assets/frontend/css';
 
         // i jsut wanted to play around with something other than concatenation, which is probably faster
-        $this->theme_dir = implode('/', array($bootswatch_dir, $this->theme));
-        $this->theme_uri = implode('/', array($bootswatch_uri, $this->theme));
+        $this->theme_dir = implode('/', array($bootswatches_dir, $this->theme));
+        $this->theme_uri = implode('/', array($bootswatches_uri, $this->theme));
     }
 
 

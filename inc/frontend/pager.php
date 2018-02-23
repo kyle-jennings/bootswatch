@@ -1,7 +1,7 @@
 <?php
 
 
-function bootswatch_link_pages_link_filter($link, $i ){
+function bootswatches_link_pages_link_filter($link, $i ){
 
     preg_match('/<a href="/', $link, $matches);
     if(empty($matches))
@@ -11,9 +11,9 @@ function bootswatch_link_pages_link_filter($link, $i ){
 
 }
 
-add_filter( 'wp_link_pages_link', 'bootswatch_link_pages_link_filter', 10, 2 );
+add_filter( 'wp_link_pages_link', 'bootswatches_link_pages_link_filter', 10, 2 );
 
-function bootswatch_get_the_posts_navigation( $args = array() ) {
+function bootswatches_get_the_posts_navigation( $args = array() ) {
 
     $navigation = '';
 
@@ -47,12 +47,12 @@ function bootswatch_get_the_posts_navigation( $args = array() ) {
 }
 
 
-function bootswatch_the_posts_navigation( $args = array() ) {
-    echo bootswatch_get_the_posts_navigation($args);  // WPCS: xss ok.
+function bootswatches_the_posts_navigation( $args = array() ) {
+    echo bootswatches_get_the_posts_navigation($args);  // WPCS: xss ok.
 }
 
 
-function bootswatch_get_the_post_navigation( $args = array() ) {
+function bootswatches_get_the_post_navigation( $args = array() ) {
 
     $navigation = '';
 
@@ -91,12 +91,12 @@ function bootswatch_get_the_post_navigation( $args = array() ) {
 }
 
 
-function bootswatch_the_post_navigation( $args = array() ) {
-    echo bootswatch_get_the_post_navigation( $args ); // WPCS: xss ok.
+function bootswatches_the_post_navigation( $args = array() ) {
+    echo bootswatches_get_the_post_navigation( $args ); // WPCS: xss ok.
 }
 
 
-function bootswatch_get_paginate_links($args = array()) {
+function bootswatches_get_paginate_links($args = array()) {
 
     $args['type'] = 'array';
     $pages = paginate_links($args);
@@ -122,6 +122,6 @@ function bootswatch_get_paginate_links($args = array()) {
 }
 
 
-function bootswatch_paginate_links($args = array()) {
-    echo bootswatch_get_paginate_links($args); // WPCS: xss ok.
+function bootswatches_paginate_links($args = array()) {
+    echo bootswatches_get_paginate_links($args); // WPCS: xss ok.
 }

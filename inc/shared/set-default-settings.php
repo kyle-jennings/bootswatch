@@ -9,7 +9,7 @@
  * The archive page hero sanitize_bookmark
  * The archive header order
  */
-function bootswatch_set_default_settings() {
+function bootswatches_set_default_settings() {
     if(!get_theme_mod('archive_sidebar_position_setting'))
         set_theme_mod('archive_sidebar_position_setting', 'right');
 
@@ -23,11 +23,11 @@ function bootswatch_set_default_settings() {
         set_theme_mod('footer_sortables_setting', '[{"name":"return-to-top","label":"Return to Top"},{"name":"footer-menu","label":"Footer Menu"}]');
 
 }
-add_action('after_switch_theme', 'bootswatch_set_default_settings');
+add_action('after_switch_theme', 'bootswatches_set_default_settings');
 
 
 
-function bootswatch_set_default_menu($args) {
+function bootswatches_set_default_menu($args) {
 
 
     // see wp-includes/nav-menu-template.php for available arguments
@@ -77,7 +77,7 @@ function bootswatch_set_default_menu($args) {
 
 
 
-function bootswatch_default_header_order() {
+function bootswatches_default_header_order() {
     $arr = array(
 
         (object) array (
@@ -95,7 +95,7 @@ function bootswatch_default_header_order() {
         'label' => 'Banner'
     );
 
-    if(bootswatch_is_dot_gov())
+    if(bootswatches_is_dot_gov())
         array_unshift($arr, $banner);
 
     return $arr;

@@ -1,6 +1,6 @@
 <?php
 
-namespace bootswatch;
+namespace bootswatches;
 
 use bootswatch\BootSwatchThemes;
 

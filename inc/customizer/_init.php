@@ -27,16 +27,16 @@ foreach($files as $file)
 
 
 
-function bootswatch_customizer_controls($wp_customize){
-  // $wp_customize->register_control_type( 'Bootswatch_Color_Scheme_Custom_Control' );
+function bootswatches_customizer_controls($wp_customize){
+  // $wp_customize->register_control_type( 'Bootswatches_Color_Scheme_Custom_Control' );
 }
 
-add_action( 'customize_register','bootswatch_customizer_controls', 20 );
+add_action( 'customize_register','bootswatches_customizer_controls', 20 );
 /**
  * enqueues scripts to the WordPress Customizer
  * @return [type] [description]
  */
-function bootswatch_customizer_enqueue() {
+function bootswatches_customizer_enqueue() {
 
   // this script is minified, however a non minified version is included with the theme
 	wp_enqueue_script(
@@ -47,7 +47,7 @@ function bootswatch_customizer_enqueue() {
         true
     );
 }
-add_action( 'customize_controls_enqueue_scripts', 'bootswatch_customizer_enqueue' );
+add_action( 'customize_controls_enqueue_scripts', 'bootswatches_customizer_enqueue' );
 
 
 
@@ -55,7 +55,7 @@ add_action( 'customize_controls_enqueue_scripts', 'bootswatch_customizer_enqueue
  * enqueues scripts to the WordPress Previewer
  * @return [type] [description]
  */
-function bootswatch_previewer_enqueue() {
+function bootswatches_previewer_enqueue() {
   wp_enqueue_script(
         'custom-previewer',
         get_stylesheet_directory_uri() . '/assets/frontend/js/previewer-min.js',
@@ -65,7 +65,7 @@ function bootswatch_previewer_enqueue() {
     );
 }
 
-add_action( 'customize_preview_init', 'bootswatch_previewer_enqueue' );
+add_action( 'customize_preview_init', 'bootswatches_previewer_enqueue' );
 
 
 
@@ -75,7 +75,7 @@ add_action( 'customize_preview_init', 'bootswatch_previewer_enqueue' );
  * ----------------------------------------------------------------------------
  */
 
-function bootswatch_active_callback_filter($active, $control) {
+function bootswatches_active_callback_filter($active, $control) {
   global $wp_customize;
 
   $toggled_by = !isset($control->input_attrs) ? $control->input_attrs['data-toggled-by'] : null;
@@ -113,4 +113,4 @@ function bootswatch_active_callback_filter($active, $control) {
 
 
 }
-add_filter( 'customize_control_active', 'bootswatch_active_callback_filter', 100, 2);
+add_filter( 'customize_control_active', 'bootswatches_active_callback_filter', 100, 2);

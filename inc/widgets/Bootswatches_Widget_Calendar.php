@@ -14,7 +14,7 @@
  *
  * @see WP_Widget
  */
-class Bootswatch_Widget_Calendar extends WP_Widget {
+class Bootswatches_Widget_Calendar extends WP_Widget {
 	/**
 	 * Ensure that the ID attribute only appears in the markup once
 	 *

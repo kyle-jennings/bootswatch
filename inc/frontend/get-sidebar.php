@@ -1,14 +1,14 @@
 <?php
 
 
-function bootswatch_get_sidebar($template, $position = 'none'){
+function bootswatches_get_sidebar($template, $position = 'none'){
 
     $class = '';
     $vertical = array('left', 'right');
     $horizontal = array('top', 'bottom');
 
-    $sidebar_width = get_theme_mod('sidebar_size_setting', 'BOOTSWATCH_ONE_FOURTH');
-    $sidebar_width = $sidebar_width ? constant($sidebar_width) : BOOTSWATCH_ONE_THIRD;
+    $sidebar_width = get_theme_mod('sidebar_size_setting', 'BOOTSWATCHES_ONE_FOURTH');
+    $sidebar_width = $sidebar_width ? constant($sidebar_width) : BOOTSWATCHES_ONE_THIRD;
 
     if(in_array($position, $vertical)):
         $class = $sidebar_width;

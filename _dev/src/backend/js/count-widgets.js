@@ -48,7 +48,7 @@ function getWidgetSize(count, sidebar) {
     return;
 
   var data = {
-    "action": "bootswatch_calculate_widget_width",
+    "action": "bootswatches_calculate_widget_width",
     "data": count
   };
 

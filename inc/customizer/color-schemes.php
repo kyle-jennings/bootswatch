@@ -1,7 +1,7 @@
 <?php
 
 
-function bootswatch_select_colorscheme($wp_customize) {
+function bootswatches_select_colorscheme($wp_customize) {
 
     /**
      * Site Identity - these settings control some site branding
@@ -23,15 +23,15 @@ function bootswatch_select_colorscheme($wp_customize) {
         'color_scheme_setting',
         array(
             'default' => $default,
-            'sanitize_callback' => 'bootswatch_color_scheme_sanitize',
-            'validate_callback' => 'bootswatch_color_scheme_validate',
+            'sanitize_callback' => 'bootswatches_color_scheme_sanitize',
+            'validate_callback' => 'bootswatches_color_scheme_validate',
         )
     );
 
 
-    $themes = bootswatch_get_scheme_css();
+    $themes = bootswatches_get_scheme_css();
     
-    $themes = apply_filters('bootswatch_filter_themes', $themes);
+    $themes = apply_filters('bootswatches_filter_themes', $themes);
 
     $wp_customize->add_control(
         new ColorScheme(
@@ -50,4 +50,4 @@ function bootswatch_select_colorscheme($wp_customize) {
 
 }
 
-add_action('customize_register', 'bootswatch_select_colorscheme');
+add_action('customize_register', 'bootswatches_select_colorscheme');

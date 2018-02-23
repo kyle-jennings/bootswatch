@@ -11,7 +11,7 @@
  * layout settings
  * @param  object $wp_customize
  */
-function bootswatch_template_layout_settings($wp_customize) {
+function bootswatches_template_layout_settings($wp_customize) {
 
 
     // create the panel for the other templates
@@ -23,7 +23,7 @@ function bootswatch_template_layout_settings($wp_customize) {
         )
     );
 
-    $templates = bootswatch_the_template_list(false, true);
+    $templates = bootswatches_the_template_list(false, true);
 
 
 
@@ -65,5 +65,5 @@ function bootswatch_template_layout_settings($wp_customize) {
     endforeach;
 
 }
-add_action('customize_register', 'bootswatch_template_layout_settings');
+add_action('customize_register', 'bootswatches_template_layout_settings');
 

@@ -21,7 +21,7 @@ if( has_post_thumbnail() )
 <article id="post-<?php the_ID(); ?>" <?php post_class('cf row'); ?> >
     <h2 class="post-title col-md-12">
     <?php
-        the_title( bootswatch_post_format_icon( get_post_format() )
+        the_title( bootswatches_post_format_icon( get_post_format() )
         . '<a href="'
         . esc_url( get_permalink() ) . '" rel="bookmark">',
         '</a>' );
@@ -30,7 +30,7 @@ if( has_post_thumbnail() )
 
     <div class="col-md-4 post-col-left">
 
-    <?php bootswatch_post_thumbnail($post); ?>
+    <?php bootswatches_post_thumbnail($post); ?>
 
     <?php
     echo '<header class="post-header">';
@@ -40,12 +40,12 @@ if( has_post_thumbnail() )
         <div class="post-meta">
             <?php
 
-            echo bootswatch_get_the_date(); // WPCS: xss ok.
-            echo bootswatch_get_the_author(); // WPCS: xss ok.
+            echo bootswatches_get_the_date(); // WPCS: xss ok.
+            echo bootswatches_get_the_author(); // WPCS: xss ok.
 
-            echo bootswatch_get_the_comment_popup(); // WPCS: xss ok.
-            echo bootswatch_get_categories_links(); // WPCS: xss ok.
-            echo bootswatch_get_tags_links(); // WPCS: xss ok.
+            echo bootswatches_get_the_comment_popup(); // WPCS: xss ok.
+            echo bootswatches_get_categories_links(); // WPCS: xss ok.
+            echo bootswatches_get_tags_links(); // WPCS: xss ok.
             ?>
         </div><!-- .post-meta -->
 
@@ -55,7 +55,7 @@ if( has_post_thumbnail() )
         endif;
 
 
-        // bootswatch_post_footer();
+        // bootswatches_post_footer();
     echo '</header>';
 
     ?>
@@ -67,7 +67,7 @@ if( has_post_thumbnail() )
 
         <?php
             if($chat_location == 'before-content')
-                echo bootswatch_get_chat_log($chat); // WPCS: xss ok.
+                echo bootswatches_get_chat_log($chat); // WPCS: xss ok.
         ?>
 
         <div class="post-content">
@@ -89,11 +89,11 @@ if( has_post_thumbnail() )
 
         <?php
             if($chat_location == 'after-content')
-                echo bootswatch_get_chat_log($chat); // WPCS: xss ok.
+                echo bootswatches_get_chat_log($chat); // WPCS: xss ok.
         ?>
 
         <div class="post-meta">
-            <?php bootswatch_the_edit_post_link(); ?>
+            <?php bootswatches_the_edit_post_link(); ?>
         </div>
 
 

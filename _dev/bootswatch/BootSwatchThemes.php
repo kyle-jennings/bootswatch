@@ -1,11 +1,11 @@
 <?php
 
-namespace bootswatch;
+namespace bootswatches;
 
 class BootSwatchThemes {
 
     /**
-     * The bootswatch themes
+     * The bootswatches themes
      * @var array
      */
     private $theme_list = array(

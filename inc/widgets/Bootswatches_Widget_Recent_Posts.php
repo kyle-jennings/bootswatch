@@ -13,7 +13,7 @@
  *
  * @see WP_Widget
  */
-class Bootswatch_Widget_Recent_Posts extends WP_Widget {
+class Bootswatches_Widget_Recent_Posts extends WP_Widget {
 	/**
 	 * Sets up a new Recent Posts widget instance.
 	 *

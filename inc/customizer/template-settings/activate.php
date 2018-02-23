@@ -3,7 +3,7 @@
 
 $wp_customize->add_setting( $name . '_settings_active', array(
     'default' => 'no',
-    'sanitize_callback' => 'bootswatch_template_settings_active_sanitize',
+    'sanitize_callback' => 'bootswatches_template_settings_active_sanitize',
 ) );
 
 $activate_args = array(

@@ -77,8 +77,8 @@ class FeaturedPost {
     }
 
     private function postVideo() {
-        if( bootswatch_has_post_video() )
-            $this->video = bootswatch_get_the_post_video_url();
+        if( bootswatches_has_post_video() )
+            $this->video = bootswatches_get_the_post_video_url();
 
     }
 
@@ -130,8 +130,8 @@ class FeaturedPost {
         }
         $author .= '</span>';
 
-        // bootswatch_get_cpt_custom_tax_terms($this->id);
-        if ( $categories_list = bootswatch_get_the_category_list($this->id) ) {
+        // bootswatches_get_cpt_custom_tax_terms($this->id);
+        if ( $categories_list = bootswatches_get_the_category_list($this->id) ) {
 			$cats = '<span class="cat-links">' . __('Posted in&nbsp;', 'bootswatch') . $categories_list . '</span>';
 		}
 

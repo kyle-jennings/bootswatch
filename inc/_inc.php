@@ -25,8 +25,8 @@ foreach($shared_files as $file)
 require get_template_directory() . '/inc/customizer/_init.php'; 
 
 // load some bootstwatch specific things
-require get_template_directory() . '/inc/bootswatch/Bootswatch.php'; 
-require get_template_directory() . '/inc/bootswatch/BootswatchThemes.php'; 
+require get_template_directory() . '/inc/bootswatches/Bootswatches.php'; 
+require get_template_directory() . '/inc/bootswatches/BootswatchesThemes.php'; 
 
 
 // only load these in the admin section

@@ -16,7 +16,7 @@
  *
  * @see WP_Widget
  */
-class Bootswatch_Widget_Meta extends WP_Widget {
+class Bootswatches_Widget_Meta extends WP_Widget {
 
 	/**
 	 * Sets up a new Meta widget instance.

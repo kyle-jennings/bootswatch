@@ -3,7 +3,7 @@
 /**
  * produces a customizer section
  */
-function bootswatch_customize_section( &$wp_customize, $args = array() ) {
+function bootswatches_customize_section( &$wp_customize, $args = array() ) {
 
     extract(shortcode_atts(
         array(
@@ -33,7 +33,7 @@ function bootswatch_customize_section( &$wp_customize, $args = array() ) {
 /**
  * produces a "label" - this is simply to group like controls together
  */
-function bootswatch_customizer_label(&$wp_customize, $args = array() ) {
+function bootswatches_customizer_label(&$wp_customize, $args = array() ) {
 
     extract(shortcode_atts(
         array(
@@ -65,7 +65,7 @@ function bootswatch_customizer_label(&$wp_customize, $args = array() ) {
     );
 
     $wp_customize->add_control(
-        new Bootswatch_Label_Custom_Control(
+        new Bootswatches_Label_Custom_Control(
             $wp_customize,
             $control_id,
             $args

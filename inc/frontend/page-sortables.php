@@ -1,6 +1,6 @@
 <?php
 
-function bootswatch_page_sortables($target = null) {
+function bootswatches_page_sortables($target = null) {
 
     if($target == null)
         return false;
@@ -19,23 +19,23 @@ function bootswatch_page_sortables($target = null) {
         $name = $s->name;
         switch($name):
             case 'widget-area-1':
-                bootswatch_sortable_widget_area_content($target_name, 1);
+                bootswatches_sortable_widget_area_content($target_name, 1);
                 break;
             case 'widget-area-2':
-                bootswatch_sortable_widget_area_content($target_name, 2);
+                bootswatches_sortable_widget_area_content($target_name, 2);
                 break;
             case 'widget-area-3':
-                bootswatch_sortable_widget_area_content($target_name, 3);
+                bootswatches_sortable_widget_area_content($target_name, 3);
                 break;
             case 'page-content':
-                bootswatch_page_content($target_name);
+                bootswatches_page_content($target_name);
                 break;
         endswitch;
     }
 
 }
 
-function bootswatch_page_content($target = null) {
+function bootswatches_page_content($target = null) {
     ?>
     <div class="sortable-row sortable-row--<?php echo esc_attr($target); ?> cf">
     <?php
@@ -58,7 +58,7 @@ function bootswatch_page_content($target = null) {
 
         endwhile;
 
-        bootswatch_the_posts_navigation();
+        bootswatches_the_posts_navigation();
 
     else :
 
@@ -71,7 +71,7 @@ function bootswatch_page_content($target = null) {
 }
 
 
-function bootswatch_sortable_widget_area_content($target = null, $num) {
+function bootswatches_sortable_widget_area_content($target = null, $num) {
     if(!$target || !$num)
         return false;
 
@@ -85,7 +85,7 @@ function bootswatch_sortable_widget_area_content($target = null, $num) {
 }
 
 
-function bootswatch_sortable_default($target_name){
+function bootswatches_sortable_default($target_name){
 
     $url = esc_url(admin_url( 'customize.php?autofocus[section]='.$target_name.'_settings_section' ));
 

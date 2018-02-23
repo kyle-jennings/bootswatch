@@ -7,7 +7,7 @@
  * @param array $classes Classes for the body element.
  * @return array
  */
-function bootswatch_body_classes( $classes ) {
+function bootswatches_body_classes( $classes ) {
     unset($classes);
        $classes = array();
 
@@ -80,11 +80,11 @@ function bootswatch_body_classes( $classes ) {
        }
        return $classes;
 }
-add_filter( 'body_class', 'bootswatch_body_classes' );
+add_filter( 'body_class', 'bootswatches_body_classes' );
 
 
 
-function bootswatch_archive_link($link) {
+function bootswatches_archive_link($link) {
 
     $find = array(
         '</a>',
@@ -99,12 +99,12 @@ function bootswatch_archive_link($link) {
     $link = str_replace($find, $replace, $link);
     return $link;
 }
-add_filter( 'get_archives_link', 'bootswatch_archive_link' );
+add_filter( 'get_archives_link', 'bootswatches_archive_link' );
 
 
 remove_filter( 'the_content', 'wpautop' );
 
-function bootswatch_autop_false($content) {
+function bootswatches_autop_false($content) {
     return wpautop( $content, false );
 }
-add_filter( 'the_content', 'bootswatch_autop_false', 10 );
+add_filter( 'the_content', 'bootswatches_autop_false', 10 );

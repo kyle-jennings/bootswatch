@@ -22,7 +22,7 @@ $args = array(
 
 
 $wp_customize->add_control(
-    new Bootswatch_Label_Custom_Control(
+    new Bootswatches_Label_Custom_Control(
         $wp_customize,
         $name . '_sidebar_label_control',
         $args
@@ -35,7 +35,7 @@ $wp_customize->add_control(
  */
 $wp_customize->add_setting( $name . '_sidebar_position_setting', array(
     'default' => 'none',
-    'sanitize_callback' => 'bootswatch_sidebar_position_sanitize',
+    'sanitize_callback' => 'bootswatches_sidebar_position_sanitize',
 ) );
 
 $sidebar_pos_args = array(
@@ -62,7 +62,7 @@ $wp_customize->add_control($name . '_sidebar_position_control', $sidebar_pos_arg
  */
 $wp_customize->add_setting( $name . '_sidebar_visibility_setting', array(
     'default' => 'always-visible',
-    'sanitize_callback' => 'bootswatch_sidebar_visibility_sanitize',
+    'sanitize_callback' => 'bootswatches_sidebar_visibility_sanitize',
 ) );
 $sidebar_visibility_args = array(
     'description' => __('Hide or show the sidebar on different screen size (ie: hide on phones)', 'bootswatch'),

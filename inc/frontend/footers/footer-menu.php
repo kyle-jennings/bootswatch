@@ -9,7 +9,7 @@
         'menu_class' => 'list-inline col-md-12',
         'theme_location' => 'footer',
         'walker' => new FooterNavbarWalker(),
-        'fallback_cb' => 'bootswatch_set_default_menu'
+        'fallback_cb' => 'bootswatches_set_default_menu'
     );
 
     wp_nav_menu( $args );

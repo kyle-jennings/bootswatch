@@ -14,7 +14,7 @@
  *
  * @see WP_Widget
  */
-class Bootswatch_Widget_Archives extends WP_Widget {
+class Bootswatches_Widget_Archives extends WP_Widget {
 
 	/**
 	 * Sets up a new Archives widget instance.

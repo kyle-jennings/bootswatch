@@ -20,18 +20,18 @@ if ( version_compare( $GLOBALS['wp_version'], '4.6', '<' ) ) {
 }
 
 // Define some constants
-define('BOOTSWATCH_FULL_WIDTH' , 'col-sm-12');
-// define('BOOTSWATCH_FULL_WIDTH_MEDIUM_UP' , 'full-medium-up');
-// define('BOOTSWATCH_FULL_WIDTH_LARGE_UP' , 'full-large-up');
+define('BOOTSWATCHES_FULL_WIDTH' , 'col-sm-12');
+// define('BOOTSWATCHES_FULL_WIDTH_MEDIUM_UP' , 'full-medium-up');
+// define('BOOTSWATCHES_FULL_WIDTH_LARGE_UP' , 'full-large-up');
 
 // wide sidebar
-define('BOOTSWATCH_TWO_THIRDS' , 'col-sm-8');
-define('BOOTSWATCH_ONE_THIRD' , 'col-sm-4');
+define('BOOTSWATCHES_TWO_THIRDS' , 'col-sm-8');
+define('BOOTSWATCHES_ONE_THIRD' , 'col-sm-4');
 
 // narrow sidebar
-define('BOOTSWATCH_ONE_FOURTH' , 'col-sm-3');
-define('BOOTSWATCH_THREE_FOURTHS' , 'col-sm-9');
-define('BOOTSWATCH_ONE_HALF' , 'col-sm-6');
+define('BOOTSWATCHES_ONE_FOURTH' , 'col-sm-3');
+define('BOOTSWATCHES_THREE_FOURTHS' , 'col-sm-9');
+define('BOOTSWATCHES_ONE_HALF' , 'col-sm-6');
 
 // misc
 define('DEFAULT_TEMPLATE', 'default');

@@ -12,15 +12,15 @@
  *
  * @return markup the echo mark up
  */
-function bootswatch_the_header() {
-    $template = bootswatch_get_template();
+function bootswatches_the_header() {
+    $template = bootswatches_get_template();
 
     $layout_settings = get_theme_mod($template.'_page_layout_setting', '[]');
     $layout_settings = json_decode($layout_settings);
 
     $order = json_decode(get_theme_mod('header_sortables_setting', '[{"name":"banner","label":"Banner"},{"name":"navbar","label":"Navbar"},{"name":"hero","label":"Hero"}]'));
 
-    $order = $order ? $order : bootswatch_default_header_order();
+    $order = $order ? $order : bootswatches_default_header_order();
 
     foreach($order as $component):
         if($layout_settings && in_array($component->name, $layout_settings))
@@ -42,7 +42,7 @@ function bootswatch_the_header() {
 }
 
 
-function bootswatch_get_post_format_video_hero()
+function bootswatches_get_post_format_video_hero()
 {
 
     global $post;
@@ -57,7 +57,7 @@ function bootswatch_get_post_format_video_hero()
         $output .= '<div class="container">';
             $output .= '<div class="row">';
                 $output .= '<div class="col-md-12">';
-                    $output .= bootswatch_get_the_video_markup($video);
+                    $output .= bootswatches_get_the_video_markup($video);
                 $output .= '</div>';
             $output .= '</div>';
         $output .= '</div>';
@@ -68,14 +68,14 @@ function bootswatch_get_post_format_video_hero()
 }
 
 
-function bootswatch_post_format_video_hero() {
-    echo bootswatch_get_post_format_video_hero(); // WPCS: xss ok.
+function bootswatches_post_format_video_hero() {
+    echo bootswatches_get_post_format_video_hero(); // WPCS: xss ok.
 }
 /**
  * gets the 404 settings
  * @return array keyed array with settings
  */
-function bootswatch_get_404_settings() {
+function bootswatches_get_404_settings() {
 
     $content = get_theme_mod('_404_page_content_setting', 'default');
     $pid = get_theme_mod('_404_page_select_setting', null);
@@ -94,12 +94,12 @@ function bootswatch_get_404_settings() {
 /**
  * The footer conditional
  */
-function bootswatch_footer() {
-    $template = bootswatch_get_template();
+function bootswatches_footer() {
+    $template = bootswatches_get_template();
 
     $sortables = get_theme_mod('footer_sortables_setting', '[]');
 
-    if(!$sortables || bootswatch_hide_layout_part('footer', $template) ) {
+    if(!$sortables || bootswatches_hide_layout_part('footer', $template) ) {
         return;
     }
 

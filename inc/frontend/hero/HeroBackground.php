@@ -80,7 +80,7 @@ class HeroBackground
     public function videoMarkup() {
         if(!$this->video)
             return;
-        return bootswatch_get_the_video_markup($this->video, 'background');
+        return bootswatches_get_the_video_markup($this->video, 'background');
     }
 
 
@@ -107,7 +107,7 @@ class HeroBackground
         switch($format):
             case 'video':
                 $url = get_post_meta($post->ID, '_post_format_video', true);
-                if( $url && $id = bootswatch_get_youtube_id($url) )
+                if( $url && $id = bootswatches_get_youtube_id($url) )
                     return 'http://img.youtube.com/vi/'.$id.'/maxresdefault.jpg';
                 break;
             case 'gallery':

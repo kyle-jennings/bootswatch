@@ -76,7 +76,7 @@ class Hero {
         $output .= '<div class="section section--hero hero '.$class.'" '.$style.'>';
             $output .= '<div class="container">';
                 $output .= '<div class="row">';
-                    $output .= '<div class="'. BOOTSWATCH_FULL_WIDTH.'">';
+                    $output .= '<div class="'. BOOTSWATCHES_FULL_WIDTH.'">';
 
                         $output .= $this->HeroContent->getContent();
 
@@ -105,7 +105,7 @@ class Hero {
         elseif( $format == 'image' && $this->HeroContent->getImage() )
             return true;
         elseif($format == 'audio' && $this->HeroContent->getAudio()) {
-            add_action('wp_footer', 'bootswatch_enqueue_visualizer_script' );
+            add_action('wp_footer', 'bootswatches_enqueue_visualizer_script' );
         }elseif( $format == 'quote' && $this->HeroContent->getQuote() )
             return true;
         else

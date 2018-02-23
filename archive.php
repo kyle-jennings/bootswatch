@@ -24,7 +24,7 @@ get_header();
  * $sidebar_position
  *
  */
-extract( bootswatch_template_settings() );
+extract( bootswatches_template_settings() );
 
 if( !$hide_content ):
 ?>
@@ -35,7 +35,7 @@ if( !$hide_content ):
         <div class="row">
     <?php
     if($sidebar_position == 'left'):
-        bootswatch_get_sidebar($template, $sidebar_position);
+        bootswatches_get_sidebar($template, $sidebar_position);
     endif;
     ?>
 
@@ -56,7 +56,7 @@ if( !$hide_content ):
 			endwhile;
 
             // pagination though the archive
-            bootswatch_paginate_links();
+            bootswatches_paginate_links();
 
 		else :
 
@@ -67,7 +67,7 @@ if( !$hide_content ):
 
   <?php
   if($sidebar_position == 'right'):
-      bootswatch_get_sidebar($template, $sidebar_position);
+      bootswatches_get_sidebar($template, $sidebar_position);
   endif;
   ?>
 

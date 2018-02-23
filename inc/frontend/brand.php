@@ -1,6 +1,6 @@
 <?php
 
-function bootswatch_get_navbar_brand() {
+function bootswatches_get_navbar_brand() {
     $logo_tag = 'em';
     $brand = get_theme_mod('navbar_brand_setting', 'text');
 
@@ -13,7 +13,7 @@ function bootswatch_get_navbar_brand() {
 
     else:
 
-        $url = esc_url(bootswatch_get_custom_logo());
+        $url = esc_url(bootswatches_get_custom_logo());
 
         // $output .= '<'.$logo_tag.' class="navbar-brand navbar-brand--image">';
             $output .= '<a class="navbar-brand navbar-brand--image" href="'.get_home_url().'" >';
@@ -31,12 +31,12 @@ function bootswatch_get_navbar_brand() {
 }
 
 
-function bootswatch_navbar_brand() {
-    echo bootswatch_get_navbar_brand(); // WPCS: xss ok.
+function bootswatches_navbar_brand() {
+    echo bootswatches_get_navbar_brand(); // WPCS: xss ok.
 }
 
 
-function bootswatch_get_custom_logo($logo_id = null){
+function bootswatches_get_custom_logo($logo_id = null){
 
     $logo_id = get_theme_mod('custom_logo', null);
     if(!$logo_id)

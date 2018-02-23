@@ -7,7 +7,7 @@
  * runs before the init hook. The init hook is too late for some features, such
  * as indicating support for post thumbnails.
  */
-function bootswatch_setup() {
+function bootswatches_setup() {
 	/*
 	 * Make theme available for translation.
 	 * Translations can be filed in the /languages/ directory.
@@ -63,4 +63,4 @@ function bootswatch_setup() {
 	// Add theme support for selective refresh for widgets.
 	add_theme_support( 'customize-selective-refresh-widgets' );
 }
-add_action( 'after_setup_theme', 'bootswatch_setup' );
+add_action( 'after_setup_theme', 'bootswatches_setup' );

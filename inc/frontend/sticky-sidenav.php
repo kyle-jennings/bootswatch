@@ -1,9 +1,9 @@
 <?php
-function bootswatch_get_sticky_sidenav($id = 0){
+function bootswatches_get_sticky_sidenav($id = 0){
     if($id == 0)
         return false;
 
-    $anchors = bootswatch_sticky_sidenav_anchors($id);
+    $anchors = bootswatches_sticky_sidenav_anchors($id);
 
     $output = '';
 
@@ -21,15 +21,15 @@ function bootswatch_get_sticky_sidenav($id = 0){
     return $output;
 }
 
-function bootswatch_sticky_sidenav($id = 0){
+function bootswatches_sticky_sidenav($id = 0){
     if($id == 0)
         return false;
 
-    echo bootswatch_get_sticky_sidenav($id); // WPCS: xss ok.
+    echo bootswatches_get_sticky_sidenav($id); // WPCS: xss ok.
 }
 
 
-function bootswatch_sticky_sidenav_anchors($id) {
+function bootswatches_sticky_sidenav_anchors($id) {
     $post_content = get_post($id);
     $content = $post_content->post_content;
 

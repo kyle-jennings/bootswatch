@@ -1,6 +1,6 @@
 <?php
 
-function bootswatch_comment_form_fields( $fields ) {
+function bootswatches_comment_form_fields( $fields ) {
     $commenter = wp_get_current_commenter();
 
     $req      = get_option( 'require_name_email' );
@@ -19,10 +19,10 @@ function bootswatch_comment_form_fields( $fields ) {
     return $fields;
 }
 
-add_filter( 'comment_form_default_fields', 'bootswatch_comment_form_fields' );
+add_filter( 'comment_form_default_fields', 'bootswatches_comment_form_fields' );
 
 
-function bootswatch_comment_form( $args ) {
+function bootswatches_comment_form( $args ) {
     $args['comment_field'] = '<div class="form-group comment-form-comment">
             <label for="comment">' . _x( 'Comment', 'noun', 'bootswatch' ) . '</label>
             <textarea class="form-control" id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea>
@@ -31,4 +31,4 @@ function bootswatch_comment_form( $args ) {
 
     return $args;
 }
-add_filter( 'comment_form_defaults', 'bootswatch_comment_form' );
+add_filter( 'comment_form_defaults', 'bootswatches_comment_form' );

@@ -1,15 +1,15 @@
 <?php
 
-function bootswatch_get_cpts() {
+function bootswatches_get_cpts() {
     $args = array(
        'public'   => true,
        'publicly_queryable' => true,
        '_builtin' => false
     );
-    return bootswatch_get_cpt_template_types( get_post_types($args) );
+    return bootswatches_get_cpt_template_types( get_post_types($args) );
 }
 
-function bootswatch_get_cpt_template_types($cpts) {
+function bootswatches_get_cpt_template_types($cpts) {
     $new = array();
     foreach($cpts as $cpt){
         $obj = get_post_type_object($cpt);

@@ -69,7 +69,7 @@ class HeroContent
          * $header_page
          *
          */
-        extract(bootswatch_get_404_settings());
+        extract(bootswatches_get_404_settings());
 
         if($header_page) {
             $page = get_page($header_page);
@@ -138,7 +138,7 @@ class HeroContent
 
         if ( 'page' !== get_post_type() ) :
             $output .= '<div class="post-meta">';
-                $output .= bootswatch_get_hero_meta();
+                $output .= bootswatches_get_hero_meta();
             $output .= '</div>';
         endif;
 
@@ -167,7 +167,7 @@ class HeroContent
         $output .= '</span>';
 
 
-        $output .= bootswatch_get_the_audio_markup($src);
+        $output .= bootswatches_get_the_audio_markup($src);
         // $output .= '<h1 class="hero__title">'.get_the_title().'</h1>';
 
         return $output;
@@ -187,7 +187,7 @@ class HeroContent
             return null;
 
         $output = '';
-        $output .= bootswatch_get_the_video_markup($url);
+        $output .= bootswatches_get_the_video_markup($url);
 
         return $output;
     }
@@ -207,7 +207,7 @@ class HeroContent
         if(!$gallery)
             return null;
 
-        $output .= bootswatch_get_carousel_markup($gallery, 'large');
+        $output .= bootswatches_get_carousel_markup($gallery, 'large');
 
         return $output;
     }
@@ -259,7 +259,7 @@ class HeroContent
         if(!$quote)
             return null;
 
-        $output .= bootswatch_get_quote_markup($quote);
+        $output .= bootswatches_get_quote_markup($quote);
 
         return $output;
     }
@@ -283,7 +283,7 @@ class HeroContent
         $output .= '<h1 class="hero__title">'.get_the_title().'</h1>';
 
         $output .= '<div class="well">';
-            $output .= bootswatch_get_chat_log($chat);
+            $output .= bootswatches_get_chat_log($chat);
         $output .= '</div>';
 
         return $output;
@@ -473,7 +473,7 @@ class HeroContent
         $output .= '</h1>';
 
         $output .= '<div class="post-meta">';
-            $output .= bootswatch_get_hero_meta($post->id);
+            $output .= bootswatches_get_hero_meta($post->id);
         $output .= '</div>';
 
         return $output;

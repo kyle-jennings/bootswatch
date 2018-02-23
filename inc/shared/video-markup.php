@@ -5,7 +5,7 @@
  */
 
 
-function bootswatch_get_the_video_markup($url = null) {
+function bootswatches_get_the_video_markup($url = null) {
     if(!$url)
         return;
 
@@ -38,18 +38,18 @@ function bootswatch_get_the_video_markup($url = null) {
 }
 
 
-function bootswatch_the_video_markup($url) {
-    echo bootswatch_get_the_video_markup($url); //WPCS: xss ok.
+function bootswatches_the_video_markup($url) {
+    echo bootswatches_get_the_video_markup($url); //WPCS: xss ok.
 }
 
 
-function bootswatch_get_youtube_id($url) {
+function bootswatches_get_youtube_id($url) {
     preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $url, $match);
     return $match[1];
 }
 
 
-function bootswatch_get_video_type($url) {
+function bootswatches_get_video_type($url) {
 
     $filetypes = array( '.mp4', '.mov', '.wmv', '.avi', '.mpg', '.ogv', '.3gp', '.3g2',);
     $type = null;

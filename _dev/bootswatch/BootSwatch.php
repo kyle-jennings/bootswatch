@@ -1,6 +1,6 @@
 <?php
 
-namespace bootswatch;
+namespace bootswatches;
 
 class BootSwatch {
 
@@ -17,8 +17,8 @@ class BootSwatch {
      * Location of the BootSwatch folder
      * @var string
      */
-    public $bootswatch_dir;
-    public $bootswatch_uri;
+    public $bootswatches_dir;
+    public $bootswatches_uri;
 
     /**
      * The theme dir and URI, getting pretty redundant now
@@ -35,14 +35,14 @@ class BootSwatch {
     public $css_uri;
 
     /**
-     * Location of the sass files, this includes the variables and the bootswatch files
+     * Location of the sass files, this includes the variables and the bootswatches files
      *
      * unlike the CSS files, or the vendor folders we do not need the URI because
      * we are not using this files for anything other than the build process
      * @param [type] $theme [description]
      */
     public $sass_variables;
-    public $sass_bootswatch;
+    public $sass_bootswatches;
 
     public $thumbnail = null;
 
@@ -59,8 +59,8 @@ class BootSwatch {
         $this->vendor_dir = $template_dir . '/_dev/vendor';
         $this->vendor_uri = $template_uri . '/_dev/vendor';
 
-        $this->bootswatch_dir = $this->vendor_dir . '/thomaspark/bootswatch';
-        $this->bootswatch_uri = $this->vendor_uri . '/thomaspark/bootswatch';
+        $this->bootswatches_dir = $this->vendor_dir . '/thomaspark/bootswatch';
+        $this->bootswatches_uri = $this->vendor_uri . '/thomaspark/bootswatch';
 
         $this->setTheme($theme);
     }
@@ -71,8 +71,8 @@ class BootSwatch {
         $this->name = $this->theme = $theme ? strtolower($theme): null;
 
         // i jsut wanted to play around with something other than concatenation, which is probably faster
-        $this->theme_dir = implode('/', array($this->bootswatch_dir, $this->theme));
-        $this->theme_uri = implode('/', array($this->bootswatch_uri, $this->theme));
+        $this->theme_dir = implode('/', array($this->bootswatches_dir, $this->theme));
+        $this->theme_uri = implode('/', array($this->bootswatches_uri, $this->theme));
     }
 
 

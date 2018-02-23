@@ -2,10 +2,10 @@
 
 
 
-function bootswatch_widgetized_settings($wp_customize) {
+function bootswatches_widgetized_settings($wp_customize) {
 
     $section = 'widgetized_content_section';
-    $template = bootswatch_get_template_info('widgetized');
+    $template = bootswatches_get_template_info('widgetized');
 
     $section_args = array(
         'section' => $section,
@@ -14,19 +14,19 @@ function bootswatch_widgetized_settings($wp_customize) {
     );
 
 
-    bootswatch_customize_section( $wp_customize, $section_args );
+    bootswatches_customize_section( $wp_customize, $section_args );
 
 
     $wp_customize->add_setting( 'widgetized_sortables_setting', array(
         'default'        => '[{"name":"page-content","label":"Page Content"}]',
-        'sanitize_callback' => 'bootswatch_widgetized_sortable_sanitize',
+        'sanitize_callback' => 'bootswatches_widgetized_sortable_sanitize',
     ) );
 
     $description = __('The page content is sortable, and optional.  Simply drag the
     available components from the "available" box over to active.  This setting
     does not depend on the "Settings Active" setting above.', 'bootswatch');
 
-    $wp_customize->add_control( new Bootswatch_Sortable_Control( $wp_customize,
+    $wp_customize->add_control( new Bootswatches_Sortable_Control( $wp_customize,
        'widgetized_sortables_control', array(
            'label'   => __('Sortable Page Content', 'bootswatch'),
            /* translators: use the $description variable above - states that the content is sortable via drag and drop */
@@ -45,4 +45,4 @@ function bootswatch_widgetized_settings($wp_customize) {
     );
 
 }
-add_action('customize_register', 'bootswatch_widgetized_settings');
+add_action('customize_register', 'bootswatches_widgetized_settings');

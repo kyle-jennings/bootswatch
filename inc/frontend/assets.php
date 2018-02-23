@@ -4,7 +4,7 @@
 /**
  * Enqueue scripts and styles.
  */
-function bootswatch_scripts() {
+function bootswatches_scripts() {
 
     if(is_admin())
         return;
@@ -31,4 +31,4 @@ function bootswatch_scripts() {
     );
 
 }
-add_action( 'wp_enqueue_scripts', 'bootswatch_scripts' );
+add_action( 'wp_enqueue_scripts', 'bootswatches_scripts' );

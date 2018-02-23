@@ -3,7 +3,7 @@
 if ( ! class_exists( 'WP_Customize_Control' ) )
     return null;
 
-class Bootswatch_Sortable_Control extends WP_Customize_Control
+class Bootswatches_Sortable_Control extends WP_Customize_Control
 {
     public $type = 'optional-sortable';
     public $optional;

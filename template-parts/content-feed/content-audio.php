@@ -7,7 +7,7 @@
  * @package Bootswatch
  */
 global $post;
-add_action('wp_footer', 'bootswatch_enqueue_visualizer_script' );
+add_action('wp_footer', 'bootswatches_enqueue_visualizer_script' );
 $background = has_post_thumbnail() ? get_the_post_thumbnail_url($post, 'full') : '';
 $audio = get_post_meta($post->ID, '_post_format_audio', true);
 ?>
@@ -18,7 +18,7 @@ $audio = get_post_meta($post->ID, '_post_format_audio', true);
     <header class="post-header col-md-12">
         <h2 class="post-title">
         <?php
-            the_title( bootswatch_post_format_icon( get_post_format() )
+            the_title( bootswatches_post_format_icon( get_post_format() )
             . '<a href="'
             . esc_url( get_permalink() ) . '" rel="bookmark">',
             '</a>' );
@@ -31,7 +31,7 @@ $audio = get_post_meta($post->ID, '_post_format_audio', true);
 
     if($audio) {
         echo '<div class="col-md-12">';
-        echo bootswatch_get_the_audio_markup($audio, $background); // WPCS: xss ok.
+        echo bootswatches_get_the_audio_markup($audio, $background); // WPCS: xss ok.
         echo '</div>';
 
     }
@@ -44,12 +44,12 @@ $audio = get_post_meta($post->ID, '_post_format_audio', true);
             <div class="post-meta">
                 <?php
 
-                echo bootswatch_get_the_date(); // WPCS: xss ok.
-                echo bootswatch_get_the_author(); // WPCS: xss ok.
+                echo bootswatches_get_the_date(); // WPCS: xss ok.
+                echo bootswatches_get_the_author(); // WPCS: xss ok.
 
-                echo bootswatch_get_the_comment_popup(); // WPCS: xss ok.
-                echo bootswatch_get_categories_links(); // WPCS: xss ok.
-                echo bootswatch_get_tags_links(); // WPCS: xss ok.
+                echo bootswatches_get_the_comment_popup(); // WPCS: xss ok.
+                echo bootswatches_get_categories_links(); // WPCS: xss ok.
+                echo bootswatches_get_tags_links(); // WPCS: xss ok.
                 ?>
             </div><!-- .post-meta -->
 
@@ -77,7 +77,7 @@ $audio = get_post_meta($post->ID, '_post_format_audio', true);
         </div><!-- .post-meta -->
 
         <div class="post-meta">
-            <?php bootswatch_the_edit_post_link(); ?>
+            <?php bootswatches_the_edit_post_link(); ?>
         </div>
 
 

@@ -1,7 +1,7 @@
 <?php
 
 
-function bootswatch_carousel_markup($images =array(), $size = 'carousel-feed') {
+function bootswatches_carousel_markup($images =array(), $size = 'carousel-feed') {
     if(empty($images))
         return null;
 
@@ -56,10 +56,10 @@ function bootswatch_carousel_markup($images =array(), $size = 'carousel-feed') {
 }
 
 
-function bootswatch_get_carousel_markup($images =array(), $size = 'carousel-feed'){
+function bootswatches_get_carousel_markup($images =array(), $size = 'carousel-feed'){
     $content = '';
     ob_start();
-        bootswatch_carousel_markup($images, $size);
+        bootswatches_carousel_markup($images, $size);
     $content = ob_get_contents();
     ob_end_clean();
 

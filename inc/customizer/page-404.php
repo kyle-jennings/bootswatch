@@ -2,10 +2,10 @@
 
 
 
-function bootswatch_404_settings($wp_customize) {
+function bootswatches_404_settings($wp_customize) {
 
 
-    $template = bootswatch_get_template_info('_404');
+    $template = bootswatches_get_template_info('_404');
     $section = '_404_content_section';
 
     // set up the section
@@ -14,7 +14,7 @@ function bootswatch_404_settings($wp_customize) {
         'title' => __('404 Page', 'bootswatch'),
         'description' => $template['description'],
     );
-    bootswatch_customize_section( $wp_customize, $section_args );
+    bootswatches_customize_section( $wp_customize, $section_args );
 
     /**
      * This selects what we display in the page header area
@@ -23,7 +23,7 @@ function bootswatch_404_settings($wp_customize) {
     // select the what to display in the header
     $wp_customize->add_setting( '_404_hero_content_setting', array(
         'default'  => 'title',
-        'sanitize_callback' => 'bootswatch_404_hero_content_sanitize',
+        'sanitize_callback' => 'bootswatches_404_hero_content_sanitize',
     ) );
 
     $wp_customize->add_control( '_404_hero_content_control', array(
@@ -63,7 +63,7 @@ function bootswatch_404_settings($wp_customize) {
      */
     $wp_customize->add_setting( '_404_page_content_setting', array(
         'default'  => 'default',
-        'sanitize_callback' => 'bootswatch_404_content_sanitize',
+        'sanitize_callback' => 'bootswatches_404_content_sanitize',
     ) );
 
     $wp_customize->add_control( '_404_page_content_control', array(
@@ -97,4 +97,4 @@ function bootswatch_404_settings($wp_customize) {
 
 }
 
-add_action('customize_register', 'bootswatch_404_settings');
+add_action('customize_register', 'bootswatches_404_settings');

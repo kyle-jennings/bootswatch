@@ -19,7 +19,7 @@ get_header();
  * $sidebar_position
  *
  */
-extract( bootswatch_template_settings() );
+extract( bootswatches_template_settings() );
 
 /**
  * the 404 settings
@@ -30,7 +30,7 @@ extract( bootswatch_template_settings() );
  * $header_page
  *
  */
-extract( bootswatch_get_404_settings() );
+extract( bootswatches_get_404_settings() );
 
 if( !$hide_content ):
 ?>
@@ -40,7 +40,7 @@ if( !$hide_content ):
         <div class="row">
     <?php
     if($sidebar_position == 'left'):
-        bootswatch_get_sidebar($template, $sidebar_position);
+        bootswatches_get_sidebar($template, $sidebar_position);
     endif;
     ?>
 
@@ -62,14 +62,14 @@ if( !$hide_content ):
                 echo '<br>';
                 echo '<br>';
 
-    			the_widget( 'Bootswatch_Widget_Pages', array('title'=>'Pages') );
+    			the_widget( 'Bootswatches_Widget_Pages', array('title'=>'Pages') );
             endif;
 		?>
   </div>
 
   <?php
   if($sidebar_position == 'right'):
-      bootswatch_get_sidebar($template, $sidebar_position);
+      bootswatches_get_sidebar($template, $sidebar_position);
   endif;
   ?>
 </div><!-- /row -->

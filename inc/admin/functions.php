@@ -1,6 +1,6 @@
 <?php
 
-function bootswatch_hide_css_files($query) {
+function bootswatches_hide_css_files($query) {
   $include = array();
   $exclude = array();
   $temp_query = new WP_Query($query);
@@ -19,4 +19,4 @@ function bootswatch_hide_css_files($query) {
   $query['post__not_in'] = $exclude;
   return $query;
 }
-add_filter('ajax_query_attachments_args', 'bootswatch_hide_css_files');
+add_filter('ajax_query_attachments_args', 'bootswatches_hide_css_files');

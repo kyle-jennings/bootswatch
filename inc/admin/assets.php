@@ -3,7 +3,7 @@
 /**
  * Enqueue scripts and styles.
  */
-function bootswatch_admin_assets() {
+function bootswatches_admin_assets() {
 
     // the following style and script files are minified, however non minified
     // versions are incuded with this theme
@@ -18,4 +18,4 @@ function bootswatch_admin_assets() {
     $ajax_object = array('ajax_url' => admin_url('admin-ajax.php'));
     wp_localize_script('admin-scripts', 'ajax_object', $ajax_object);
 }
-add_action( 'admin_enqueue_scripts', 'bootswatch_admin_assets' );
+add_action( 'admin_enqueue_scripts', 'bootswatches_admin_assets' );

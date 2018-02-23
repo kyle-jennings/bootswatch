@@ -1,7 +1,7 @@
 <?php
 
 
-function bootswatch_frontpage_settings($wp_customize) {
+function bootswatches_frontpage_settings($wp_customize) {
 
     // $section = 'rontpage_settings_section'; // old section
     $section = 'static_front_page';
@@ -12,7 +12,7 @@ function bootswatch_frontpage_settings($wp_customize) {
     //     'label' => __('Header Content Settings', 'bootswatch'),
     //     'control_id' => 'frontpage_header_label_control'
     // );
-    // bootswatch_customizer_label($wp_customize, $label_args);
+    // bootswatches_customizer_label($wp_customize, $label_args);
 
 
 
@@ -20,7 +20,7 @@ function bootswatch_frontpage_settings($wp_customize) {
     // select the what to display in the header
     $wp_customize->add_setting( 'frontpage_hero_content_setting', array(
         'default'  => 'callout',
-        'sanitize_callback' => 'bootswatch_frontpage_hero_content_sanitize',
+        'sanitize_callback' => 'bootswatches_frontpage_hero_content_sanitize',
     ) );
 
     $wp_customize->add_control( 'frontpage_hero_content_control', array(
@@ -79,14 +79,14 @@ function bootswatch_frontpage_settings($wp_customize) {
       */
      $wp_customize->add_setting( 'frontpage_sortables_setting', array(
          'default'        => '[{"name":"page-content","label":"Page Content"}]',
-         'sanitize_callback' => 'bootswatch_frontpage_sortable_sanitize',
+         'sanitize_callback' => 'bootswatches_frontpage_sortable_sanitize',
      ) );
 
      $description = __('The page content is sortable, and optional.  Simply drag the
           available components from the "available" box over to active.  This setting
           does not depend on the "Settings Active" setting above.', 'bootswatch');
 
-     $wp_customize->add_control( new Bootswatch_Sortable_Control( $wp_customize,
+     $wp_customize->add_control( new Bootswatches_Sortable_Control( $wp_customize,
         'frontpage_sortables_control', array(
             'description' => sprintf(' %s', $description ),
             'label'   => __('Sortable Page Content', 'bootswatch'),
@@ -105,4 +105,4 @@ function bootswatch_frontpage_settings($wp_customize) {
     );
 
 }
-add_action('customize_register', 'bootswatch_frontpage_settings');
+add_action('customize_register', 'bootswatches_frontpage_settings');

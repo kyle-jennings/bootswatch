@@ -3,7 +3,7 @@
 if ( ! class_exists( 'WP_Customize_Control' ) )
     return null;
 
-class Bootswatch_Color_Scheme_Custom_Control extends WP_Customize_Control
+class Bootswatches_Color_Scheme_Custom_Control extends WP_Customize_Control
 {
     public $type = 'color-scheme';
 

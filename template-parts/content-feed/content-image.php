@@ -16,7 +16,7 @@ global $post;
     <header class="post-header col-md-12">
         <h2 class="post-title">
         <?php
-            the_title( bootswatch_post_format_icon( get_post_format() )
+            the_title( bootswatches_post_format_icon( get_post_format() )
             . '<a href="'
             . esc_url( get_permalink() ) . '" rel="bookmark">',
             '</a>' );
@@ -44,12 +44,12 @@ global $post;
             <div class="post-meta">
                 <?php
 
-                echo bootswatch_get_the_date(); // WPCS: xss ok.
-                echo bootswatch_get_the_author(); // WPCS: xss ok.
+                echo bootswatches_get_the_date(); // WPCS: xss ok.
+                echo bootswatches_get_the_author(); // WPCS: xss ok.
 
-                echo bootswatch_get_the_comment_popup(); // WPCS: xss ok.
-                echo bootswatch_get_categories_links(); // WPCS: xss ok.
-                echo bootswatch_get_tags_links(); // WPCS: xss ok.
+                echo bootswatches_get_the_comment_popup(); // WPCS: xss ok.
+                echo bootswatches_get_categories_links(); // WPCS: xss ok.
+                echo bootswatches_get_tags_links(); // WPCS: xss ok.
                 ?>
             </div><!-- .post-meta -->
 
@@ -79,7 +79,7 @@ global $post;
 
         <!-- The edit link -->
         <div class="post-meta">
-            <?php bootswatch_the_edit_post_link(); ?>
+            <?php bootswatches_the_edit_post_link(); ?>
         </div>
 
 

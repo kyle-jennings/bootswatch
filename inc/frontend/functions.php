@@ -1,6 +1,6 @@
 <?php
 
-function bootswatch_get_quote_markup($quote = null) {
+function bootswatches_get_quote_markup($quote = null) {
     if( !is_array($quote) || !isset($quote['author']) || !isset($quote['body']) )
         return;
 
@@ -14,7 +14,7 @@ function bootswatch_get_quote_markup($quote = null) {
 }
 
 
-function bootswatch_get_chat_log($chat = null) {
+function bootswatches_get_chat_log($chat = null) {
     if(!$chat || empty($chat) || empty($chat['messages']))
         return;
 

@@ -9,7 +9,7 @@
  * @param  [type] $wp_customize [description]
  * @return [type]               [description]
  */
-function bootswatch_header_settings($wp_customize){
+function bootswatches_header_settings($wp_customize){
 
 
     // the section
@@ -21,7 +21,7 @@ function bootswatch_header_settings($wp_customize){
 
     $wp_customize->add_setting( 'header_sortables_setting', array(
         'default' => '[{"name":"navbar","label":"Navbar"},{"name":"hero","label":"Hero"}]',
-        'sanitize_callback' => 'bootswatch_header_sortable_sanitize',
+        'sanitize_callback' => 'bootswatches_header_sortable_sanitize',
     ) );
 
     // header size
@@ -35,7 +35,7 @@ function bootswatch_header_settings($wp_customize){
         parts around to change the order they are displayed.', 'bootswatch');
 
     $wp_customize->add_control(
-        new Bootswatch_Sortable_Control( $wp_customize,
+        new Bootswatches_Sortable_Control( $wp_customize,
             'header_sortables_control', array(
                 'description' => sprintf('%s', $description),
                 'label' => __('Header Order', 'bootswatch'),
@@ -59,7 +59,7 @@ function bootswatch_header_settings($wp_customize){
 
 
     $wp_customize->add_control(
-        new Bootswatch_Label_Custom_Control(
+        new Bootswatches_Label_Custom_Control(
             $wp_customize,
             'navbar_label_control',
             array(
@@ -74,7 +74,7 @@ function bootswatch_header_settings($wp_customize){
 
     $wp_customize->add_setting( 'navbar_search_setting', array(
         'default' => 'none',
-        'sanitize_callback' => 'bootswatch_navbar_search_setting_sanitize',
+        'sanitize_callback' => 'bootswatches_navbar_search_setting_sanitize',
     ) );
 
     $wp_customize->add_control('navbar_search_control', array(
@@ -94,7 +94,7 @@ function bootswatch_header_settings($wp_customize){
 
     $wp_customize->add_setting( 'navbar_color_setting', array(
         'default' => 'light',
-        'sanitize_callback' => 'bootswatch_navbar_color_setting_sanitize',
+        'sanitize_callback' => 'bootswatches_navbar_color_setting_sanitize',
     ) );
 
     $wp_customize->add_control('navbar_color_control', array(
@@ -112,7 +112,7 @@ function bootswatch_header_settings($wp_customize){
 
     $wp_customize->add_setting( 'navbar_sticky_setting', array(
         'default' => 'no',
-        'sanitize_callback' => 'bootswatch_navbar_sticky_sanitize',
+        'sanitize_callback' => 'bootswatches_navbar_sticky_sanitize',
     ) );
 
     $wp_customize->add_control('navbar_sticky_control', array(
@@ -130,7 +130,7 @@ function bootswatch_header_settings($wp_customize){
 
     $wp_customize->add_setting( 'navbar_brand_setting', array(
         'default' => 'text',
-        'sanitize_callback' => 'bootswatch_navbar_brand_sanitize',
+        'sanitize_callback' => 'bootswatches_navbar_brand_sanitize',
     ) );
 
     $wp_customize->add_control('navbar_brand_control', array(
@@ -160,7 +160,7 @@ function bootswatch_header_settings($wp_customize){
 
 
     $wp_customize->add_control(
-        new Bootswatch_Label_Custom_Control(
+        new Bootswatches_Label_Custom_Control(
             $wp_customize,
             'banner_label_control',
             array(
@@ -175,7 +175,7 @@ function bootswatch_header_settings($wp_customize){
 
     $wp_customize->add_setting( 'banner_visibility_setting', array(
         'default' => 'hide',
-        'sanitize_callback' => 'bootswatch_banner_visibility_sanitize',
+        'sanitize_callback' => 'bootswatches_banner_visibility_sanitize',
     ) );
 
     $wp_customize->add_control('banner_visibility_control', array(
@@ -221,4 +221,4 @@ function bootswatch_header_settings($wp_customize){
 
 
 }
-add_action('customize_register', 'bootswatch_header_settings');
+add_action('customize_register', 'bootswatches_header_settings');

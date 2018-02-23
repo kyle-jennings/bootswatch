@@ -1,12 +1,12 @@
 <?php
 
-if( class_exists('BootswatchThemes'))
+if( class_exists('BootswatchesThemes'))
     return false;
 
-class BootswatchThemes {
+class BootswatchesThemes {
 
     /**
-     * The bootswatch themes
+     * The bootswatches themes
      * @var array
      */
     private $theme_list = array(
@@ -66,7 +66,7 @@ class BootswatchThemes {
     {
 
         foreach($this->theme_list as $theme){
-            $BootSwatch = new Bootswatch($theme);
+            $BootSwatch = new Bootswatches($theme);
 
             $BootSwatch->setCSS();
             $BootSwatch->setThumbnail();
@@ -99,8 +99,8 @@ class BootswatchThemes {
             'sass_bootswatch',
             'theme_dir',
             'theme_uri',
-            'bootswatch_dir',
-            'bootswatch_uri',
+            'bootswatches_dir',
+            'bootswatches_uri',
             'thumbnail'
         );
 

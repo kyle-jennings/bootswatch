@@ -17,7 +17,7 @@ global $post;
     <header class="post-header col-md-12">
         <h2 class="post-title">
         <?php
-            the_title( bootswatch_post_format_icon( get_post_format() )
+            the_title( bootswatches_post_format_icon( get_post_format() )
             . '<a href="'
             . esc_url( get_permalink() ) . '" rel="bookmark">',
             '</a>' );
@@ -29,7 +29,7 @@ global $post;
 <?php
     if($video){
         echo '<div class="col-md-12">';
-        echo bootswatch_get_the_video_markup($video); // WPCS: xss ok.
+        echo bootswatches_get_the_video_markup($video); // WPCS: xss ok.
         echo '</div>';
     }
 
@@ -37,19 +37,19 @@ global $post;
 
     <div class="col-md-4 post-col-left">
 
-        <?php bootswatch_post_thumbnail($post); ?>
+        <?php bootswatches_post_thumbnail($post); ?>
 
         <?php
         if ( 'page' !== get_post_type() ) : ?>
             <div class="post-meta">
                 <?php
 
-                echo bootswatch_get_the_date(); // WPCS: xss ok.
-                echo bootswatch_get_the_author(); // WPCS: xss ok.
+                echo bootswatches_get_the_date(); // WPCS: xss ok.
+                echo bootswatches_get_the_author(); // WPCS: xss ok.
 
-                echo bootswatch_get_the_comment_popup(); // WPCS: xss ok.
-                echo bootswatch_get_categories_links(); // WPCS: xss ok.
-                echo bootswatch_get_tags_links(); // WPCS: xss ok.
+                echo bootswatches_get_the_comment_popup(); // WPCS: xss ok.
+                echo bootswatches_get_categories_links(); // WPCS: xss ok.
+                echo bootswatches_get_tags_links(); // WPCS: xss ok.
                 ?>
             </div><!-- .post-meta -->
 
@@ -77,7 +77,7 @@ global $post;
         </div><!-- .post-meta -->
 
         <div class="post-meta">
-            <?php bootswatch_the_edit_post_link(); ?>
+            <?php bootswatches_the_edit_post_link(); ?>
         </div>
 
 

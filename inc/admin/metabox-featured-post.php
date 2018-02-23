@@ -2,7 +2,7 @@
 
 
 
-function bootswatch_featured_post_metabox_markup($post) {
+function bootswatches_featured_post_metabox_markup($post) {
 
     $featured_post = get_option('featured-post--'.$post->post_type, null);
     $checked = ($post->ID === $featured_post) ? 'checked' : '';
@@ -21,7 +21,7 @@ function bootswatch_featured_post_metabox_markup($post) {
 
 
 
-function bootswatch_featured_post_metabox() {
+function bootswatches_featured_post_metabox() {
     $args = array(
        'public'   => true,
        'publicly_queryable' => true,
@@ -33,18 +33,18 @@ function bootswatch_featured_post_metabox() {
     add_meta_box(
         'featured_post',
         'Featured Post',
-        'bootswatch_featured_post_metabox_markup',
+        'bootswatches_featured_post_metabox_markup',
         $cpts,
         'side',
         'high',
         null
     );
 }
-add_action( 'add_meta_boxes', 'bootswatch_featured_post_metabox' );
+add_action( 'add_meta_boxes', 'bootswatches_featured_post_metabox' );
 
 
 
-function bootswatch_save_featured_post($post_id, $post, $update) {
+function bootswatches_save_featured_post($post_id, $post, $update) {
 
     if(!current_user_can("edit_post", $post_id))
         return $post_id;
@@ -68,4 +68,4 @@ function bootswatch_save_featured_post($post_id, $post, $update) {
 
 }
 
-add_action("save_post", "bootswatch_save_featured_post", 10, 3);
+add_action("save_post", "bootswatches_save_featured_post", 10, 3);

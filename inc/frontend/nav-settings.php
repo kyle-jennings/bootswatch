@@ -2,7 +2,7 @@
 
 
 
-function bootswatch_get_bootswatch_nav_title() {
+function bootswatches_get_bootswatches_nav_title() {
     $output = '';
     $link = '<a href="' . esc_url( home_url( '/' ) ) . '"
         accesskey="1" title="Home" aria-label="Home"> '.get_bloginfo( 'name', 'display' ).'
@@ -17,6 +17,6 @@ function bootswatch_get_bootswatch_nav_title() {
 }
 
 
-function bootswatch_nav_title() {
-    echo bootswatch_get_bootswatch_nav_title(); // WPCS: xss ok.
+function bootswatches_nav_title() {
+    echo bootswatches_get_bootswatches_nav_title(); // WPCS: xss ok.
 }

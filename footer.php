@@ -13,7 +13,7 @@
 
 <footer class="section section--footer">
 
-            <?php bootswatch_footer(); ?>
+            <?php bootswatches_footer(); ?>
 </footer><!-- /site-footer -->
 
 </div><!-- /page-wrapper -->

@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <?php echo bootswatch_get_navbar_brand(); // WPCS: xss ok.?>
+            <?php echo bootswatches_get_navbar_brand(); // WPCS: xss ok.?>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -19,7 +19,7 @@
                 'container' => '',
                 'menu_class'     => 'nav navbar-nav',
                 'walker' => new NavbarWalker(),
-                'fallback_cb' => 'bootswatch_set_default_menu'
+                'fallback_cb' => 'bootswatches_set_default_menu'
             );
 
              wp_nav_menu( $args );

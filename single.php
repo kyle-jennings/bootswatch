@@ -19,7 +19,7 @@ get_header();
  * $sidebar_position
  *
  */
-extract( bootswatch_template_settings() );
+extract( bootswatches_template_settings() );
 
 if( !$hide_content ):
 ?>
@@ -30,7 +30,7 @@ if( !$hide_content ):
 
     <?php
     if($sidebar_position == 'left'):
-        bootswatch_get_sidebar($template, $sidebar_position);
+        bootswatches_get_sidebar($template, $sidebar_position);
     endif;
     ?>
     <div class="main-content <?php echo esc_attr($main_width); ?>">
@@ -46,7 +46,7 @@ if( !$hide_content ):
                 'next_text' => 'Next Post &raquo;',
             );
 
-            bootswatch_the_post_navigation($navigation_args);
+            bootswatches_the_post_navigation($navigation_args);
 
     		// If comments are open or we have at least one comment, load up the comment template.
     		if ( comments_open() || get_comments_number() ) :
@@ -58,7 +58,7 @@ if( !$hide_content ):
     </div>
     <?php
     if($sidebar_position == 'right'):
-        bootswatch_get_sidebar($template, $sidebar_position);
+        bootswatches_get_sidebar($template, $sidebar_position);
     endif;
     ?>
 

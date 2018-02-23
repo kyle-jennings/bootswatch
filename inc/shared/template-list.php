@@ -8,17 +8,17 @@
  * @package Benjamin
  */
 
-function bootswatch_get_template_info($name = null) {
+function bootswatches_get_template_info($name = null) {
 
     if(!$name)
         return;
 
-    $templates = bootswatch_the_template_list();
+    $templates = bootswatches_the_template_list();
     return $templates[$name];
 }
 
 
-function bootswatch_the_template_list($use_widget_areas = false, $add_default = false) {
+function bootswatches_the_template_list($use_widget_areas = false, $add_default = false) {
 
 
     $desc_warning = '<p>The layout settings and widgets on this template are not available
@@ -129,7 +129,7 @@ function bootswatch_the_template_list($use_widget_areas = false, $add_default = 
         ),
     );
 
-    $cpts = bootswatch_get_cpts();
+    $cpts = bootswatches_get_cpts();
 
     $templates = $templates + $cpts;
 

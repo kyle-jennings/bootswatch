@@ -13,7 +13,7 @@
  *
  * @see WP_Widget
  */
-class Bootswatch_Widget_Recent_Comments extends WP_Widget {
+class Bootswatches_Widget_Recent_Comments extends WP_Widget {
 	/**
 	 * Sets up a new Recent Comments widget instance.
 	 *

@@ -6,7 +6,7 @@
  * @param  [type] $wp_customize [description]
  * @return [type]               [description]
  */
-function bootswatch_site_identity($wp_customize) {
+function bootswatches_site_identity($wp_customize) {
 
 
     $logo_desc = __('The logo appears in the navbar and must be toggled in the ', 'bootswatch');
@@ -25,14 +25,14 @@ function bootswatch_site_identity($wp_customize) {
     // color scheme
     $wp_customize->add_setting( 'color_scheme_setting', array(
         'default' => 'standard',
-        'sanitize_callback' => 'bootswatch_color_scheme_sanitize',
+        'sanitize_callback' => 'bootswatches_color_scheme_sanitize',
         )
     );
 
     // removing red color scheme for now
     // 'red' => $red,
     $description = 'Bootswatch currently comes with 3 premade color schemes, like color swatches.';
-    $wp_customize->add_control( new Bootswatch_Color_Scheme_Custom_Control(
+    $wp_customize->add_control( new Bootswatches_Color_Scheme_Custom_Control(
         $wp_customize, 'color_scheme_control', array(
             'description' => $description,
             'label'   => __('Color Scheme', 'bootswatch'),
@@ -47,8 +47,8 @@ function bootswatch_site_identity($wp_customize) {
     );
 
     $wp_customize->add_setting( 'sidebar_size_setting', array(
-        'default' => 'BOOTSWATCH_ONE_THIRD',
-        'sanitize_callback' => 'bootswatch_sidebar_width_sanitize',
+        'default' => 'BOOTSWATCHES_ONE_THIRD',
+        'sanitize_callback' => 'bootswatches_sidebar_width_sanitize',
         )
     );
 
@@ -58,11 +58,11 @@ function bootswatch_site_identity($wp_customize) {
             'settings' => 'sidebar_size_setting',
             'type' => 'select',
             'choices' => array(
-                        'BOOTSWATCH_ONE_THIRD' => __('Wide', 'bootswatch'),
-                        'BOOTSWATCH_ONE_FOURTH' => __('Narrow', 'bootswatch'),
+                        'BOOTSWATCHES_ONE_THIRD' => __('Wide', 'bootswatch'),
+                        'BOOTSWATCHES_ONE_FOURTH' => __('Narrow', 'bootswatch'),
                     ),
         )
     );
 
 }
-add_action('customize_register', 'bootswatch_site_identity');
+add_action('customize_register', 'bootswatches_site_identity');

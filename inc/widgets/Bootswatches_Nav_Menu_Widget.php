@@ -8,7 +8,7 @@
  * and messy process to refactor the CSS to match the and since we have to add
  * the new display options, we might as well jsut go the extra mile and add the markup here
  */
-class Bootswatch_Nav_Menu_Widget extends WP_Nav_Menu_Widget {
+class Bootswatches_Nav_Menu_Widget extends WP_Nav_Menu_Widget {
 
 	/**
 	 * Outputs the content for the current Custom Menu widget instance.

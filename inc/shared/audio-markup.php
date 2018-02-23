@@ -4,7 +4,7 @@
  * is used in various places
  */
 
-function bootswatch_get_the_audio_markup($url = null, $background = null) {
+function bootswatches_get_the_audio_markup($url = null, $background = null) {
     if(!$url)
         return;
 
@@ -37,13 +37,13 @@ function bootswatch_get_the_audio_markup($url = null, $background = null) {
 }
 
 
-function bootswatch_the_audio_markup($url, $background = null) {
-    echo bootswatch_get_the_audio_markup($url, $background); //WPCS: xss ok.
+function bootswatches_the_audio_markup($url, $background = null) {
+    echo bootswatches_get_the_audio_markup($url, $background); //WPCS: xss ok.
 }
 
 
 
-function bootswatch_enqueue_visualizer_script(){
+function bootswatches_enqueue_visualizer_script(){
     $script = 'window.audioVis2D(".js--audio-player");';
     wp_enqueue_script('audio-vis-2d', get_template_directory_uri() . '/assets/frontend/js/audio-vis-2d.js', null, null, true);
     wp_add_inline_script('audio-vis-2d', $script, 'after');

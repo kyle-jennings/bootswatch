@@ -21,7 +21,7 @@ $args = array(
 );
 
 $wp_customize->add_control(
-    new Bootswatch_Label_Custom_Control(
+    new Bootswatches_Label_Custom_Control(
         $wp_customize,
         $name . '_other_settings_label_control',
         $args
@@ -31,7 +31,7 @@ $wp_customize->add_control(
 
 $wp_customize->add_setting( $name.'_page_layout_setting', array(
     'default'        => '',
-    'sanitize_callback' => 'bootswatch_hide_layout_sanitize',
+    'sanitize_callback' => 'bootswatches_hide_layout_sanitize',
 ) );
 
 $layout_args = array(
@@ -51,7 +51,7 @@ $layout_args = array(
 );
 
 $wp_customize->add_control(
-    new Bootswatch_Checkbox_Group_Control(
+    new Bootswatches_Checkbox_Group_Control(
         $wp_customize,
         $name.'_page_layout_control',
         $layout_args

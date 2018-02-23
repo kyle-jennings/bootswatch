@@ -10,8 +10,8 @@
  * Register the widget areas, and determine the width of said area to use to 
  * size the widgets correctly
  */
-function bootswatch_widgets_init() {
-    $templates = bootswatch_the_template_list(true, true);
+function bootswatches_widgets_init() {
+    $templates = bootswatches_the_template_list(true, true);
     $sidebars = wp_get_sidebars_widgets();
     foreach($templates as $name => $args){
         $sidebar_size = '';
@@ -31,7 +31,7 @@ function bootswatch_widgets_init() {
             'widgetized-widget-area-3',
         );
 
-        // $sidebar_size = bootswatch_determine_widget_width_rules($pos, $name);
+        // $sidebar_size = bootswatches_determine_widget_width_rules($pos, $name);
         // determine whether or not to apply withs to the widgets
         if ( in_array($name, $horizontals) ){
             $sidebar_size = 'full';
@@ -39,7 +39,7 @@ function bootswatch_widgets_init() {
 
         // figure out which width rules to use
         if($sidebar_size == 'full')
-            $width = bootswatch_calculate_widget_width($count);
+            $width = bootswatches_calculate_widget_width($count);
         else
             $width = '';
 
@@ -58,7 +58,7 @@ function bootswatch_widgets_init() {
 
 
 }
-add_action( 'init', 'bootswatch_widgets_init' );
+add_action( 'init', 'bootswatches_widgets_init' );
 
 
 
@@ -95,7 +95,7 @@ function add_classes_to__widget($args){
  * @param  [type] $count [description]
  * @return [type]        [description]
  */
-function bootswatch_calculate_widget_width($count){
+function bootswatches_calculate_widget_width($count){
     $cols = 12;
     if($count <= 0)
         return '';
@@ -107,7 +107,7 @@ function bootswatch_calculate_widget_width($count){
  * Deactivate and hide the widget area if it is not "active"
  * @return [type] [description]
  */
-function bootswatch_hide_inactive_templates_on_widget_screen(){
+function bootswatches_hide_inactive_templates_on_widget_screen(){
     $screen = get_current_screen();
 
     if($screen->id !== 'widgets')
@@ -124,7 +124,7 @@ function bootswatch_hide_inactive_templates_on_widget_screen(){
         'widgetized-widget-area-3',
     );
 
-    $templates = bootswatch_the_template_list(true);
+    $templates = bootswatches_the_template_list(true);
 
     // loop through all the templates
     foreach($templates as $name => $args){
@@ -157,4 +157,4 @@ function bootswatch_hide_inactive_templates_on_widget_screen(){
     }
 
 }
-add_action('sidebar_admin_setup', 'bootswatch_hide_inactive_templates_on_widget_screen');
+add_action('sidebar_admin_setup', 'bootswatches_hide_inactive_templates_on_widget_screen');

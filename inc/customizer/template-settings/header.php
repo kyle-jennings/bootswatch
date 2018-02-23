@@ -22,7 +22,7 @@ $args = array(
 );
 
 $wp_customize->add_control(
-    new Bootswatch_Label_Custom_Control(
+    new Bootswatches_Label_Custom_Control(
         $wp_customize,
         $name . '_header_label_control',
         $args
@@ -35,7 +35,7 @@ $wp_customize->add_control(
  */
 $wp_customize->add_setting( $name . '_image_setting', array(
     'default'      => null,
-    'sanitize_callback' => 'bootswatch_hero_image_sanitization',
+    'sanitize_callback' => 'bootswatches_hero_image_sanitization',
 ) );
 
 $hero_image_args = array(
@@ -66,7 +66,7 @@ $wp_customize->add_control(
  */
 $wp_customize->add_setting( $name . '_hero_position_setting', array(
     'default' => 'top',
-    'sanitize_callback' => 'bootswatch_hero_position_sanitize',
+    'sanitize_callback' => 'bootswatches_hero_position_sanitize',
 ) );
 
 $choices = array(
@@ -95,7 +95,7 @@ $wp_customize->add_control( $name . '_hero_position_control', $hero_position_arg
  */
 $wp_customize->add_setting( $name . '_hero_size_setting', array(
     'default' => 'medium',
-    'sanitize_callback' => 'bootswatch_hero_size_sanitize',
+    'sanitize_callback' => 'bootswatches_hero_size_sanitize',
 ) );
 
 $hero_size_args = array(

@@ -1,4 +1,4 @@
-<?php bootswatch_template_settings(); ?>
+<?php bootswatches_template_settings(); ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -22,4 +22,4 @@
 <div id="page-wrapper" class="page-wrapper">
 
 <?php
-    bootswatch_the_header();
+    bootswatches_the_header();

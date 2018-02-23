@@ -1,11 +1,11 @@
 <?php
 
-function bootswatch_featured_video_metabox_markup($post) {
+function bootswatches_featured_video_metabox_markup($post) {
 
     $url = get_post_meta($post->ID, 'featured-video', true);
     $video = null;
     if($url) {
-        $video = bootswatch_get_the_video_markup($url);
+        $video = bootswatches_get_the_video_markup($url);
     }
 ?>
     <div class="js--media-wrapper">
@@ -35,7 +35,7 @@ function bootswatch_featured_video_metabox_markup($post) {
 
 
 
-function bootswatch_featured_video_metabox() {
+function bootswatches_featured_video_metabox() {
     $args = array(
        'public'   => true,
        'publicly_queryable' => true,
@@ -46,19 +46,19 @@ function bootswatch_featured_video_metabox() {
     add_meta_box(
         'featured_video',
         'Featured Video',
-        'bootswatch_featured_video_metabox_markup',
+        'bootswatches_featured_video_metabox_markup',
         $cpts,
         'side',
         'low',
         null
     );
 }
-add_action( 'add_meta_boxes', 'bootswatch_featured_video_metabox' );
+add_action( 'add_meta_boxes', 'bootswatches_featured_video_metabox' );
 
 
 
 
-function bootswatch_save_featured_video($post_id, $post, $update) {
+function bootswatches_save_featured_video($post_id, $post, $update) {
 
     if(!current_user_can("edit_post", $post_id))
         return $post_id;
@@ -78,7 +78,7 @@ function bootswatch_save_featured_video($post_id, $post, $update) {
 
         // if local - Check for .mp4 or .mov format, which
         // (assuming h.264 encoding) are the only cross-browser-supported formats.
-        if( strpos($url, home_url()) !== false  && bootswatch_validate_local_video($url) ) {
+        if( strpos($url, home_url()) !== false  && bootswatches_validate_local_video($url) ) {
             update_post_meta($post_id, 'featured-video', $url);
         } elseif( preg_match( '#^https?://(?:www\.)?(?:youtube\.com/watch|youtu\.be/)#', $url ) ) {
             update_post_meta($post_id, 'featured-video', $url);
@@ -92,10 +92,10 @@ function bootswatch_save_featured_video($post_id, $post, $update) {
 
 }
 
-add_action("save_post", "bootswatch_save_featured_video", 10, 3);
+add_action("save_post", "bootswatches_save_featured_video", 10, 3);
 
 
-function bootswatch_validate_local_video($url) {
+function bootswatches_validate_local_video($url) {
     global $wpdb;
 	$attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $url ));
     $id = $attachment[0];

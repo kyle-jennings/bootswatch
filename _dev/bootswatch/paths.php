@@ -1,6 +1,6 @@
 <?php
 
-namespace bootswatch;
+namespace bootswatches;
 
 trait paths {
     
@@ -12,7 +12,7 @@ trait paths {
     static public $fontawesome_dir;
     static public $twbs_bootstrap_dir;
     static public $custom_dir;
-    static public $bootswatch_dir;
+    static public $bootswatches_dir;
 
     static public $custom_manifest;
 
@@ -33,7 +33,7 @@ trait paths {
         self::$fontawesome_dir = self::$src_dir . '/vendor/fortawesome/font-awesome';
         self::$twbs_bootstrap_dir = self::$src_dir . '/vendor/twbs/bootstrap-sass/assets/stylesheets';
         self::$custom_dir = self::$src_dir . '/src/frontend/scss';
-        self::$bootswatch_dir = self::$src_dir . '/vendor/thomaspark/bootswatch';
+        self::$bootswatches_dir = self::$src_dir . '/vendor/thomaspark/bootswatch';
 
         // our custom SCSS modules
         self::$custom_manifest = self::$custom_dir . '/manifest.scss';
