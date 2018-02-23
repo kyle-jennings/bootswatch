@@ -9,7 +9,7 @@ function bootswatch_scripts() {
     if(is_admin())
         return;
 
-    $default = get_template_directory_uri() . '/assets/frontend/css/bootstrap/bootswatch.css';
+    $default = get_template_directory_uri() . '/assets/frontend/css/bootstrap/bootstrap.css';
 
     $theme = get_theme_mod('color_scheme_setting', $default);
     

@@ -1,4 +1,15 @@
 .navbar {
     border-radius: 0;
     margin-bottom: 20px !important;
+
+    > .container {
+        display: flex;
+        align-items: center;
+    }
+
+    .navbar-brand--image {
+        height: 100%;
+    }
 }
+
+

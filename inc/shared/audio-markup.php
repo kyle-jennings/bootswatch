@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * This file contains teh functions to pruduce the markup for the audio player which 
+ * is used in various places
+ */
 
 function bootswatch_get_the_audio_markup($url = null, $background = null) {
     if(!$url)
@@ -41,14 +44,8 @@ function bootswatch_the_audio_markup($url, $background = null) {
 
 
 function bootswatch_enqueue_visualizer_script(){
-    $file = get_template_directory() . '/_dev/src/js/audio-vis-2d.js';
-    if(!is_readable($file))
-        return false;
-    $script = '';
-    $script .= '<script>';
-        $script .= file_get_contents($file);
-        $script .= 'window.audioVis2D(".js--audio-player");';
-    $script .= '</script>';
+    $script = 'window.audioVis2D(".js--audio-player");';
+    wp_enqueue_script('audio-vis-2d', get_template_directory_uri() . '/assets/frontend/js/audio-vis-2d.js', null, null, true);
+    wp_add_inline_script('audio-vis-2d', $script, 'after');
 
-    echo $script; // WPCS: xss ok.
 }

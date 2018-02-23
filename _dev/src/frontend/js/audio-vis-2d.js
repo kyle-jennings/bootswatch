@@ -33,14 +33,19 @@ window.audioVis2D = function(elm, usrOpts) {
     if(!$audio || !$canvas)
       return false;
 
+
+    var root = document.querySelector(':root');
+    var rootStyles = getComputedStyle(root);
+
+
     var options = {
-      gap: 2,
+      gap: 5,
       capHeight: 2,
-      colWidth: 10,
-      capColor: '#fff',
-      topColor: '#0012ff',
-      middleColor: '#ff0',
-      bottomColor: '#0f0'
+      colWidth: 5,
+      capColor: rootStyles.getPropertyValue('--gray-lighter') || '#fff',
+      topColor: rootStyles.getPropertyValue('--brand-primary') || '#0012ff',
+      middleColor: rootStyles.getPropertyValue('--brand-warning') || '#ff0',
+      bottomColor: rootStyles.getPropertyValue('--brand-danger') || '#0f0'
     };
     options = Object.assign(options, usrOpts);
 
@@ -49,8 +54,6 @@ window.audioVis2D = function(elm, usrOpts) {
     var analyser = ctx.createAnalyser();
     var audioSrc = ctx.createMediaElementSource($audio);
 
-    var gap = 2;
-    var colWidth = 10;
     // we have to connect the MediaElementSource with the analyser
     audioSrc.connect(analyser);
     analyser.connect(ctx.destination);

@@ -28,7 +28,7 @@ class BuildBootswatches {
         $scss_paths = array(
             self::$twbs_bootstrap_dir, 
             self::$fontawesome_dir . '/scss',
-            self::$modules_dir, 
+            self::$custom_dir, 
         );
 
         // init the compiler
@@ -93,7 +93,8 @@ class BuildBootswatches {
         $files = array(
             self::$fontawesome_dir . '/scss/font-awesome.scss',
             self::$twbs_bootstrap_dir . '/_bootstrap.scss',
-            self::$modules_manifest,
+            self::$custom_manifest,
+            self::$custom_dir . '/browser-variables.scss'
         );
 
 
@@ -157,7 +158,8 @@ class BuildBootswatches {
                 $theme->sass_variables,
                 self::$twbs_bootstrap_dir . '/_bootstrap.scss',
                 $theme->sass_bootswatch,
-                self::$modules_manifest,
+                self::$custom_manifest,
+                self::$custom_dir . '/browser-variables.scss'
             );
 
 
@@ -213,7 +215,9 @@ class BuildBootswatches {
 
 
         // compile it
+        error_log('--- Compiling CSS' . "\n");
         self::runCompiler($name, $css_dir, $sources, 'Expanded');
+        error_log('--- Minifying CSS' . "\n");
         self::runCompiler($name, $css_dir, $sources, 'Crunched');
 
         return true;
@@ -233,7 +237,7 @@ class BuildBootswatches {
 
         if(!$name || !$css_dir || !$sources || empty($sources) || !$method)
             return false;
-        error_log('--- Compiling CSS' . "\n");
+
 
         $suffix = ($method == 'Crunched') ? '.min' : '';
         $method = 'Leafo\ScssPhp\Formatter\\' . $method;

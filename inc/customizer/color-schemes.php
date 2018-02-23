@@ -15,11 +15,14 @@ function bootswatch_select_colorscheme($wp_customize) {
             'priority' => 20,
         )
     );
+
+    $default = get_template_directory_uri() . '/assets/frontend/css/bootstrap/bootstrap.min.css';
+
     // color scheme
     $wp_customize->add_setting(
         'color_scheme_setting',
         array(
-            'default' => 'bootstrap',
+            'default' => $default,
             'sanitize_callback' => 'bootswatch_color_scheme_sanitize',
             'validate_callback' => 'bootswatch_color_scheme_validate',
         )
@@ -29,7 +32,6 @@ function bootswatch_select_colorscheme($wp_customize) {
     $themes = bootswatch_get_scheme_css();
     
     $themes = apply_filters('bootswatch_filter_themes', $themes);
-    
 
     $wp_customize->add_control(
         new ColorScheme(

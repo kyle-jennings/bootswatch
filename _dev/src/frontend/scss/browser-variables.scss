@@ -1,0 +1,24 @@
+
+$varcolors: () !default;
+$varcolors: map-merge((
+'gray-base': $gray-base,
+'gray-darker': $gray-darker,
+'gray-dark': $gray-dark,
+'gray': $gray,
+'gray-light': $gray-light,
+'gray-lighter': $gray-lighter,
+'brand-primary': $brand-primary,
+'brand-success': $brand-success,
+'brand-info': $brand-info,
+'brand-warning': $brand-warning,
+'brand-danger': $brand-danger,
+), $varcolors);
+
+:root {
+  // Custom variable values only support SassScript inside `#{}`.
+  @each $color, $value in $varcolors {
+    --#{$color}: #{$value};
+  }
+
+
+}

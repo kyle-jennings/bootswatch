@@ -7,6 +7,7 @@ if ( ! class_exists( 'WP_Customize_Control' ) )
 if(!class_exists('ColorScheme')) {
     class ColorScheme extends WP_Customize_Control
     {
+        public $default;
         public $type = 'color-scheme';
         public $themes;
 
@@ -40,8 +41,9 @@ if(!class_exists('ColorScheme')) {
                     <input type="radio" name="<?php echo esc_attr($this->id); ?>"
                         <?php $this->link(); ?>
                         value="<?php echo esc_attr($theme->css_uri); ?>"
-                        <?php selected($this->value(), $theme->css_uri) ?>
+                        <?php selected($this->value(), $theme->css_uri); ?>
                     />
+
                     <?php echo esc_attr(ucfirst($theme->name)); ?>
                     <img class="swatches" src="<?php echo esc_url($theme->thumbnail_uri); ?>" />
 

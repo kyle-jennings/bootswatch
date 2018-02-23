@@ -11,10 +11,10 @@ trait paths {
     
     static public $fontawesome_dir;
     static public $twbs_bootstrap_dir;
-    static public $modules_dir;
+    static public $custom_dir;
     static public $bootswatch_dir;
 
-    static public $modules_manifest;
+    static public $custom_manifest;
 
 
     static public function initPaths()
@@ -32,11 +32,11 @@ trait paths {
         // directories - used for compiling (the paths are needed)
         self::$fontawesome_dir = self::$src_dir . '/vendor/fortawesome/font-awesome';
         self::$twbs_bootstrap_dir = self::$src_dir . '/vendor/twbs/bootstrap-sass/assets/stylesheets';
-        self::$modules_dir = self::$src_dir . '/src/frontend/scss';
+        self::$custom_dir = self::$src_dir . '/src/frontend/scss';
         self::$bootswatch_dir = self::$src_dir . '/vendor/thomaspark/bootswatch';
 
         // our custom SCSS modules
-        self::$modules_manifest = self::$modules_dir . '/manifest.scss';
+        self::$custom_manifest = self::$custom_dir . '/manifest.scss';
 
 
 
