@@ -30,7 +30,6 @@ function bootswatches_select_colorscheme($wp_customize) {
 
 
     $themes = bootswatches_get_scheme_css();
-    
     $themes = apply_filters('bootswatches_filter_themes', $themes);
 
     $wp_customize->add_control(

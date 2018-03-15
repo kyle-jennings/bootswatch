@@ -1,4 +1,4 @@
-=== Bootswatch ===
+=== Bootswatches ===
 
 Requires at least: 4.5
 Tested up to: 4.7
@@ -6,7 +6,7 @@ Stable tag: 1.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Copyright 2017 Kyle Jennings
-Bootswatch is distributed under the terms of the GNU GPL
+Bootswatches is distributed under the terms of the GNU GPL
 
 == !! JS console error note !! ==
 When navigating to the 404 section in the customizer, there is an intentional JS error:
@@ -17,12 +17,8 @@ can be previewed while be customized!
 
 == Description ==
 
-Bootswatch is built with _s and the 18f US Web Design Standards.  The Web Design
-Standards are a library of design guidelines and code to help government
-developers and designers quickly create trustworthy, accessible, and consistent
-digital government services.
+Bootswatches is built with _s and Bootswatch - set of color schemes built with Twitter's Bootstrap.
 
-Theme Demo: https://uswds.sites.usa.gov
 
 == Installation ==
 
@@ -34,10 +30,10 @@ Theme Demo: https://uswds.sites.usa.gov
 * The following default settings have been removed as they are not implemented in this theme
 ** Colors - link and background colors are not configurable
 ** Background - Background wallpapers are not visible in this theme
-** Custom Headers are not implemented.  Arguably a similar feature exists, but is implemented different and is also logically grouped in with the template settings sections.
+** Custom Headers are not implemented.  Arguably a similar feature exists, but is implemented different - logically grouped in with the template settings sections.
 
-== Documentation for site identity  ==
-* The color scheme settings will change Bootswatch's colors to a series of preset combinations.
+== Documentation for site identity and color schemes ==
+* The color scheme settings will change Bootswatches's colors to a series of preset combinations.
 * The sidebar size setting has 2 options, wide (1/3rd page) and narrow (1/4th)
 * The logo is used for the navbar brand (if the navbar brand setting is changed.)
 
@@ -45,18 +41,15 @@ Theme Demo: https://uswds.sites.usa.gov
 * the menus only go 2 levels deep, the top level and a single dropdown
 
 == Documentation for header settings and navbar ==
-* The header order is a draggable, sortable setting which lets you select the position of the hero, navbar, and banner (banner is available if and only if your site domain is a .gov or .mil)
+* The header order is a draggable, sortable setting which lets you select the position of the hero, navbar
 * Search location allows you to place a search field in the navbar
-* You can change the navbar color scheme from light (default) to dark (kind of inverted)
 * The navbar can be set to stick to the top of the window when scrolling down
-* As mentioned in the site identity section, the brand can be set from text (default) to the logo
+* The brand can be set from text (default) to the logo
 
 == Documentation for templates setup ==
-* There are template which can be configured: the feed (default), frontpage, single post, single page, and widgetized page
-* Each template can be activated to override the feed (default) template settings
 * The hero image can be set
 * the hero size can be set to predefined sizes include a fullscreen size
-* the position can be hidden, or set to th left or right of the page
+* the sidebar position can be hidden, or set to the left or right of the page
 * the sizebar's visibility can be hidden or shown on different screen sizes
 
 == Documentation for frontpage setup ==
@@ -92,13 +85,23 @@ under GPLv2 or later
 * Underscores
 http://underscores.me/
 (C) 2012-2016 Automattic, Inc.
-License: [GPLv2 or later]
-URL: https://www.gnu.org/licenses/gpl-2.0.html
+License: [GPLv2 or later] (https://www.gnu.org/licenses/gpl-2.0.html )
 
 
-* US Web Design Standards (USWDS)
-(USWDS) v1.2.0 (https://standards.usa.gov/)
-Mixed License (https://github.com/18F/web-design-standards/blob/develop/LICENSE.md)
+* Bootswatches WordPress Theme
+https://github.com/kyle-jennings/bootswatches
+(C) 2018 Kyle Jennings
+[GPLv2 or later](https://www.gnu.org/licenses/gpl-2.0.html)
+
+* Bootswatch
+https://bootswatch.com/
+(C) 2014-2016 Thomas Park
+[MIT](http://opensource.org/licenses/MIT)
+
+* Twitter Bootstrap
+http://getbootstrap.com/
+(C) 2011-2017 The Bootstrap Authors and Twitter, Inc.
+[MIT](http://opensource.org/licenses/MIT)
 
 
 *  This program is distributed in the hope that it will be useful,

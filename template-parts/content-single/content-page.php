@@ -4,7 +4,7 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package Bootswatch
+ * @package Bootswatches
  */
 
 ?>
@@ -24,7 +24,7 @@
 	</div><!-- .post-meta -->
 
 	<?php if ( get_edit_post_link() ) : ?>
-		<footer class="entry-footer">
+		<footer class="post-footer">
 			<?php
 				edit_post_link(
 					sprintf(
@@ -36,6 +36,6 @@
 					'</span>'
 				);
 			?>
-		</footer><!-- .entry-footer -->
+		</footer><!-- .post-footer -->
 	<?php endif; ?>
 </article><!-- #post-## -->

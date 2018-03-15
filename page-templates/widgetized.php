@@ -30,7 +30,7 @@ if( !$hide_content ):
         <div class="row">
     <?php
         if($sidebar_position == 'left'):
-            bootswatches_get_sidebar($template, $sidebar_position);
+            bootswatches_get_sidebar($template, $sidebar_position, $sidebar_size);
         endif;
     ?>
 
@@ -40,7 +40,7 @@ if( !$hide_content ):
 
     <?php
         if($sidebar_position == 'right'):
-          bootswatches_get_sidebar($template, $sidebar_position);
+          bootswatches_get_sidebar($template, $sidebar_position, $sidebar_size);
         endif;
     ?>
 

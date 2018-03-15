@@ -1,5 +1,14 @@
 <?php
 
+
+/**
+ * Hides CSS files from teh media library
+ *
+ * When a user creates their own color scheme, it is compile to a CSS file, and 
+ * then uploaded to WordPress and thus would show up in the media library.  We 
+ * want to hide that to avoid accidental deletion.
+ * 
+ */
 function bootswatches_hide_css_files($query) {
   $include = array();
   $exclude = array();
@@ -19,4 +28,5 @@ function bootswatches_hide_css_files($query) {
   $query['post__not_in'] = $exclude;
   return $query;
 }
+
 add_filter('ajax_query_attachments_args', 'bootswatches_hide_css_files');

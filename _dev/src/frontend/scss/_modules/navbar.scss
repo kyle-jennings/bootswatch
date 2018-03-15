@@ -1,15 +1,28 @@
 .navbar {
+
     border-radius: 0;
     margin-bottom: 20px !important;
-
-    > .container {
-        display: flex;
-        align-items: center;
-    }
 
     .navbar-brand--image {
         height: 100%;
     }
+
 }
 
+
+.navbar.navbar-sticky {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    z-index: 9999;
+    
+    .logged-in & {
+        top: $admin-bar-height;
+
+        @media screen and (max-width: 782px) {
+            top: $admin-bar-height-mobile;
+        }
+    }
+
+}
 

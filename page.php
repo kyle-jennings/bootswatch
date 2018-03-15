@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
  *
- * @package Bootswatch
+ * @package Bootswatches
  */
 
 get_header();
@@ -30,7 +30,7 @@ if( !$hide_content ):
 
     <?php
     if($sidebar_position == 'left'):
-        bootswatches_get_sidebar($template, $sidebar_position);
+        bootswatches_get_sidebar($template, $sidebar_position, $sidebar_size);
     endif;
     ?>
     <div class="main-content <?php echo esc_attr($main_width); ?>">
@@ -45,7 +45,7 @@ if( !$hide_content ):
     </div>
     <?php
     if($sidebar_position == 'right'):
-        bootswatches_get_sidebar($template, $sidebar_position);
+        bootswatches_get_sidebar($template, $sidebar_position, $sidebar_size);
     endif;
     ?>
 

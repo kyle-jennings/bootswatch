@@ -9,7 +9,7 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package Bootswatch
+ * @package Bootswatches
  */
 
 get_header();
@@ -35,7 +35,7 @@ if( !$hide_content ):
         <div class="row">
     <?php
     if($sidebar_position == 'left'):
-        bootswatches_get_sidebar($template, $sidebar_position);
+        bootswatches_get_sidebar($template, $sidebar_position, $sidebar_size);
     endif;
     ?>
 
@@ -59,7 +59,7 @@ if( !$hide_content ):
 				 * If you want to override this in a child theme, then include a file
 				 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
 				 */
-				get_template_part( 'template-parts/content/content', 'search' );
+				get_template_part( 'template-parts/content-feed/content', 'search' );
 
 			endwhile;
 
@@ -67,14 +67,14 @@ if( !$hide_content ):
 
 		else :
 
-			get_template_part( 'template-parts/content/content', 'none' );
+			get_template_part( 'template-parts/content-feed/content', 'none' );
 
 		endif; ?>
   </div>
 
   <?php
   if($sidebar_position == 'right'):
-      bootswatches_get_sidebar($template, $sidebar_position);
+      bootswatches_get_sidebar($template, $sidebar_position, $sidebar_size);
   endif;
   ?>
 

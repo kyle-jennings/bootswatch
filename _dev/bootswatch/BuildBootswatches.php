@@ -1,6 +1,6 @@
 <?php
 
-namespace bootswatches;
+namespace bootswatch;
 
 use bootswatch\BootSwatchThemes;
 
@@ -93,6 +93,7 @@ class BuildBootswatches {
         $files = array(
             self::$fontawesome_dir . '/scss/font-awesome.scss',
             self::$twbs_bootstrap_dir . '/_bootstrap.scss',
+            self::$custom_dir . '/_variables.scss',
             self::$custom_manifest,
             self::$custom_dir . '/browser-variables.scss'
         );
@@ -158,6 +159,7 @@ class BuildBootswatches {
                 $theme->sass_variables,
                 self::$twbs_bootstrap_dir . '/_bootstrap.scss',
                 $theme->sass_bootswatch,
+                self::$custom_dir . '/_variables.scss',
                 self::$custom_manifest,
                 self::$custom_dir . '/browser-variables.scss'
             );
@@ -249,10 +251,10 @@ class BuildBootswatches {
             $css = self::$Compiler->compile($sources);
 
             if( !file_put_contents( $filename, $css ) )
-                self::examine('Unable to save CSS to file');
+                error_log('Unable to save CSS to file');
 
         } catch (\Exception $e) {
-            self::examine('something went wrong compiling the ' . $name . ' theme');
+            error_log( $e->getMessage() );
         }
 
     }

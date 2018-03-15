@@ -1,10 +1,11 @@
+
 <?php
 /**
  * The template for displaying 404 pages (not found)
  *
  * @link https://codex.wordpress.org/Creating_an_Error_404_Page
  *
- * @package Bootswatch
+ * @package Bootswatches
  */
 
 get_header();
@@ -40,7 +41,7 @@ if( !$hide_content ):
         <div class="row">
     <?php
     if($sidebar_position == 'left'):
-        bootswatches_get_sidebar($template, $sidebar_position);
+        bootswatches_get_sidebar($template, $sidebar_position, $sidebar_size);
     endif;
     ?>
 
@@ -69,7 +70,7 @@ if( !$hide_content ):
 
   <?php
   if($sidebar_position == 'right'):
-      bootswatches_get_sidebar($template, $sidebar_position);
+      bootswatches_get_sidebar($template, $sidebar_position, $sidebar_size);
   endif;
   ?>
 </div><!-- /row -->

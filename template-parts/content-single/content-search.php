@@ -4,27 +4,27 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package Bootswatch
+ * @package Bootswatches
  */
 
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
-		<?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
+	<header class="post-header">
+		<?php the_title( sprintf( '<h2 class="post-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
 
 		<?php if ( 'post' === get_post_type() ) : ?>
-		<div class="entry-meta">
-			<?php bootswatches_posted_on(); ?>
-		</div><!-- .entry-meta -->
+		<div class="post-meta">
+			<?php bootswatches_post_header(); ?>
+		</div><!-- .post-meta -->
 		<?php endif; ?>
-	</header><!-- .entry-header -->
+	</header><!-- .post-header -->
 
-	<div class="entry-summary">
+	<div class="post-summary">
 		<?php the_excerpt(); ?>
-	</div><!-- .entry-summary -->
+	</div><!-- .post-summary -->
 
-	<footer class="entry-footer">
+	<footer class="post-footer">
 		<?php bootswatches_entry_footer(); ?>
-	</footer><!-- .entry-footer -->
+	</footer><!-- .post-footer -->
 </article><!-- #post-## -->

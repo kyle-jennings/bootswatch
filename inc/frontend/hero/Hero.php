@@ -92,9 +92,10 @@ class Hero {
     function isPostFormat()
     {
         global $post;
+
+
         if($this->currentpage !== 'singular')
             return false;
-
 
         $format = get_post_format();
 
@@ -104,8 +105,9 @@ class Hero {
             return true;
         elseif( $format == 'image' && $this->HeroContent->getImage() )
             return true;
-        elseif($format == 'audio' && $this->HeroContent->getAudio()) {
+        elseif($format == 'audio' && $this->HeroContent->getAudio() ) {
             add_action('wp_footer', 'bootswatches_enqueue_visualizer_script' );
+            return true;
         }elseif( $format == 'quote' && $this->HeroContent->getQuote() )
             return true;
         else

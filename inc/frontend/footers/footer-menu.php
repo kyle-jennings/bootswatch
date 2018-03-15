@@ -8,7 +8,7 @@
         'depth'=> 0,
         'menu_class' => 'list-inline col-md-12',
         'theme_location' => 'footer',
-        'walker' => new FooterNavbarWalker(),
+        'walker' => new BootswatchesFooterNavbarWalker(),
         'fallback_cb' => 'bootswatches_set_default_menu'
     );
 

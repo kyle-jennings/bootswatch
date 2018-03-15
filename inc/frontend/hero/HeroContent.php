@@ -155,6 +155,7 @@ class HeroContent
         global $post;
         $src = get_post_meta($post->ID, '_post_format_audio', true);
 
+
         if(!$src)
             return null;
 

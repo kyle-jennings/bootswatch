@@ -11,6 +11,12 @@ function bootswatches_body_classes( $classes ) {
     unset($classes);
        $classes = array();
 
+
+      if( get_theme_mod('navbar_sticky_setting', false) ) {
+        $classes[] = 'sticky-nav';
+      }
+
+
        if( is_user_logged_in() ){
            $classes[] = 'logged-in';
        }

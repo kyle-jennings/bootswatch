@@ -61,7 +61,7 @@ gulp.task('front-js',['clean:front-js'], function(){
   });
 
   return gulp.src([
-    paths.srcPath + '/js/bootswatch.js',
+    paths.srcPath + '/js/bootswatches.js',
     paths.srcPath + '/js/audio-vis-2d.js',
     paths.srcPath + '/js/previewer.js',
   ] )
@@ -124,7 +124,7 @@ gulp.task('clean:img', function(){
  */
 gulp.task('admin-css', ['admin-sass'], function() {
 
-  return gulp.src( paths.adminAssetsPath + '/css/bootswatch-admin.css')
+  return gulp.src( paths.adminAssetsPath + '/css/bootswatches-admin.css')
     .pipe(plumber({ errorHandler: handleErrors }))
     .pipe(cssnano({ safe: true }))
     .pipe(rename({suffix: '.min'}))
@@ -137,8 +137,8 @@ gulp.task('admin-css', ['admin-sass'], function() {
  * Compile Sass and run stylesheet through PostCSS.
  */
 gulp.task('admin-sass', ['clean:admin-css'], function() {
-  console.log(paths.adminSrcPath+'/scss/bootswatch-admin.scss');
-  return gulp.src(paths.adminSrcPath+'/scss/bootswatch-admin.scss')
+  console.log(paths.adminSrcPath+'/scss/bootswatches-admin.scss');
+  return gulp.src(paths.adminSrcPath+'/scss/bootswatches-admin.scss')
     .pipe(plumber({ errorHandler: handleErrors }))
     .pipe(sourcemaps.init())
     .pipe(sass({
@@ -173,8 +173,8 @@ gulp.task('admin-js',['clean:admin-js'], function () {
   });
 
   return gulp.src([
-    paths.adminSrcPath + '/js/_bootswatch-admin.js',
-    paths.adminSrcPath + '/js/_bootswatch-customizer.js'
+    paths.adminSrcPath + '/js/_bootswatches-admin.js',
+    paths.adminSrcPath + '/js/_bootswatches-customizer.js'
   ] )
   .pipe(plumber({ errorHandler: handleErrors }))
   .pipe(browserified)
@@ -199,10 +199,10 @@ gulp.task('pot', function () {
 
     return gulp.src('../**/*.php')
         .pipe(wpPot( {
-            domain: 'bootswatch',
+            domain: 'bootswatches',
             package: 'Example project'
         } ))
-        .pipe(gulp.dest('../languages/bootswatch.pot'));
+        .pipe(gulp.dest('../languages/bootswatches.pot'));
 });
 
 /**

@@ -4,7 +4,7 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package Bootswatch
+ * @package Bootswatches
  */
 
 $right = ' col-md-8';

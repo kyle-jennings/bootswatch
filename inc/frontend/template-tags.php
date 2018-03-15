@@ -4,7 +4,7 @@
  *
  * Eventually, some of the functionality here could be replaced by core features.
  *
- * @package Bootswatch
+ * @package Bootswatches
  */
 
 /**
@@ -29,18 +29,13 @@
  }
 
 
-function bootswatches_posted_on() {
-    echo bootswatches_get_posted_on(); //WPCS: xss ok.
-}
-
-
 /**
  * Gets the entry header info (meta of author and post date )
  *
  * this is used inside the loop, hence being a different function than the previous one
  * @return string html
  */
-function bootswatches_get_posted_on(){
+function bootswatches_get_entry_header(){
 
     $output = '';
     $output .= bootswatches_get_the_date();
@@ -50,14 +45,24 @@ function bootswatches_get_posted_on(){
     if ( 'page' !== get_post_type() ) {
 
         $output .= bootswatches_get_the_comment_popup();
-        $output .= bootswatches_get_categories_links();
-        $output .= bootswatches_get_tags_links();
+        // $output .= bootswatches_get_categories_links();
+        // $output .= bootswatches_get_tags_links();
     }
 
     return $output;
 }
 
+// echos the above
+function bootswatches_entry_header() {
+    echo bootswatches_get_entry_header(); //WPCS: xss ok.
+}
 
+
+/**
+ * Gets the author name and link
+ * @param  wp_post $post the post object
+ * @return string
+ */
 function bootswatches_get_the_author($post = null) {
     if(!$post)
         global $post;
@@ -118,6 +123,9 @@ function bootswatches_get_the_date($post = null) {
 }
 
 
+/**
+ * Gets the number of comments and links to the comments 
+ */
 function bootswatches_get_the_comment_count_link($post = null) {
     if(!$post)
         global $post;
@@ -157,6 +165,10 @@ function bootswatches_get_the_comment_count_link($post = null) {
     return $output;
 }
 
+
+/**
+ * The markup for the comment form
+ */
 function bootswatches_get_the_comment_popup($anchor = null) {
 
     global $post;
@@ -203,6 +215,11 @@ function bootswatches_get_the_comment_popup($anchor = null) {
 }
 
 
+/**
+ * gets the markup for the list of category links
+ * @param  wp_post $post the post object
+ * @return string
+ */
 function bootswatches_get_categories_links($post = null) {
     if(!$post)
         global $post;
@@ -216,6 +233,12 @@ function bootswatches_get_categories_links($post = null) {
 }
 
 
+
+/**
+ * gets the markup for the list of tag links
+ * @param  wp_post $post the post object
+ * @return string
+ */
 function bootswatches_get_tags_links() {
 
     $output = '';
@@ -228,6 +251,13 @@ function bootswatches_get_tags_links() {
     return $output;
 }
 
+
+
+/**
+ * gets the markup for the post/entry footer
+ * @param  wp_post $post the post object
+ * @return string
+ */
 function bootswatches_get_entry_footer($post = null) {
     if(!$post)
         global $post;
@@ -265,7 +295,11 @@ function bootswatches_entry_footer( $post = null ) {
 
 }
 
-
+/**
+ * Displays the "edit post" link under a post when logged in
+ * @param  [type] $post_id [description]
+ * @return [type]          [description]
+ */
 function bootswatches_get_the_edit_post_link($post_id = null){
 
     $output = '';
@@ -356,6 +390,12 @@ function bootswatches_get_custom_tax_terms($id = null, $post_type = null) {
     return $terms;
 }
 
+
+/**
+ * returns the featured image markup
+ * @param  wp_post $post [description]
+ * @return [type]       [description]
+ */
 function bootswatches_get_post_thumbnail($post = null){
     if(!$post)
         global $post;
@@ -372,10 +412,20 @@ function bootswatches_get_post_thumbnail($post = null){
 
     return $output;
 }
+
+/**
+ * displays the featured image markup
+ * @param  wp_post $post [description]
+ * @return [type]       [description]
+ */
 function bootswatches_post_thumbnail($post = null) {
     echo bootswatches_get_post_thumbnail($post); //WPCS. xss ok.
 }
 
+
+/**
+ * the icon displayed before the title for post formats
+ */
 function bootswatches_post_format_icon($format = null) {
 
     $icon = null;

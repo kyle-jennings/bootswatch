@@ -41,7 +41,7 @@ function bootswatches_customizer_enqueue() {
   // this script is minified, however a non minified version is included with the theme
 	wp_enqueue_script(
         'custom-customize',
-        get_stylesheet_directory_uri() . '/assets/backend/js/_bootswatch-customizer-min.js',
+        get_stylesheet_directory_uri() . '/assets/backend/js/_bootswatches-customizer-min.js',
         null,
         '20170215',
         true
@@ -78,12 +78,12 @@ add_action( 'customize_preview_init', 'bootswatches_previewer_enqueue' );
 function bootswatches_active_callback_filter($active, $control) {
   global $wp_customize;
 
-  $toggled_by = !isset($control->input_attrs) ? $control->input_attrs['data-toggled-by'] : null;
+  $toggled_by = isset($control->input_attrs['data-toggled-by']) ? $control->input_attrs['data-toggled-by'] : null;
 
 
   // toggle controls if the template has been "activated"
-  if( strpos($toggled_by, '_settings_active') && $toggled_by !== DEFAULT_TEMPLATE.'_settings_active' ){
-    // error_log('template');
+  if( strpos($toggled_by, '_settings_active') && $toggled_by !== DEFAULT_TEMPLATE . '_settings_active' ){
+
     return 'yes' === $wp_customize->get_setting( $toggled_by )->value();
   
   // toggle the 404 header content page selection is "page" is selected
@@ -107,6 +107,18 @@ function bootswatches_active_callback_filter($active, $control) {
     return 'page' == $wp_customize->get_setting( 'frontpage_hero_content_setting' )->value();
     
     // return $this->checkToggableSettings($active, $control, $wp_customize );
+  } elseif( strpos($toggled_by, '_sidebar_position_setting') ) {
+      $pos = strpos($toggled_by, '_sidebar_position_setting');
+      $prefix = substr($toggled_by, 0, $pos);
+      $pos = 'none' !== $wp_customize->get_setting( $toggled_by )->value();
+      $settings_active = $prefix . '_settings_active';
+
+      if($prefix == 'default'){
+        return $pos;
+      }
+
+      $section = 'yes' === $wp_customize->get_setting( $settings_active )->value();
+      return $pos == $section ? true : false;
   }
 
   return $active;

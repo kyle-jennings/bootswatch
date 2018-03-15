@@ -1,7 +1,12 @@
 <?php
 
 
-
+/**
+ * Displays the nav title as either an H1 or H2 depending on the page
+ *
+ * Is this proper SEO?  I dont think this is correct
+ * @return [type] [description]
+ */
 function bootswatches_get_bootswatches_nav_title() {
     $output = '';
     $link = '<a href="' . esc_url( home_url( '/' ) ) . '"

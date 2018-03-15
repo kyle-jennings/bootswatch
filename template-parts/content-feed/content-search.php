@@ -1,30 +1,95 @@
 <?php
 /**
- * Template part for displaying results in search pages
+ * Template part for displaying posts
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package Bootswatch
+ * @package Bootswatches
  */
+
+$right = ' col-md-8';
+
+if( has_post_thumbnail() )
+    $right = ' col-md-8';
 
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
-		<?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
+<article id="post-<?php the_ID(); ?>" <?php post_class('cf row'); ?> >
+    <h2 class="post-title col-md-12">
+    <?php
+        the_title( bootswatches_post_format_icon( get_post_format() )
+        . '<a href="'
+        . esc_url( get_permalink() ) . '" rel="bookmark">',
+        '</a>' );
+     ?>
+    </h2>
 
-		<?php if ( 'post' === get_post_type() ) : ?>
-		<div class="entry-meta">
-			<?php bootswatches_posted_on(); ?>
-		</div><!-- .entry-meta -->
-		<?php endif; ?>
-	</header><!-- .entry-header -->
+    <div class="col-md-4 post-col-left">
 
-	<div class="entry-summary">
-		<?php the_excerpt(); ?>
-	</div><!-- .entry-summary -->
+    <?php bootswatches_post_thumbnail($post); ?>
 
-	<footer class="entry-footer">
-		<?php bootswatches_entry_footer(); ?>
-	</footer><!-- .entry-footer -->
+    <?php
+    echo '<header class="post-header">';
+
+
+        if ( 'page' !== get_post_type() ) : ?>
+        <div class="post-meta">
+            <?php
+
+            echo bootswatches_get_the_date(); // WPCS: xss ok.
+            echo bootswatches_get_the_author(); // WPCS: xss ok.
+
+            echo bootswatches_get_the_comment_popup(); // WPCS: xss ok.
+            echo bootswatches_get_categories_links(); // WPCS: xss ok.
+            echo bootswatches_get_tags_links(); // WPCS: xss ok.
+            ?>
+        </div><!-- .post-meta -->
+
+
+
+        <?php
+        endif;
+
+
+        // bootswatches_post_footer();
+    echo '</header>';
+
+    ?>
+    </div> <!-- col-md-4-->
+
+    <div class="<?php echo $right; // WPCS: xss ok.?>">
+
+        <div class="post-content">
+            <?php
+
+                the_content( sprintf(
+                    wp_kses(
+                        /* translators: %s: Name of current post. */
+                        __( 'Continue reading %s <span class="meta-nav">&rarr;</span>', 'bootswatches' ),
+                        array( 'span' => array( 'class' => array() ) )
+                    ),
+                    the_title( '<span class="screen-reader-text">"', '"</span>', false )
+                    )
+                );
+
+            ?>
+        </div><!-- .post-meta -->
+
+        <div class="post-meta">
+            <?php bootswatches_the_edit_post_link(); ?>
+        </div>
+
+
+        <footer class="post-footer post-meta">
+            <?php
+                wp_link_pages( array(
+                    'before' => '<nav aria-label="Page navigation"><ul class="pagination">',
+                    'after'  => '</ul></nav>',
+                ) );
+
+            ?>
+
+        </footer><!-- .post-footer -->
+
+    </div>
 </article><!-- #post-## -->

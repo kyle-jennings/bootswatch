@@ -4,7 +4,7 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package Bootswatch
+ * @package Bootswatches
  */
 
 $right = ' col-md-8';
@@ -26,7 +26,7 @@ if( has_post_thumbnail() )
 
     <div class="col-md-4 post-col-left">
 
-    <?php bootswatches_post_thumbnail($post); ?>
+    <?php bootswatches_post_thumbnail($post, 'thumbnail'); ?>
 
     <?php
     echo '<header class="post-header">';

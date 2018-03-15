@@ -9,7 +9,7 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package Bootswatch
+ * @package Bootswatches
  */
 
 get_header();
@@ -36,7 +36,7 @@ if( !$hide_content ):
 
             <?php
             if($sidebar_position == 'left'):
-                bootswatches_get_sidebar($template, $sidebar_position);
+                bootswatches_get_sidebar($template, $sidebar_position, $sidebar_size);
             endif;
             ?>
 
@@ -56,14 +56,14 @@ if( !$hide_content ):
 
         		else :
 
-        			get_template_part( 'template-parts/content/content', 'none' );
+        			get_template_part( 'template-parts/content-feed/content', 'none' );
 
         		endif; ?>
           </div>
 
           <?php
           if($sidebar_position == 'right'):
-              bootswatches_get_sidebar($template, $sidebar_position);
+              bootswatches_get_sidebar($template, $sidebar_position, $sidebar_size);
           endif;
           ?>
 

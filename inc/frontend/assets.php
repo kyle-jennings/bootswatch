@@ -12,10 +12,13 @@ function bootswatches_scripts() {
     $default = get_template_directory_uri() . '/assets/frontend/css/bootstrap/bootstrap.css';
 
     $theme = get_theme_mod('color_scheme_setting', $default);
-    
+    if( !$theme = filter_var( apply_filters('bootswatches_filter_css_uri', $theme), FILTER_VALIDATE_URL ) )
+        $theme = $default;
+
+
 	wp_enqueue_script(
         'bootswatches-js', get_template_directory_uri() . '/assets/frontend/js/bootswatches.js',
-         array('jquery'), null, true
+        array('jquery'), null, true
     );
 
     wp_enqueue_style( 'bootswatches', $theme );

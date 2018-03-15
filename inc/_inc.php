@@ -65,11 +65,11 @@ if( !is_admin() ){
         'template-parts',
         'template-settings',
         'template-tags',
-        'walkers/class-NavbarWalker',
-        'walkers/class-FooterNavbarWalker',
-        'walkers/class-SidenavWalker',
-        'walkers/class-NavlistWalker',
-        'walkers/class-CommentsWalker',
+        'walkers/BootswatchesNavbarWalker',
+        'walkers/BootswatchesFooterNavbarWalker',
+        'walkers/BootswatchesSidenavWalker',
+        'walkers/BootswatchesNavlistWalker',
+        'walkers/BootswatchesCommentsWalker',
     );
     foreach($files as $file)
         require get_template_directory() . '/inc/frontend/' . $file . '.php';

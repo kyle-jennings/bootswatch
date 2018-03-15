@@ -4,7 +4,7 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package Bootswatch
+ * @package Bootswatches
  */
 global $post;
 $gallery = get_post_meta($post->ID, '_post_format_gallery', true);

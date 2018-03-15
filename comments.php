@@ -7,7 +7,7 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package Bootswatch
+ * @package Bootswatches
  */
 
 /*
@@ -76,7 +76,7 @@ if ( post_password_required() ) {
 				wp_list_comments( array(
 					'style'      => 'ul',
 					'short_ping' => true,
-                    'walker' => new CommentsWalker()
+                    'walker' => new BootswatchesCommentsWalker()
 				) );
 			?>
 		</ul><!-- .comment-list -->

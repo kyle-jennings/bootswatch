@@ -4,7 +4,7 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package Bootswatch
+ * @package Bootswatches
  */
 global $post;
 add_action('wp_footer', 'bootswatches_enqueue_visualizer_script' );

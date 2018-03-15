@@ -1,6 +1,13 @@
 <?php
 
+/**
+ * Functions for page and post paginations
+ */
 
+
+/**
+ * Displays page-links for paginated posts (i.e. includes the <!--nextpage--> Quicktag one or more times). 
+ */
 function bootswatches_link_pages_link_filter($link, $i ){
 
     preg_match('/<a href="/', $link, $matches);
@@ -12,6 +19,10 @@ function bootswatches_link_pages_link_filter($link, $i ){
 }
 
 add_filter( 'wp_link_pages_link', 'bootswatches_link_pages_link_filter', 10, 2 );
+
+
+
+
 
 function bootswatches_get_the_posts_navigation( $args = array() ) {
 
@@ -52,6 +63,12 @@ function bootswatches_the_posts_navigation( $args = array() ) {
 }
 
 
+
+/**
+ * Navigates between posts
+ * @param  array  $args [description]
+ * @return [type]       [description]
+ */
 function bootswatches_get_the_post_navigation( $args = array() ) {
 
     $navigation = '';
@@ -96,11 +113,18 @@ function bootswatches_the_post_navigation( $args = array() ) {
 }
 
 
+
+/**
+ * Navigates between pages
+ * @param  array  $args [description]
+ * @return [type]       [description]
+ */
 function bootswatches_get_paginate_links($args = array()) {
 
     $args['type'] = 'array';
     $pages = paginate_links($args);
-
+    if(empty($pages))
+        return '';
 
     $output = '';
 

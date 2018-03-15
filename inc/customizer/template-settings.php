@@ -59,7 +59,6 @@ function bootswatches_template_layout_settings($wp_customize) {
 
         require('template-settings/header.php');
         require('template-settings/sidebar.php');
-        // if($name!== DEFAULT_TEMPLATE)
         require('template-settings/layout.php');
 
     endforeach;

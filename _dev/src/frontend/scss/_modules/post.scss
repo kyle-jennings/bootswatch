@@ -1,0 +1,82 @@
+.post,
+article {
+    margin-bottom: 60px;
+
+    img,
+    video,
+    .video,
+    figure {
+        height: auto;
+        max-width: 100%;
+    }
+}
+
+
+.post-featured-image {
+    margin-bottom: 1em;
+}
+
+
+/**
+ * The title
+ */
+.post-title {
+    margin-top: 0;
+    margin-bottom: 20px;
+
+    .fa {
+        color: rgba($text-color, .4);
+        font-size: .7em;
+        margin-right: 15px;
+    }
+
+
+    *{
+        margin-top: 0;
+    }
+}
+
+/**
+ * The post meta such as categories, tags and date ect
+ */
+.post-meta {
+    margin-bottom: 10px;
+}
+
+.post-meta .fa {
+    margin-right: 10px;
+}
+
+.post-meta__field {
+
+    margin-right: 20px;
+
+    .fa {
+        margin-right: 10px;
+    }
+    
+    .post-col-left & {
+        margin-right: 15px;
+        display: inline-block;
+
+        @media(min-width: $screen-md) {
+            margin-right: 0;
+            margin-bottom: 5px;
+            display: block;
+        }
+    }
+
+}
+
+
+/**
+ * The content
+ */
+
+.post-content {
+    margin-bottom: 30px;
+
+    > * {
+        margin-top: 0;
+    }
+}

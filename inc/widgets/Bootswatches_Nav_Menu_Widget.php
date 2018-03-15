@@ -56,7 +56,7 @@ class Bootswatches_Nav_Menu_Widget extends WP_Nav_Menu_Widget {
             'items_wrap' => '<'.$elm.' id="%1$s" class="%2$s">%3$s</'.$elm.'>',
             'menu_class' => $class . ' widget-list',
 			'menu' => $nav_menu,
-            'walker' => new SideNavWalker,
+            'walker' => new BootswatchesSideNavWalker,
             'list_item_classes' => $list_item
 		);
 

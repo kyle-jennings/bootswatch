@@ -4,7 +4,7 @@
 *
 * @link https://developer.wordpress.org/reference/functions/get_search_form/
 *
-* @package Bootswatch
+* @package Bootswatches
 */
 
 ?>
@@ -14,9 +14,9 @@
         <input class="form-control" id="search-field-small"
             name="s"
             placeholder="<?php echo esc_attr_x( 'Search ...', 'placeholder', 'bootswatches' ); ?>"
-            title="<?php echo esc_attr_x( 'Search for:', 'title','bootswatches' ) ?>"
+            title="<?php echo esc_attr_x( 'Search for:', 'title','bootswatches' ); ?>"
             type="search"
-            value="<?php echo get_search_query() ?>"
+            value="<?php echo get_search_query(); ?>"
         />
     </div>
 

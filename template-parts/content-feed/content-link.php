@@ -4,10 +4,12 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package Bootswatch
+ * @package Bootswatches
  */
 
 global $post;
+$link_url = get_post_meta($post->ID, '_post_format_link_url', true);
+$link_text = get_post_meta($post->ID, '_post_format_link_text', true);
 
 $right = ' col-md-8';
 
@@ -20,9 +22,6 @@ if( has_post_thumbnail() )
 
     <h2 class="post-title col-md-12">
     <?php
-
-        $link_url = get_post_meta($post->ID, '_post_format_link_url', true);
-        $link_text = get_post_meta($post->ID, '_post_format_link_text', true);
 
         if($link_url && $link_text) {
                 echo '<i class="fa fa-link fa-sm"></i>';

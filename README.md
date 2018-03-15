@@ -1,10 +1,10 @@
-Bootswatch
+Bootswatches
 ========
 
 
 <img alt="bootswatches" src="screenshot.jpg" style="float: right; margin-left: 10px;">
 
-Bootswatch is a flexible and feature rich WordPess theme build with Automattic's _s (underscores) theme 18f's [Web Design Standards](https://standards.usa.gov).  
+Bootswatches is a flexible and feature rich WordPess theme build with Automattic's _s (underscores) theme 18f's [Web Design Standards](https://standards.usa.gov).  
 
 Be sure to install the companion plugin, [Franklin](https://github.com/kyle-jennings/Franklin/) to include various 18F components via shortcodes!
 <br>

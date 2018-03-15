@@ -14,10 +14,9 @@
 
 function bootswatches_footer_settings($wp_customize) {
     $choices = array(
-            'return-to-top' => __('Return to Top', 'bootswatches'),
-            'footer-menu' => __('Footer Menu', 'bootswatches'),
-            'widget-area-1' => __('Widget Area 1', 'bootswatches'),
-            'widget-area-2' => __('Widget Area 2', 'bootswatches'),
+        'footer-menu' => __('Footer Menu', 'bootswatches'),
+        'widget-area-1' => __('Widget Area 1', 'bootswatches'),
+        'widget-area-2' => __('Widget Area 2', 'bootswatches'),
     );
 
     $wp_customize->add_section( 'footer_settings_section', array(

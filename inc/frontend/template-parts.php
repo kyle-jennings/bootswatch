@@ -26,10 +26,6 @@ function bootswatches_the_header() {
         if($layout_settings && in_array($component->name, $layout_settings))
             continue;
         switch($component->name):
-            case 'banner':
-                if( get_theme_mod('banner_visibility_setting', 'hide') !== 'hide')
-                    get_template_part('inc/frontend/section', 'banner');
-                break;
             case 'navbar':
                 get_template_part('inc/frontend/navbars/navbar');
                 break;

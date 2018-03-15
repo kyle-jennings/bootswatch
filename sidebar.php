@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package Bootswatch
+ * @package Bootswatches
  */
 
 if ( ! is_active_sidebar( 'sidebar-1' ) ) {

@@ -58,6 +58,30 @@ $wp_customize->add_control($name . '_sidebar_position_control', $sidebar_pos_arg
 
 
 /**
+ * The sidebar size
+ */
+$wp_customize->add_setting( $name . '_sidebar_size_setting', array(
+    'default' => 'BOOTSWATCHES_ONE_THIRD',
+    'sanitize_callback' => 'bootswatches_sidebar_width_sanitize',
+    )
+);
+
+$wp_customize->add_control( $name . '_sidebar_size_control', array(
+        'label'   => __('Sizebar Size', 'bootswatches'),
+        'section' => $name . '_settings_section',
+        'settings' => $name . '_sidebar_size_setting',
+        'type' => 'select',
+        'choices' => array(
+            'BOOTSWATCHES_ONE_THIRD' => __('Wide', 'bootswatches'),
+            'BOOTSWATCHES_ONE_FOURTH' => __('Narrow', 'bootswatches'),
+        ),
+        'input_attrs' => array(
+            'data-toggled-by' => $name . '_sidebar_position_setting',
+        )
+    )
+);
+
+/**
  * Sidebar Visibility
  */
 $wp_customize->add_setting( $name . '_sidebar_visibility_setting', array(
@@ -78,7 +102,7 @@ $sidebar_visibility_args = array(
         'visible-large-up' => __('Visible on desktop', 'bootswatches'),
     ),
     'input_attrs' => array(
-      'data-toggled-by' => $name . '_settings_active',
+      'data-toggled-by' => $name . '_sidebar_position_setting',
     )
 );
 

@@ -4,7 +4,7 @@
  * Our Modified widgets, these replace the default widgets with near identical ones.
  *
  * The only real differences are that these widgets have additonal options.
- * @package Bootswatch
+ * @package Bootswatches
  */
 
 

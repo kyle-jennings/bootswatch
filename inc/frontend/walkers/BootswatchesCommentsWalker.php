@@ -1,6 +1,6 @@
 <?php
 
-class CommentsWalker extends Walker_Comment {
+class BootswatchesCommentsWalker extends Walker_Comment {
     /**
     * Output a comment in the HTML5 format.
     *

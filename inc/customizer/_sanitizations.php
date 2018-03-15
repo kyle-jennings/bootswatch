@@ -119,7 +119,6 @@ function bootswatches_header_sortable_sanitize($val) {
     $valids = array(
         'navbar',
         'hero',
-        'banner',
     );
 
     $valid = true;
@@ -346,7 +345,6 @@ function bootswatches_sidebar_visibility_sanitize($val) {
 
 function bootswatches_hide_layout_sanitize($val) {
     $valids = array(
-        'banner',
         'navbar',
         'page-content',
         'footer',
