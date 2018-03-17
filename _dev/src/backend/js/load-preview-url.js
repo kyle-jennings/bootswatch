@@ -12,7 +12,8 @@ function randomString(length, chars) {
 // enter or leave the 404 page
 function toggle404Page(api, isExpanded){
     var rand = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
-    var url = api.settings.url.home + rand;
+    var randNum = 'p=' + randomString(32, '0123456789');
+    var url = api.settings.url.home + rand + randNum;
     var previousUrl = api.previewer.previewUrl.get();
     if ( isExpanded ) {
         api.previewer.previewUrl.set( url );
