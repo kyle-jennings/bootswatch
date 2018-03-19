@@ -25,8 +25,8 @@ get_header();
  *
  */
 
-extract( bootswatches_template_settings() );
-if( !$hide_content ):
+extract(bootswatches_template_settings());
+if (!$hide_content) :
 ?>
 
 
@@ -35,37 +35,33 @@ if( !$hide_content ):
         <div class="row">
 
             <?php
-            if($sidebar_position == 'left'):
+            if ($sidebar_position == 'left') :
                 bootswatches_get_sidebar($template, $sidebar_position, $sidebar_size);
             endif;
             ?>
 
-          <div class="main-content <?php echo esc_attr($main_width); ?>">
-        		<?php
-        		if ( have_posts() ) :
+            <div class="main-content <?php echo esc_attr($main_width); ?>">
+            <?php
+            if (have_posts()) :
+                /* Start the Loop */
+                while (have_posts()) :
+                    the_post();
+                    get_template_part('template-parts/feed/content', get_post_format());
+                endwhile;
 
-        			/* Start the Loop */
-        			while ( have_posts() ) : the_post();
+            // pagination though the archive
+                echo bootswatches_paginate_links(); // WPCS: xss ok.
+            else :
+                get_template_part('template-parts/feed/content', 'none');
+            endif;
+            ?>
+            </div>
 
-    				get_template_part( 'template-parts/feed/content', get_post_format() );
-
-        			endwhile;
-
-                    // pagination though the archive
-        			echo bootswatches_paginate_links(); // WPCS: xss ok.
-
-        		else :
-
-        			get_template_part( 'template-parts/feed/content', 'none' );
-
-        		endif; ?>
-          </div>
-
-          <?php
-          if($sidebar_position == 'right'):
-              bootswatches_get_sidebar($template, $sidebar_position, $sidebar_size);
-          endif;
-          ?>
+            <?php
+            if ($sidebar_position == 'right') :
+                bootswatches_get_sidebar($template, $sidebar_position, $sidebar_size);
+            endif;
+            ?>
 
         </div><!-- /row -->
     </div><!-- container -->

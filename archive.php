@@ -24,9 +24,9 @@ get_header();
  * $sidebar_position
  *
  */
-extract( bootswatches_template_settings() );
+extract(bootswatches_template_settings());
 
-if( !$hide_content ):
+if (!$hide_content) :
 ?>
 
 
@@ -34,42 +34,38 @@ if( !$hide_content ):
     <div class="container">
         <div class="row">
     <?php
-    if($sidebar_position == 'left'):
+    if ($sidebar_position == 'left') :
         bootswatches_get_sidebar($template, $sidebar_position, $sidebar_size);
     endif;
     ?>
 
   <div class="main-content <?php echo esc_attr($main_width); ?>">
-		<?php
-		if ( have_posts() ) :
+        <?php
+        if (have_posts()) :
+            /* Start the Loop */
+            while (have_posts()) :
+                the_post();
 
-			/* Start the Loop */
-			while ( have_posts() ) : the_post();
-
-
-                if( !has_post_thumbnail() && !get_post_format()){
+                if (!has_post_thumbnail() && !get_post_format()) {
                     $part = 'vertical';
                 }
 
-                get_template_part( 'template-parts/feed/content', get_post_format() );
-
-			endwhile;
+                get_template_part('template-parts/feed/content', get_post_format());
+            endwhile;
 
             // pagination though the archive
             bootswatches_paginate_links();
-
-		else :
-
-			get_template_part( 'template-parts/feed/content', 'none' );
-
-		endif; ?>
+        else :
+            get_template_part('template-parts/feed/content', 'none');
+        endif;
+?>
   </div>
 
-  <?php
-  if($sidebar_position == 'right'):
-      bootswatches_get_sidebar($template, $sidebar_position, $sidebar_size);
-  endif;
-  ?>
+<?php
+if ($sidebar_position == 'right') :
+    bootswatches_get_sidebar($template, $sidebar_position, $sidebar_size);
+endif;
+?>
 
 </div><!-- /row -->
 </div><!-- container -->
