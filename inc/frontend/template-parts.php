@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /**
  * Get the header parts
  *
@@ -22,10 +19,12 @@ function bootswatches_the_header() {
 
     $order = $order ? $order : bootswatches_default_header_order();
 
-    foreach($order as $component):
-        if($layout_settings && in_array($component->name, $layout_settings))
+    foreach ($order as $component) :
+        if ($layout_settings && in_array($component->name, $layout_settings)) {
             continue;
-        switch($component->name):
+        }
+
+        switch ($component->name) :
             case 'navbar':
                 get_template_part('inc/frontend/navbars/navbar');
                 break;

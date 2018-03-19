@@ -9,7 +9,6 @@
     @for $i from 1 through 6 {
         h#{$i}{
             margin-top: 0;
-            margin-bottom: 0
         }
     }
 
@@ -39,10 +38,45 @@
     }
 
     .audio-player__player {
+        margin-bottom: 0;
         width: 100%
     }
 
+
+
 }
+
+
+
+// Hero Title
+.hero__title {
+    font-weight: bold;
+    margin-bottom: 3rem;
+    text-transform: uppercase;
+
+    .fa {
+        margin-right: 1.5rem;
+        font-size: inherit;
+    }
+}
+
+// the pretitle (such as labels)
+.hero__pre-title {
+    font-size: 16px;
+    margin-bottom: .75em;
+}
+
+.hero__sub-title {
+    font-size: 20px;
+}
+
+.hero__title + .post-meta {
+    margin-bottom: 0;
+}
+
+
+
+
 
 // if it has a bg image of video, give it a border
 .hero--has-background {
@@ -72,6 +106,7 @@
 
 
 
+
 // slim size
 // total padding 6em
 .section.hero--slim,
@@ -79,10 +114,22 @@
     padding-top: 5rem;
     padding-bottom: 2rem;
 
+
+    .audio-player {
+        margin-bottom: -2rem;
+    }
+
     &.hero--center-align {
         padding-top: 3rem;
         padding-bottom: 3rem;
+    
+        .audio-player {
+            margin-bottom: -3rem;
+        }
     }
+
+
+
 }
 
 
@@ -93,9 +140,20 @@
     padding-top: 7rem;
     padding-bottom: 3rem;
 
+
+    .audio-player {
+        margin-bottom: -3rem;
+    }
+
     &.hero--center-align {
         padding-top: 4.5rem;
         padding-bottom: 4.5rem;
+
+
+        .audio-player {
+            margin-bottom: -4.5rem;
+        }
+
     }
 }
 
@@ -106,9 +164,21 @@
     padding-top: 13rem;
     padding-bottom: 4rem;
 
+
+    .audio-player {
+        margin-bottom: -4rem;
+    }
+
+
     &.hero--center-align {
         padding-top: 8rem;
         padding-bottom: 8rem;
+
+
+        .audio-player {
+            margin-bottom: -8rem;
+        }
+
     }
 }
 
@@ -128,16 +198,15 @@
 }
 
 
-.section.hero--is-post-format,
-.hero--is-post-format {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
-    text-align: center;
+// .section.hero--is-post-format,
+// .hero--is-post-format {
+//     padding-top: 4rem;
+//     padding-bottom: 4rem;
 
-    &::before {
-        background-color: rgba(0,0,0, .85);
-    }
-}
+//     &::before {
+//         background-color: rgba(0,0,0, .85);
+//     }
+// }
 
 
 // trim hero a little more if the admin bar is showing
@@ -150,36 +219,3 @@ body.logged-in .hero--full {
     }
 }
 
-
-// Hero Title
-.hero__title {
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.hero__pre-title {
-
-    font-size: 16px;
-    margin-bottom: .75em;
-
-    .fa {
-        margin-right: 6px;
-        font-size: 20px;
-        line-height: 24px;
-        vertical-align: bottom;
-    }
-}
-
-.hero__sub-title {
-    font-size: 20px;
-}
-
-@media(min-width: $screen-sm) {
-    .hero__title {
-         font-size: $jumbotron-heading-font-size;
-    }
-}
-
-.hero__title+.post-meta {
-    margin-bottom: 0;
-}

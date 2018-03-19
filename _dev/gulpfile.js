@@ -33,7 +33,7 @@ var paths = {
   srcPath: './src/frontend',
   assetsPath: '../assets/frontend',
 
-  adminSrcPath: './src/backend',
+  adminSrcPath: './src/admin',
   adminAssetsPath: '../assets/backend',
   
   npmPath : './node_modules',
@@ -68,8 +68,7 @@ gulp.task('front-js',['clean:front-js'], function(){
   .pipe(plumber({ errorHandler: handleErrors }))
   .pipe(browserified)
   .pipe(minify())
-  .pipe(gulp.dest( paths.assetsPath + '/js' ))
-  .pipe(notify({message: 'JS complete'}));
+  .pipe(gulp.dest( paths.assetsPath + '/js' ));
 
 });
 
@@ -128,8 +127,7 @@ gulp.task('admin-css', ['admin-sass'], function() {
     .pipe(plumber({ errorHandler: handleErrors }))
     .pipe(cssnano({ safe: true }))
     .pipe(rename({suffix: '.min'}))
-    .pipe(gulp.dest( paths.adminAssetsPath + '/css'))
-    .pipe(notify({message: 'CSS complete'}));
+    .pipe(gulp.dest( paths.adminAssetsPath + '/css'));
 });
 
 
@@ -137,7 +135,6 @@ gulp.task('admin-css', ['admin-sass'], function() {
  * Compile Sass and run stylesheet through PostCSS.
  */
 gulp.task('admin-sass', ['clean:admin-css'], function() {
-  console.log(paths.adminSrcPath+'/scss/bootswatches-admin.scss');
   return gulp.src(paths.adminSrcPath+'/scss/bootswatches-admin.scss')
     .pipe(plumber({ errorHandler: handleErrors }))
     .pipe(sourcemaps.init())
@@ -174,13 +171,13 @@ gulp.task('admin-js',['clean:admin-js'], function () {
 
   return gulp.src([
     paths.adminSrcPath + '/js/_bootswatches-admin.js',
-    paths.adminSrcPath + '/js/_bootswatches-customizer.js'
+    paths.adminSrcPath + '/js/_bootswatches-customizer.js',
+    paths.adminSrcPath + '/js/_bootswatches-post-formats.js',
   ] )
   .pipe(plumber({ errorHandler: handleErrors }))
   .pipe(browserified)
   .pipe(minify())
-  .pipe(gulp.dest( paths.adminAssetsPath + '/js' ))
-  .pipe(notify({message: 'JS complete'}));
+  .pipe(gulp.dest( paths.adminAssetsPath + '/js' ));
 });
 
 

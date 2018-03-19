@@ -12,17 +12,15 @@ class HeroContent
 
     public function __construct($post_id, $template, $currentpage)
     {
-
         $this->post_id = $post_id;
         $this->template = $template;
         $this->currentpage = $currentpage;
-
     }
 
-    function __toString()
+    public function __toString()
     {
 
-        $func = $this->currentpage.'Content';
+        $func = $this->currentpage . 'Content';
         $func = array($this, $func);
 
         return call_user_func($func);
@@ -33,14 +31,13 @@ class HeroContent
      * The date (month / year), search results, or the post type's featured post
      * @return [type] [description]
      */
-    function getContent()
+    public function getContent()
     {
 
-        $func = $this->currentpage.'Content';
+        $func = $this->currentpage . 'Content';
         $func = array($this, $func);
 
         return call_user_func($func);
-
     }
 
 
@@ -48,10 +45,11 @@ class HeroContent
     public function defaultContent()
     {
         $post = get_queried_object();
-        if( $post->post_title)
+        if ($post->post_title) {
             $title = $post->post_title;
-        elseif($post->name)
+        } elseif ($post->name) {
             $title = $post->name;
+        }
 
         return '<h1 class="hero__title">' . $title .'</h1>';
     }
@@ -71,11 +69,10 @@ class HeroContent
          */
         extract(bootswatches_get_404_settings());
 
-        if($header_page) {
+        if ($header_page) {
             $page = get_page($header_page);
             return apply_filters('the_content', $page->post_content);
         } else {
-
             $output = '';
             $output .= '<span class="hero__pre-title">';
                 $output .= '<i class="fa fa-question-circle" aria-hidden="true"></i>';
@@ -86,7 +83,6 @@ class HeroContent
 
             return $output;
         }
-
     }
 
     /**
@@ -100,13 +96,7 @@ class HeroContent
     {
         $output = '';
 
-        $format = get_post_format();
-
-        if( $this->getPostFormatContent($format) )
-            $output .= $this->getPostFormatContent($format);
-        else
-            $output .= $this->getSingularTitle();
-
+        $output .= $this->getSingularTitle();
 
         return $output;
     }
@@ -114,13 +104,13 @@ class HeroContent
 
     public function getPostFormatContent($format)
     {
-        $func = 'get'.ucfirst($format);
+        $func = 'get' . ucfirst($format);
 
-        if( method_exists($this, $func) && call_user_func( array($this, $func)) )
-            return call_user_func( array($this, $func));
-        else
+        if (method_exists($this, $func) && call_user_func(array($this, $func))) {
+            return call_user_func(array($this, $func));
+        } else {
             return false;
-
+        }
     }
 
 
@@ -133,14 +123,21 @@ class HeroContent
     {
 
         $output = '';
+        $format = get_post_format();
 
-        $output .= '<h1 class="hero__title">'.get_the_title().'</h1>';
+        $output .= '<h1 class="hero__title">'
+            . bootswatches_get_post_format_icon(get_post_format()) . get_the_title()
+            . '</h1>';
 
-        if ( 'page' !== get_post_type() ) :
-            $output .= '<div class="post-meta">';
-                $output .= bootswatches_get_hero_meta();
+        if ($this->getPostFormatContent($format)) {
+            $output .= '<div class="hero__post_format">';
+            $output .= $this->getPostFormatContent($format);
             $output .= '</div>';
-        endif;
+        } elseif ('page' !== get_post_type()) {
+            $output .= '<div class="post-meta">';
+            $output .= bootswatches_get_hero_meta();
+            $output .= '</div>';
+        }
 
         return $output;
     }
@@ -153,42 +150,68 @@ class HeroContent
     public function getAudio()
     {
         global $post;
-        $src = get_post_meta($post->ID, '_post_format_audio', true);
+        $value = bootswatches_get_post_format_value($post->ID, 'audio', null);
 
 
-        if(!$src)
+        if (!$value) {
             return null;
+        }
 
 
         $output = '';
 
-        $output .= '<span class="hero__pre-title">';
-            $output .= '<i class="fa fa-volume-up" aria-hidden="true"></i>';
-            $output .= 'Play Audio';
-        $output .= '</span>';
-
-
-        $output .= bootswatches_get_the_audio_markup($src);
+        $output .= bootswatches_get_the_audio_markup($value);
         // $output .= '<h1 class="hero__title">'.get_the_title().'</h1>';
 
         return $output;
     }
 
 
+
+
     /**
-     * If the current post is of the post format "video" then lets get that video
+     * Gets the post format quote
      * @return [type] [description]
      */
-    public function getVideo()
+    public function getAside()
     {
         global $post;
-        $url = get_post_meta($post->ID, '_post_format_video', true);
-
-        if(!$url)
-            return null;
 
         $output = '';
-        $output .= bootswatches_get_the_video_markup($url);
+        $value = bootswatches_get_post_format_value($post->ID, 'aside', null);
+
+        if (!$value) {
+            return null;
+        }
+
+        $output .= $value;
+
+        return $output;
+    }
+
+
+
+    /**
+     * Gets the post format chat
+     * @return [type] [description]
+     */
+    public function getChat()
+    {
+        global $post;
+
+        $output = '';
+
+        $value = bootswatches_get_post_format_value($post->ID, 'chat', null);
+
+        if (!$value || $value['location'] !== 'header') {
+            return false;
+        }
+
+        $output .= '<h1 class="hero__title">'.get_the_title().'</h1>';
+
+        $output .= '<div class="well">';
+            $output .= bootswatches_get_chat_log($value);
+        $output .= '</div>';
 
         return $output;
     }
@@ -202,13 +225,13 @@ class HeroContent
     {
         global $post;
         $output = '';
+        $value = bootswatches_get_post_format_value($post->ID, 'gallery', null);
 
-        $gallery = get_post_meta($post->ID, '_post_format_gallery', true);
-
-        if(!$gallery)
+        if (!$value) {
             return null;
+        }
 
-        $output .= bootswatches_get_carousel_markup($gallery, 'large');
+        $output .= bootswatches_get_carousel_markup($value, 'large');
 
         return $output;
     }
@@ -223,69 +246,20 @@ class HeroContent
         global $post;
         $output = '';
 
-        if( !has_post_thumbnail() )
+        $value = bootswatches_get_post_format_value($post->ID, 'image', null);
+
+        if (!$value) {
             return null;
-
-
-        $src = get_the_post_thumbnail_url();
-
-        $image = get_post( get_post_thumbnail_id() );
+        }
 
         $title = $image->post_title;
         $caption = $image->post_excerpt;
 
-        // $output .= '<div >';
-            $output .= '<img class="hero-post-format-image" src="'.$src.'">';
-            if($caption)
-                $output .= '<div class="hero-post-format-image__caption">'. $caption . '</div>';
+        $output .= '<img class="hero-post-format-image" src="' . esc_url_raw($value) . '">';
+        if ($caption) {
+            $output .= '<div class="hero-post-format-image__caption">'. esc_html($caption) . '</div>';
+        }
 
-        // $output .= '</div>';
-
-        return $output;
-    }
-
-
-    /**
-     * Gets the post format quote
-     * @return [type] [description]
-     */
-    public function getQuote()
-    {
-        global $post;
-
-        $output = '';
-
-        $quote = get_post_meta($post->ID, '_post_format_quote', true);
-
-        if(!$quote)
-            return null;
-
-        $output .= bootswatches_get_quote_markup($quote);
-
-        return $output;
-    }
-
-
-    /**
-     * Gets the post format chat
-     * @return [type] [description]
-     */
-    public function getChat()
-    {
-        global $post;
-
-        $output = '';
-
-        $chat = get_post_meta($post->ID, '_post_format_chat', true);
-
-        if(!$chat || $chat['location'] !== 'header')
-            return false;
-
-        $output .= '<h1 class="hero__title">'.get_the_title().'</h1>';
-
-        $output .= '<div class="well">';
-            $output .= bootswatches_get_chat_log($chat);
-        $output .= '</div>';
 
         return $output;
     }
@@ -300,24 +274,83 @@ class HeroContent
         global $post;
 
         $output = '';
+        
+        $value = bootswatches_get_post_format_value($post->ID, 'link', null);
 
-        $link = get_post_meta($post->ID, '_post_format_link', true);
-
-        if(!$link)
+        if (!$value) {
             return null;
-
-        $output .= '<span class="hero__pre-title">';
-            $output .= '<i class="fa fa-link" aria-hidden="true"></i>';
-            $output .= 'Visit Link';
-        $output .= '</span>';
+        }
 
         $output .= '<h1 class="hero__title">';
-            $output .= '<a href="'.$link['url'].'" target="_blank" follow="no-follow">'.$link['text'].'</a>';
+            $output .= '<a href="'.$value['url'].'" target="_blank" follow="no-follow">'.$value['text'].'</a>';
         $output .= '</h1>';
 
         return $output;
     }
 
+
+    /**
+     * Gets the post format quote
+     * @return [type] [description]
+     */
+    public function getQuote()
+    {
+        global $post;
+
+        $output = '';
+        $value = bootswatches_get_post_format_value($post->ID, 'quote', null);
+
+        if (!$value) {
+            return null;
+        }
+
+        $output .= bootswatches_get_quote_markup($value);
+
+        return $output;
+    }
+
+
+    /**
+     * Gets the post format status
+     * @return [type] [description]
+     */
+    public function getStatus()
+    {
+        global $post;
+
+        $value = bootswatches_get_post_format_value($post->ID, 'status', null);
+
+        $output = '';
+
+        if ($value) {
+            $output .= '<p>';
+            $output .= $value;
+            $output .= '</p>';
+        }
+
+
+        return $output;
+    }
+
+    
+    /**
+     * If the current post is of the post format "video" then lets get that video
+     * @return [type] [description]
+     */
+    public function getVideo()
+    {
+        global $post;
+        $value = bootswatches_get_post_format_value($post->ID, 'video', null);
+
+        if (!$value) {
+            return null;
+        }
+
+        $output = '';
+        $output .= bootswatches_get_the_video_markup($value);
+
+        return $output;
+    }
 
 
 
@@ -349,8 +382,7 @@ class HeroContent
 
         $output = '';
 
-        if( is_month()){
-
+        if (is_month()) {
             $output .= '<span class="hero__pre-title">';
                 $output .= '<i class="fa fa-calendar" aria-hidden="true"></i>';
                 $output .= 'Posted in ';
@@ -358,16 +390,13 @@ class HeroContent
 
             $output .= '<h1 class="hero__title">' . get_the_date('F') .'</h1>';
             $output .= '<span class="hero__sub-title">' . get_the_date('Y') .'</span>';
-
-        } else{
-
+        } else {
             $output .= '<span class="hero__pre-title">';
                 $output .= '<i class="fa fa-calendar" aria-hidden="true"></i>';
                 $output .= 'Posted in ';
             $output .= '</span>';
 
             $output .= '<h1 class="hero__title">' . get_the_date('Y') .'</h1>';
-
         }
 
         return $output;
@@ -391,7 +420,6 @@ class HeroContent
         $output .= '<h1 class="hero__title">' . $buffered_cat . '</h1>';
 
         return $output;
-
     }
 
     // category feed title
@@ -411,7 +439,6 @@ class HeroContent
         $output .= '<h1 class="hero__title">' . $buffered_cat . '</h1>';
 
         return $output;
-
     }
 
 
@@ -431,7 +458,6 @@ class HeroContent
         $output .= '<h1 class="hero__title">' . get_search_query() . '</h1>';
 
         return $output;
-
     }
 
 
@@ -445,12 +471,12 @@ class HeroContent
 
         $hasFeaturedPost = get_option('featured-post--'.$post_type, false);
 
-        if($hasFeaturedPost) {
+        if ($hasFeaturedPost) {
             $FeaturedPost = new FeaturedPost($hasFeaturedPost, $post_type);
             $output = $this->featuredContent($FeaturedPost);
-        } elseif( $post->post_title )  {
+        } elseif ($post->post_title)  {
             $output = '<h1 class="hero__title">' . $post->post_title . '</h1>';
-        } elseif($post->name) {
+        } elseif ($post->name) {
             $output = '<h1 class="hero__title">' . $post->name . '</h1>';
         } else {
             $output = '<h1 class="hero__title"> Home </h1>';
@@ -489,12 +515,12 @@ class HeroContent
         $post = get_queried_object();
         $post_type = is_a($post, 'WP_Post_Type') ? $post->name : 'post';
 
-        if( is_home() )
+        if (is_home())
             $this->isFeaturedPost = get_option('featured-post--'.$post_type, false);
 
-        if( $post->post_title )  {
+        if ($post->post_title)  {
             $output = '<h1 class="hero__title">' . $post->post_title . '</h1>';
-        } elseif($post->name) {
+        } elseif ($post->name) {
             $output = '<h1 class="hero__title">' . $post->name . '</h1>';
         } else {
             $output = '<h1 class="hero__title"> Home </h1>';
@@ -510,16 +536,16 @@ class HeroContent
         $output = '';
         $content = get_theme_mod('frontpage_hero_content_setting', 'callout');
 
-        if($content == 'page') {
+        if ($content == 'page') {
             $page = get_theme_mod('frontpage_hero_page_setting', 0);
-            if( !is_null($page) && $page != 0 ) {
+            if (!is_null($page) && $page != 0) {
                 $page = get_page($page);
                 $output .= apply_filters('the_content', $page->post_content);
             }
-        } elseif($content == 'callout') {
+        } elseif ($content == 'callout') {
             $output .= $this->heroCallout();
         } else {
-            $output = '<h1 class="hero__title">' . get_bloginfo( 'name' ) . '</h1>';
+            $output = '<h1 class="hero__title">' . get_bloginfo('name') . '</h1>';
         }
 
         return $output;
@@ -530,14 +556,16 @@ class HeroContent
      * The front page displays a "callout", here is the markup
      * @return [type] [description]
      */
-    public function heroCallout(){
+    public function heroCallout()
+    {
         $id = get_theme_mod('frontpage_hero_callout_setting', 0);
 
-        $description = get_bloginfo( 'description', 'display' );
-        $title = get_bloginfo( 'name', 'display' );
+        $description = get_bloginfo('description', 'display');
+        $title = get_bloginfo('name', 'display');
 
-        if(!$title || !$description)
+        if (!$title || !$description) {
             return '<h1 class="hero__title">' . $title .'</h1>';
+        }
 
 
         $output = '';
@@ -545,12 +573,14 @@ class HeroContent
         $output .= '<div class="hero-callout">';
             $output .= '<h1 class="hero__title">'.$title.'</h1>';
 
-                if ( $description || is_customize_preview() )
-                    $output .= '<p class="hero__sub-title">'.$description.'</p>';
+            if ($description || is_customize_preview()) {
+                $output .= '<p class="hero__sub-title">'.$description.'</p>';
+            }
 
-                if( !is_null($id) && $id != 0 )
-                    $output .= '<a class="btn btn-primary"
-                        href="'.get_the_permalink($id).'">Learn More</a>';
+            if (!is_null($id) && $id != 0){
+                $output .= '<a class="btn btn-primary"
+                    href="'.get_the_permalink($id).'">Learn More</a>';
+            }
 
         $output .= '</div>';
 

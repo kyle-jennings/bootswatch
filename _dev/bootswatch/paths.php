@@ -21,7 +21,7 @@ trait paths {
     {
 
         self::$template_dir = $tmp = function_exists('get_template_directory')
-            ? get_template_directory() : self::get_template_directory(); 
+            ? get_template_directory() : self::get_template_directory();
             
         // Source
         self::$src_dir = self::$template_dir . '/_dev';
@@ -37,9 +37,6 @@ trait paths {
 
         // our custom SCSS modules
         self::$custom_manifest = self::$custom_dir . '/manifest.scss';
-
-
-
     }
 
 
@@ -51,16 +48,16 @@ trait paths {
      */
     static private function get_template_directory()
     {
-        
-        $theme_root = dirname(dirname( dirname( __FILE__) ) );
+        $theme_root = dirname(dirname(dirname(__FILE__)));
         return $theme_root;
     }
 
 
     static public function examine($val = array(), $mode = null)
     {
-        if( empty($val) && $mode != 'vardump' )
+        if (empty($val) && $mode != 'vardump'){
             return;
+        }
         echo "<pre>";
         print_r($val);
         echo "</pre>\n";

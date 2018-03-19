@@ -51,7 +51,7 @@ if( !$hide_content ):
                     $part = 'vertical';
                 }
 
-                get_template_part( 'template-parts/content-feed/content', get_post_format() );
+                get_template_part( 'template-parts/feed/content', get_post_format() );
 
 			endwhile;
 
@@ -60,7 +60,7 @@ if( !$hide_content ):
 
 		else :
 
-			get_template_part( 'template-parts/content-feed/content', 'none' );
+			get_template_part( 'template-parts/feed/content', 'none' );
 
 		endif; ?>
   </div>

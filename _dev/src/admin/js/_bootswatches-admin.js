@@ -8,9 +8,9 @@
  */
 jQuery(document).ready(function($) {
 
-  require('./video-media-library');
-  require('./video-field-updated');
-  require('./video-clear');
+  require('./admin/video-media-library');
+  require('./admin/video-field-updated');
+  require('./admin/video-clear');
 
   if($('body.widgets-php')){
     $('.benjamin-widget-area-options').appendTo('.widgets-sortables');

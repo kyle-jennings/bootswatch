@@ -10,7 +10,7 @@
 global $post;
 
 $chat = get_post_meta($post->ID, '_post_format_chat', true);
-$chat_location = $chat['location'];
+$chat_location = isset($chat['location']) ? $chat['location'] : 'before-content';
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class('cf row'); ?> >

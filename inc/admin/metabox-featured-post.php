@@ -6,7 +6,8 @@
  * @param  [type] $post [description]
  * @return [type]       [description]
  */
-function bootswatches_featured_post_metabox_markup($post) {
+function bootswatches_featured_post_metabox_markup($post)
+{
 
     $featured_post = get_option('featured-post--'.$post->post_type, null);
     $checked = ($post->ID === $featured_post) ? 'checked' : '';
@@ -29,7 +30,8 @@ function bootswatches_featured_post_metabox_markup($post) {
  * Registers the metabox
  * @return [type] [description]
  */
-function bootswatches_featured_post_metabox() {
+function bootswatches_featured_post_metabox()
+{
     $args = array(
        'public'   => true,
        'publicly_queryable' => true,
@@ -48,7 +50,7 @@ function bootswatches_featured_post_metabox() {
         null
     );
 }
-add_action( 'add_meta_boxes', 'bootswatches_featured_post_metabox' );
+add_action('add_meta_boxes', 'bootswatches_featured_post_metabox');
 
 
 
@@ -58,31 +60,32 @@ add_action( 'add_meta_boxes', 'bootswatches_featured_post_metabox' );
  * @param  wp_post $post    the post object
  * @param  string? $update  has the post been updated?
  */
-function bootswatches_save_featured_post($post_id, $post, $update) {
+function bootswatches_save_featured_post($post_id, $post, $update)
+{
 
-    if(!current_user_can("edit_post", $post_id))
+    if (!current_user_can("edit_post", $post_id)) {
         return $post_id;
-
-    if(defined("DOING_AUTOSAVE") && DOING_AUTOSAVE)
-        return $post_id;
-
-    if($post->post_type == 'revision')
-        return $post_id;
-
-    // if the post has been stickies, remove that flag and apply our flag
-    if( $post->post_type == 'post' && isset( $_POST['sticky'] ) ) {
-        unset( $_POST['sticky'] );
-        update_option('featured-post--'.$post->post_type, $post_id);
-    } elseif( isset($_POST['featured-post--'.$post->post_type]) ) {
-        update_option('featured-post--'.$post->post_type, $post_id);
-
-    } elseif( !isset($_POST['featured-post--'.$post->post_type])
-        && $post_id == get_option('featured-post--'.$post->post_type, true)
-    ) {
-
-        delete_option('featured-post--'.$post->post_type);
     }
 
+    if (defined("DOING_AUTOSAVE") && DOING_AUTOSAVE) {
+        return $post_id;
+    }
+
+    if ($post->post_type == 'revision') {
+        return $post_id;
+    }
+
+    // if the post has been stickies, remove that flag and apply our flag
+    if ($post->post_type == 'post' && isset($_POST['sticky'])) {
+        unset($_POST['sticky']);
+        update_option('featured-post--'.$post->post_type, $post_id);
+    } elseif (isset($_POST['featured-post--'.$post->post_type])) {
+        update_option('featured-post--'.$post->post_type, $post_id);
+    } elseif (!isset($_POST['featured-post--'.$post->post_type])
+        && $post_id == get_option('featured-post--'.$post->post_type, true)
+    ) {
+        delete_option('featured-post--'.$post->post_type);
+    }
 }
 
 add_action("save_post", "bootswatches_save_featured_post", 10, 3);
