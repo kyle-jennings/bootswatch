@@ -11,11 +11,9 @@
 
 <body <?php body_class(); ?>>
 
-
 <a class="skipnav" href="#primary">
     <?php esc_html_e( 'Skip to main content', 'bootswatches' ); ?>
 </a>
-
 
 <div class="overlay"></div>
 

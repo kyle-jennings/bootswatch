@@ -3,8 +3,6 @@
 jQuery(document).ready(function($) {
 
   require('./customizer/checkbox-group');
-  require('./customizer/tabSwitcherFilter');
-
   require('./customizer/sortables');
 
 });

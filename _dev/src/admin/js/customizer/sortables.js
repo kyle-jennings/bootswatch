@@ -31,7 +31,7 @@ function benjaminSortable(elm) {
 
       activeComponentsStr = get_active_sortables($active);
 
-      save_values(id, activeComponentsStr, $field)
+      save_values(id, activeComponentsStr, $field);
     },
     receive: function(e){}
   });

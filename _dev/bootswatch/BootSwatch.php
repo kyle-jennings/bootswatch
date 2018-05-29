@@ -2,7 +2,8 @@
 
 namespace bootswatch;
 
-class BootSwatch {
+class BootSwatch
+{
 
     public $name;
     public $theme;
@@ -67,7 +68,8 @@ class BootSwatch {
 
 
     // the theme might not be set at initalization
-    public function setTheme($theme = null) {
+    public function setTheme($theme = null)
+    {
         $this->name = $this->theme = $theme ? strtolower($theme): null;
 
         // i jsut wanted to play around with something other than concatenation, which is probably faster
@@ -82,8 +84,9 @@ class BootSwatch {
 
         $file = $this->theme_dir . '/bootstrap.min.css';
 
-        if( !is_readable($file))
+        if (!is_readable($file)) {
             return false;
+        }
 
         $this->setCSS();
 
@@ -94,10 +97,8 @@ class BootSwatch {
     // Set the location of the pre-built CSS files as provided by the vendor
     public function setCSS()
     {
-
         $this->css_dir = $this->theme_dir . '/bootswatch.min.css';
         $this->css_uri = $this->theme_uri . '/bootswatch.min.css';
-
     }
 
 
@@ -111,12 +112,14 @@ class BootSwatch {
 
 
     // set the file system path of the SCSS files
-    public function setSCSS(){
+    public function setSCSS()
+    {
         $files = array('bootswatch', 'variables' );
-        foreach($files as $filename) {
+        foreach ($files as $filename) {
             $file = $this->theme_dir . '/_' . $filename .'.scss';
-            if(!is_readable($file))
+            if (!is_readable($file)) {
                 return false;
+            }
 
             $prop = 'sass_' . $filename;
             $this->$prop = $file;
@@ -124,10 +127,11 @@ class BootSwatch {
     }
 
 
-    public function setThumbnail() {
+    public function setThumbnail()
+    {
         $file = $this->theme_dir . '/thumbnail.png';
 
-        if(is_readable($file)){
+        if (is_readable($file)) {
             $this->thumbnail_dir = $file;
             $this->thumbnail_uri =  $this->theme_uri . '/thumbnail.png';
         }
@@ -136,8 +140,9 @@ class BootSwatch {
 
     private function get_template_directory()
     {
-        return dirname( dirname( dirname( __FILE__)));
+        return dirname(dirname(dirname(__FILE__)));
     }
+
 
     private function get_template_directory_uri()
     {
@@ -145,13 +150,14 @@ class BootSwatch {
     }
 
 
-    static public function examine($val = array(), $mode = null)
+    public static function examine($val = array(), $mode = null)
     {
-        if( empty($val) && $mode != 'vardump' )
+        if (empty($val) && $mode != 'vardump') {
             return;
+        }
+
         echo "<pre>";
         print_r($val);
         die;
     }
-
 }
