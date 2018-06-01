@@ -39,6 +39,17 @@ function bootswatches_get_scheme_css()
 }
 
 
+function bootswatches_get_default_theme() {
+    $themes = bootswatches_get_scheme_css();
+    $themes = apply_filters('bootswatches_filter_themes', $themes);
+    $default = reset($themes);
+    return json_encode(array(
+        'uri' => $default->css_uri,
+        'name' => $default->name
+    ));
+}
+
+
 
 function bootswatches_get_post_format_value($post_id = null, $format = null, $default = null)
 {

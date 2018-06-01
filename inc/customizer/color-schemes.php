@@ -18,27 +18,22 @@ function bootswatches_select_colorscheme($wp_customize) {
 
     $themes = bootswatches_get_scheme_css();
     $themes = apply_filters('bootswatches_filter_themes', $themes);
-
     $default = reset($themes);
-    $default_uri = $default->css_uri;
+    $default = array(
+        'uri' => $default->css_uri,
+        'name' => $default->name
+    );
+
 
     // color scheme
     $wp_customize->add_setting(
         'color_scheme_setting',
         array(
-            'default' => $default_uri,
-            'sanitize_callback' => 'bootswatches_color_scheme_sanitize',
-            'validate_callback' => 'bootswatches_color_scheme_validate',
+            'default' => json_encode($default),
+            // 'sanitize_callback' => 'bootswatches_color_scheme_sanitize',
+            // 'validate_callback' => 'bootswatches_color_scheme_validate',
         )
     );
-
-
-    // $wp_customize->add_setting(
-    //     'color_scheme_setting_name',
-    //     array(
-    //         'default' => $default,
-    //     )
-    // );
 
 
     // examine($themes);

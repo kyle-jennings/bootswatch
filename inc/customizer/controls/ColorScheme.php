@@ -23,7 +23,6 @@ if(!class_exists('ColorScheme')) {
         */
         public function render_content()
         {
-
         ?>
             <label>
                 <span class="customize-control-title">
@@ -36,15 +35,23 @@ if(!class_exists('ColorScheme')) {
             <ul>
             <?php
                 foreach($this->choices as $theme):
+
+                $value = json_encode(array(
+                    'uri' => $theme->css_uri,
+                    'name' => $theme->name
+                ));
+
             ?>
                 <li class="cf">
+                    <label>
                     <input type="radio" name="<?php echo esc_attr($this->id); ?>"
                         <?php $this->link(); ?>
-                        value="<?php echo esc_attr($theme->css_uri); ?>"
-                        <?php selected($this->value(), $theme->css_uri); ?>
+                        value="<?php echo esc_attr($value); ?>"
+                        <?php selected($this->value(), $value); ?>
                     />
 
                     <?php echo esc_attr(ucfirst($theme->name)); ?>
+                    </label>
                     <img class="swatches" src="<?php echo esc_url($theme->thumbnail_uri); ?>" />
 
                 </li>
