@@ -16,21 +16,31 @@ function bootswatches_select_colorscheme($wp_customize) {
         )
     );
 
-    $default = get_template_directory_uri() . '/assets/frontend/css/bootstrap/bootstrap.min.css';
+    $themes = bootswatches_get_scheme_css();
+    $themes = apply_filters('bootswatches_filter_themes', $themes);
+
+    $default = reset($themes);
+    $default_uri = $default->css_uri;
 
     // color scheme
     $wp_customize->add_setting(
         'color_scheme_setting',
         array(
-            'default' => $default,
+            'default' => $default_uri,
             'sanitize_callback' => 'bootswatches_color_scheme_sanitize',
             'validate_callback' => 'bootswatches_color_scheme_validate',
         )
     );
 
 
-    $themes = bootswatches_get_scheme_css();
-    $themes = apply_filters('bootswatches_filter_themes', $themes);
+    // $wp_customize->add_setting(
+    //     'color_scheme_setting_name',
+    //     array(
+    //         'default' => $default,
+    //     )
+    // );
+
+
     // examine($themes);
     $wp_customize->add_control(
         new ColorScheme(

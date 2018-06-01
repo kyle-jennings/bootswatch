@@ -6,7 +6,6 @@ $files = array(
 
     'controls/label',
     'controls/sortable',
-    'controls/color-scheme',
     'controls/menu-dropdown',
     'controls/checkbox-group',
     'controls/ColorScheme',
