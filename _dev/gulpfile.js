@@ -34,7 +34,7 @@ var paths = {
   assetsPath: '../assets/frontend',
 
   adminSrcPath: './src/admin',
-  adminAssetsPath: '../assets/backend',
+  adminAssetsPath: '../assets/admin',
   
   npmPath : './node_modules',
   bowerPath: './bower_components',

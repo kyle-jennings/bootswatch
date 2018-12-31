@@ -32,83 +32,79 @@ class Bootswatches_Widget_Archives extends WP_Widget {
 	}
 
 
-    public function dropdown($c)
+    private function menuStyleArgs($style = 'side_nav'){
+
+        if($style == 'side_nav'):
+            $class = 'usa-sidenav-list';
+        elseif($style == 'nav_list'):
+            $class = 'usa-unstyled-list';
+        else:
+            $class = '';
+        endif;
+
+        return $class;
+    }
+
+
+    public function dropdown($c, $title)
     {
         $dropdown_id = "{$this->id_base}-dropdown-{$this->number}";
+    ?>
+    <label class="screen-reader-text" for="<?php echo esc_attr( $dropdown_id ); ?>">
+        <?php echo esc_html($title); ?>
+    </label>
+    <select id="<?php echo esc_attr( $dropdown_id ); ?>" name="archive-dropdown" onchange='document.location.href=this.options[this.selectedIndex].value;'>
+        <?php
+        /**
+         * Filters the arguments for the Archives widget drop-down.
+         *
+         * @since 2.8.0
+         *
+         * @see wp_get_archives()
+         *
+         * @param array $args An array of Archives widget drop-down arguments.
+         */
+        $dropdown_args = apply_filters( 'widget_archives_dropdown_args', array(
+            'type'            => 'monthly',
+            'format'          => 'option',
+            'show_post_count' => $c
+        ) );
 
-            /**
-             * Filters the arguments for the Archives widget drop-down.
-             *
-             * @since 2.8.0
-             *
-             * @see wp_get_archives()
-             *
-             * @param array $args An array of Archives widget drop-down arguments.
-             */
-            $dropdown_args = apply_filters( 'widget_archives_dropdown_args', array(
-                'type'            => 'monthly',
-                'format'          => 'option',
-                'show_post_count' => $c
-            ) );
+        switch ( $dropdown_args['type'] ) {
+            case 'yearly':
+                $label = __( 'Select Year', 'bootswatches' );
+                break;
+            case 'monthly':
+                $label = __( 'Select Month', 'bootswatches' );
+                break;
+            case 'daily':
+                $label = __( 'Select Day', 'bootswatches' );
+                break;
+            case 'weekly':
+                $label = __( 'Select Week', 'bootswatches' );
+                break;
+            default:
+                $label = __( 'Select Post', 'bootswatches' );
+                break;
+        }
+        ?>
 
-            switch ( $dropdown_args['type'] ) {
-                case 'yearly':
-                    $label = __( 'Select Year', 'bootswatches' );
-                    break;
-                case 'monthly':
-                    $label = __( 'Select Month', 'bootswatches' );
-                    break;
-                case 'daily':
-                    $label = __( 'Select Day', 'bootswatches' );
-                    break;
-                case 'weekly':
-                    $label = __( 'Select Week', 'bootswatches' );
-                    break;
-                default:
-                    $label = __( 'Select Post', 'bootswatches' );
-                    break;
-            }
-            ?>
-    <div class="form-group">
+        <option value=""><?php echo esc_attr( $label ); ?></option>
+        <?php wp_get_archives( $dropdown_args ); ?>
 
-        <select class="form-control" id="<?php echo esc_attr( $dropdown_id ); ?>"
-            name="archive-dropdown"
-            onchange='document.location.href=this.options[this.selectedIndex].value;
-        '>
-            <option value="">
-                <?php echo esc_attr( $label ); ?>
-            </option>
-            <?php wp_get_archives( $dropdown_args ); ?>
-        </select>
-    </div>
+    </select>
     <?php
     }
 
 
+    public function menu($c, $style_args) {
 
-    public function list($c, $style = null)
-    {
+        // $c = ($style_args == 'usa-sidenav-list') ? null : $c ; // untill i figure out how to add the count to the anchor tags
+        $class = $style_args ? 'class="'.esc_attr($style_args).'"' : '';
 
-        $class = '';
-        $elm = 'ul';
-        $format = 'html';
-        $before = null;
-        if($style == 'unordered-list'):
-            $elm = 'ul';
-        elseif($style == 'ordered-list'):
-            $elm = 'ol';
-        elseif($style == 'unstyled-list') :
-            $class = 'list-unstyled';
-        elseif( $style == 'list-group') :
-            $class = 'list-group';
-            $li_class = 'list-group-item';
-            $format = 'custom';
-            $before = '<li class="list-group-item">';
-        elseif($style == 'pills'):
-            $class = 'nav nav-pills nav-stacked';
-        endif;
-
-        echo '<'.esc_attr($elm) .' class="widget-list '.esc_attr($class) .'">';
+    ?>
+		<ul <?php echo $class; //WPCS: xss ok. ?>>
+	<?php
 		/**
 		 * Filters the arguments for the Archives widget.
 		 *
@@ -118,19 +114,12 @@ class Bootswatches_Widget_Archives extends WP_Widget {
 		 *
 		 * @param array $args An array of Archives option arguments.
 		 */
-        wp_get_archives(
-            apply_filters(
-                'widget_archives_args',
-                array(
-                    'type'            => 'monthly',
-                    'show_post_count' => $c,
-                    'format' => $format,
-                    'before' => $before,
-                )
-            )
-        );
+		wp_get_archives( apply_filters( 'widget_archives_args', array(
+			'type'            => 'monthly',
+			'show_post_count' => $c,
+		) ) );
 	?>
-		</<?php echo esc_attr($elm); ?>>
+		</ul>
 	<?php
 
     }
@@ -151,24 +140,25 @@ class Bootswatches_Widget_Archives extends WP_Widget {
 		$d = ! empty( $instance['dropdown'] ) ? '1' : '0';
 
         $style = ! empty( $instance['menu_style'] ) ? $instance['menu_style'] : 'side_nav';
-        // $style_args = $this->menuStyleArgs($style);
+        $style_args = $this->menuStyleArgs($style);
 
 
 		/** This filter is documented in wp-includes/widgets/class-wp-widget-pages.php */
 		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Archives', 'bootswatches' ) : $instance['title'], $instance, $this->id_base );
 
-		echo $args['before_widget']; //WPCS: xss ok.
+		echo $args['before_widget']; // WPCS: xss ok.
 		if ( $title ) {
-			echo $args['before_title'] . $title . $args['after_title'];  //WPCS: xss ok.
+			echo $args['before_title'] . $title . $args['after_title']; // WPCS: xss ok.
 		}
 
-		if ( $style == 'dropdown' )
-            $this->dropdown($c);
-        else
-            $this->list($c, $style);
+		if ( $style == 'dropdown' ) {
+            $this->dropdown($c, $title);
+        } else {
 
+            $this->menu($c, $style_args);
+		}
 
-		echo $args['after_widget'];  //WPCS: xss ok.
+		echo $args['after_widget']; // WPCS: xss ok.
 	}
 
 	/**
@@ -212,22 +202,21 @@ class Bootswatches_Widget_Archives extends WP_Widget {
 		?>
 		<p>
             <label for="<?php echo esc_attr($this->get_field_id('title')); ?>">
-                <?php echo __('Title:', 'bootswatches');  // WPCS: xss ok.?>
+                <?php esc_html_e('Title:', 'bootswatches'); ?>
             </label>
             <input class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>"
-                name="<?php echo esc_attr($this->get_field_name('title')); ?>" placeholder="<?php echo esc_attr( 'Archives', 'bootswatches' ); ?>"
-                type="text" value="<?php echo esc_attr($title); ?>"
-            />
-        </p>
+            name="<?php echo esc_attr($this->get_field_name('title')); ?>"
+            placeholder="<?php esc_attr_e( 'Archives', 'bootswatches' ); ?>"
+            type="text" value="<?php echo esc_attr($title); ?>" /></p>
         <?php
         // styles
         $find = array('-', '_');
-        $menu_styles = array('dropdown', 'unordered-list', 'ordered-list', 'unstyled-list', 'list-group', 'pills');
+        $menu_styles = array('dropdown', 'side_nav', 'nav_list', 'list');
 
         ?>
         <p>
             <label for="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>">
-                <?php echo __( 'Menu Style:', 'bootswatches' );  // WPCS: xss ok.?>
+                    <?php esc_html_e( 'Menu Style:', 'bootswatches' ); ?>
             </label>
             <select id="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>"
                   name="<?php echo esc_attr($this->get_field_name( 'menu_style' )); ?>">
@@ -244,11 +233,11 @@ class Bootswatches_Widget_Archives extends WP_Widget {
         </p>
 
 		<p>
-			<input class="checkbox" type="checkbox" <?php checked( $instance['count'] ); ?>
-                id="<?php echo esc_attr($this->get_field_id('count')); ?>"
-                name="<?php echo esc_attr($this->get_field_name('count')); ?>" />
+			<input class="checkbox" type="checkbox"<?php checked( $instance['count'] ); ?>
+            id="<?php echo esc_attr($this->get_field_id('count')); ?>"
+            name="<?php echo esc_attr($this->get_field_name('count')); ?>" />
             <label for="<?php echo esc_attr($this->get_field_id('count')); ?>">
-                <?php echo __('Show post counts', 'bootswatches'); // WPCS: xss ok. ?>
+                <?php esc_html_e('Show post counts', 'bootswatches'); ?>
             </label>
 		</p>
 		<?php

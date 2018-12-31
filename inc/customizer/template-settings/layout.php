@@ -40,6 +40,7 @@ $layout_args = array(
     'section' => $name.'_settings_section',
     'settings'=> $name.'_page_layout_setting',
     'choices' => array(
+        'banner' => __('Hide Banner', 'bootswatches'),
         'navbar' => __('Hide Navbar', 'bootswatches'),
         'page-content' => __('Hide Page Content and Sidebar', 'bootswatches'),
         'footer' => __('Hide Footer', 'bootswatches'),

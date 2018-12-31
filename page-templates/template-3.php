@@ -37,8 +37,7 @@ if( !$hide_content ):
     	<?php
     	while ( have_posts() ) : the_post();
 
-    		get_template_part( 'template-parts/content/content', 'page' );
-
+            get_template_part('template-parts/singles/content', 'page');
 
     	endwhile; // End of the loop.
     	?>
@@ -49,9 +48,9 @@ if( !$hide_content ):
     endif;
     ?>
 
-</div><!-- /row -->
-</div><!-- container -->
-</div><!-- / section--body -->
+        </div>
+    </div>
+</div>
 
 <?php
 endif;

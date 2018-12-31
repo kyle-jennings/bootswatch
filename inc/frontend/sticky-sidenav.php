@@ -7,8 +7,8 @@ function bootswatches_get_sticky_sidenav($id = 0){
 
     $output = '';
 
-    $output .= '<aside class="sidenav sticky usa-width-one-third">';
-        $output .= '<ul class="usa-sidenav-list">';
+    $output .= '<aside class="sidenav sticky col-sm-12">';
+        $output .= '<ul class="sidenav-list">';
         foreach($anchors as $anchor):
             $label = str_replace(array('-','_'),' ', $anchor);
             $output .= '<li>';

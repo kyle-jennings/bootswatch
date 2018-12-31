@@ -33,13 +33,13 @@ if( !$hide_content ):
         bootswatches_sticky_sidenav($post->ID);
     endif;
     ?>
-    <div class="main-content col-md-8">
+    <div class="main-content usa-width-two-thirds">
     	<?php
     	while ( have_posts() ) : the_post();
 
-    		get_template_part( 'template-parts/content/content', 'page' );
+    		get_template_part( 'template-parts/singles/content', 'page' );
 
-    		bootswatches_the_posts_navigation();
+    		the_post_navigation();
 
     		// If comments are open or we have at least one comment, load up the comment template.
     		if ( comments_open() || get_comments_number() ) :
@@ -55,9 +55,9 @@ if( !$hide_content ):
     endif;
     ?>
 
-</div><!-- /row -->
-</div><!-- container -->
-</div><!-- / section--body -->
+        </div>
+    </div>
+</div>
 
 <?php
 endif;

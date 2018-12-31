@@ -1,5 +1,6 @@
 <?php
 
+
 function bootswatches_get_cpts() {
     $args = array(
        'public'   => true,

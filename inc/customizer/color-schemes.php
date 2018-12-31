@@ -30,8 +30,8 @@ function bootswatches_select_colorscheme($wp_customize) {
         'color_scheme_setting',
         array(
             'default' => json_encode($default),
-            // 'sanitize_callback' => 'bootswatches_color_scheme_sanitize',
-            // 'validate_callback' => 'bootswatches_color_scheme_validate',
+            'sanitize_callback' => 'bootswatches_color_scheme_sanitize',
+            'validate_callback' => 'bootswatches_color_scheme_validate',
         )
     );
 

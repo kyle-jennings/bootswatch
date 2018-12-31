@@ -45,48 +45,20 @@ function bootswatches_widgets_init() {
 
         $description = isset($args['widget_description']) ? $args['widget_description'] : '';
         register_sidebar( array(
-            'name'          => sprintf( '%s ', ucfirst($args['label']) ),
-            'id'            => (string) $name,
+    		'name'          => sprintf( '%s ', ucfirst($args['label']) ),
+    		'id'            => (string) $name,
             /* translators: sidebar description. */
-            'description'   => sprintf(  __('%s ', 'bootswatches'), $description ),
-            'before_widget' => '<div id="%1$s" class="widget widget-area--' . $name . ' '. $width . '">',
-            'after_widget'  => '</div>',
-            'before_title'  => '<h3 class="widget-title">',
-            'after_title'   => '</h3>',
-        ) );
+    		'description'   => sprintf(  __('%s ', 'bootswatches'), $description ),
+    		'before_widget' => '<div id="%1$s" class="widget widget-area--' . $name . ' '. $width . '">',
+    		'after_widget'  => '</div>',
+    		'before_title'  => '<h3 class="widget-title">',
+    		'after_title'   => '</h3>',
+    	) );
     }
 
 
 }
 add_action( 'init', 'bootswatches_widgets_init' );
-
-
-
-function add_classes_to__widget($args){
-    global $horizontal_sidebars_count;
-
-    if( !array_key_exists($args[0]['id'], $horizontal_sidebars_count) )
-        return $args;
-    $horizontal_sidebars_count[$args[0]['id']]['current']++;
-
-    // store the variables into something i dont hate writing
-    $current = $horizontal_sidebars_count[$args[0]['id']]['current'];
-    $count = $horizontal_sidebars_count[$args[0]['id']]['count'];
-    $cols = 12;
-
-    // if there are no widgets just return
-    if($count == 0)
-        return $args;
-
-    if( ($current == $count) && ($cols % $count > 0) ){
-        $last = 'col-md-'. floor(($cols / $count) + ($cols % $count));
-        $args[0]['before_widget'] = preg_replace('/(col-md-[0-9]+)/', $last, $args[0]['before_widget']);
-    }
-
-    return $args;
-}
-// add_filter('dynamic_sidebar_params', 'add_classes_to__widget');
-
 
 
 /**
@@ -96,10 +68,11 @@ function add_classes_to__widget($args){
  * @return [type]        [description]
  */
 function bootswatches_calculate_widget_width($count){
-    $cols = 12;
-    if($count <= 0)
-        return '';
-    return 'col-md-'.floor($cols / $count);
+    if($count == 0) {
+        return 'col-sm-1';
+    }
+    return 'col-sm-' . (12 / $count);
+
 }
 
 
@@ -131,7 +104,7 @@ function bootswatches_hide_inactive_templates_on_widget_screen(){
         
         // if we are on the default template or that template's settings 
         // have been activated, then skip it.
-        if( $name == DEFAULT_TEMPLATE || get_theme_mod($name.'_settings_active') == 'yes' )
+        if( $name == BOOTSWATCHES_DEFAULT_TEMPLATE || get_theme_mod($name.'_settings_active') == 'yes' )
             continue;
 
         // skip the following areas

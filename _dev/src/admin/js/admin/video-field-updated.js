@@ -8,7 +8,7 @@ $('body').on('change','.js--video-url', function(e){
 
 
   var data = {
-    "action": "benjamin_video_shortcode",
+    "action": "bootswatches_video_shortcode",
     "data": url
   };
   $.ajax({

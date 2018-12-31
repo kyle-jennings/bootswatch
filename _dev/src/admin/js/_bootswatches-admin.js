@@ -13,7 +13,7 @@ jQuery(document).ready(function($) {
   require('./admin/video-clear');
 
   if($('body.widgets-php')){
-    $('.benjamin-widget-area-options').appendTo('.widgets-sortables');
+    $('.bootswatches-widget-area-options').appendTo('.widgets-sortables');
   }
 
 });

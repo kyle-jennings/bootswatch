@@ -6,60 +6,50 @@
  *
  * @package Bootswatches
  */
-
-$right = ' col-md-8';
-
-if( has_post_thumbnail() )
-    $right = ' col-md-8';
-
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class('cf row'); ?> >
-    <h2 class="post-title col-md-12">
-    <?php
-        the_title( bootswatches_post_format_icon( get_post_format() )
-        . '<a href="'
-        . esc_url( get_permalink() ) . '" rel="bookmark">',
-        '</a>' );
-     ?>
-    </h2>
-
-    <div class="col-md-4 post-col-left">
-
-    <?php bootswatches_post_thumbnail($post, 'thumbnail'); ?>
-
-    <?php
-    echo '<header class="post-header">';
-
-
-        if ( 'page' !== get_post_type() ) : ?>
-        <div class="post-meta">
-            <?php
-
-            echo bootswatches_get_the_date(); // WPCS: xss ok.
-            echo bootswatches_get_the_author(); // WPCS: xss ok.
-
-            echo bootswatches_get_the_comment_popup(); // WPCS: xss ok.
-            echo bootswatches_get_categories_links(); // WPCS: xss ok.
-            echo bootswatches_get_tags_links(); // WPCS: xss ok.
-            ?>
-        </div><!-- .post-meta -->
-
-
-
+<article id="post-<?php the_ID(); ?>" <?php post_class( 'entry cf' ); ?>>
+    
+    <header class="entry-header">
+        <h3 class="entry-title">
         <?php
-        endif;
+            echo bootswatches_get_feed_entry_title(); // WPCS: xss ok.
+        ?>
+        </h3>
+    </header><!-- .entry-header -->
 
+    <div class="grid">
+        <?php
+        if(class_exists('BootswatchesPostFormat')) {
+            bootswatches_post_format_markup( $post, get_post_format() );
+        }
+        ?>
 
-        // bootswatches_post_footer();
-    echo '</header>';
+        <div class="usa-width-one-fourth">
 
-    ?>
-    </div> <!-- col-md-4-->
+            <?php 
+                bootswatches_post_thumbnail( $post );
+            ?>
 
-    <div class="<?php echo $right; // WPCS: xss ok.?>">
+            <?php
+            if ( 'page' !== get_post_type() ) :
+            ?>
+                <div class="entry-meta">
+            <?php
+                echo bootswatches_get_the_date(); // WPCS: xss ok.
+                echo bootswatches_get_the_author(); // WPCS: xss ok.
 
-        <div class="post-content">
+                echo bootswatches_get_the_comment_popup(); // WPCS: xss ok.
+                echo bootswatches_get_categories_links(); // WPCS: xss ok.
+                echo bootswatches_get_tags_links(); // WPCS: xss ok.
+            ?>
+            </div><!-- .entry-meta -->
+            <?php
+            endif;
+            ?>
+        </div>
+
+        <div class="entry-content usa-width-three-fourths">
             <?php
 
                 the_content( sprintf(
@@ -73,23 +63,15 @@ if( has_post_thumbnail() )
                 );
 
             ?>
-        </div><!-- .post-meta -->
-
-        <div class="post-meta">
-            <?php bootswatches_the_edit_post_link(); ?>
-        </div>
-
-
-        <footer class="post-footer post-meta">
-            <?php
-                wp_link_pages( array(
-                    'before' => '<nav aria-label="Page navigation"><ul class="pagination">',
-                    'after'  => '</ul></nav>',
-                ) );
-
-            ?>
-
-        </footer><!-- .post-footer -->
-
+        </div><!-- .entry-content -->
     </div>
+
+    <footer class="entry-footer">
+        <?php
+            wp_link_pages( array(
+                'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'bootswatches' ),
+                'after'  => '</div>',
+            ) );
+        ?>
+    </footer><!-- .entry-footer -->
 </article><!-- #post-## -->

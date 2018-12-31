@@ -12,35 +12,35 @@ $shared_files = array(
     'set-default-settings',
     'template-list',
     'theme-support',
-    'utils',
     'video-markup',
     'widgets',
 );
 
 foreach ($shared_files as $file) {
-    require get_template_directory() . '/inc/shared/' . $file . '.php';
+    require get_template_directory() . '/inc/shared/' . $file . '.php'; // WPCS: xss ok.
 }
 
-
-// include customizer
+// customizer
 require get_template_directory() . '/inc/customizer/_init.php';
 
 // load some bootstwatch specific things
 require get_template_directory() . '/inc/bootswatches/Bootswatches.php';
 require get_template_directory() . '/inc/bootswatches/BootswatchesThemes.php';
 
-
 // only load these in the admin section
 if (is_admin()) {
     $files = array(
+        'about-page',
         'ajax',
         'assets',
+        'franklin-notice',
         'functions',
-        'class-PostFormat',
-        'metabox-featured-post',
+        'metabox-featured-post'
     );
+
+
     foreach ($files as $file) {
-        require get_template_directory() . '/inc/admin/' . $file . '.php';// WPCS: xss ok.
+        require get_template_directory() . '/inc/admin/' . $file . '.php'; // WPCS: xss ok.
     }
 }
 
@@ -51,31 +51,28 @@ if (!is_admin()) {
     $files = array(
         'assets',
         'brand',
-        'class-FeaturedPost',
-        'comment-form',
+        'class-BootswatchesFeaturedPost',
+        'hero/BootswatchesHero',
+        'hero/BootswatchesHeroBG',
+        'hero/BootswatchesHeroContent',
         'excerpts',
         'filters',
-        'functions',
-        'galleries',
         'get-sidebar',
         'get-width-visibility',
-        'hero/Hero',
-        'hero/HeroBackground',
-        'hero/HeroContent',
         'nav-settings',
+        'nav-walkers/footer-nav-walker',
+        'nav-walkers/navbar-walker',
+        'nav-walkers/navlist-walker',
+        'nav-walkers/sidenav-walker',
         'page-sortables',
-        'pager',
+        'post-format-markup',
         'sticky-sidenav',
         'template-parts',
         'template-settings',
         'template-tags',
-        'walkers/BootswatchesNavbarWalker',
-        'walkers/BootswatchesFooterNavbarWalker',
-        'walkers/BootswatchesSidenavWalker',
-        'walkers/BootswatchesNavlistWalker',
-        'walkers/BootswatchesCommentsWalker',
     );
+
     foreach ($files as $file) {
-        require get_template_directory() . '/inc/frontend/' . $file . '.php';
+        require get_template_directory() . '/inc/frontend/' . $file . '.php'; // WPCS: xss ok.
     }
 }

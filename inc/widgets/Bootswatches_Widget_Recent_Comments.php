@@ -91,21 +91,19 @@ class Bootswatches_Widget_Recent_Comments extends WP_Widget {
 
         $output = '';
 
-        $output .= '<select class="form-control" id="'.$dropdown_id.'">';
+        $output .= '<select id="'.$dropdown_id.'">';
         $output .= '<option>-- Select Comment --</option>';
         if ( is_array( $comments ) && $comments ) {
             // Prime cache for associated posts. (Prime post term cache if we need it for permalinks.)
             $post_ids = array_unique( wp_list_pluck( $comments, 'comment_post_ID' ) );
-
             _prime_post_caches( $post_ids, strpos( get_option( 'permalink_structure' ), '%category%' ), false );
-
             foreach ( (array) $comments as $comment ) {
                 $output .= '<option value="'.get_comment_link( $comment ) .'" >';
-                /* translators: comments widget: 1: comment author, 2: post link */
-                $output .= sprintf( _x( ' %1$s', 'widgets', 'bootswatches' ),
-                    get_comment_author_link( $comment ) . ' &#45; &nbsp;'
-                    . get_the_title( $comment->comment_post_ID )
-                );
+
+            /* translators: comments widget: 1 - comment author -  post link */
+            $output .= esc_html(  get_comment_author_link( $comment ) . ' &#45; &nbsp;' . get_the_title( $comment->comment_post_ID ) );
+
+
                 $output .= '</option>';
             }
         }
@@ -117,52 +115,41 @@ class Bootswatches_Widget_Recent_Comments extends WP_Widget {
         return $output;
     }
 
+    private function menuStyleArgs($style = 'side_nav'){
+        if($style == 'side_nav'):
+            $class = 'usa-sidenav-list';
+        elseif($style == 'nav_list'):
+            $class = 'usa-unstyled-list';
+        else:
+            $class = '';
+        endif;
+
+        return $class;
+    }
+
 
     public function menu($comments, $style)
     {
         // set up vars
-
-        $class = '';
-        $elm = 'ul';
-        $format = 'html';
-        $before = null;
-        $li_class = '';
-
-        if($style == 'unordered-list'):
-            $elm = 'ul';
-        elseif($style == 'ordered-list'):
-            $elm = 'ol';
-        elseif($style == 'unstyled-list') :
-            $class = 'list-unstyled';
-        elseif( $style == 'list-group') :
-            $class = 'list-group';
-            $li_class = 'list-group-item';
-
-        elseif($style == 'pills'):
-            $class = 'nav nav-pills nav-stacked';
-        endif;
-
+        $style_args = $this->menuStyleArgs($style);
+        $class = $style_args ? 'class="'.$style_args.'"' : '';
+        $li_class = ($style_args == 'list') ? 'class="recentcomments"' : '';
 
         $output = '';
-        $output .= '<'.$elm.' class="widget-list '.$class.'"  id="recentcomments">';
+        $output .= '<ul id="recentcomments" '.$class.'>';
         if ( is_array( $comments ) && $comments ) {
             // Prime cache for associated posts. (Prime post term cache if we need it for permalinks.)
             $post_ids = array_unique( wp_list_pluck( $comments, 'comment_post_ID' ) );
             _prime_post_caches( $post_ids, strpos( get_option( 'permalink_structure' ), '%category%' ), false );
             foreach ( (array) $comments as $comment ) {
-                $output .= '<li class="'.$li_class.'">';
-
-                /* translators: comments widget: 1: comment author, 2: post link */
-                $output .= sprintf( _x( ' %1$s', 'widgets', 'bootswatches' ),
+                $output .= '<li '.$li_class.'>';
+                $output .= '<a href="' . esc_url( get_comment_link( $comment ) ) . '">' .
                     '<span class="comment-author-link">' . get_comment_author( $comment ) . ' &#45;  </span> &nbsp;'
-                    . '<a href="' . esc_url( get_comment_link( $comment ) ) . '">'
-                    . ( get_the_title( $comment->comment_post_ID ) ? get_the_title( $comment->comment_post_ID ) : "No Title" )
-                    . '</a>'
-                );
+                    . get_the_title( $comment->comment_post_ID ) . '</a>'; // WPCS: xss ok.
                 $output .= '</li>';
             }
         }
-        $output .= '</'.$elm.'>';
+        $output .= '</ul>';
 
         return $output;
     }
@@ -223,7 +210,7 @@ class Bootswatches_Widget_Recent_Comments extends WP_Widget {
 
 
 		$output .= $args['after_widget'];
-		echo $output;  //WPCS: xss ok;
+		echo $output; // WPCS: xss ok.
 	}
 	/**
 	 * Handles updating settings for the current Recent Comments widget instance.
@@ -260,39 +247,24 @@ class Bootswatches_Widget_Recent_Comments extends WP_Widget {
         $saved_style = isset( $instance['menu_style'] ) ? $instance['menu_style'] : '';
 
 		?>
-		<p>
-            <label for="<?php echo esc_attr($this->get_field_id( 'title' )); ?>">
-                <?php echo __( 'Title:', 'bootswatches' );  // WPCS: xss ok. ?>
-            </label>
-            <input class="widefat" id="<?php echo esc_attr($this->get_field_id( 'title' )); ?>"
-                name="<?php echo esc_attr($this->get_field_name( 'title' )); ?>"
-                placeholder="<?php echo esc_attr( 'Recent Comments', 'bootswatches' ); ?>"
-                type="text" value="<?php echo esc_attr( $title ); ?>"
-            />
-        </p>
+		<p><label for="<?php echo esc_attr($this->get_field_id( 'title' )); ?>"><?php esc_html_e( 'Title:', 'bootswatches' ); ?></label>
+		<input class="widefat" id="<?php echo esc_attr($this->get_field_id( 'title' )); ?>" name="<?php echo esc_attr($this->get_field_name( 'title' )); ?>" placeholder="<?php esc_attr_e( 'Recent Comments', 'bootswatches' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" /></p>
 
-		<p>
-            <label for="<?php echo esc_attr($this->get_field_id( 'number' )); ?>">
-                <?php echo __( 'Number of comments to show:', 'bootswatches' ); // WPCS: xss ok. ?>
-            </label>
-		    <input class="tiny-text" id="<?php echo esc_attr($this->get_field_id( 'number' )); ?>"
-            name="<?php echo esc_attr($this->get_field_name( 'number' )); ?>"
-            type="number" step="1" min="1" value="<?php echo esc_attr($number); ?>" size="3"
-            />
-        </p>
+		<p><label for="<?php echo esc_attr($this->get_field_id( 'number' )); ?>"><?php esc_html_e( 'Number of comments to show:', 'bootswatches' ); ?></label>
+		<input class="tiny-text" id="<?php echo esc_attr($this->get_field_id( 'number' )); ?>" name="<?php echo esc_attr($this->get_field_name( 'number' )); ?>" type="number" step="1" min="1" value="<?php echo esc_attr($number); ?>" size="3" /></p>
 
         <?php
         // styles
         $find = array('-', '_');
-        $menu_styles = array('dropdown', 'unordered-list', 'ordered-list', 'unstyled-list', 'list-group', 'pills');
+        $menu_styles = array('dropdown', 'side_nav', 'nav_list', 'list');
 
         ?>
         <p>
             <label for="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>">
-                    <?php echo __( 'Menu Style:', 'bootswatches' );  // WPCS: xss ok.?>
+                    <?php esc_html_e( 'Menu Style:', 'bootswatches' ); ?>
             </label>
-            <select id="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>"
-                  name="<?php echo esc_attr($this->get_field_name( 'menu_style' )); ?>">
+            <select id="<?php echo esc_attr($this->get_field_id( 'menu_style' ) ); ?>"
+                  name="<?php echo esc_attr($this->get_field_name( 'menu_style' ) ); ?>">
                 <?php
                     foreach ( $menu_styles as $style ) :
                         $label = ucwords(str_replace($find, ' ', $style ));

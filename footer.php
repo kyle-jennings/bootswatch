@@ -12,13 +12,13 @@
 ?>
 
 <footer class="section section--footer">
-
-            <?php bootswatches_footer(); ?>
-</footer><!-- /site-footer -->
-
-</div><!-- /page-wrapper -->
-
+    <?php
+        // inc/frontend/footer.php
+        bootswatches_the_footer();
+    ?>
+</footer>
 <?php wp_footer(); ?>
+</div><!-- #main-content -->
 
 </body>
 </html>

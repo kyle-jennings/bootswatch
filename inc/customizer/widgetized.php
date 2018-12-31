@@ -22,9 +22,12 @@ function bootswatches_widgetized_settings($wp_customize) {
         'sanitize_callback' => 'bootswatches_widgetized_sortable_sanitize',
     ) );
 
-    $description = __('The page content is sortable, and optional.  Simply drag the
-    available components from the "available" box over to active.  This setting
-    does not depend on the "Settings Active" setting above.', 'bootswatches');
+    $description = __('The page content is sortable, and optional.  Simply drag the 
+        available components from the "available" box over to "active".  Once a widget 
+        area has been dragged to "active" you\'ll need to add some ', 'bootswatches');
+    $description .= '<a href="' . esc_attr("javascript:wp.customize.control( 'navbar_brand_control' ).focus();") . 
+        '" data-panel="widgets">';
+    $description .= __('widgets', 'bootswatches') . '</a>';
 
     $wp_customize->add_control( new Bootswatches_Sortable_Control( $wp_customize,
        'widgetized_sortables_control', array(
@@ -32,7 +35,7 @@ function bootswatches_widgetized_settings($wp_customize) {
            /* translators: use the $description variable above - states that the content is sortable via drag and drop */
            'description' => sprintf( __('%s ', 'bootswatches'), $description ),
            'section' => $section,
-           'settings'=> 'widgetized_sortables_setting',
+           'settings' => 'widgetized_sortables_setting',
            'optional' => true,
            'choices' => array(
                    'widget-area-1' => __('Widget Area 1', 'bootswatches'),

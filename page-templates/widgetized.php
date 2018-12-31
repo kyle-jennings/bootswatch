@@ -44,9 +44,9 @@ if( !$hide_content ):
         endif;
     ?>
 
-</div><!-- /row -->
-</div><!-- container -->
-</div><!-- / section--body -->
+        </div>
+    </div>
+</div>
 
 <?php
 endif;

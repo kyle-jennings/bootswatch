@@ -1,52 +1,49 @@
 <?php
 
 $files = array(
-    '_helpers',
-    '_sanitizations',
+    '_helpers.php',
+    '_sanitizations.php',
 
-    'controls/label',
-    'controls/sortable',
-    'controls/menu-dropdown',
-    'controls/checkbox-group',
-    'controls/ColorScheme',
-    
-    'identity',
-    'header',
-    'template-settings',
-    'frontpage',
-    'widgetized',
-    'footer',
-    'page-404',
-    'color-schemes'
+    'controls/label.php',
+    'controls/sortable.php',
+    'controls/color-scheme.php',
+    'controls/menu-dropdown.php',
+    'controls/checkbox-group.php',
+    'controls/ColorScheme.php',
+    'identity.php',
+    'header.php',
+    'template-settings.php',
+    'frontpage.php',
+    'widgetized.php',
+    'footer.php',
+    'page-404.php',
+    'color-schemes.php'
 );
 
 // load all the settings files
-foreach($files as $file)
-  require_once $file . '.php';
-
-
-
-function bootswatches_customizer_controls($wp_customize){
-  // $wp_customize->register_control_type( 'Bootswatches_Color_Scheme_Custom_Control' );
+foreach ($files as $file) {
+    require_once $file;
 }
 
-add_action( 'customize_register','bootswatches_customizer_controls', 20 );
+
+
 /**
  * enqueues scripts to the WordPress Customizer
  * @return [type] [description]
  */
-function bootswatches_customizer_enqueue() {
+function bootswatches_customizer_enqueue()
+{
 
   // this script is minified, however a non minified version is included with the theme
-	wp_enqueue_script(
+    wp_enqueue_script(
         'custom-customize',
-        get_stylesheet_directory_uri() . '/assets/backend/js/_bootswatches-customizer-min.js',
+        get_template_directory_uri() . '/assets/admin/js/_bootswatches-customizer-min.js',
         null,
         '20170215',
         true
     );
 }
-add_action( 'customize_controls_enqueue_scripts', 'bootswatches_customizer_enqueue' );
+add_action('customize_controls_enqueue_scripts', 'bootswatches_customizer_enqueue');
 
 
 
@@ -54,17 +51,18 @@ add_action( 'customize_controls_enqueue_scripts', 'bootswatches_customizer_enque
  * enqueues scripts to the WordPress Previewer
  * @return [type] [description]
  */
-function bootswatches_previewer_enqueue() {
-  wp_enqueue_script(
-        'custom-previewer',
-        get_stylesheet_directory_uri() . '/assets/frontend/js/previewer-min.js',
+function bootswatches_previewer_enqueue()
+{
+    wp_enqueue_script(
+        'custom-customize',
+        get_template_directory_uri() . '/assets/frontend/js/_bootswatches-previewer-min.js',
         null,
         '20170215',
         true
     );
 }
 
-add_action( 'customize_preview_init', 'bootswatches_previewer_enqueue' );
+// add_action('customize_preview_init', 'bootswatches_previewer_enqueue');
 
 
 
@@ -74,54 +72,43 @@ add_action( 'customize_preview_init', 'bootswatches_previewer_enqueue' );
  * ----------------------------------------------------------------------------
  */
 
-function bootswatches_active_callback_filter($active, $control) {
-  global $wp_customize;
+function bootswatches_active_callback_filter($active, $control)
+{
+    global $wp_customize;
 
-  $toggled_by = isset($control->input_attrs['data-toggled-by']) ? $control->input_attrs['data-toggled-by'] : null;
+    $toggled_by = isset($control->input_attrs['data-toggled-by']) ? $control->input_attrs['data-toggled-by'] : null;
 
+    if (strpos($toggled_by, '_settings_active') && $toggled_by !== BOOTSWATCHES_DEFAULT_TEMPLATE . '_settings_active') {
+        return 'yes' === $wp_customize->get_setting($toggled_by)->value();
+    } elseif ($control->id == '_404_header_page_content_control') {
+        return 'page' == $wp_customize->get_setting('_404_hero_content_setting')->value();
+    } elseif ($control->id == '_404_page_select_control') {
+        return 'page' == $wp_customize->get_setting('_404_page_content_setting')->value();
+    } elseif ($control->id == 'frontpage_hero_callout_control') {
+        return 'callout' === $wp_customize->get_setting('frontpage_hero_content_setting')->value();
+    } elseif ($control->id == 'frontpage_hero_page_control') {
+        return 'page' == $wp_customize->get_setting('frontpage_hero_content_setting')->value();
+    } elseif ($control->id == 'banner_read_more_control' || $control->id == 'banner_text_control') {
+        return 'display' == $wp_customize->get_setting('banner_visibility_setting')->value();
+    } elseif (strpos($toggled_by, '_sidebar_position_setting')) {
 
-  // toggle controls if the template has been "activated"
-  if( strpos($toggled_by, '_settings_active') && $toggled_by !== DEFAULT_TEMPLATE . '_settings_active' ){
+        $pos = strpos($toggled_by, '_sidebar_position_setting');
+        $prefix = substr($toggled_by, 0, $pos);
+        $pos = 'none' !== $wp_customize->get_setting($toggled_by)->value();
+        $settings_active = $prefix . '_settings_active';
 
-    return 'yes' === $wp_customize->get_setting( $toggled_by )->value();
-  
-  // toggle the 404 header content page selection is "page" is selected
-  } elseif( $control->id == '_404_header_page_content_control'){
+        if ($prefix == 'default') {
+            return $pos;
+        }
 
-    return 'page' == $wp_customize->get_setting( '_404_hero_content_setting' )->value();
+        $section = 'yes' === $wp_customize->get_setting($settings_active)->value();
 
-  } elseif( $control->id == '_404_page_select_control' ){
-    // error_log('404 page');
-  
-    return 'page' == $wp_customize->get_setting( '_404_page_content_setting' )->value();
+        return $pos == $section ? true : false;
+    }
 
-  // toggle the frontpage header content page selection is "page" is selected  
-  }elseif( $control->id == 'frontpage_hero_callout_control' ) {
-    // error_log('frontpage hero');
-    return 'callout' === $wp_customize->get_setting( 'frontpage_hero_content_setting' )->value();
-
-  // something else with the frontage
-  }elseif( $control->id == 'frontpage_hero_page_control' ) {
-    // error_log('front page hero content');
-    return 'page' == $wp_customize->get_setting( 'frontpage_hero_content_setting' )->value();
-    
-    // return $this->checkToggableSettings($active, $control, $wp_customize );
-  } elseif( strpos($toggled_by, '_sidebar_position_setting') ) {
-      $pos = strpos($toggled_by, '_sidebar_position_setting');
-      $prefix = substr($toggled_by, 0, $pos);
-      $pos = 'none' !== $wp_customize->get_setting( $toggled_by )->value();
-      $settings_active = $prefix . '_settings_active';
-
-      if($prefix == 'default'){
-        return $pos;
-      }
-
-      $section = 'yes' === $wp_customize->get_setting( $settings_active )->value();
-      return $pos == $section ? true : false;
-  }
-
-  return $active;
+    return $active;
 
 
 }
-add_filter( 'customize_control_active', 'bootswatches_active_callback_filter', 100, 2);
+
+add_filter('customize_control_active', 'bootswatches_active_callback_filter', 100, 2);

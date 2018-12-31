@@ -30,15 +30,28 @@ class Bootswatches_Widget_Categories extends WP_Widget {
 	}
 
 
-    public function dropdown($c, $args, $first_dropdown)
+    private function menuStyleArgs($style = 'side_nav'){
+        if($style == 'side_nav'):
+            $class = 'usa-sidenav-list';
+        elseif($style == 'nav_list'):
+            $class = 'usa-unstyled-list';
+        else:
+            $class = '';
+        endif;
+
+        return $class;
+    }
+
+
+    public function dropdown($c, $cat_args, $first_dropdown, $title)
     {
 
         $dropdown_id = "{$this->id_base}-dropdown-{$this->number}";
         $first_dropdown = false;
 
-        $args['show_option_none'] = __( 'Select Category', 'bootswatches' );
-        $args['id'] = $dropdown_id;
-        $args['class'] = 'form-control';
+        echo '<label class="screen-reader-text" for="' . esc_attr( $dropdown_id ) . '">' . esc_html($title) . '</label>';
+        $cat_args['show_option_none'] = __( 'Select Category', 'bootswatches' );
+        $cat_args['id'] = $dropdown_id;
         /**
          * Filters the arguments for the Categories widget drop-down.
          *
@@ -46,9 +59,9 @@ class Bootswatches_Widget_Categories extends WP_Widget {
          *
          * @see wp_dropdown_categories()
          *
-         * @param array $args An array of Categories widget drop-down arguments.
+         * @param array $cat_args An array of Categories widget drop-down arguments.
          */
-        wp_dropdown_categories( apply_filters( 'widget_categories_dropdown_args', $args ) );
+        wp_dropdown_categories( apply_filters( 'widget_categories_dropdown_args', $cat_args ) );
         ?>
 
         <script type='text/javascript'>
@@ -69,31 +82,14 @@ class Bootswatches_Widget_Categories extends WP_Widget {
     }
 
 
-    public function list($c, $style, $cat_args)
+    public function menu($c, $style, $cat_args)
     {
+        $style_args = $this->menuStyleArgs($style);
+        $class = $style_args ? 'class="'.esc_attr($style_args).'"' : '';
 
-        $class = '';
-        $elm = 'ul';
-        $format = 'html';
-        $before = null;
-        $li_class = '';
-        if($style == 'unordered-list'):
-            $elm = 'ul';
-        elseif($style == 'ordered-list'):
-            $elm = 'ol';
-        elseif($style == 'unstyled-list') :
-            $class = 'list-unstyled';
-        elseif( $style == 'list-group') :
-            $class = 'list-group';
-            $li_class = 'class="list-group-item"';
-            $format = 'custom';
-            $before = '<li class="list-group-item">';
-        elseif($style == 'pills'):
-            $class = 'nav nav-pills nav-stacked';
-        endif;
-
-        echo '<'.$elm .' class="widget-list '.$class .'">';  //WPCS: xss ok.
-
+        ?>
+        		<ul <?php echo $class; // WPCS: xss ok. ?>>
+        <?php
         		$cat_args['title_li'] = '';
         		/**
         		 * Filters the arguments for the Categories widget.
@@ -104,18 +100,16 @@ class Bootswatches_Widget_Categories extends WP_Widget {
         		 */
         		$cats = get_categories( apply_filters( 'widget_categories_args', $cat_args ) );
                 foreach($cats as $cat){
-                    $output = '';
-                    $output .= '<li '.$li_class.'>';
-                        $output .= '<a href="'.get_category_link($cat->term_id).'">';
-                            $output .=  $cat->name;
-                            $output .= '&nbsp;('.$cat->count.')';
-                        $output .= '</a>';
-                    $output .= '</li>';
-                    echo $output;  //WPCS: xss ok.
+                    echo '<li>';
+                        echo '<a href="'.esc_url(get_category_link($cat->term_id)).'">';
+                            echo esc_html($cat->name);
+                            echo esc_html('&nbsp;('.$cat->count.')');
+                        echo '</a>';
+                    echo '</li>';
                 }
 
         ?>
-        		</<?php echo $elm;  //WPCS: xss ok. ?>>
+        		</ul>
         <?php
     }
 	/**
@@ -137,11 +131,10 @@ class Bootswatches_Widget_Categories extends WP_Widget {
 		$d = ! empty( $instance['dropdown'] ) ? '1' : '0';
         $style = ! empty( $instance['menu_style'] ) ? $instance['menu_style'] : 'side_nav';
 
-		echo $args['before_widget'];  //WPCS: xss ok.
+		echo $args['before_widget']; // WPCS: xss ok.
 		if ( $title ) {
-			echo $args['before_title'] . $title . $args['after_title'];  //WPCS: xss ok.
+			echo $args['before_title'] . esc_html($title) . $args['after_title']; // WPCS: xss ok.
 		}
-
 		$cat_args = array(
 			'orderby'      => 'name',
 			'show_count'   => $c,
@@ -149,11 +142,11 @@ class Bootswatches_Widget_Categories extends WP_Widget {
 		);
 
 		if ( $style == 'dropdown' ) {
-			$this->dropdown($c, $cat_args, $first_dropdown);
+			$this->dropdown($c, $cat_args, $first_dropdown, $title);
 		} else {
-            $this->list($c, $style, $cat_args);
+            $this->menu($c, $style, $cat_args);
 		}
-		echo $args['after_widget'];  //WPCS: xss ok.
+		echo $args['after_widget']; // WPCS: xss ok.
 	}
 	/**
 	 * Handles updating settings for the current Categories widget instance.
@@ -200,29 +193,27 @@ class Bootswatches_Widget_Categories extends WP_Widget {
 		?>
 		<p>
             <label for="<?php echo esc_attr($this->get_field_id('title')); ?>">
-                <?php echo __( 'Title:', 'bootswatches' );  // WPCS: xss ok.?>
+                <?php esc_html_e( 'Title:', 'bootswatches' ); ?>
             </label>
 		    <input class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>"
-                name="<?php echo esc_attr($this->get_field_name('title')); ?>"
-                placeholder="<?php echo esc_attr( 'Categories', 'bootswatches' ); ?>"
-                type="text" value="<?php echo esc_attr( $title ); ?>" />
+            name="<?php echo esc_attr($this->get_field_name('title')); ?>"
+            placeholder="<?php esc_attr_e( 'Categories', 'bootswatches' ); ?>"
+            type="text" value="<?php echo esc_attr( $title ); ?>" />
         </p>
 
-		<input type="checkbox" class="checkbox" id="<?php echo esc_attr($this->get_field_id('count')); ?>"
-            name="<?php echo esc_attr($this->get_field_name('count')); ?>"<?php checked( $count ); ?> />
-		<label for="<?php echo esc_attr($this->get_field_id('count')); ?>">
-            <?php echo __( 'Show post counts', 'bootswatches' );  // WPCS: xss ok. ?>
-        </label><br />
+		<input type="checkbox" class="checkbox" id="<?php echo esc_attr($this->get_field_id('count')); ?>" name="<?php echo esc_attr($this->get_field_name('count')); ?>"<?php checked( $count ); ?> />
+		<label for="<?php echo esc_attr($this->get_field_id('count')); ?>"><?php esc_html_e( 'Show post counts', 'bootswatches' ); ?></label><br />
+
 
         <?php
         // styles
         $find = array('-', '_');
-        $menu_styles = array('dropdown', 'unordered-list', 'ordered-list', 'unstyled-list', 'list-group', 'pills');
+        $menu_styles = array('dropdown', 'side_nav', 'nav_list', 'list');
 
         ?>
         <p>
             <label for="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>">
-                <?php echo __( 'Menu Style:', 'bootswatches' );  // WPCS: xss ok.?>
+                    <?php esc_html_e( 'Menu Style:', 'bootswatches' ); ?>
             </label>
             <select id="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>"
                   name="<?php echo esc_attr($this->get_field_name( 'menu_style' )); ?>">

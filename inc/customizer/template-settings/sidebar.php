@@ -57,8 +57,9 @@ $sidebar_pos_args = array(
 $wp_customize->add_control($name . '_sidebar_position_control', $sidebar_pos_args);
 
 
+
 /**
- * The sidebar size
+ * Sidebar Size
  */
 $wp_customize->add_setting( $name . '_sidebar_size_setting', array(
     'default' => 'BOOTSWATCHES_ONE_THIRD',
@@ -67,7 +68,7 @@ $wp_customize->add_setting( $name . '_sidebar_size_setting', array(
 );
 
 $wp_customize->add_control( $name . '_sidebar_size_control', array(
-        'label'   => __('Sizebar Size', 'bootswatches'),
+        'label'   => 'Sizebar Size',
         'section' => $name . '_settings_section',
         'settings' => $name . '_sidebar_size_setting',
         'type' => 'select',

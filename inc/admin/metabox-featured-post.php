@@ -2,36 +2,33 @@
 
 
 /**
- * The form field to mark a post as "featured"
- * @param  [type] $post [description]
- * @return [type]       [description]
+ * The checkbox markup for marking a post as "featured"
  */
-function bootswatches_featured_post_metabox_markup($post)
-{
+function bootswatches_featured_post_metabox_markup($post) {
 
     $featured_post = get_option('featured-post--'.$post->post_type, null);
     $checked = ($post->ID === $featured_post) ? 'checked' : '';
 
-?>
+    $output = '';
 
-    <p>
-        Marks this post as the "featured post" in the
-        <b><?php echo esc_html($post->post_type); ?></b> feed.
-    </p>
+    $output .= '<p>';
+        /* translators: marks post as "featured" */
+        $output .= sprintf( __('Marks this post as the "featured post" in the <b> %s </b> feed.', 'bootswatches'), esc_html($post->post_type) );
+    $output .= '</p>';
 
-    <label for="featured-post--<?php echo esc_html($post->post_type); ?>">Feature this post?</label>
-    <input name="featured-post--<?php echo esc_html($post->post_type); ?>" type="checkbox" value="true" <?php echo esc_html($checked); ?>>
+    $output .= '<label for="featured-post--' . esc_attr($post->post_type) . '"> '. __('Feature this post?', 'bootswatches') . ' </label>';
+    $output .= '<input name="featured-post--' . esc_attr($post->post_type) . '" 
+        type="checkbox" value="true" '. esc_html($checked) . ' >';
 
-<?php
+    echo $output; //WPCS: xss ok.
 }
 
 
 /**
- * Registers the metabox
+ * Adds the metabox for making a post "featured"
  * @return [type] [description]
  */
-function bootswatches_featured_post_metabox()
-{
+function bootswatches_featured_post_metabox() {
     $args = array(
        'public'   => true,
        'publicly_queryable' => true,
@@ -50,42 +47,43 @@ function bootswatches_featured_post_metabox()
         null
     );
 }
-add_action('add_meta_boxes', 'bootswatches_featured_post_metabox');
+add_action( 'add_meta_boxes', 'bootswatches_featured_post_metabox' );
 
 
 
 /**
- * Save the value to the DC
- * @param  int $post_id
- * @param  wp_post $post    the post object
- * @param  string? $update  has the post been updated?
+ * Saves the featured post setting to the DB
+ * 
+ * @param int $post_id The post ID.
+ * @param post $post The post object.
+ * @param bool $update Whether this is an existing post being updated or not.
  */
-function bootswatches_save_featured_post($post_id, $post, $update)
-{
+function bootswatches_save_featured_post($post_id, $post) {
 
-    if (!current_user_can("edit_post", $post_id)) {
-        return $post_id;
-    }
 
-    if (defined("DOING_AUTOSAVE") && DOING_AUTOSAVE) {
+    if(!current_user_can("edit_post", $post_id))
         return $post_id;
-    }
 
-    if ($post->post_type == 'revision') {
+    if(defined("DOING_AUTOSAVE") && DOING_AUTOSAVE)
         return $post_id;
-    }
+
+    if($post->post_type == 'revision')
+        return $post_id;
+
 
     // if the post has been stickies, remove that flag and apply our flag
-    if ($post->post_type == 'post' && isset($_POST['sticky'])) {
-        unset($_POST['sticky']);
+    if( $post->post_type == 'post' && isset( $_POST['sticky'] ) ) {
+        unset( $_POST['sticky'] );
         update_option('featured-post--'.$post->post_type, $post_id);
-    } elseif (isset($_POST['featured-post--'.$post->post_type])) {
+    } elseif( isset($_POST['featured-post--'.$post->post_type]) ) {
         update_option('featured-post--'.$post->post_type, $post_id);
-    } elseif (!isset($_POST['featured-post--'.$post->post_type])
+
+    } elseif( !isset($_POST['featured-post--'.$post->post_type])
         && $post_id == get_option('featured-post--'.$post->post_type, true)
     ) {
         delete_option('featured-post--'.$post->post_type);
     }
+
 }
 
 add_action("save_post", "bootswatches_save_featured_post", 10, 3);

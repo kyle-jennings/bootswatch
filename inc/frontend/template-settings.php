@@ -51,7 +51,7 @@ function bootswatches_template_settings($log = null) {
  */
 function bootswatches_get_template() {
 
-    //  if the page is a post type
+    //	if the page is a post type
     if( is_front_page() && bootswatches_settings_active('frontpage') ) :
         return 'frontpage';
     elseif( is_single() && $cpt = bootswatches_which_cpt() ) :
@@ -67,7 +67,7 @@ function bootswatches_get_template() {
     elseif( $feed = bootswatches_is_feed() ) :
         return $feed;
     else:
-        return DEFAULT_TEMPLATE;
+        return BOOTSWATCHES_DEFAULT_TEMPLATE;
     endif;
 }
 

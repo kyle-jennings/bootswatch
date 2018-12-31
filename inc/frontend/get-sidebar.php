@@ -1,7 +1,6 @@
 <?php
 
-
-function bootswatches_get_sidebar($template, $position = 'none', $size ='BOOTSWATCHES_ONE_FOURTH' ){
+function bootswatches_get_sidebar($template, $position = 'none', $size ='BOOTSWATCHES_ONE_FOURTH'){
 
     $class = '';
     $vertical = array('left', 'right');

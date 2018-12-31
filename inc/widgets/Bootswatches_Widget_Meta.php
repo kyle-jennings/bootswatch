@@ -34,69 +34,18 @@ class Bootswatches_Widget_Meta extends WP_Widget {
 	}
 
 
-
-
-    public function menu( $style )
-    {
-        $class = '';
-        $elm = 'ul';
-        $format = 'html';
-        $before = null;
-        $li_class= '';
-        if($style == 'unordered-list'):
-            $elm = 'ul';
-        elseif($style == 'ordered-list'):
-            $elm = 'ol';
-        elseif($style == 'unstyled-list') :
-            $class = 'list-unstyled';
-        elseif( $style == 'list-group') :
-            $class = 'list-group';
-            $li_class = 'list-group-item';
-        elseif($style == 'pills'):
-            $class = 'nav nav-pills nav-stacked';
+    private function menuStyleArgs($style = 'side_nav'){
+        if($style == 'side_nav'):
+            $class = 'usa-sidenav-list';
+        elseif($style == 'nav_list'):
+            $class = 'usa-unstyled-list';
+        else:
+            $class = '';
         endif;
 
-
-        echo '<'.$elm .' class="widget-list '.$class .'">'; // WPCS: xss ok.
-
-        wp_register( '<li class="'.$li_class.'">', '</li>' );
-        ?>
-        <li class="<?php echo esc_attr($li_class); ?>"><?php wp_loginout(); ?></li>
-        <li class="<?php echo esc_attr($li_class); ?>">
-            <a href="<?php echo esc_url( get_bloginfo( 'rss2_url' ) ); ?>">
-                <?php echo __('Entries <abbr title="Really Simple Syndication">RSS</abbr>', 'bootswatches'); // WPCS: xss ok. ?>
-            </a>
-        </li>
-        <li class="<?php echo esc_attr($li_class); ?>">
-            <a href="<?php echo esc_url( get_bloginfo( 'comments_rss2_url' ) ); ?>">
-                <?php echo __('Comments <abbr title="Really Simple Syndication">RSS</abbr>', 'bootswatches');  // WPCS: xss ok. ?>
-            </a>
-        </li>
-        <?php
-        /**
-         * Filters the "Powered by WordPress" text in the Meta widget.
-         *
-         * @since 3.6.0
-         *
-         * @param string $title_text Default title text for the WordPress.org link.
-         */
-        echo apply_filters( // WPCS: xss ok.
-            'widget_meta_poweredby',
-            sprintf( '<li class="%1$s"><a href="%2$s" title="%3$s">%4$s</a></li>',
-                $li_class,
-                esc_url( __( 'https://wordpress.org/', 'bootswatches' ) ),
-                esc_attr__( 'Powered by WordPress, state-of-the-art semantic personal publishing platform.', 'bootswatches' ),
-                _x( 'WordPress.org', 'meta widget link text', 'bootswatches' )
-            )
-        ); // WPCS: xss ok.
-
-        // wp_meta();
-
-
-        echo '</'.$elm .'>';  // WPCS: xss ok.
-
-
+        return $class;
     }
+
 
     public function dropdown_js($dropdown_id)
     {
@@ -126,34 +75,19 @@ class Bootswatches_Widget_Meta extends WP_Widget {
     }
 
 
-    public function dropdown()
+    public function menu( $style )
     {
+        $style_args = $this->menuStyleArgs($style);
+        $class = $style_args ? 'class="'.esc_attr($style_args).'"' : '';
+
+
+        echo '<ul '.$class.'>'; // WPCS: xss ok.
+
+        wp_register();
         ?>
-
-        <select class="form-control"
-        onchange='document.location.href=this.options[this.selectedIndex].value;'>
-
-        <?php
-        $reg =  wp_register( '<option', '</option>', false );
-        $pattern = '/(<a href=")/';
-        $replace = ' value="';
-        echo preg_replace($pattern, $replace, $reg);  // WPCS: xss ok.
-
-        ?>
-
-
-        <?php
-            $logout = wp_loginout('', false);
-            $pattern = '/(<a href=")/';
-            $replace = ' value="';
-            echo '<option '. preg_replace($pattern, $replace, $logout) . '</option>';  // WPCS: xss ok.
-        ?>
-
-        <option value="<?php echo esc_url( get_bloginfo( 'rss2_url' ) ); ?>">
-        <?php echo __('Entries <abbr title="Really Simple Syndication">RSS</abbr>', 'bootswatches');  // WPCS: xss ok. ?></a></option>
-        <option value="<?php echo esc_url( get_bloginfo( 'comments_rss2_url' ) ); ?>">
-            <?php echo __('Comments <abbr title="Really Simple Syndication">RSS</abbr>', 'bootswatches'); // WPCS: xss ok. ?>
-        </option>
+        <li><?php wp_loginout(); ?></li>
+        <li><a href="<?php echo esc_url( get_bloginfo( 'rss2_url' ) ); ?>"><?php _e('Entries <abbr title="Really Simple Syndication">RSS</abbr>', 'bootswatches'); // WPCS: xss ok. ?></a></li>
+        <li><a href="<?php echo esc_url( get_bloginfo( 'comments_rss2_url' ) ); ?>"><?php _e('Comments <abbr title="Really Simple Syndication">RSS</abbr>', 'bootswatches'); // WPCS: xss ok. ?></a></li>
         <?php
         /**
          * Filters the "Powered by WordPress" text in the Meta widget.
@@ -162,19 +96,20 @@ class Bootswatches_Widget_Meta extends WP_Widget {
          *
          * @param string $title_text Default title text for the WordPress.org link.
          */
-        echo apply_filters(  // WPCS: xss ok.
-            'widget_meta_poweredby',
-            sprintf( '<option value="%1$s">%2$s</option>',
-                esc_url( __( 'https://wordpress.org/', 'bootswatches' ) ),
-                _x( 'WordPress.org', 'meta widget link text', 'bootswatches' )
-            )
-        ); // WPCS: xss ok.
+        echo apply_filters( 'widget_meta_poweredby', sprintf( '<li><a href="%s" title="%s">%s</a></li>', // WPCS: xss ok.
+            esc_url( __( 'https://wordpress.org/', 'bootswatches' ) ),
+            esc_attr__( 'Powered by WordPress, state-of-the-art semantic personal publishing platform.', 'bootswatches' ),
+            _x( 'WordPress.org', 'meta widget link text', 'bootswatches' )
+        ) );
 
-        // wp_meta();
+        wp_meta();
 
 
-        echo '</select>';
+        echo '</ul>';
+
+
     }
+
 
 	/**
 	 * Outputs the content for the current Meta widget instance.
@@ -194,7 +129,7 @@ class Bootswatches_Widget_Meta extends WP_Widget {
 
 		echo $args['before_widget']; // WPCS: xss ok.
 		if ( $title ) {
-			echo $args['before_title'] . $title . $args['after_title']; // WPCS: xss ok.
+			echo $args['before_title'] . esc_html($title) . $args['after_title']; // WPCS: xss ok.
 		}
 
         if($style == 'dropdown') {
@@ -241,24 +176,21 @@ class Bootswatches_Widget_Meta extends WP_Widget {
         $saved_style = isset( $instance['menu_style'] ) ? $instance['menu_style'] : '';
 
 ?>
-			<p>
-                <label for="<?php echo esc_attr($this->get_field_id('title')); ?>">
-                    <?php echo __('Title:', 'bootswatches');  // WPCS: xss ok.?>
-                </label>
+			<p><label for="<?php echo esc_attr($this->get_field_id('title')); ?>">
+                <?php esc_html_e('Title:', 'bootswatches'); ?></label>
                 <input class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>"
                 name="<?php echo esc_attr($this->get_field_name('title')); ?>"
-                placeholder="<?php echo esc_attr( 'Meta', 'bootswatches' ); ?>"
-                type="text" value="<?php echo esc_attr($title); ?>" />
-            </p>
+                placeholder="<?php esc_attr_e( 'Meta', 'bootswatches' ); ?>"
+                type="text" value="<?php echo esc_attr($title); ?>" /></p>
 <?php
         // styles
         $find = array('-', '_');
-        // $menu_styles = array('side_nav', 'nav_list', 'list');
-        $menu_styles = array('dropdown','unordered-list', 'ordered-list', 'unstyled-list', 'list-group', 'pills');
+        $menu_styles = array('side_nav', 'nav_list', 'list');
+
         ?>
         <p>
             <label for="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>">
-                    <?php echo __( 'Menu Style:', 'bootswatches' );  // WPCS: xss ok.?>
+                    <?php esc_html_e( 'Menu Style:', 'bootswatches' ); ?>
             </label>
             <select id="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>"
                   name="<?php echo esc_attr($this->get_field_name( 'menu_style' )); ?>">

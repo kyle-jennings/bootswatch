@@ -25,7 +25,7 @@ if ( post_password_required() ) {
 	<?php
 	// You can start editing here -- including this comment!
 	if ( have_comments() ) : ?>
-		<h4 class="comments-title">
+		<h2 class="comments-title">
 			<?php
                 $comment_count = get_comments_number();
 				if ( 1 === $comment_count ) {
@@ -50,25 +50,18 @@ if ( post_password_required() ) {
                 }
 
 			?>
-		</h4><!-- .comments-title -->
+		</h2><!-- .comments-title -->
 
 		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // Are there comments to navigate through? ?>
 		<nav id="comment-nav-above" class="navigation comment-navigation" role="navigation">
-			<h4 class="screen-reader-text">
-                <?php esc_html_e( 'Comment navigation', 'bootswatches' ); ?>
-            </h4>
+			<h2 class="screen-reader-text"><?php esc_html_e( 'Comment navigation', 'bootswatches' ); ?></h2>
 			<div class="nav-links">
 
-				<div class="nav-previous">
-                    <?php previous_comments_link( esc_html__( 'Older Comments', 'bootswatches' ) ); ?>
-                </div>
-				<div class="nav-next">
-                    <?php next_comments_link( esc_html__( 'Newer Comments', 'bootswatches' ) ); ?>
-                </div>
+				<div class="nav-previous"><?php previous_comments_link( esc_html__( 'Older Comments', 'bootswatches' ) ); ?></div>
+				<div class="nav-next"><?php next_comments_link( esc_html__( 'Newer Comments', 'bootswatches' ) ); ?></div>
 
 			</div><!-- .nav-links -->
 		</nav><!-- #comment-nav-above -->
-
 		<?php endif; // Check for comment navigation. ?>
 
 		<ul class="comment-list">
@@ -76,24 +69,17 @@ if ( post_password_required() ) {
 				wp_list_comments( array(
 					'style'      => 'ul',
 					'short_ping' => true,
-                    'walker' => new BootswatchesCommentsWalker()
 				) );
 			?>
 		</ul><!-- .comment-list -->
 
 		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // Are there comments to navigate through? ?>
 		<nav id="comment-nav-below" class="navigation comment-navigation" role="navigation">
-			<h4 class="screen-reader-text">
-                <?php esc_html_e( 'Comment navigation', 'bootswatches' ); ?>
-            </h4>
+			<h2 class="screen-reader-text"><?php esc_html_e( 'Comment navigation', 'bootswatches' ); ?></h2>
 			<div class="nav-links">
 
-				<div class="nav-previous">
-                    <?php previous_comments_link( esc_html__( 'Older Comments', 'bootswatches' ) ); ?>
-                </div>
-				<div class="nav-next">
-                    <?php next_comments_link( esc_html__( 'Newer Comments', 'bootswatches' ) ); ?>
-                </div>
+				<div class="nav-previous"><?php previous_comments_link( esc_html__( 'Older Comments', 'bootswatches' ) ); ?></div>
+				<div class="nav-next"><?php next_comments_link( esc_html__( 'Newer Comments', 'bootswatches' ) ); ?></div>
 
 			</div><!-- .nav-links -->
 		</nav><!-- #comment-nav-below -->
@@ -106,9 +92,7 @@ if ( post_password_required() ) {
 	// If comments are closed and there are comments, let's leave a little note, shall we?
 	if ( ! comments_open() && get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) : ?>
 
-		<p class="no-comments">
-            <?php esc_html_e( 'Comments are closed.', 'bootswatches' ); ?>
-        </p>
+		<p class="no-comments"><?php esc_html_e( 'Comments are closed.', 'bootswatches' ); ?></p>
 	<?php
 	endif;
 

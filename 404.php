@@ -1,4 +1,3 @@
-
 <?php
 /**
  * The template for displaying 404 pages (not found)
@@ -20,7 +19,7 @@ get_header();
  * $sidebar_position
  *
  */
-extract( bootswatches_template_settings() );
+extract(bootswatches_template_settings());
 
 /**
  * the 404 settings
@@ -31,51 +30,49 @@ extract( bootswatches_template_settings() );
  * $header_page
  *
  */
-extract( bootswatches_get_404_settings() );
+extract(bootswatches_get_404_settings());
 
-if( !$hide_content ):
+if (!$hide_content):
 ?>
 
 <div class="section section--body">
     <div class="container">
         <div class="row">
-    <?php
-    if($sidebar_position == 'left'):
-        bootswatches_get_sidebar($template, $sidebar_position, $sidebar_size);
-    endif;
-    ?>
-
-  <div class="main-content <?php echo esc_attr($main_width); ?>">
         <?php
+        if ($sidebar_position == 'left') :
+            bootswatches_get_sidebar($template, $sidebar_position, $sidebar_size);
+        endif;
+        ?>
 
-            if($content == 'page' && $pid):
+          <div class="main-content <?php echo esc_attr($main_width); ?>">
+                <?php
 
-                $page = get_page($pid);
-                $content = apply_filters('the_content', $page->post_content);
-                echo $content; // WPCS: xss ok.
+                if ($content == 'page' && $pid) :
+                    $page = get_page($pid);
+                    $content = apply_filters('the_content', $page->post_content);
+                    echo $content; // WPCS: xss ok.
+                else :
+                    echo '<p>' . esc_html_e('It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'bootswatches') . '</p>';
 
-            else :
-                echo '<p>' . esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'bootswatches' ) . '</p>';
+                    get_search_form();
 
-                get_search_form();
+                    echo '<br>';
+                    echo '<br>';
+                    echo '<br>';
 
-                echo '<br>';
-                echo '<br>';
-                echo '<br>';
+                    the_widget('Bootswatches_Widget_Pages', array('title'=> __('Pages', 'bootswatches')));
+                endif;
+            ?>
+          </div>
 
-    			the_widget( 'Bootswatches_Widget_Pages', array('title'=>'Pages') );
-            endif;
-		?>
-  </div>
-
-  <?php
-  if($sidebar_position == 'right'):
-      bootswatches_get_sidebar($template, $sidebar_position, $sidebar_size);
-  endif;
-  ?>
-</div><!-- /row -->
-</div><!-- container -->
-</div><!-- / section--body -->
+        <?php
+        if ($sidebar_position == 'right') :
+            bootswatches_get_sidebar($template, $sidebar_position, $sidebar_size);
+        endif;
+        ?>
+        </div>
+    </div>
+</div>
 
 <?php
 endif;

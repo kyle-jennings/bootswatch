@@ -4,14 +4,13 @@
 // The main content visibility
 function bootswatches_get_main_visibility($template, $sidebar_pos = 'none', $sidebar_size = 'BOOTSWATCHES_ONE_FOURTH') {
     $sidebar_vis = get_theme_mod($template . '_sidebar_visibility_setting', 'always-visible');
-
     $visibility = null;
-    if($sidebar_vis == 'hidden-md hidden-lg') {
-        $visibility = 'main-content-full-medium-up';
-    }elseif($sidebar_vis == 'hidden-lg') {
-        $visibility = 'main-content-full-large-up';
-    }elseif($sidebar_vis == 'visible-lg') {
-        $visibility = 'main-content-full-medium-only';
+    if($sidebar_vis == 'hidden-medium-up') {
+        $visibility = 'usa-width-full-medium-up';
+    }elseif($sidebar_vis == 'hidden-large-up') {
+        $visibility = 'usa-width-full-large-up';
+    }elseif($sidebar_vis == 'visible-large-up') {
+        $visibility = 'usa-width-full-medium-only';
     }
 
     return $visibility;

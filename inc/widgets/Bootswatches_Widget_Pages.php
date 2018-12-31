@@ -29,6 +29,18 @@ class Bootswatches_Widget_Pages extends WP_Widget {
 		parent::__construct( 'pages', __( 'Pages', 'bootswatches' ), $widget_ops );
 	}
 
+    private function menuStyleArgs($style = 'side_nav'){
+        if($style == 'side_nav'):
+            $class = 'usa-sidenav-list';
+        elseif($style == 'nav_list'):
+            $class = 'usa-unstyled-list';
+        else:
+            $class = '';
+        endif;
+
+        return $class;
+    }
+
 
     public function dropdown_js($dropdown_id)
     {
@@ -58,12 +70,12 @@ class Bootswatches_Widget_Pages extends WP_Widget {
     }
 
 
-    public function dropdown($sortby, $exclude, $show_children = 0)
+    public function dropdown($sortby, $exclude, $show_children)
     {
         $dropdown_id = "{$this->id_base}-dropdown-{$this->number}";
 
         $output = '';
-		$output .= '<select class="form-control" id="'.$dropdown_id.'">';
+		$output .= '<select id="'.esc_attr($dropdown_id).'">';
         $output .= '<option>-- Select Page --</option>';
         $pages = get_pages(array(
             'sort_column' => $sortby,
@@ -74,79 +86,44 @@ class Bootswatches_Widget_Pages extends WP_Widget {
 
         $last_id = 0;
         foreach($pages as $page){
-
             // sets the indent
             $indent = ($show_children == '1' && $page->post_parent > 0)
                 ? '&nbsp;&nbsp; - ' : '' ;
 
-            $output .= '<option value="'.get_permalink($page->ID).'">';
-                $output .= $indent . $page->post_title;
+            $output .= '<option value="' . esc_url(get_permalink($page->ID)) . '">';
+                $output .= $indent . $page->post_title; // WPCS: xss ok.
             $output .= '</option>';
         }
         $output .= '</select>';
         $output .= $this->dropdown_js($dropdown_id);
 
-        echo $output; //WPCS: xss ok;
+        echo $output;// WPCS: xss ok.
     }
 
 
-    public function child_menu($children, $style)
+    public function child_menu($children)
     {
-
-        $class = '';
-        $elm = 'ul';
-        $li_class = '';
-
-        if($style == 'unordered-list'):
-            $elm = 'ul';
-        elseif($style == 'ordered-list'):
-            $elm = 'ol';
-        elseif($style == 'unstyled-list') :
-            $class = 'list-unstyled';
-        elseif( $style == 'list-group') :
-            $class = 'list-group';
-            $li_class = 'class="list-group-item"';
-        elseif($style == 'pills'):
-            $class = 'nav nav-pills nav-stacked';
-        endif;
-
-
         $output = '';
-        $output .= '<'.$elm.' class="widget-list '.$class.'">';
+        $output .= '<ul class="usa-sidenav-sub_list">';
         foreach($children as $child){
-            $output .= '<li '.$li_class.'>';
-                $output .= '<a href="'.get_permalink($child->ID).'">';
+            $output .= '<li>';
+                $output .= '<a href="' . esc_url(get_permalink($child->ID)) . '">';
                     $output .= $child->post_title;
                 $output .= '</a>';
             $output .= '</li>';
         }
-        $output .= '</'.$elm.'>';
+        $output .= '</ul>';
 
         return $output;
     }
 
     public function menu($sortby, $exclude, $style, $show_children)
     {
-
-        $class = '';
-        $elm = 'ul';
-        $li_class = '';
-
-        if($style == 'unordered-list'):
-            $elm = 'ul';
-        elseif($style == 'ordered-list'):
-            $elm = 'ol';
-        elseif($style == 'unstyled-list') :
-            $class = 'list-unstyled';
-        elseif( $style == 'list-group') :
-            $class = 'list-group';
-            $li_class = 'class="list-group-item"';
-        elseif($style == 'pills'):
-            $class = 'nav nav-pills nav-stacked';
-        endif;
+        $style_args = $this->menuStyleArgs($style);
+        $class = $style_args ? 'class="'.$style_args.'"' : '';
 
         $output = '';
-		$output .= '<'.$elm.' class="widget-list '.$class.'">';
+		$output .= '<ul '.$class.'>';
 
         $pages = get_pages(array(
             'sort_column' => $sortby,
@@ -172,23 +149,22 @@ class Bootswatches_Widget_Pages extends WP_Widget {
         $last_id = 0;
         foreach($pages as $page){
 
-            $output .= '<li '.$li_class.'>';
-                $output .= '<a href="'.get_permalink($page->ID).'">';
+            $output .= '<li>';
+                $output .= '<a href="' . esc_url(get_permalink($page->ID)) . '">';
                     $output .= $page->post_title;
                 $output .= '</a>';
 
                 if(!empty($children[$page->ID]))
-                    $output .= $this->child_menu($children[$page->ID], $style);
-
+                    $output .= $this->child_menu($children[$page->ID]);
             $output .= '</li>';
 
             $last_id = $page->ID;
 
         }
 
-        $output .= '</'.$elm.'>';
+        $output .= '</ul>';
 
-        echo $output;  //WPCS: xss ok;
+        echo $output; //WPCS: xss ok.
     }
 
 	/**
@@ -244,9 +220,9 @@ class Bootswatches_Widget_Pages extends WP_Widget {
 		if ( empty( $out ) )
             return false;
 
-		echo $args['before_widget']; //WPCS: xss ok;
+		echo $args['before_widget']; // WPCS: xss ok.
 		if ( $title ) {
-			echo $args['before_title'] . $title . $args['after_title']; //WPCS: xss ok;
+			echo $args['before_title'] . esc_html($title) . $args['after_title']; // WPCS: xss ok.
 		}
 
         if($style == 'dropdown') {
@@ -255,11 +231,11 @@ class Bootswatches_Widget_Pages extends WP_Widget {
             $this->menu($sortby, $exclude, $style, $children);
         } else {
             echo '<ul>';
-                echo $out;  //WPCS: xss ok;
+                echo $out; //WPCS: xss ok.
             echo '</ul>';
         }
 
-		echo $args['after_widget']; //WPCS: xss ok;
+		echo $args['after_widget']; // WPCS: xss ok.
 
 	}
 	/**
@@ -306,65 +282,37 @@ class Bootswatches_Widget_Pages extends WP_Widget {
 
 		?>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>">
-                <?php echo __( 'Title:', 'bootswatches' );  // WPCS: xss ok.?>
-            </label>
-			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id('title') ); ?>"
-                name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>"
-                placeholder="<?php echo esc_attr__( 'Pages', 'bootswatches' ); ?>"
-                type="text" value="<?php echo esc_attr( $instance['title'] ); ?>"
-            />
+			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:', 'bootswatches' ); ?></label>
+			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id('title') ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" placeholder="<?php esc_attr_e( 'Pages', 'bootswatches' ); ?>" type="text" value="<?php echo esc_attr( $instance['title'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'sortby' ) ); ?>">
-                <?php echo __( 'Sort by:', 'bootswatches' ); // WPCS: xss ok. ?>
-            </label>
-			<select name="<?php echo esc_attr( $this->get_field_name( 'sortby' ) ); ?>"
-                id="<?php echo esc_attr( $this->get_field_id( 'sortby' ) ); ?>"
-                class="widefat"
-            >
-				<option value="post_title"<?php selected( $instance['sortby'], 'post_title' ); ?>>
-                    <?php echo __('Page title', 'bootswatches');  // WPCS: xss ok.?>
-                </option>
-				<option value="menu_order"<?php selected( $instance['sortby'], 'menu_order' ); ?>>
-                    <?php echo __('Page order', 'bootswatches');  // WPCS: xss ok.?>
-                </option>
-				<option value="ID"<?php selected( $instance['sortby'], 'ID' ); ?>>
-                    <?php echo __( 'Page ID', 'bootswatches' );  // WPCS: xss ok.?>
-                </option>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'sortby' ) ); ?>"><?php esc_html_e( 'Sort by:', 'bootswatches' ); ?></label>
+			<select name="<?php echo esc_attr( $this->get_field_name( 'sortby' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'sortby' ) ); ?>" class="widefat">
+				<option value="post_title"<?php selected( $instance['sortby'], 'post_title' ); ?>><?php esc_html_e('Page title', 'bootswatches'); ?></option>
+				<option value="menu_order"<?php selected( $instance['sortby'], 'menu_order' ); ?>><?php esc_html_e('Page order', 'bootswatches'); ?></option>
+				<option value="ID"<?php selected( $instance['sortby'], 'ID' ); ?>><?php esc_html_e( 'Page ID', 'bootswatches' ); ?></option>
 			</select>
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'exclude' ) ); ?>">
-                <?php echo __( 'Exclude:', 'bootswatches' );  // WPCS: xss ok. ?>
-            </label>
-			<input type="text" value="<?php echo esc_attr( $instance['exclude'] ); ?>"
-                name="<?php echo esc_attr( $this->get_field_name( 'exclude' ) ); ?>"
-                id="<?php echo esc_attr( $this->get_field_id( 'exclude' ) ); ?>" class="widefat"
-            />
+			<label for="<?php echo esc_attr( $this->get_field_id( 'exclude' ) ); ?>"><?php esc_html_e( 'Exclude:', 'bootswatches' ); ?></label>
+			<input type="text" value="<?php echo esc_attr( $instance['exclude'] ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'exclude' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'exclude' ) ); ?>" class="widefat" />
 			<br />
-			<small><?php  echo __( 'Page IDs, separated by commas.', 'bootswatches' );  // WPCS: xss ok. ?></small>
+			<small><?php esc_html_e( 'Page IDs, separated by commas.', 'bootswatches' ); ?></small>
 		</p>
 
-        <p>
-            <input type="checkbox" class="checkbox" id="<?php echo esc_attr($this->get_field_id('children')); ?>"
-                name="<?php echo esc_attr($this->get_field_name('children')); ?>"<?php checked( $children ); ?>
-            />
-    		<label for="<?php echo esc_attr($this->get_field_id('children')); ?>">
-                <?php echo __( 'Show child pages', 'bootswatches' );  // WPCS: xss ok.?>
-            </label>
-        </p>
+        <input type="checkbox" class="checkbox" id="<?php echo esc_attr($this->get_field_id('children')); ?>" name="<?php echo esc_attr($this->get_field_name('children')); ?>"<?php checked( $children ); ?> />
+		<label for="<?php echo esc_attr($this->get_field_id('children')); ?>"><?php esc_html_e( 'Show child pages', 'bootswatches' ); ?></label></p>
 
 
         <?php
         // styles
         $find = array('-', '_');
-        $menu_styles = array('dropdown', 'unordered-list', 'ordered-list', 'unstyled-list', 'list-group', 'pills');
+        $menu_styles = array('dropdown', 'side_nav', 'nav_list', 'list');
 
         ?>
         <p>
             <label for="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>">
-                    <?php echo __( 'Menu Style:', 'bootswatches' );  // WPCS: xss ok.?>
+                    <?php esc_html_e( 'Menu Style:', 'bootswatches' ); ?>
             </label>
             <select id="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>"
                   name="<?php echo esc_attr($this->get_field_name( 'menu_style' )); ?>">

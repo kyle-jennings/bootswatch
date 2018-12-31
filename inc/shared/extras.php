@@ -7,40 +7,35 @@
  * @package Bootswatches
  */
 
+/**
+ * Adds custom classes to the array of body classes.
+ *
+ * @param array $classes Classes for the body element.
+ * @return array
+ */
+function bootswatches_body_classes($classes)
+{
+    // Adds a class of group-blog to blogs with more than 1 published author.
+    if (is_multi_author()) {
+        $classes[] = 'group-blog';
+    }
 
+    // Adds a class of hfeed to non-singular pages.
+    if (! is_singular()) {
+        $classes[] = 'hfeed';
+    }
+
+    return $classes;
+}
+add_filter('body_class', 'bootswatches_body_classes');
 
 /**
  * Add a pingback url auto-discovery header for singularly identifiable articles.
  */
-function bootswatches_pingback_header() {
-	if ( is_singular() && pings_open() ) {
-		echo '<link rel="pingback" href="', esc_url( get_bloginfo( 'pingback_url' ) ), '">';
-	}
+function bootswatches_pingback_header()
+{
+    if (is_singular() && pings_open()) {
+        echo '<link rel="pingback" href="', esc_url(get_bloginfo('pingback_url')), '">';
+    }
 }
-add_action( 'wp_head', 'bootswatches_pingback_header' );
-
-// do shortcodes inside of widgets
-add_filter('widget_text','do_shortcode');
-
-
-// lets add soem new image sizes
-add_image_size('featured-image', '262', '262', true);
-add_image_size('carousel-feed', '1066', '600', true);
-
-
-
-$defaults = array(
-	'default-image'          => '',
-	'width'                  => 0,
-	'height'                 => 0,
-	'flex-height'            => false,
-	'flex-width'             => false,
-	'uploads'                => true,
-	'random-default'         => false,
-	'header-text'            => true,
-	'default-text-color'     => '',
-	'wp-head-callback'       => '',
-	'admin-head-callback'    => '',
-	'admin-preview-callback' => '',
-);
-// add_theme_support( 'custom-header', $defaults );
+add_action('wp_head', 'bootswatches_pingback_header');

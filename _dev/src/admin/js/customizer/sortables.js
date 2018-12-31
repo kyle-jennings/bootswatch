@@ -1,12 +1,12 @@
 
-frontpageSortables = benjaminSortable('.js--frontpage-sortables');
-widgetizedSortables = benjaminSortable('.js--widgetized-sortables');
-footerSortables = benjaminSortable('.js--footer-sortables');
-headerSortables = benjaminSortable('.js--header-sortables');
+frontpageSortables = bootswatchesSortable('.js--frontpage-sortables');
+widgetizedSortables = bootswatchesSortable('.js--widgetized-sortables');
+footerSortables = bootswatchesSortable('.js--footer-sortables');
+headerSortables = bootswatchesSortable('.js--header-sortables');
 
 
 
-function benjaminSortable(elm) {
+function bootswatchesSortable(elm) {
 
   if(elm == 'undefined')
     return;

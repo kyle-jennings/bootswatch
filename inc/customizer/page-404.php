@@ -2,7 +2,7 @@
 
 
 
-function bootswatches_404_settings($wp_customize) {
+function bootswatches_404_settings( $wp_customize) {
 
 
     $template = bootswatches_get_template_info('_404');

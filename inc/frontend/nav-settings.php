@@ -2,9 +2,7 @@
 
 
 /**
- * Displays the nav title as either an H1 or H2 depending on the page
- *
- * Is this proper SEO?  I dont think this is correct
+ * displays either a h1 or h2 tag for the title
  * @return [type] [description]
  */
 function bootswatches_get_bootswatches_nav_title() {
@@ -24,4 +22,32 @@ function bootswatches_get_bootswatches_nav_title() {
 
 function bootswatches_nav_title() {
     echo bootswatches_get_bootswatches_nav_title(); // WPCS: xss ok.
+}
+
+
+// toggles the dark and light themes
+function bootswatches_navbar_header_class() {
+    $color = get_theme_mod('navbar_color_setting', 'light');
+    $color = 'nav-header--'.$color;
+
+    return $color;
+}
+
+
+
+
+/**
+ * Navigate through pages of the feed
+ */
+function bootswatches_get_the_posts_navigation() {
+    $args = array(
+        'prev_text' => '<span class="dashicons dashicons-arrow-left-alt2" title="older posts"></span>' . __('Older Posts', 'bootswatches'),
+        'next_text' => __('Newer Posts', 'bootswatches') . ' <span class="dashicons dashicons-arrow-right-alt2" title="newer posts"></span>'
+    );
+    return get_the_posts_navigation($args);
+}
+
+
+function bootswatches_the_posts_navigation() {
+    echo bootswatches_get_the_posts_navigation(); // WPCS: xss ok.
 }

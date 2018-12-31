@@ -1,14 +1,24 @@
 <?php
-/**
- * This is basically a clone of the WP_Nav_Menu_Widget but has some additonal
- * display options and obviously the additonal markup for these display options.
- *
- * Examples of the new options are basically just adding different types of
- * list styles. Because this theme is using Bootstrap, it might be a complicated
- * and messy process to refactor the CSS to match the and since we have to add
- * the new display options, we might as well jsut go the extra mile and add the markup here
- */
+
 class Bootswatches_Nav_Menu_Widget extends WP_Nav_Menu_Widget {
+
+    private function menuStyleArgs($style = 'side_nav'){
+        if($style == 'side_nav'):
+            $class = 'usa-sidenav-list';
+            $walker = new BootswatchesSideNavWalker();
+        elseif($style == 'nav_list'):
+            $class = 'usa-unstyled-list';
+            $walker = new BootswatchesNavListWalker();
+        else:
+            $class = '';
+            $walker = null;
+        endif;
+
+        return array(
+            'class' => $class,
+            'walker' => $walker
+        );
+    }
 
 	/**
 	 * Outputs the content for the current Custom Menu widget instance.
@@ -27,37 +37,22 @@ class Bootswatches_Nav_Menu_Widget extends WP_Nav_Menu_Widget {
 		if ( !$nav_menu )
 			return;
 
-
-        $style = ! empty( $instance['menu_style'] ) ? $instance['menu_style'] : 'side_nav';
-
-
-        $elm = ($style == 'ordered-list') ? 'ol' : 'ul' ;
-
-        $list_item = ($style == 'list-group') ? 'list-group-item' : null ;
-
-        if($style == 'unstyled-list')
-            $class = 'list-unstyled';
-        elseif($style == 'list-group')
-            $class = 'list-group';
-        elseif($style == 'pills')
-            $class = 'nav nav-pills nav-stacked';
-
 		/** This filter is documented in wp-includes/widgets/class-wp-widget-pages.php */
 		$instance['title'] = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
 
-		echo $args['before_widget']; // WPCS: xss ok.
+		echo $args['before_widget']; //WPCS: xss ok.
 
 		if ( !empty($instance['title']) )
-			echo $args['before_title'] . $instance['title'] . $args['after_title'];  // WPCS: xss ok.
+			echo $args['before_title'] . $instance['title'] . $args['after_title'];  //WPCS: xss ok.
 
+        $style = ! empty( $instance['menu_style'] ) ? $instance['menu_style'] : 'side_nav';
+        extract($this->menuStyleArgs($style));
 
 		$nav_menu_args = array(
             'container' => '',
-            'items_wrap' => '<'.$elm.' id="%1$s" class="%2$s">%3$s</'.$elm.'>',
-            'menu_class' => $class . ' widget-list',
-			'menu' => $nav_menu,
-            'walker' => new BootswatchesSideNavWalker,
-            'list_item_classes' => $list_item
+            'menu_class'     => $class,
+            'walker' => $walker,
+			'menu'        => $nav_menu
 		);
 
 		/**
@@ -77,7 +72,7 @@ class Bootswatches_Nav_Menu_Widget extends WP_Nav_Menu_Widget {
 		 * @param array    $instance      Array of settings for the current widget.
 		 */
 		wp_nav_menu( apply_filters( 'widget_nav_menu_args', $nav_menu_args, $nav_menu, $args, $instance ) );
-		echo $args['after_widget']; // WPCS: xss ok.
+		echo $args['after_widget'];  //WPCS: xss ok.
 	}
 
 	/**
@@ -128,7 +123,7 @@ class Bootswatches_Nav_Menu_Widget extends WP_Nav_Menu_Widget {
 
         // styles
         $find = array('-', '_');
-        $menu_styles = array('unordered-list', 'ordered-list', 'unstyled-list', 'list-group', 'pills');
+        $menu_styles = array('side_nav', 'nav_list', 'list');
 
 		// If no menus exists, direct the user to go and create some.
 		?>
@@ -140,28 +135,25 @@ class Bootswatches_Nav_Menu_Widget extends WP_Nav_Menu_Widget {
 				$url = admin_url( 'nav-menus.php' );
 			}
 			?>
-			<?php /* translators: link to create new menu if none exist */ printf( __( 'No menus have been created yet. <a href="%s">Create some</a>.', 'bootswatches' ), esc_attr( $url ) ); //WPCS xss ok; ?>
+			<?php
+                /* translators: Links to create a new menu */
+                echo sprintf( esc_html__( 'No menus have been created yet. <a href="%s">Create some</a>.', 'bootswatches' ), esc_attr( $url ) );
+             ?>
 		</p>
 		<div class="nav-menu-widget-form-controls"
             <?php if ( empty( $menus ) ) { echo ' style="display:none" '; } ?>>
 			<p>
-				<label for="<?php echo esc_attr($this->get_field_id( 'title' )); ?>">
-                    <?php echo __( 'Title:', 'bootswatches' );  // WPCS: xss ok. ?>
-                </label>
+				<label for="<?php echo esc_attr($this->get_field_id( 'title' )); ?>"><?php esc_html_e( 'Title:', 'bootswatches' ) ?></label>
 				<input type="text" class="widefat" id="<?php echo esc_attr($this->get_field_id( 'title' )); ?>"
                     name="<?php echo esc_attr($this->get_field_name( 'title' )); ?>"
-                    value="<?php echo esc_attr( $title ); ?>"
-                 />
+                    value="<?php echo esc_attr( $title ); ?>"/>
 			</p>
 			<p>
 				<label for="<?php echo esc_attr($this->get_field_id( 'nav_menu' )); ?>">
-                    <?php echo __( 'Select Menu:', 'bootswatches' ); // WPCS: xss ok. ?>
-                </label>
+                        <?php esc_html_e( 'Select Menu:', 'bootswatches' ); ?></label>
 				<select id="<?php echo esc_attr($this->get_field_id( 'nav_menu' )); ?>"
                     name="<?php echo esc_attr($this->get_field_name( 'nav_menu' )); ?>">
-					<option value="0">
-                        <?php echo esc_html( '&mdash; Select &mdash;', 'bootswatches' ); ?>
-                    </option>
+					<option value="0"><?php esc_html_e( '&mdash; Select &mdash;', 'bootswatches' ); ?></option>
 					<?php foreach ( $menus as $menu ) : ?>
 						<option value="<?php echo esc_attr( $menu->term_id ); ?>"
                             <?php selected( $nav_menu, $menu->term_id ); ?>>
@@ -173,7 +165,7 @@ class Bootswatches_Nav_Menu_Widget extends WP_Nav_Menu_Widget {
 
             <p>
 				<label for="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>">
-                    <?php echo esc_html__( 'Menu Style:', 'bootswatches' ); ?>
+                        <?php esc_html_e( 'Menu Style:', 'bootswatches' ); ?>
                 </label>
 				<select id="<?php echo esc_attr($this->get_field_id( 'menu_style' )); ?>"
                       name="<?php echo esc_attr($this->get_field_name( 'menu_style' )); ?>">
@@ -191,7 +183,7 @@ class Bootswatches_Nav_Menu_Widget extends WP_Nav_Menu_Widget {
 
 			<?php if ( $wp_customize instanceof WP_Customize_Manager ) : ?>
 				<p class="edit-selected-nav-menu" style="<?php if ( ! $nav_menu ) { echo 'display: none;'; } ?>">
-					<button type="button" class="button"><?php echo esc_html( 'Edit Menu', 'bootswatches' ) ?></button>
+					<button type="button" class="button"><?php esc_html_e( 'Edit Menu', 'bootswatches' ) ?></button>
 				</p>
 			<?php endif; ?>
 		</div>

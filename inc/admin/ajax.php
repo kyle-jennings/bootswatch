@@ -1,56 +1,42 @@
 <?php
 
+/**
+ * Counts the widgets and returns the proper width (which each widget should use.
+ *
+ * @return void echos out some json.
+ */
+function bootswatches_ajax_calculate_widget_width() {
 
-function bootswatches_ajax_video()
-{
-    if (isset($_POST['data'])) {
-        $url = esc_url_raw(wp_unslash($_POST['data']));
-    } else {
+    if ( ! isset( $_POST['data'] ) ) {
         wp_die();
     }
 
-    bootswatches_the_video_markup($url);
-    wp_die();
-}
-add_action('wp_ajax_bootswatches_video_shortcode', 'bootswatches_ajax_video');
-
-
-function bootswatches_ajax_calculate_widget_width()
-{
-
-    
-    if (!isset($_POST['data'])) {
-        wp_die();
-    }
-
-    echo bootswatches_calculate_widget_width(wp_unslash(absint($_POST['data']))); // WPCS: xss ok.
+    echo bootswatches_calculate_widget_width( wp_unslash( absint( $_POST['data'] ) ) ); // WPCS: xss ok.
 
     wp_die();
 }
 
-add_action('wp_ajax_bootswatches_calculate_widget_width', 'bootswatches_ajax_calculate_widget_width');
-add_action('wp_ajax_nopriv_bootswatches_calculate_widget_width', 'bootswatches_ajax_calculate_widget_width');
-
+add_action( 'wp_ajax_bootswatches_calculate_widget_width', 'bootswatches_ajax_calculate_widget_width' );
+add_action( 'wp_ajax_nopriv_bootswatches_calculate_widget_width', 'bootswatches_ajax_calculate_widget_width' );
 
 
 /**
  * [bootswatches_postformat_shortcode description]
  * @return void       echo markup.
  */
-function bootswatches_postformat_shortcode()
-{
-    error_log('shortcode');
-    if (! isset($_POST['pfpSTR']) || empty($_POST['pfpSTR'])) {
+function bootswatches_postformat_shortcode() {
+    
+    if ( ! isset( $_POST['pfpSTR']) || empty( $_POST['pfpSTR'] ) ) {
         return;
     }
 
-    $str = sanitize_text_field(wp_unslash($_POST['pfpSTR']));
-    echo do_shortcode($str); // WPCS: xss ok.
+    $str = sanitize_text_field( wp_unslash( $_POST['pfpSTR'] ) );
+    echo do_shortcode( $str ); // WPCS: xss ok.
 
     exit();
-}
 
-add_action('wp_ajax_bootswatches_postformat_shortcode', 'bootswatches_postformat_shortcode');
+}
+add_action( 'wp_ajax_bootswatches_postformat_shortcode', 'bootswatches_postformat_shortcode' );
 
 
 /**
@@ -60,24 +46,31 @@ add_action('wp_ajax_bootswatches_postformat_shortcode', 'bootswatches_postformat
  * @param  string $type the asset type (image, video ect).
  * @return void       echo markup.
  */
-function bootswatches_postformat_oembed($url = null, $type = null)
-{
+function bootswatches_postformat_oembed( $url = null, $type = null ) {
 
-    error_log('oembed');
-    if ((! $url || ! $type) && (isset($_POST['pfpType']) && isset($_POST['pfpURL']))) {
-        $type = sanitize_text_field(wp_unslash($_POST['pfpType']));
-        $url = esc_url_raw(wp_unslash($_POST['pfpURL']));
+    if ( ( ! $url || ! $type ) && ( isset( $_POST['pfpType'] ) && isset( $_POST['pfpURL'] ) ) ) {
+        
+        $type = sanitize_text_field( wp_unslash( $_POST['pfpType'] ) );
+        $url = esc_url_raw( wp_unslash( $_POST['pfpURL'] ) );
     } else {
-        $type = sanitize_text_field(wp_unslash($type));
-        $url = esc_url_raw(wp_unslash($url));
+        $type = sanitize_text_field( wp_unslash( $type ) );
+        $url = esc_url_raw( wp_unslash( $url ) );
     }
 
 
-    $func = 'bootswatches_postformat_get_the_' . strtolower($type) . '_markup';
+    $func = 'bootswatches_postformat_get_the_' . strtolower( $type ) . '_markup';
     
-    echo call_user_func($func, $url); // WPCS: xss ok.
+    echo call_user_func( $func, $url ); // WPCS: xss ok.
 
     exit();
 }
+add_action( 'wp_ajax_bootswatches_postformat_oembed', 'bootswatches_postformat_oembed' );
 
-add_action('wp_ajax_bootswatches_postformat_oembed', 'bootswatches_postformat_oembed');
+
+
+function bootswatches_dismiss_franklin_notice() {
+    $result = update_option('bootswatches-franklin-notice', 'dismissed');
+    echo esc_html($result);
+    exit();
+}
+add_action( 'wp_ajax_bootswatches_dismiss_franklin_notice', 'bootswatches_dismiss_franklin_notice' );

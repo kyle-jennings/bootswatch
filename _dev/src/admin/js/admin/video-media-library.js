@@ -51,7 +51,7 @@ $('body').on('click','.js--media-library', function( event ){
     $thisField.val(url);
 
     var data = {
-      "action": "benjamin_video_shortcode",
+      "action": "bootswatches_video_shortcode",
       "data": url
     };
     $.ajax({

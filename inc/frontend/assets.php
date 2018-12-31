@@ -13,6 +13,7 @@ function bootswatches_scripts() {
     $default = bootswatches_get_default_theme();
     $theme = json_decode(get_theme_mod('color_scheme_setting', $default));
 
+
     if( !$theme_uri = filter_var( $theme->uri, FILTER_VALIDATE_URL ) )
         $theme_uri = json_decode($default->uri);
 

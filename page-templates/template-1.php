@@ -19,9 +19,8 @@ get_header();
  * $sidebar_position
  *
  */
-extract( bootswatches_template_settings() );
-
-if( !$hide_content ):
+extract(bootswatches_template_settings());
+if(!$hide_content):
 ?>
 
 <div class="section section--body">
@@ -30,31 +29,29 @@ if( !$hide_content ):
 
     <?php
     if($sidebar_position == 'left'):
-        bootswatches_get_sidebar($template, $sidebar_position, $sidebar_size);
+        // bootswatches_get_sidebar($template, $sidebar_position, $sidebar_size);
     endif;
     ?>
     <div class="main-content <?php echo esc_attr($main_width); ?>">
-    	<?php
-    	while ( have_posts() ) : the_post();
+        <?php
+        while (have_posts()) : the_post();
 
-    		get_template_part( 'template-parts/content/content', 'page' );
+            get_template_part('template-parts/singles/content', 'page');
 
-
-    	endwhile; // End of the loop.
-    	?>
+        endwhile; // End of the loop.
+        ?>
     </div>
     <?php
     if($sidebar_position == 'right'):
-        bootswatches_get_sidebar($template, $sidebar_position, $sidebar_size);
+        // bootswatches_get_sidebar($template, $sidebar_position, $sidebar_size);
     endif;
     ?>
 
-</div><!-- /row -->
-</div><!-- container -->
-</div><!-- / section--body -->
+        </div>
+    </div>
+</div>
 
 <?php
 endif;
-
 
 get_footer();

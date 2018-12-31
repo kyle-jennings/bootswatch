@@ -99,7 +99,7 @@ $wp_customize->add_setting( $name . '_hero_size_setting', array(
 ) );
 
 $hero_size_args = array(
-    'description' => __('Changes the height of the hero area', 'bootswatches'),
+    'description' => __('Changes the height of the hero banner', 'bootswatches'),
     'label' => __('Header Size', 'bootswatches'),
     'section' => $name . '_settings_section',
     'settings' => $name . '_hero_size_setting',
