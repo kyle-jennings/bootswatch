@@ -2,7 +2,7 @@
 
 namespace bootswatch;
 
-class BootSwatchThemes {
+class Themes {
 
     /**
      * The bootswatch themes
